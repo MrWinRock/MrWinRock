@@ -1,5 +1,4 @@
-<h1 align="center">Hi 👋, I'm MrWinRock</h1>
-<h3 align="center">Trying to code...</h3>
+<h1 align="center">MrWinRock</h1>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=mrwinrock&label=Profile%20views&color=0e75b6&style=flat" alt="mrwinrock" /> </p>
 
