@@ -2,7 +2,7 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=mrwinrock&label=Profile%20views&color=0e75b6&style=flat" alt="mrwinrock" /> </p>
 
-- 🌱 I’m currently learning **Java, C++, C#, HTML, CSS, JS, etc.**
+- 🌱 I’m currently learning **Java, C++, C#, HTML, CSS, JS, TS, Python, etc.**
 
 - 📫 How to reach me **mrwinrock11@gmail.com**
 
