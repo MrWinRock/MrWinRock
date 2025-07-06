@@ -4,6 +4,7 @@
 }
 
 .p-button {
+  text-decoration: none;
   background: linear-gradient(to right, #FF00FF, #00FFFF);
   -webkit-background-clip: text;
   background-clip: text;
