@@ -1,15 +1,14 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.jpg';
-import './../css/navbar.css'
 
 const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <div className='flex max-w-[1200px] mx-auto items-center justify-between p-4 bg-gray-800 text-white z-10'>
+            <div className='flex max-w-[1200px] mx-auto items-center justify-between p-4'>
                 <div className="flex flex-row items-center justify-center gap-4">
                     <img src={logo} alt="Logo" />
-                    <Link to="/" className="navbar-title text-[32px] sm:text-[40px] font-[900] text-white">
+                    <Link to="/" className="navbar-title text-[2rem] font-[900] text-white">
                         MrWinRock
                     </Link>
                 </div>
