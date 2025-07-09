@@ -1,25 +1,133 @@
 @import url('https://fonts.googleapis.com/css2?family=Krub:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html {
-  scroll-behavior: smooth;
-}
+@import "tailwindcss";
 
 :root {
   font-family: "Krub", sans-serif, system-ui, Avenir, Helvetica, Arial;
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-
   color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #1b1b1b;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#root {
+  margin: 0 auto;
+}
+
+/* Button Styles */
+
+.p-button {
+  text-decoration: none;
+  background: linear-gradient(to right, #FF00FF, #00FFFF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  transition: background-position 0.3s ease;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border: 2px solid white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.p-button:hover {
+  background-position: 0 0;
+}
+
+/* Navbar Styles */
+
+.navbar {
+  position: relative;
+  padding-bottom: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.navbar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #FF00FF, #00FFFF);
+}
+
+.navbar img {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.navbar-title {
+  text-decoration: none;
+  background: linear-gradient(to right, #FF00FF, #00FFFF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  transition: background-position 0.3s ease;
+  display: inline-block;
+}
+
+.navbar-title:hover {
+  background-position: 0% 0;
+}
+
+.navbar .p-button+.p-button {
+  margin-left: 0.5rem;
+}
+
+/* @media (max-width: 960px) {
+  .navbar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .navbar-title {
+    font-size: 1.5rem;
+  }
+
+  .navbar img {
+    width: 24px;
+    height: 24px;
+  }
+} */
+
+/* Footer Styles */
+
+.footer {
+  position: relative;
+  /* padding-top: 10px; */
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #FF00FF, #00FFFF);
 }
