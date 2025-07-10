@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 const Construction = () => {
     return (
-        <div className="">
+        <div className="flex flex-col">
             <motion.h1
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 lg:mb-8"
                 initial={{ opacity: 0, y: -50 }}
