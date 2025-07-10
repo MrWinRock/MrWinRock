@@ -1,69 +1,109 @@
-# React + TypeScript + Vite
+# MrWinRock Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive developer portfolio built with **React 19**, **TypeScript**, **Vite**, and **Tailwind CSS**.
 
-Currently, two official plugins are available:
+Showcase your skills, projects, and experience with a fast, modular, and easily customizable portfolio site.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- ⚡️ Ultra-fast Vite build with SWC for React
+- 🎨 Tailwind CSS 4 for rapid, modern styling
+- 🧩 Modular React component structure for easy customization
+- 📱 Fully responsive design for all devices
+- 🛠️ ESLint with TypeScript and React rules for code quality
+- 🚀 Ready for GitHub Pages deployment (see [deploy.yml](.github/workflows/deploy.yml))
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [Bun](https://bun.sh/) (optional, for fast scripts)
+- [pnpm](https://pnpm.io/), [npm](https://www.npmjs.com/), or [yarn](https://yarnpkg.com/)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Install dependencies
+
+```sh
+bun install
+# or
+npm install
+# or
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+bun run dev
+# or
+npm run dev
+# or
+pnpm dev
 ```
+
+### Build
+
+```sh
+bun run build
+# or
+npm run build
+# or
+pnpm build
+```
+
+### Preview
+
+```sh
+bun run preview
+# or
+npm run preview
+# or
+pnpm preview
+```
+
+### Lint
+
+```sh
+bun run lint
+# or
+npm run lint
+# or
+pnpm lint
+```
+
+## Project Structure
+
+```
+mrwinrock/
+├── public/           # Static assets (favicon, CNAME, 404.html)
+├── src/
+│   ├── components/   # React components (Navbar, Footer, pages, etc.)
+│   ├── lib/          # Utility functions
+│   ├── index.css     # Tailwind and global styles
+│   └── main.tsx      # App entry point
+├── tailwind.config.ts
+├── vite.config.ts
+├── tsconfig*.json
+└── package.json
+```
+
+## ESLint & TypeScript
+
+- ESLint config: [`eslint.config.js`](eslint.config.js)
+- TypeScript configs: [`tsconfig.json`](tsconfig.json), [`tsconfig.app.json`](tsconfig.app.json), [`tsconfig.node.json`](tsconfig.node.json)
+
+## Deployment
+
+Deploy your portfolio to GitHub Pages automatically by pushing to the `release` branch.
+
+## Credits
+
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [SWC](https://swc.rs/)
+- [Bun](https://bun.sh/)
+
+---
+
+MIT License

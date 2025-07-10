@@ -56,9 +56,9 @@ html {
 
 .navbar {
   position: relative;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px;
   padding-left: 40px;
-  padding-right: 40px;
+  padding-right: 40px; */
 }
 
 .navbar::after {
@@ -79,6 +79,14 @@ html {
   margin-right: 10px;
 }
 
+@media screen and (max-width: 1024px) {
+  .navbar img {
+    width: 24px;
+    height: 24px;
+  }
+
+}
+
 .navbar-title {
   text-decoration: none;
   background: linear-gradient(to right, #FF00FF, #00FFFF);
@@ -95,25 +103,6 @@ html {
   background-position: 0% 0;
 }
 
-.navbar .p-button+.p-button {
-  margin-left: 0.5rem;
-}
-
-/* @media (max-width: 960px) {
-  .navbar {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .navbar-title {
-    font-size: 1.5rem;
-  }
-
-  .navbar img {
-    width: 24px;
-    height: 24px;
-  }
-} */
 
 /* Footer Styles */
 

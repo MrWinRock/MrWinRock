@@ -8,6 +8,20 @@ const Footer = () => {
                     Built with React, TypeScript, and Tailwind CSS
                 </p>
             </div>
+            <div className="">
+                <div className="container mx-auto text-center py-4">
+                    <p className="text-gray-400 text-sm">
+                        Follow me on{" "}
+                        <a href="https://github.com/MrWinRock" className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">
+                            GitHub
+                        </a>{" "}
+                        and{" "}
+                        <a href="https://www.linkedin.com/in/pharthiwath-gristsoopharruth-232301240/" className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">
+                            LinkedIn
+                        </a>
+                    </p>
+                </div>
+            </div>
         </footer>
     );
 };
