@@ -54,12 +54,12 @@ html {
 
 /* Navbar Styles */
 
-.navbar {
+/* .navbar {
   position: relative;
-  /* padding-bottom: 10px;
+  padding-bottom: 10px;
   padding-left: 40px;
-  padding-right: 40px; */
-}
+  padding-right: 40px;
+} */
 
 .navbar::after {
   content: '';
