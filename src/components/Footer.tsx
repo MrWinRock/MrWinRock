@@ -11,7 +11,7 @@ const Footer = () => {
                     title="View on GitHub"
                 >
                     <img
-                        src="https://cdn.worldvectorlogo.com/logos/github-icon.svg"
+                        src="../src/assets/icons/github-icon.svg"
                         alt="GitHub"
                         className="w-8 h-8 filter invert"
                     />

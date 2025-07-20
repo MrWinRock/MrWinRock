@@ -1,16 +1,17 @@
 import { motion } from "motion/react";
+import githubIcon from "../../../assets/icons/github-icon.svg";
 
 const Projects = () => {
     const projects = [
         { title: "MrWinRock", description: "My Portfolio Website.", url: "/", gh_url: "https://github.com/MrWinRock/MrWinRock", tags: ["React", "TypeScript", "Vite", "Tailwind CSS"] },
         { title: "Stringy", description: "A Blog Platform Discussing about IT.", url: "https://stringy-b8c5e.web.app/", gh_url: "https://github.com/MrWinRock/Stringy", tags: ["React", "Javascript", "Node.js", "Express.js"] },
-        { title: "SSRU Interactive Map", description: "An Interactive Map for SSRU.", url: "https://mrwinrock.github.io/ssru-inter-map/", gh_url: "https://github.com/MrWinRock/ssru-inter-map", tags: ["React", "Javascript", "Leaflet", "Interactive"] },
+        { title: "SSRU Interactive Map", description: "An Interactive Map for SSRU.", url: "https://mrwinrock.github.io/ssru-inter-map/", gh_url: "https://github.com/MrWinRock/ssru-inter-map", tags: ["React", "Javascript", "Zoom Pan Pitch"] },
         { title: "ChadChat", description: "An Interactive Real-Time Chat Application.", gh_url: "https://github.com/MrWinRock/ChadChat", tags: ["React Native", "Typescript", "Nodejs", "Expressjs", "Socket.io"] },
         { title: "Chronobreak", description: "World clock, Time zone converter, Alarm, Stopwatch, Timer", gh_url: "https://github.com/MrWinRock/chronobreak", tags: ["React Native", "Javascript", "Typescript", "PHP"] },
         { title: "Todo App", description: "Basic Todo App.", url: "https://todo-react-group.web.app", gh_url: "https://github.com/MrWinRock/todoreact", tags: ["React", "Javascript"] },
         { title: "EarthMC Data Site", description: "EarthMC Server Data Site.", url: "https://mrwinrock.github.io/earthmc-web-data", gh_url: "https://github.com/MrWinRock/earthmc-web-data", tags: ["React", "Typescript", "Vite", "Tailwind CSS"] },
         { title: "EarthMC API Proxy", description: "EarthMC Proxy API Server For POST Requests.", gh_url: "https://github.com/MrWinRock/earthmc-api-proxy", tags: ["Node.js", "Express.js"] },
-        { title: "Crazy Dad Lore 3D", description: "3D games development using Unity.", url: "https://marguro.itch.io/crazy-dad-lore", gh_url: "https://github.com/MrWinRock/summer-jam-2025?tab=readme-ov-file", tags: ["Unity", "C#", "Game Dev"] },
+        { title: "Crazy Dad Lore 3D", description: "3D games development using Unity.", url: "https://marguro.itch.io/crazy-dad-lore", gh_url: "https://github.com/MrWinRock/summer-jam-2025?tab=readme-ov-file", tags: ["Unity 3D", "C#"] },
     ]
 
     return (
@@ -47,14 +48,6 @@ const Projects = () => {
                                 type: "spring",
                                 stiffness: 100
                             }}
-                        // whileHover={{
-                        //     y: -8,
-                        //     scale: 1.02,
-                        //     rotateY: 5,
-                        //     boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
-                        //     transition: { duration: 0.15 }
-                        // }}
-                        // whileTap={{ scale: 0.98 }}
                         >
                             <motion.h2
                                 className="text-xl font-bold mb-3 text-white"
@@ -131,9 +124,9 @@ const Projects = () => {
                                         whileTap={{ scale: 0.9 }}
                                     >
                                         <img
-                                            src="https://cdn.worldvectorlogo.com/logos/github-icon.svg"
+                                            src={githubIcon}
                                             alt="GitHub"
-                                            className="w-6 h-6 filter invert"
+                                            className="w-8 h-8 filter invert"
                                         />
                                     </motion.a>
                                 )}
