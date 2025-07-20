@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 const Skills = () => {
     const skills = [
         { name: 'Blender', image: 'https://download.blender.org/branding/community/blender_community_badge_white.svg' },
@@ -36,19 +38,54 @@ const Skills = () => {
     ];
 
     return (
-        <div className="min-h-screen p-8">
+        <motion.div
+            className="min-h-screen p-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+        >
             <div className="max-w-[800px] mx-auto">
-                <h1 className="text-4xl font-bold mb-8">My Skills</h1>
+                <motion.h1
+                    className="text-4xl font-bold mb-8"
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                    My Skills
+                </motion.h1>
                 <div className="grid md:grid-cols-2 gap-6">
-                    {skills.map((skill) => (
-                        <div key={skill.name} className="p-button p-6 flex flex-row gap-3 items-center justify-center text-center">
-                            <img src={skill.image} alt={skill.name} className="w-8 h-8 rounded-2xl" />
+                    {skills.map((skill, index) => (
+                        <motion.div
+                            key={skill.name}
+                            className="p-button p-6 flex flex-row gap-3 items-center justify-center text-center"
+                            initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                            transition={{
+                                duration: 0.6,
+                                delay: index * 0.1,
+                                type: "spring",
+                                stiffness: 100
+                            }}
+                            whileHover={{
+                                scale: 1.05,
+                                rotateY: 10,
+                                transition: { duration: 0.2 }
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <motion.img
+                                src={skill.image}
+                                alt={skill.name}
+                                className="w-8 h-8 rounded-2xl"
+                                whileHover={{ rotate: 360 }}
+                                transition={{ duration: 0.6 }}
+                            />
                             <span className="text-lg font-semibold">{skill.name}</span>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

@@ -2,6 +2,21 @@
 const Footer = () => {
     return (
         <footer className="footer pt-8 pb-4">
+            <div className="container mx-auto text-center flex justify-center items-center">
+                <a
+                    href="https://github.com/MrWinRock/MrWinRock"
+                    className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="View on GitHub"
+                >
+                    <img
+                        src="https://cdn.worldvectorlogo.com/logos/github-icon.svg"
+                        alt="GitHub"
+                        className="w-8 h-8 filter invert"
+                    />
+                </a>
+            </div>
             <div className="container mx-auto text-center">
                 <p>&copy; {new Date().getFullYear()} MrWinRock. All rights reserved.</p>
                 <p className="text-gray-500 text-sm mt-2">
