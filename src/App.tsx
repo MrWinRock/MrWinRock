@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <main className='min-h-screen max-w-[1200px] mx-auto px-4 py-8'>
+      <main className='min-h-screen max-w-[1200px] mx-auto mt-12 px-4 py-8'>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

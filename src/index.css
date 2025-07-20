@@ -52,14 +52,31 @@ html {
   background-position: 0 0;
 }
 
+.s-button {
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border: 2px solid white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: white;
+  transform: translateY(0);
+}
+
+.s-button:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
 /* Navbar Styles */
 
-.navbar {
+/* .navbar {
   position: relative;
-  /* padding-bottom: 10px;
+  padding-bottom: 10px;
   padding-left: 40px;
-  padding-right: 40px; */
-}
+  padding-right: 40px;
+} */
 
 .navbar::after {
   content: '';
