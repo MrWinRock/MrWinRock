@@ -180,7 +180,7 @@ const Skills = () => {
                                             duration: 0.6,
                                             delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.6
                                         }}
-                                        whileHover={{ scale: 1.05, rotateY: 10 }}
+                                        whileHover={{ scale: 1.05 }}
                                     >
                                         <motion.img
                                             src={skill.image}
