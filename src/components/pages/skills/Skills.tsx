@@ -178,10 +178,9 @@ const Skills = () => {
                                         animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                                         transition={{
                                             duration: 0.6,
-                                            delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.6,
-                                            type: "spring",
-                                            stiffness: 100
+                                            delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.6
                                         }}
+                                        whileHover={{ scale: 1.05, rotateY: 10 }}
                                     >
                                         <motion.img
                                             src={skill.image}
