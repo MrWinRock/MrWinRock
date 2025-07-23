@@ -1,8 +1,9 @@
+import githubIcon from '../assets/icons/github-icon.svg';
 
 const Footer = () => {
     return (
         <footer className="footer pt-8 pb-4">
-            <div className="container mx-auto text-center flex justify-center items-center">
+            <div className="container mx-auto mb-2 text-center flex justify-center items-center">
                 <a
                     href="https://github.com/MrWinRock/MrWinRock"
                     className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200"
@@ -11,7 +12,7 @@ const Footer = () => {
                     title="View on GitHub"
                 >
                     <img
-                        src="../src/assets/icons/github-icon.svg"
+                        src={githubIcon}
                         alt="GitHub"
                         className="w-8 h-8 filter invert"
                     />

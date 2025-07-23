@@ -1,78 +1,133 @@
 import { motion } from "motion/react";
 
+// Programming Languages
+import c_original from "./../../../images/skills/c-original.svg";
+import cplusplus_original from "./../../../images/skills/cplusplus-original.svg";
+import csharp_original from "./../../../images/skills/csharp-original.svg";
+import javascript_original from "./../../../images/skills/javascript-original.svg";
+import typescript_original from "./../../../images/skills/typescript-original.svg";
+import java_original from "./../../../images/skills/java-original.svg";
+import kotlinlang_icon from "./../../../images/skills/kotlinlang-icon.svg";
+import python_original from "./../../../images/skills/python-original.svg";
+import go_original from "./../../../images/skills/go-original.svg";
+import gnu_bash_icon from "./../../../images/skills/gnu_bash-icon.svg";
+
+// Web Technologies
+import html5_original_wordmark from "./../../../images/skills/html5-original-wordmark.svg";
+import css3_original_wordmark from "./../../../images/skills/css3-original-wordmark.svg";
+import react_original_wordmark from "./../../../images/skills/react-original-wordmark.svg";
+import nodejs_original_wordmark from "./../../../images/skills/nodejs-original-wordmark.svg";
+import express_original_wordmark from "./../../../images/skills/express-original-wordmark.svg";
+import socketio_icon from "./../../../images/skills/socketio-icon.svg";
+
+// Mobile Development
+import header_logo from "./../../../images/skills/header_logo.svg";
+import flutterio_icon from "./../../../images/skills/flutterio-icon.svg";
+
+// Databases
+import mysql_original_wordmark from "./../../../images/skills/mysql-original-wordmark.svg";
+import postgresql_original_wordmark from "./../../../images/skills/postgresql-original-wordmark.svg";
+import mongodb_original_wordmark from "./../../../images/skills/mongodb-original-wordmark.svg";
+import mariadb_icon from "./../../../images/skills/mariadb-icon.svg";
+import firebase_icon from "./../../../images/skills/firebase-icon.svg";
+
+// Cloud & DevOps
+import amazonwebservices_original_wordmark from "./../../../images/skills/amazonwebservices-original-wordmark.svg";
+import google_cloud_icon from "./../../../images/skills/google_cloud-icon.svg";
+import docker_original_wordmark from "./../../../images/skills/docker-original-wordmark.svg";
+import heroku_icon from "./../../../images/skills/heroku-icon.svg";
+
+// Game Development
+import unity3d_icon from "./../../../images/skills/unity3d-icon.svg";
+import unreal_engine from "./../../../images/skills/unreal-engine.svg";
+
+// Design & Tools
+import figma_icon from "./../../../images/skills/figma-icon.svg";
+import photoshop_line from "./../../../images/skills/photoshop-line.svg";
+import blender_community_badge from "./../../../images/skills/blender_community_badge_white.svg";
+
+// Other Tools
+import git_scm_icon from "./../../../images/skills/git-scm-icon.svg";
+import linux_original from "./../../../images/skills/linux-original.svg";
+import arduino_icon from "./../../../images/skills/arduino-1.svg";
+import postman_icon from "./../../../images/skills/getpostman-icon.svg";
+
 const Skills = () => {
     const skillCategories = [
         {
             title: "Programming Languages",
             skills: [
-                { name: 'C', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg' },
-                { name: 'C++', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg' },
-                { name: 'C#', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg' },
-                { name: 'Java', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg' },
-                { name: 'JavaScript', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg' },
-                { name: 'Python', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' },
-                { name: 'Go', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original.svg' },
-                { name: 'Bash', image: 'https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg' },
+                { name: 'C', image: c_original },
+                { name: 'C++', image: cplusplus_original },
+                { name: 'C#', image: csharp_original },
+                { name: 'JavaScript', image: javascript_original },
+                { name: 'TypeScript', image: typescript_original },
+                { name: 'Java', image: java_original },
+                { name: 'Kotlin', image: kotlinlang_icon },
+                { name: 'Python', image: python_original },
+                { name: 'Go', image: go_original },
+                { name: 'Bash', image: gnu_bash_icon },
             ]
         },
         {
             title: "Web Technologies",
             skills: [
-                { name: 'HTML5', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg' },
-                { name: 'CSS3', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg' },
-                { name: 'React', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg' },
-                { name: 'Node.js', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg' },
-                { name: 'Express', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg' },
+                { name: 'HTML5', image: html5_original_wordmark },
+                { name: 'CSS3', image: css3_original_wordmark },
+                { name: 'React', image: react_original_wordmark },
+                { name: 'Node.js', image: nodejs_original_wordmark },
+                { name: 'Express', image: express_original_wordmark },
+                { name: 'Socket.io', image: socketio_icon },
             ]
         },
         {
             title: "Mobile Development",
             skills: [
-                { name: 'React Native', image: 'https://reactnative.dev/img/header_logo.svg' },
-                { name: 'Flutter', image: 'https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg' },
+                { name: 'React Native', image: header_logo },
+                { name: 'Flutter', image: flutterio_icon },
             ]
         },
         {
             title: "Databases",
             skills: [
-                { name: 'MySQL', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg' },
-                { name: 'PostgreSQL', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg' },
-                { name: 'MongoDB', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg' },
-                { name: 'MariaDB', image: 'https://www.vectorlogo.zone/logos/mariadb/mariadb-icon.svg' },
-                { name: 'Firebase', image: 'https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg' },
+                { name: 'MySQL', image: mysql_original_wordmark },
+                { name: 'PostgreSQL', image: postgresql_original_wordmark },
+                { name: 'MongoDB', image: mongodb_original_wordmark },
+                { name: 'MariaDB', image: mariadb_icon },
+                { name: 'Firebase', image: firebase_icon },
             ]
         },
         {
             title: "Cloud & DevOps",
             skills: [
-                { name: 'AWS', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
-                { name: 'Google Cloud Platform', image: 'https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg' },
-                { name: 'Docker', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg' },
-                { name: 'Heroku', image: 'https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg' },
+                { name: 'AWS', image: amazonwebservices_original_wordmark },
+                { name: 'Google Cloud Platform', image: google_cloud_icon },
+                { name: 'Docker', image: docker_original_wordmark },
+                { name: 'Heroku', image: heroku_icon },
             ]
         },
         {
             title: "Game Development",
             skills: [
-                { name: 'Unity', image: 'https://www.vectorlogo.zone/logos/unity3d/unity3d-icon.svg' },
-                { name: 'Unreal Engine', image: 'https://raw.githubusercontent.com/kenangundogan/fontisto/036b7eca71aab1bef8e6a0518f7329f13ed62f6b/icons/svg/brand/unreal-engine.svg' },
+                { name: 'Unity', image: unity3d_icon },
+                { name: 'Unreal Engine', image: unreal_engine },
             ]
         },
         {
             title: "Design & Tools",
             skills: [
-                { name: 'Figma', image: 'https://www.vectorlogo.zone/logos/figma/figma-icon.svg' },
-                { name: 'Photoshop', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/photoshop/photoshop-line.svg' },
-                { name: 'Blender', image: 'https://download.blender.org/branding/community/blender_community_badge_white.svg' },
+                { name: 'Figma', image: figma_icon },
+                { name: 'Photoshop', image: photoshop_line },
+                { name: 'Blender', image: blender_community_badge },
             ]
         },
         {
             title: "Other Tools",
             skills: [
-                { name: 'Git', image: 'https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg' },
-                { name: 'Linux', image: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg' },
-                { name: 'Arduino', image: 'https://cdn.worldvectorlogo.com/logos/arduino-1.svg' },
-                { name: 'Postman', image: 'https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg' },
+                { name: 'Git', image: git_scm_icon },
+                { name: 'Linux', image: linux_original },
+                { name: 'Arduino', image: arduino_icon },
+                { name: 'Postman', image: postman_icon },
             ]
         }
     ];
@@ -123,23 +178,16 @@ const Skills = () => {
                                         animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                                         transition={{
                                             duration: 0.6,
-                                            delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.6,
-                                            type: "spring",
-                                            stiffness: 100
+                                            delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.6
                                         }}
-                                        whileHover={{
-                                            scale: 1.05,
-                                            rotateY: 10,
-                                            transition: { duration: 0.15 }
-                                        }}
-                                        whileTap={{ scale: 0.95 }}
+                                        whileHover={{ scale: 1.05 }}
                                     >
                                         <motion.img
                                             src={skill.image}
                                             alt={skill.name}
                                             className="w-10 h-10"
                                             whileHover={{
-                                                rotate: 360,
+                                                scale: 1.1,
                                                 transition: { duration: 0.6 }
                                             }}
                                         />
