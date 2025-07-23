@@ -1,6 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import githubIcon from '../assets/icons/github-icon.svg';
 
 const Footer = () => {
+    const { t } = useTranslation();
+
     return (
         <footer className="footer pt-8 pb-4">
             <div className="container mx-auto mb-2 text-center flex justify-center items-center">
@@ -19,15 +22,15 @@ const Footer = () => {
                 </a>
             </div>
             <div className="container mx-auto text-center">
-                <p>&copy; {new Date().getFullYear()} MrWinRock. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} MrWinRock. {t('footer.rights')}</p>
                 <p className="text-gray-500 text-sm mt-2">
-                    Built with React, TypeScript, and Tailwind CSS
+                    {t('footer.builtWith')}
                 </p>
             </div>
             <div className="">
                 <div className="container mx-auto text-center py-4">
                     <p className="text-gray-400 text-sm">
-                        Follow me on{" "}
+                        {t('footer.followMe')}{" "}
                         <a href="https://github.com/MrWinRock" className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">
                             GitHub
                         </a>{" "}

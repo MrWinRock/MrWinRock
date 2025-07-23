@@ -6,7 +6,7 @@ const Projects = () => {
         { title: "MrWinRock", description: "My Portfolio Website.", url: "/", gh_url: "https://github.com/MrWinRock/MrWinRock", tags: ["React", "TypeScript", "Vite", "Tailwind CSS"] },
         { title: "Stringy", description: "A Blog Platform Discussing about IT.", url: "https://stringy-b8c5e.web.app/", gh_url: "https://github.com/MrWinRock/Stringy", tags: ["React", "Javascript", "Node.js", "Express.js"] },
         { title: "SSRU Interactive Map", description: "An Interactive Map for SSRU.", url: "https://mrwinrock.github.io/ssru-inter-map/", gh_url: "https://github.com/MrWinRock/ssru-inter-map", tags: ["React", "Javascript", "Zoom Pan Pitch"] },
-        { title: "ChadChat", description: "An Interactive Real-Time Chat Application.", gh_url: "https://github.com/MrWinRock/ChadChat", tags: ["React Native", "Typescript", "Nodejs", "Expressjs", "Socket.io"] },
+        { title: "ChadChat", description: "An Interactive Real-Time Chat Application.", gh_url: "https://github.com/MrWinRock/ChadChat", tags: ["React Native", "Typescript", "Node.js", "Express.js", "Socket.io"] },
         { title: "Chronobreak", description: "World clock, Time zone converter, Alarm, Stopwatch, Timer", gh_url: "https://github.com/MrWinRock/chronobreak", tags: ["React Native", "Javascript", "Typescript", "PHP"] },
         { title: "Todo App", description: "Basic Todo App.", url: "https://todo-react-group.web.app", gh_url: "https://github.com/MrWinRock/todoreact", tags: ["React", "Javascript"] },
         { title: "EarthMC Data Site", description: "EarthMC Server Data Site.", url: "https://mrwinrock.github.io/earthmc-web-data", gh_url: "https://github.com/MrWinRock/earthmc-web-data", tags: ["React", "Typescript", "Vite", "Tailwind CSS"] },

@@ -1,6 +1,9 @@
 import { motion } from "motion/react";
+import { useTranslation } from 'react-i18next';
 
 const Construction = () => {
+    const { t } = useTranslation();
+
     return (
         <div className="flex flex-col">
             <motion.h1
@@ -9,7 +12,7 @@ const Construction = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
             >
-                🚧 Under Construction...
+                {t('home.title')}
             </motion.h1>
             <motion.p
                 className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed"
@@ -17,7 +20,7 @@ const Construction = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}
             >
-                I'm working on this portfolio, please check back later!
+                {t('home.subtitle')}
             </motion.p>
         </div>
     )
