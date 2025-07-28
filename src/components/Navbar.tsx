@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import logo from '../assets/logo.jpg';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { t } = useTranslation();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -24,33 +27,37 @@ const Navbar = () => {
                 </div>
                 {/* Desktop Menu */}
                 <div className="hidden lg:flex lg:gap-4 xl:gap-6 items-center">
-                    <Link to="/" className="p-button">Home</Link>
-                    <Link to="/about" className="p-button">About</Link>
-                    <Link to="/skills" className="p-button">Skills</Link>
-                    <Link to="/projects" className="p-button">Projects</Link>
-                    {/* <Link to="/experience" className="p-button">Experience</Link> */}
-                    {/* <Link to="/contact" className="p-button">Contact</Link> */}
+                    <Link to="/" className="p-button">{t('nav.home')}</Link>
+                    <Link to="/about" className="p-button">{t('nav.about')}</Link>
+                    <Link to="/skills" className="p-button">{t('nav.skills')}</Link>
+                    <Link to="/projects" className="p-button">{t('nav.projects')}</Link>
+                    {/* <Link to="/experience" className="p-button">{t('nav.experience')}</Link> */}
+                    {/* <Link to="/contact" className="p-button">{t('nav.contact')}</Link> */}
+                    <LanguageSwitcher />
                 </div>
                 {/* Mobile Menu Button */}
-                <button
-                    className="lg:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1 cursor-pointer"
-                    onClick={toggleMenu}
-                    aria-label="Toggle menu"
-                >
-                    <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-                    <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-                    <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
-                </button>
+                <div className="lg:hidden flex items-center gap-2">
+                    <LanguageSwitcher />
+                    <button
+                        className="lg:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1 cursor-pointer"
+                        onClick={toggleMenu}
+                        aria-label="Toggle menu"
+                    >
+                        <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+                        <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+                        <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+                    </button>
+                </div>
             </div>
             {/* Mobile Menu */}
             <div className={`lg:hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
                 <div className="flex flex-col gap-4 p-4 width-full">
-                    <Link to="/" className="p-button text-center" onClick={closeMenu}>Home</Link>
-                    <Link to="/about" className="p-button text-center" onClick={closeMenu}>About</Link>
-                    <Link to="/skills" className="p-button text-center" onClick={closeMenu}>Skills</Link>
-                    <Link to="/projects" className="p-button text-center" onClick={closeMenu}>Projects</Link>
-                    {/* <Link to="/experience" className="p-button text-center" onClick={closeMenu}>Experience</Link> */}
-                    {/* <Link to="/contact" className="p-button text-center" onClick={closeMenu}>Contact</Link> */}
+                    <Link to="/" className="p-button text-center" onClick={closeMenu}>{t('nav.home')}</Link>
+                    <Link to="/about" className="p-button text-center" onClick={closeMenu}>{t('nav.about')}</Link>
+                    <Link to="/skills" className="p-button text-center" onClick={closeMenu}>{t('nav.skills')}</Link>
+                    <Link to="/projects" className="p-button text-center" onClick={closeMenu}>{t('nav.projects')}</Link>
+                    {/* <Link to="/experience" className="p-button text-center" onClick={closeMenu}>{t('nav.experience')}</Link> */}
+                    {/* <Link to="/contact" className="p-button text-center" onClick={closeMenu}>{t('nav.contact')}</Link> */}
                 </div>
             </div>
         </nav>
