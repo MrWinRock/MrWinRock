@@ -1,7 +1,10 @@
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import githubIcon from "../../../assets/icons/github-icon.svg";
 
 const Projects = () => {
+    const { t } = useTranslation();
+
     const projects = [
         { title: "MrWinRock", description: "My Portfolio Website.", url: "/", gh_url: "https://github.com/MrWinRock/MrWinRock", tags: ["React", "TypeScript", "Vite", "Tailwind CSS"] },
         { title: "Stringy", description: "A Blog Platform Discussing about IT.", url: "https://stringy-b8c5e.web.app/", gh_url: "https://github.com/MrWinRock/Stringy", tags: ["React", "Javascript", "Node.js", "Express.js"] },
@@ -33,7 +36,7 @@ const Projects = () => {
                         stiffness: 120
                     }}
                 >
-                    My Projects
+                    {t("projects.title")}
                 </motion.h1>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {projects.map((project, index) => (
@@ -105,7 +108,7 @@ const Projects = () => {
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
-                                        View Live
+                                        {t("projects.viewLive")}
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon">
                                             <path d="M18 13V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5" />
@@ -114,7 +117,7 @@ const Projects = () => {
                                         </svg>
                                     </motion.a>
                                 ) : (
-                                    <span className="s-button px-4 py-2 text-sm font-medium opacity-50">Not Available</span>
+                                    <span className="s-button px-4 py-2 text-sm font-medium opacity-50">{t("projects.notAvailable")}</span>
                                 )}
                                 {project.gh_url && (
                                     <motion.a

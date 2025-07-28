@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next"
 
 // Programming Languages
 import c_original from "./../../../images/skills/c-original.svg";
@@ -53,9 +54,11 @@ import arduino_icon from "./../../../images/skills/arduino-1.svg";
 import postman_icon from "./../../../images/skills/getpostman-icon.svg";
 
 const Skills = () => {
+    const { t } = useTranslation();
+
     const skillCategories = [
         {
-            title: "Programming Languages",
+            title: t("skills.categories.programming"),
             skills: [
                 { name: 'C', image: c_original },
                 { name: 'C++', image: cplusplus_original },
@@ -70,7 +73,7 @@ const Skills = () => {
             ]
         },
         {
-            title: "Web Technologies",
+            title: t("skills.categories.web"),
             skills: [
                 { name: 'HTML5', image: html5_original_wordmark },
                 { name: 'CSS3', image: css3_original_wordmark },
@@ -81,14 +84,14 @@ const Skills = () => {
             ]
         },
         {
-            title: "Mobile Development",
+            title: t("skills.categories.mobile"),
             skills: [
                 { name: 'React Native', image: header_logo },
                 { name: 'Flutter', image: flutterio_icon },
             ]
         },
         {
-            title: "Databases",
+            title: t("skills.categories.databases"),
             skills: [
                 { name: 'MySQL', image: mysql_original_wordmark },
                 { name: 'PostgreSQL', image: postgresql_original_wordmark },
@@ -98,7 +101,7 @@ const Skills = () => {
             ]
         },
         {
-            title: "Cloud & DevOps",
+            title: t("skills.categories.cloud"),
             skills: [
                 { name: 'AWS', image: amazonwebservices_original_wordmark },
                 { name: 'Google Cloud Platform', image: google_cloud_icon },
@@ -107,14 +110,14 @@ const Skills = () => {
             ]
         },
         {
-            title: "Game Development",
+            title: t("skills.categories.game"),
             skills: [
                 { name: 'Unity', image: unity3d_icon },
                 { name: 'Unreal Engine', image: unreal_engine },
             ]
         },
         {
-            title: "Design & Tools",
+            title: t("skills.categories.design"),
             skills: [
                 { name: 'Figma', image: figma_icon },
                 { name: 'Photoshop', image: photoshop_line },
@@ -122,7 +125,7 @@ const Skills = () => {
             ]
         },
         {
-            title: "Other Tools",
+            title: t("skills.categories.other"),
             skills: [
                 { name: 'Git', image: git_scm_icon },
                 { name: 'Linux', image: linux_original },
@@ -146,7 +149,7 @@ const Skills = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                    My Skills
+                    {t("skills.title")}
                 </motion.h1>
 
                 <div className="space-y-12">

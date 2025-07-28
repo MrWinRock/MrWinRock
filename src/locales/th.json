@@ -36,8 +36,7 @@
     "projects": {
         "title": "โปรเจกต์ของฉัน",
         "viewLive": "ดูเว็บไซต์",
-        "notAvailable": "ไม่พร้อมใช้งาน",
-        "github": "ดูบน GitHub"
+        "notAvailable": "ไม่พร้อมใช้งาน"
     },
     "footer": {
         "rights": "สงวนลิขสิทธิ์ทั้งหมด",

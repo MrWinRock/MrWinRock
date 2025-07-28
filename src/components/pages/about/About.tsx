@@ -7,13 +7,13 @@ const About = () => {
     return (
         <div className="min-h-screen p-8">
             <div className="max-w-4xl mx-auto">
-                <h1 className="text-4xl font-bold mb-8">About Me</h1>
+                <h1 className="text-4xl font-bold mb-8">{t("about.title")}</h1>
                 <div className="grid md:grid-cols-2 gap-8">
                     <div>
                         <motion.h2 className="text-2xl font-semibold mb-4"
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}>My Story</motion.h2>
+                            transition={{ duration: 0.5 }}>{t("about.myStory")}</motion.h2>
                         <motion.p className="text-gray-300 mb-4"
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ const About = () => {
                         <motion.h2 className="text-2xl font-semibold mb-4"
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}>Education</motion.h2>
+                            transition={{ duration: 0.5 }}>{t("about.education")}</motion.h2>
                         <motion.p className="text-gray-300"
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
