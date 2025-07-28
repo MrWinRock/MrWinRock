@@ -1,0 +1,47 @@
+{
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "skills": "Skills",
+        "projects": "Projects",
+        "experience": "Experience",
+        "contact": "Contact"
+    },
+    "home": {
+        "title": "🚧 Under Construction...",
+        "subtitle": "I'm working on this portfolio, please check back later!"
+    },
+    "about": {
+        "title": "About Me",
+        "myStory": "My Story",
+        "education": "Education",
+        "description1": "Hi! I'm Pharthiwath Gristsoopharruth, a Computer Science student at Suan Sunandha Rajabhat University, based in Bangkok, Thailand. I'm passionate about full-stack development and have a strong interest in cybersecurity. I’ve worked on several projects including ",
+        "description2": ", a blog platform for IT discussions, and ",
+        "description3": ", a simple real-time one-on-one chat application. Outside of coding, I enjoy gaming, exploring cybersecurity, watching football, and motorsport. My goal is to grow into a senior role in the computer science field and contribute to impactful, secure software systems.",
+        "educationDesc": "I'm currently pursuing a Bachelor's degree in Computer Science at Suan Sunandha Rajabhat University, with a GPA of 3.66. My studies focus on artificial intelligence, full-stack web and mobile application development, backend systems, and cybersecurity. This academic foundation, combined with hands-on projects, is shaping me into a versatile and forward-thinking developer."
+    },
+    "skills": {
+        "title": "My Skills",
+        "categories": {
+            "programming": "Programming Languages",
+            "web": "Web Technologies",
+            "mobile": "Mobile Development",
+            "databases": "Databases",
+            "cloud": "Cloud & DevOps",
+            "game": "Game Development",
+            "design": "Design & Tools",
+            "other": "Other Tools"
+        }
+    },
+    "projects": {
+        "title": "My Projects",
+        "viewLive": "View Live",
+        "notAvailable": "Not Available",
+        "github": "View on GitHub"
+    },
+    "footer": {
+        "rights": "All rights reserved",
+        "builtWith": "Built with React, TypeScript, and Tailwind CSS",
+        "followMe": "Follow me on"
+    }
+}
