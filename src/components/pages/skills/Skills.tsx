@@ -5,7 +5,6 @@ import { getSkillCategories } from "../../../data/skillCategories";
 const Skills = () => {
     const { t } = useTranslation();
 
-    // Get skill categories with translations
     const skillCategories = getSkillCategories(t);
 
     return (
