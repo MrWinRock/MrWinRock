@@ -205,7 +205,7 @@ const Home: React.FC = () => {
                         {t("home.techTitle")}
                     </h3>
 
-                    <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-4xl mx-auto cursor-pointer">
+                    <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-4xl mx-auto">
                         {skillsData.map((tech: string, index: number) => (
                             <motion.span
                                 key={tech}
