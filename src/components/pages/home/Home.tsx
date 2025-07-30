@@ -3,6 +3,7 @@ import type { Variants } from "motion/react";
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useCallback } from 'react';
+import { getSkillCategories } from "../../../data/skillCategories";
 import profileImage from '../../../assets/logo.jpg';
 
 interface SocialLinkProps {
@@ -13,10 +14,18 @@ interface SocialLinkProps {
 
 const Home: React.FC = () => {
     const { t } = useTranslation();
-    const [displayedName, setDisplayedName] = useState<string>('');
-    const [isTypingComplete, setIsTypingComplete] = useState<boolean>(false);
+    const [displayedName, setDisplayedName] = useState('');
+    const [isTypingComplete, setIsTypingComplete] = useState(false);
 
     const fullName: string = t("home.name");
+
+    const skillCategories = getSkillCategories(t);
+    const featuredSkills = [
+        ...skillCategories[0].skills.slice(3, 6),
+        ...skillCategories[1].skills.slice(2, 5),
+        ...skillCategories[3].skills.slice(2, 4),
+        ...skillCategories[4].skills.slice(0, 2),
+    ];
 
     const startTypingEffect = useCallback((): (() => void) | undefined => {
         if (!fullName) return;
@@ -62,8 +71,6 @@ const Home: React.FC = () => {
             transition: { duration: 0.6, ease: "easeOut" }
         }
     };
-
-    const skillsData: string[] = ['JavaScript', 'TypeScript', 'React', 'Node.js', 'Python', 'MongoDB', 'Docker', 'AWS'];
 
     return (
         <div className="min-h-screen flex items-center justify-center">
@@ -194,7 +201,7 @@ const Home: React.FC = () => {
                     </motion.div>
                 </div>
 
-                {/* Skills Preview - Enhanced with better animations */}
+                {/* Skills Preview - Enhanced with real skill data and icons */}
                 <motion.div
                     className="mt-20 text-center"
                     initial={{ opacity: 0, y: 50 }}
@@ -205,11 +212,11 @@ const Home: React.FC = () => {
                         {t("home.techTitle")}
                     </h3>
 
-                    <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-4xl mx-auto cursor-pointer">
-                        {skillsData.map((tech: string, index: number) => (
-                            <motion.span
-                                key={tech}
-                                className="px-6 py-3 bg-gray-800/50 backdrop-blur-sm rounded-full text-sm md:text-base border border-gray-700 hover:border-purple-500 transition-all duration-300 hover:scale-110 hover:bg-gray-700/50"
+                    <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-4xl mx-auto">
+                        {featuredSkills.map((skill, index) => (
+                            <motion.div
+                                key={skill.name}
+                                className="flex flex-col items-center gap-2 px-4 py-3 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700 hover:border-purple-500 transition-all duration-300 hover:scale-110 hover:bg-gray-700/50 group cursor-pointer"
                                 initial={{
                                     opacity: 0,
                                     scale: 0,
@@ -230,8 +237,20 @@ const Home: React.FC = () => {
                                     scale: 1.1,
                                 }}
                             >
-                                {tech}
-                            </motion.span>
+                                <motion.img
+                                    src={skill.image}
+                                    alt={skill.name}
+                                    className="w-8 h-8 md:w-10 md:h-10"
+                                    whileHover={{
+                                        scale: 1.2,
+                                        rotate: 10,
+                                        transition: { duration: 0.3 }
+                                    }}
+                                />
+                                <span className="text-xs md:text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
+                                    {skill.name}
+                                </span>
+                            </motion.div>
                         ))}
                     </div>
 
