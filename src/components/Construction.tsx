@@ -12,7 +12,7 @@ const Construction = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
             >
-                {t('home.title')}
+                {t('construction.title')}
             </motion.h1>
             <motion.p
                 className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed"
@@ -20,7 +20,7 @@ const Construction = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}
             >
-                {t('home.subtitle')}
+                {t('construction.subtitle')}
             </motion.p>
         </div>
     )
