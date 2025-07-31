@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import type { Variants } from "motion/react";
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { getSkillCategories } from "../../../data/skillCategories";
 import profileImage from '../../../assets/logo.jpg';
 
@@ -27,7 +27,9 @@ const Home: React.FC = () => {
         ...skillCategories[4].skills.slice(0, 2),
     ];
 
-    const startTypingEffect = useCallback((): (() => void) | undefined => {
+    const TYPING_DELAY_MS = 75;
+
+    useEffect(() => {
         if (!fullName) return;
 
         let index = 0;
@@ -42,15 +44,10 @@ const Home: React.FC = () => {
                 setIsTypingComplete(true);
                 clearInterval(typingInterval);
             }
-        }, 75);
+        }, TYPING_DELAY_MS);
 
         return () => clearInterval(typingInterval);
     }, [fullName]);
-
-    useEffect(() => {
-        const cleanup = startTypingEffect();
-        return cleanup;
-    }, [startTypingEffect]);
 
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
