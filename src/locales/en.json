@@ -7,9 +7,19 @@
         "experience": "Experience",
         "contact": "Contact"
     },
-    "home": {
+    "construction": {
         "title": "🚧 Under Construction...",
         "subtitle": "I'm working on this portfolio, please check back later!"
+    },
+    "home": {
+        "title": "Hi, I'm",
+        "name": "Pharthiwath Gristsoopharruth",
+        "subtitle": "Full-Stack Developer & Computer Science Student",
+        "description": "Passionate about creating innovative web applications and exploring cybersecurity. Currently studying Computer Science at Suan Sunandha Rajabhat University.",
+        "viewWork": "View My Work",
+        "aboutMe": "About Me",
+        "techTitle": "Technologies I Work With",
+        "seeMore": "See More"
     },
     "about": {
         "title": "About Me",
