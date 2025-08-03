@@ -34,10 +34,12 @@
         "title": "My Skills",
         "categories": {
             "programming": "Programming Languages",
-            "web": "Web Technologies",
-            "mobile": "Mobile Development",
+            "web": "Frontend Development",
+            "mobile": "Mobile App Development",
+            "backend": "Backend & API Development",
             "databases": "Databases",
             "cloud": "Cloud & DevOps",
+            "devtools": "Development Tools",
             "game": "Game Development",
             "design": "Design & Tools",
             "other": "Other Tools"

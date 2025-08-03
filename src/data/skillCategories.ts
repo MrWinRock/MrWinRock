@@ -7,20 +7,24 @@ import typescript_original from "../images/skills/typescript-original.svg";
 import java_original from "../images/skills/java-original.svg";
 import kotlinlang_icon from "../images/skills/kotlinlang-icon.svg";
 import python_original from "../images/skills/python-original.svg";
+import dart_icon from "../images/skills/logo_dart_192px.svg";
 import go_original from "../images/skills/go-original.svg";
 import gnu_bash_icon from "../images/skills/gnu_bash-icon.svg";
 
-// Web Technologies
+// Web Development
 import html5_original_wordmark from "../images/skills/html5-original-wordmark.svg";
 import css3_original_wordmark from "../images/skills/css3-original-wordmark.svg";
 import react_original_wordmark from "../images/skills/react-original-wordmark.svg";
-import nodejs_original_wordmark from "../images/skills/nodejs-original-wordmark.svg";
-import express_original_wordmark from "../images/skills/express-original-wordmark.svg";
-import socketio_icon from "../images/skills/socketio-icon.svg";
+import tailwindcss_icon from "../images/skills/tailwind-css.svg";
 
 // Mobile Development
 import header_logo from "../images/skills/header_logo.svg";
 import flutterio_icon from "../images/skills/flutterio-icon.svg";
+
+// Backend Technologies
+import nodejs_original_wordmark from "../images/skills/nodejs-original-wordmark.svg";
+import express_original_wordmark from "../images/skills/express-original-wordmark.svg";
+import socketio_icon from "../images/skills/socketio-icon.svg";
 
 // Databases
 import mysql_original_wordmark from "../images/skills/mysql-original-wordmark.svg";
@@ -34,6 +38,11 @@ import amazonwebservices_original_wordmark from "../images/skills/amazonwebservi
 import google_cloud_icon from "../images/skills/google_cloud-icon.svg";
 import docker_original_wordmark from "../images/skills/docker-original-wordmark.svg";
 import heroku_icon from "../images/skills/heroku-icon.svg";
+
+// Dev Tools
+import vscode_icon from "../images/skills/vscode-original.svg";
+import androidstudio_icon from "../images/skills/androidstudio-original.svg";
+import intellij_icon from "../images/skills/intellij-original.svg";
 
 // Game Development
 import unity3d_icon from "../images/skills/unity3d-icon.svg";
@@ -49,8 +58,10 @@ import git_scm_icon from "../images/skills/git-scm-icon.svg";
 import linux_original from "../images/skills/linux-original.svg";
 import arduino_icon from "../images/skills/arduino-1.svg";
 import postman_icon from "../images/skills/getpostman-icon.svg";
+import npm_icon from "../images/skills/npm-original-wordmark.svg";
+import eslint_icon from "../images/skills/eslint-original.svg";
 
-// Export a function that takes the translation function as parameter
+
 export const getSkillCategories = (t: (key: string) => string) => [
     {
         title: t("skills.categories.programming"),
@@ -60,10 +71,12 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'C#', image: csharp_original },
             { name: 'JavaScript', image: javascript_original },
             { name: 'TypeScript', image: typescript_original },
+            { name: 'JSX/TSX', image: header_logo },
             { name: 'Java', image: java_original },
             { name: 'Kotlin', image: kotlinlang_icon },
             { name: 'Python', image: python_original },
             { name: 'Go', image: go_original },
+            { name: 'Dart', image: dart_icon },
             { name: 'Bash', image: gnu_bash_icon },
         ]
     },
@@ -73,9 +86,9 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'HTML5', image: html5_original_wordmark },
             { name: 'CSS3', image: css3_original_wordmark },
             { name: 'React', image: react_original_wordmark },
-            { name: 'Node.js', image: nodejs_original_wordmark },
-            { name: 'Express', image: express_original_wordmark },
-            { name: 'Socket.io', image: socketio_icon },
+            { name: 'Framer Motion' },
+            { name: 'Tailwind CSS', image: tailwindcss_icon },
+            { name: 'Bootstrap' },
         ]
     },
     {
@@ -83,6 +96,16 @@ export const getSkillCategories = (t: (key: string) => string) => [
         skills: [
             { name: 'React Native', image: header_logo },
             { name: 'Flutter', image: flutterio_icon },
+            { name: 'Expo' },
+        ]
+    },
+    {
+        title: t("skills.categories.backend"),
+        skills: [
+            { name: 'Node.js', image: nodejs_original_wordmark },
+            { name: 'Express', image: express_original_wordmark },
+            { name: 'Socket.io', image: socketio_icon },
+            { name: 'JSON Web Tokens (JWT)' },
         ]
     },
     {
@@ -102,6 +125,15 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'Google Cloud Platform', image: google_cloud_icon },
             { name: 'Docker', image: docker_original_wordmark },
             { name: 'Heroku', image: heroku_icon },
+            { name: 'Github Actions' },
+        ]
+    },
+    {
+        title: t("skills.categories.devtools"),
+        skills: [
+            { name: 'VS Code', image: vscode_icon },
+            { name: 'Android Studio', image: androidstudio_icon },
+            { name: 'IntelliJ IDEA', image: intellij_icon },
         ]
     },
     {
@@ -126,6 +158,11 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'Linux', image: linux_original },
             { name: 'Arduino', image: arduino_icon },
             { name: 'Postman', image: postman_icon },
+            { name: 'npm', image: npm_icon },
+            { name: 'bun' },
+            { name: 'ESLint', image: eslint_icon },
+            { name: 'Playwright' },
+            { name: 'Robot Framework' },
         ]
     }
 ];
