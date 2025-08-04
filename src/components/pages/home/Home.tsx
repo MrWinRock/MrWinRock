@@ -22,9 +22,11 @@ const Home: React.FC = () => {
     const skillCategories = getSkillCategories(t);
     const featuredSkills = [
         ...skillCategories[0].skills.slice(3, 6),
-        ...skillCategories[1].skills.slice(2, 5),
-        ...skillCategories[3].skills.slice(2, 4),
-        ...skillCategories[4].skills.slice(0, 2),
+        ...skillCategories[1].skills.slice(0, 3),
+        ...skillCategories[2].skills.slice(0, 2),
+        ...skillCategories[3].skills.slice(0, 1),
+        ...skillCategories[4].skills.slice(2, 4),
+        ...skillCategories[5].skills.slice(0, 1),
     ];
 
     const TYPING_DELAY_MS = 75;
