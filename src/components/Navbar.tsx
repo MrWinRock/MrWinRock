@@ -32,7 +32,7 @@ const Navbar = () => {
                     <Link to="/skills" className="p-button">{t('nav.skills')}</Link>
                     <Link to="/projects" className="p-button">{t('nav.projects')}</Link>
                     {/* <Link to="/experience" className="p-button">{t('nav.experience')}</Link> */}
-                    <Link to="/contact" className="p-button">{t('nav.contact')}</Link>
+                    {/* <Link to="/contact" className="p-button">{t('nav.contact')}</Link> */}
                     <LanguageSwitcher />
                 </div>
                 {/* Mobile Menu Button */}
