@@ -10,6 +10,7 @@ import python_original from "../images/skills/python-original.svg";
 import dart_icon from "../images/skills/logo_dart_192px.svg";
 import go_original from "../images/skills/go-original.svg";
 import gnu_bash_icon from "../images/skills/gnu_bash-icon.svg";
+/* JSX/TSX uses React logo */
 
 // Web Development
 import html5_original_wordmark from "../images/skills/html5-original-wordmark.svg";
@@ -134,7 +135,7 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'Google Cloud Platform', image: google_cloud_icon },
             { name: 'Docker', image: docker_original_wordmark },
             { name: 'Heroku', image: heroku_icon },
-            { name: 'Github Actions', image: github_actions_icon },
+            { name: 'GitHub Actions', image: github_actions_icon },
         ]
     },
     {
