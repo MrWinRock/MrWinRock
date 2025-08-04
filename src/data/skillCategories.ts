@@ -16,15 +16,20 @@ import html5_original_wordmark from "../images/skills/html5-original-wordmark.sv
 import css3_original_wordmark from "../images/skills/css3-original-wordmark.svg";
 import react_original_wordmark from "../images/skills/react-original-wordmark.svg";
 import tailwindcss_icon from "../images/skills/tailwind-css.svg";
+import boostrap_logo from "../images/skills/bootstrap-logo.svg";
+import motion_logo from "../images/skills/motion.png";
 
 // Mobile Development
 import header_logo from "../images/skills/header_logo.svg";
 import flutterio_icon from "../images/skills/flutterio-icon.svg";
+import expo_icon from "../images/skills/expo-1.svg";
 
 // Backend Technologies
 import nodejs_original_wordmark from "../images/skills/nodejs-original-wordmark.svg";
 import express_original_wordmark from "../images/skills/express-original-wordmark.svg";
 import socketio_icon from "../images/skills/socketio-icon.svg";
+import spring_boot_icon from "../images/skills/icon-spring-boot.svg";
+import jwt_icon from "../images/skills/jwt-3.svg";
 
 // Databases
 import mysql_original_wordmark from "../images/skills/mysql-original-wordmark.svg";
@@ -38,6 +43,7 @@ import amazonwebservices_original_wordmark from "../images/skills/amazonwebservi
 import google_cloud_icon from "../images/skills/google_cloud-icon.svg";
 import docker_original_wordmark from "../images/skills/docker-original-wordmark.svg";
 import heroku_icon from "../images/skills/heroku-icon.svg";
+import github_actions_icon from "../images/skills/github-icon.svg";
 
 // Dev Tools
 import vscode_icon from "../images/skills/vscode-original.svg";
@@ -59,8 +65,10 @@ import linux_original from "../images/skills/linux-original.svg";
 import arduino_icon from "../images/skills/arduino-1.svg";
 import postman_icon from "../images/skills/getpostman-icon.svg";
 import npm_icon from "../images/skills/npm-original-wordmark.svg";
+import bun from "../images/skills/bun-1.svg";
 import eslint_icon from "../images/skills/eslint-original.svg";
-
+import playwright from "../images/skills/idVX2ElrpI_1754279985033.png";
+import robot_framework from "../images/skills/robotframework-svgrepo-com.svg";
 
 export const getSkillCategories = (t: (key: string) => string) => [
     {
@@ -86,9 +94,9 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'HTML5', image: html5_original_wordmark },
             { name: 'CSS3', image: css3_original_wordmark },
             { name: 'React', image: react_original_wordmark },
-            { name: 'Framer Motion' },
+            { name: 'Motion', image: motion_logo },
             { name: 'Tailwind CSS', image: tailwindcss_icon },
-            { name: 'Bootstrap' },
+            { name: 'Bootstrap', image: boostrap_logo },
         ]
     },
     {
@@ -96,7 +104,7 @@ export const getSkillCategories = (t: (key: string) => string) => [
         skills: [
             { name: 'React Native', image: header_logo },
             { name: 'Flutter', image: flutterio_icon },
-            { name: 'Expo' },
+            { name: 'Expo', image: expo_icon },
         ]
     },
     {
@@ -105,7 +113,8 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'Node.js', image: nodejs_original_wordmark },
             { name: 'Express', image: express_original_wordmark },
             { name: 'Socket.io', image: socketio_icon },
-            { name: 'JSON Web Tokens (JWT)' },
+            { name: 'Spring Boot', image: spring_boot_icon },
+            { name: 'JSON Web Tokens (JWT)', image: jwt_icon },
         ]
     },
     {
@@ -125,7 +134,7 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'Google Cloud Platform', image: google_cloud_icon },
             { name: 'Docker', image: docker_original_wordmark },
             { name: 'Heroku', image: heroku_icon },
-            { name: 'Github Actions' },
+            { name: 'Github Actions', image: github_actions_icon },
         ]
     },
     {
@@ -159,10 +168,10 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'Arduino', image: arduino_icon },
             { name: 'Postman', image: postman_icon },
             { name: 'npm', image: npm_icon },
-            { name: 'bun' },
+            { name: 'bun', image: bun },
             { name: 'ESLint', image: eslint_icon },
-            { name: 'Playwright' },
-            { name: 'Robot Framework' },
+            { name: 'Playwright', image: playwright },
+            { name: 'Robot Framework', image: robot_framework },
         ]
     }
 ];
