@@ -16,11 +16,11 @@ import html5_original_wordmark from "../images/skills/html5-original-wordmark.sv
 import css3_original_wordmark from "../images/skills/css3-original-wordmark.svg";
 import react_original_wordmark from "../images/skills/react-original-wordmark.svg";
 import tailwindcss_icon from "../images/skills/tailwind-css.svg";
-import boostrap_logo from "../images/skills/bootstrap-logo.svg";
+import bootstrap_logo from "../images/skills/bootstrap-logo.svg";
 import motion_logo from "../images/skills/motion.png";
 
 // Mobile Development
-import header_logo from "../images/skills/header_logo.svg";
+import react_logo from "../images/skills/react_logo.svg";
 import flutterio_icon from "../images/skills/flutterio-icon.svg";
 import expo_icon from "../images/skills/expo-1.svg";
 
@@ -79,7 +79,7 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'C#', image: csharp_original },
             { name: 'JavaScript', image: javascript_original },
             { name: 'TypeScript', image: typescript_original },
-            { name: 'JSX/TSX', image: header_logo },
+            { name: 'JSX/TSX', image: react_logo },
             { name: 'Java', image: java_original },
             { name: 'Kotlin', image: kotlinlang_icon },
             { name: 'Python', image: python_original },
@@ -96,13 +96,13 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'React', image: react_original_wordmark },
             { name: 'Motion', image: motion_logo },
             { name: 'Tailwind CSS', image: tailwindcss_icon },
-            { name: 'Bootstrap', image: boostrap_logo },
+            { name: 'Bootstrap', image: bootstrap_logo },
         ]
     },
     {
         title: t("skills.categories.mobile"),
         skills: [
-            { name: 'React Native', image: header_logo },
+            { name: 'React Native', image: react_logo },
             { name: 'Flutter', image: flutterio_icon },
             { name: 'Expo', image: expo_icon },
         ]
