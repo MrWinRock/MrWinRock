@@ -17,7 +17,7 @@ const Projects = () => {
         { title: "EarthMC Data Site", description: "EarthMC Server Data Site.", url: "https://mrwinrock.github.io/earthmc-web-data", gh_url: "https://github.com/MrWinRock/earthmc-web-data", tags: ["React", "Typescript", "Vite", "Tailwind CSS"] },
         { title: "EarthMC API Proxy", description: "EarthMC Proxy API Server For POST Requests.", gh_url: "https://github.com/MrWinRock/earthmc-api-proxy", tags: ["Node.js", "Express.js"] },
         { title: "Crazy Dad Lore 3D", description: "A 3D Road game created for the Thailand Summer Jam 2025.", url: "https://marguro.itch.io/crazy-dad-lore", gh_url: "https://github.com/MrWinRock/summer-jam-2025?tab=readme-ov-file", tags: ["Unity 3D", "C#"] },
-        { title: "Horror Company", description: "A 2D game created for the Thailand Horror Jam 2024.", url: "https://marguro.itch.io/horror-company", gh_url: "https://github.com/MrWinRock/project-H-jam", tags: ["Unity 3D", "C#"] },
+        { title: "Horror Company", description: "A 2D game created for the Thailand Horror Jam 2024.", url: "https://marguro.itch.io/horror-company", gh_url: "https://github.com/MrWinRock/project-H-jam", tags: ["Unity", "C#"] },
     ]
 
     return (
@@ -122,7 +122,7 @@ const Projects = () => {
                                 ) : (
                                     <span className="s-button px-4 py-2 text-sm font-medium opacity-50">{t("projects.notAvailable")}</span>
                                 )}
-                                {project.gh_url && (
+                                {project.gh_url ? (
                                     <motion.a
                                         href={project.gh_url}
                                         className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200"
@@ -141,6 +141,17 @@ const Projects = () => {
                                             className="w-8 h-8 filter invert"
                                         />
                                     </motion.a>
+                                ) : (
+                                    <div
+                                        className="p-2 rounded-full cursor-not-allowed opacity-30"
+                                        title="View on GitHub"
+                                    >
+                                        <img
+                                            src={githubIcon}
+                                            alt="GitHub"
+                                            className="w-8 h-8 filter invert"
+                                        />
+                                    </div>
                                 )}
                             </motion.div>
                         </motion.div>
