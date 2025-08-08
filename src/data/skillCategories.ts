@@ -1,178 +1,183 @@
 // Programming Languages
-import c_original from "../images/skills/c-original.svg";
-import cplusplus_original from "../images/skills/cplusplus-original.svg";
-import csharp_original from "../images/skills/csharp-original.svg";
-import javascript_original from "../images/skills/javascript-original.svg";
-import typescript_original from "../images/skills/typescript-original.svg";
-import java_original from "../images/skills/java-original.svg";
-import kotlinlang_icon from "../images/skills/kotlinlang-icon.svg";
-import python_original from "../images/skills/python-original.svg";
-import dart_icon from "../images/skills/logo_dart_192px.svg";
-import go_original from "../images/skills/go-original.svg";
-import gnu_bash_icon from "../images/skills/gnu_bash-icon.svg";
-/* JSX/TSX uses React logo */
+import c_logo from "../images/skills/c.svg";
+import cplusplus_logo from "../images/skills/cplusplus.svg";
+import csharp_logo from "../images/skills/csharp.svg";
+import javascript_logo from "../images/skills/javascript.svg";
+import typescript_logo from "../images/skills/typescript.svg";
+import jsx_tsx_logo from "../images/skills/jsx-tsx.svg";
+import java_logo from "../images/skills/java.svg";
+import kotlinlang_logo from "../images/skills/kotlinlang.svg";
+import python_logo from "../images/skills/python.svg";
+import dart_logo from "../images/skills/dart.svg";
+import go_logo from "../images/skills/go.svg";
+import gnu_bash_logo from "../images/skills/bash.svg";
+
 
 // Web Development
-import html5_original_wordmark from "../images/skills/html5-original-wordmark.svg";
-import css3_original_wordmark from "../images/skills/css3-original-wordmark.svg";
-import react_original_wordmark from "../images/skills/react-original-wordmark.svg";
-import tailwindcss_icon from "../images/skills/tailwind-css.svg";
-import bootstrap_logo from "../images/skills/bootstrap-logo.svg";
+import html5_logo from "../images/skills/html5.svg";
+import css3_logo from "../images/skills/css3.svg";
+import react_logo from "../images/skills/react.svg";
+import tailwindcss_logo from "../images/skills/tailwindcss.svg";
+import bootstrap_logo from "../images/skills/bootstrap.svg";
 import motion_logo from "../images/skills/motion.png";
 
 // Mobile Development
-import react_logo from "../images/skills/react_logo.svg";
-import flutterio_icon from "../images/skills/flutterio-icon.svg";
-import expo_icon from "../images/skills/expo-1.svg";
+import react_native_logo from "../images/skills/react-native.svg";
+import flutterio_logo from "../images/skills/flutter.svg";
+import expo_logo from "../images/skills/expo.svg";
 
 // Backend Technologies
-import nodejs_original_wordmark from "../images/skills/nodejs-original-wordmark.svg";
-import express_original_wordmark from "../images/skills/express-original-wordmark.svg";
-import socketio_icon from "../images/skills/socketio-icon.svg";
-import spring_boot_icon from "../images/skills/icon-spring-boot.svg";
-import jwt_icon from "../images/skills/jwt-3.svg";
+import nodejs_logo from "../images/skills/nodejs.svg";
+import express_logo from "../images/skills/express.svg";
+import socketio_logo from "../images/skills/socketio.svg";
+import spring_boot_logo from "../images/skills/spring-boot.svg";
+import jwt_logo from "../images/skills/jwt.svg";
+import hono_logo from "../images/skills/hono.svg";
+import zod_logo from "../images/skills/zod.webp";
 
 // Databases
-import mysql_original_wordmark from "../images/skills/mysql-original-wordmark.svg";
-import postgresql_original_wordmark from "../images/skills/postgresql-original-wordmark.svg";
-import mongodb_original_wordmark from "../images/skills/mongodb-original-wordmark.svg";
-import mariadb_icon from "../images/skills/mariadb-icon.svg";
-import firebase_icon from "../images/skills/firebase-icon.svg";
+import mysql_logo from "../images/skills/mysql.svg";
+import postgresql_logo from "../images/skills/postgresql.svg";
+import mongodb_logo from "../images/skills/mongodb.svg";
+import mariadb_logo from "../images/skills/mariadb.svg";
+import firebase_logo from "../images/skills/firebase.svg";
 
 // Cloud & DevOps
-import amazonwebservices_original_wordmark from "../images/skills/amazonwebservices-original-wordmark.svg";
-import google_cloud_icon from "../images/skills/google_cloud-icon.svg";
-import docker_original_wordmark from "../images/skills/docker-original-wordmark.svg";
-import heroku_icon from "../images/skills/heroku-icon.svg";
-import github_actions_icon from "../images/skills/github-icon.svg";
+import aws_logo from "../images/skills/aws.svg";
+import google_cloud_logo from "../images/skills/google_cloud.svg";
+import docker_logo from "../images/skills/docker.svg";
+import heroku_logo from "../images/skills/heroku.svg";
+import github_actions_logo from "../images/skills/github.svg";
 
 // Dev Tools
-import vscode_icon from "../images/skills/vscode-original.svg";
-import androidstudio_icon from "../images/skills/androidstudio-original.svg";
-import intellij_icon from "../images/skills/intellij-original.svg";
+import vscode_logo from "../images/skills/vscode.svg";
+import androidstudio_logo from "../images/skills/androidstudio.svg";
+import intellij_logo from "../images/skills/intellij.svg";
 
 // Game Development
-import unity3d_icon from "../images/skills/unity3d-icon.svg";
-import unreal_engine from "../images/skills/unreal-engine.svg";
+import unity3d_logo from "../images/skills/unity.svg";
+import unreal_engine_logo from "../images/skills/unreal-engine.svg";
 
 // Design & Tools
-import figma_icon from "../images/skills/figma-icon.svg";
-import photoshop_line from "../images/skills/photoshop-line.svg";
-import blender_community_badge from "../images/skills/blender_community_badge_white.svg";
+import figma_logo from "../images/skills/figma.svg";
+import photoshop_logo from "../images/skills/photoshop.svg";
+import blender_logo from "../images/skills/blender.svg";
 
 // Other Tools
-import git_scm_icon from "../images/skills/git-scm-icon.svg";
-import linux_original from "../images/skills/linux-original.svg";
-import arduino_icon from "../images/skills/arduino-1.svg";
-import postman_icon from "../images/skills/getpostman-icon.svg";
-import npm_icon from "../images/skills/npm-original-wordmark.svg";
-import bun from "../images/skills/bun-1.svg";
-import eslint_icon from "../images/skills/eslint-original.svg";
-import playwright from "../images/skills/idVX2ElrpI_1754279985033.png";
-import robot_framework from "../images/skills/robotframework-svgrepo-com.svg";
+import git_scm_logo from "../images/skills/git.svg";
+import linux_logo from "../images/skills/linux.svg";
+import arduino_logo from "../images/skills/arduino.svg";
+import postman_logo from "../images/skills/postman.svg";
+import npm_logo from "../images/skills/npm.svg";
+import bun_logo from "../images/skills/bun.svg";
+import eslint_logo from "../images/skills/eslint.svg";
+import playwright_logo from "../images/skills/playwright.png";
+import robot_framework_logo from "../images/skills/robotframework.svg";
 
 export const getSkillCategories = (t: (key: string) => string) => [
     {
         title: t("skills.categories.programming"),
         skills: [
-            { name: 'C', image: c_original },
-            { name: 'C++', image: cplusplus_original },
-            { name: 'C#', image: csharp_original },
-            { name: 'JavaScript', image: javascript_original },
-            { name: 'TypeScript', image: typescript_original },
-            { name: 'JSX/TSX', image: react_logo },
-            { name: 'Java', image: java_original },
-            { name: 'Kotlin', image: kotlinlang_icon },
-            { name: 'Python', image: python_original },
-            { name: 'Go', image: go_original },
-            { name: 'Dart', image: dart_icon },
-            { name: 'Bash', image: gnu_bash_icon },
+            { name: 'C', image: c_logo },
+            { name: 'C++', image: cplusplus_logo },
+            { name: 'C#', image: csharp_logo },
+            { name: 'JavaScript', image: javascript_logo },
+            { name: 'TypeScript', image: typescript_logo },
+            { name: 'JSX/TSX', image: jsx_tsx_logo },
+            { name: 'Java', image: java_logo },
+            { name: 'Kotlin', image: kotlinlang_logo },
+            { name: 'Python', image: python_logo },
+            { name: 'Go', image: go_logo },
+            { name: 'Dart', image: dart_logo },
+            { name: 'Bash', image: gnu_bash_logo },
         ]
     },
     {
         title: t("skills.categories.web"),
         skills: [
-            { name: 'HTML5', image: html5_original_wordmark },
-            { name: 'CSS3', image: css3_original_wordmark },
-            { name: 'React', image: react_original_wordmark },
+            { name: 'HTML5', image: html5_logo },
+            { name: 'CSS3', image: css3_logo },
+            { name: 'React', image: react_logo },
             { name: 'Motion', image: motion_logo },
-            { name: 'Tailwind CSS', image: tailwindcss_icon },
+            { name: 'Tailwind CSS', image: tailwindcss_logo },
             { name: 'Bootstrap', image: bootstrap_logo },
         ]
     },
     {
         title: t("skills.categories.mobile"),
         skills: [
-            { name: 'React Native', image: react_logo },
-            { name: 'Flutter', image: flutterio_icon },
-            { name: 'Expo', image: expo_icon },
+            { name: 'React Native', image: react_native_logo },
+            { name: 'Flutter', image: flutterio_logo },
+            { name: 'Expo', image: expo_logo },
         ]
     },
     {
         title: t("skills.categories.backend"),
         skills: [
-            { name: 'Node.js', image: nodejs_original_wordmark },
-            { name: 'Express', image: express_original_wordmark },
-            { name: 'Socket.io', image: socketio_icon },
-            { name: 'Spring Boot', image: spring_boot_icon },
-            { name: 'JSON Web Tokens (JWT)', image: jwt_icon },
+            { name: 'Node.js', image: nodejs_logo },
+            { name: 'Express', image: express_logo },
+            { name: 'Socket.io', image: socketio_logo },
+            { name: 'Spring Boot', image: spring_boot_logo },
+            { name: 'JSON Web Tokens (JWT)', image: jwt_logo },
+            { name: 'Hono', image: hono_logo },
+            { name: 'Zod', image: zod_logo },
         ]
     },
     {
         title: t("skills.categories.databases"),
         skills: [
-            { name: 'MySQL', image: mysql_original_wordmark },
-            { name: 'PostgreSQL', image: postgresql_original_wordmark },
-            { name: 'MongoDB', image: mongodb_original_wordmark },
-            { name: 'MariaDB', image: mariadb_icon },
-            { name: 'Firebase', image: firebase_icon },
+            { name: 'MySQL', image: mysql_logo },
+            { name: 'PostgreSQL', image: postgresql_logo },
+            { name: 'MongoDB', image: mongodb_logo },
+            { name: 'MariaDB', image: mariadb_logo },
+            { name: 'Firebase', image: firebase_logo },
         ]
     },
     {
         title: t("skills.categories.cloud"),
         skills: [
-            { name: 'AWS', image: amazonwebservices_original_wordmark },
-            { name: 'Google Cloud Platform', image: google_cloud_icon },
-            { name: 'Docker', image: docker_original_wordmark },
-            { name: 'Heroku', image: heroku_icon },
-            { name: 'GitHub Actions', image: github_actions_icon },
+            { name: 'AWS', image: aws_logo },
+            { name: 'Google Cloud Platform', image: google_cloud_logo },
+            { name: 'Docker', image: docker_logo },
+            { name: 'Heroku', image: heroku_logo },
+            { name: 'GitHub Actions', image: github_actions_logo },
         ]
     },
     {
         title: t("skills.categories.devtools"),
         skills: [
-            { name: 'VS Code', image: vscode_icon },
-            { name: 'Android Studio', image: androidstudio_icon },
-            { name: 'IntelliJ IDEA', image: intellij_icon },
+            { name: 'VS Code', image: vscode_logo },
+            { name: 'Android Studio', image: androidstudio_logo },
+            { name: 'IntelliJ IDEA', image: intellij_logo },
         ]
     },
     {
         title: t("skills.categories.game"),
         skills: [
-            { name: 'Unity', image: unity3d_icon },
-            { name: 'Unreal Engine', image: unreal_engine },
+            { name: 'Unity', image: unity3d_logo },
+            { name: 'Unreal Engine', image: unreal_engine_logo },
         ]
     },
     {
         title: t("skills.categories.design"),
         skills: [
-            { name: 'Figma', image: figma_icon },
-            { name: 'Photoshop', image: photoshop_line },
-            { name: 'Blender', image: blender_community_badge },
+            { name: 'Figma', image: figma_logo },
+            { name: 'Photoshop', image: photoshop_logo },
+            { name: 'Blender', image: blender_logo },
         ]
     },
     {
         title: t("skills.categories.other"),
         skills: [
-            { name: 'Git', image: git_scm_icon },
-            { name: 'Linux', image: linux_original },
-            { name: 'Arduino', image: arduino_icon },
-            { name: 'Postman', image: postman_icon },
-            { name: 'npm', image: npm_icon },
-            { name: 'bun', image: bun },
-            { name: 'ESLint', image: eslint_icon },
-            { name: 'Playwright', image: playwright },
-            { name: 'Robot Framework', image: robot_framework },
+            { name: 'Git', image: git_scm_logo },
+            { name: 'Linux', image: linux_logo },
+            { name: 'Arduino', image: arduino_logo },
+            { name: 'Postman', image: postman_logo },
+            { name: 'npm', image: npm_logo },
+            { name: 'bun', image: bun_logo },
+            { name: 'ESLint', image: eslint_logo },
+            { name: 'Playwright', image: playwright_logo },
+            { name: 'Robot Framework', image: robot_framework_logo },
         ]
     }
 ];
