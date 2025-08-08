@@ -4,13 +4,14 @@ import cplusplus_logo from "../images/skills/cplusplus.svg";
 import csharp_logo from "../images/skills/csharp.svg";
 import javascript_logo from "../images/skills/javascript.svg";
 import typescript_logo from "../images/skills/typescript.svg";
+import jsx_tsx_logo from "../images/skills/jsx-tsx.svg";
 import java_logo from "../images/skills/java.svg";
 import kotlinlang_logo from "../images/skills/kotlinlang.svg";
 import python_logo from "../images/skills/python.svg";
 import dart_logo from "../images/skills/dart.svg";
 import go_logo from "../images/skills/go.svg";
 import gnu_bash_logo from "../images/skills/bash.svg";
-/* JSX/TSX uses React logo */
+
 
 // Web Development
 import html5_logo from "../images/skills/html5.svg";
@@ -82,7 +83,7 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'C#', image: csharp_logo },
             { name: 'JavaScript', image: javascript_logo },
             { name: 'TypeScript', image: typescript_logo },
-            { name: 'JSX/TSX', image: react_logo },
+            { name: 'JSX/TSX', image: jsx_tsx_logo },
             { name: 'Java', image: java_logo },
             { name: 'Kotlin', image: kotlinlang_logo },
             { name: 'Python', image: python_logo },
