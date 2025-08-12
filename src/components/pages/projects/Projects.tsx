@@ -7,6 +7,7 @@ const Projects = () => {
 
     const projects = [
         { title: "MrWinRock", description: "My Portfolio Website.", url: "/", gh_url: "https://github.com/MrWinRock/MrWinRock", tags: ["React", "TypeScript", "Vite", "Tailwind CSS"] },
+        { title: "MrWinRock API", description: "My Portfolio Website.", url: "https://api.mrwinrock.com/", gh_url: "https://github.com/MrWinRock/mrwinrock-app", tags: ["Bun", "Hono", "Zod", "Fly.io", "Cloudflare"] },
         { title: "Stringy", description: "A Blog Platform Discussing about IT.", url: "https://stringy-b8c5e.web.app/", gh_url: "https://github.com/MrWinRock/Stringy", tags: ["React", "Javascript"] },
         { title: "Stringy Backend", description: "Backend for the Stringy application.", url: "", gh_url: "", tags: ["Node.js", "Express.js", "JWT", "Google Cloud SQL", "Google Cloud Platform"] },
         { title: "SSRU Interactive Map", description: "An Interactive Map for SSRU.", url: "https://mrwinrock.github.io/ssru-inter-map/", gh_url: "https://github.com/MrWinRock/ssru-inter-map", tags: ["React", "Javascript", "Zoom Pan Pitch"] },
