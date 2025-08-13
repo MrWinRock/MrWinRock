@@ -21,7 +21,7 @@ export class ApiError<T = unknown> extends Error {
 
 type Primitive = string | number | boolean;
 export interface RequestOptions {
-    method?: "GET";
+    method?: AxiosRequestConfig["method"];
     query?: Record<string, Primitive | null | undefined>;
     json?: unknown;
     rawBody?: unknown;
@@ -58,7 +58,7 @@ function isAxiosError(e: unknown): e is AxiosError {
 
 async function req<T = unknown>(
     path: string,
-    opts: RequestOptions & { method?: AxiosRequestConfig["method"] } = {}
+    opts: RequestOptions = {}
 ): Promise<T> {
     if (!BASE_URL) throw new Error("VITE_BASE_URL is not defined");
     if (opts.json !== undefined && opts.rawBody !== undefined) {
@@ -123,8 +123,21 @@ const get = <T = unknown>(
     opts?: Omit<RequestOptions, "method" | "json" | "rawBody">
 ) => req<T>(path, { ...opts, method: "GET" });
 
+const post = <T = unknown>(
+    path: string,
+    data?: unknown,
+    opts?: Omit<RequestOptions, "method" | "json" | "rawBody">
+) => req<T>(path, { ...opts, method: "POST", json: data });
+
 export const api = {
     health: () => get<{ ok: boolean; status?: string }>("/health"),
+    fish: () => get<{ ok: boolean; fish?: string }>("/fish"),
+    skills: () => get<{ ok: boolean; data?: string[] }>("/api/skills"),
+    projects: () => get<{ ok: boolean; data?: string[] }>("/api/projects"),
+    experience: () => get<{ ok: boolean; data?: string[] }>("/api/experience"),
+    contact: (data: { name: string; email: string; message: string }) =>
+        post<{ ok: boolean; message?: string }>("/api/contact", data),
     get,
+    post,
     raw: req,
 };
