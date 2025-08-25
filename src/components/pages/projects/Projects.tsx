@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
+import SpotlightCard from "@/components/cards/SpotLightCard";
 import githubIcon from "../../../assets/icons/github-icon.svg";
 
 const Projects = () => {
@@ -42,63 +43,61 @@ const Projects = () => {
                 >
                     {t("projects.title")}
                 </motion.h1>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                     {projects.map((project, index) => (
-                        <motion.div
+                        <SpotlightCard
                             key={index}
-                            className="flex flex-col justify-between bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-gray-600 transition-all duration-300"
-                            initial={{ opacity: 0, y: 50, rotateX: -15 }}
-                            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                            transition={{
-                                duration: 0.6,
-                                delay: index * 0.15,
-                                type: "spring",
-                                stiffness: 100
-                            }}
+                            className="h-full"
+                            index={index}
+                            spotlightColor="rgba(255, 0, 255, 0.3)"
+                            motionProps={{ whileHover: { transition: { duration: 0.3 } } }}
                         >
-                            <motion.h2
-                                className="text-xl font-bold mb-3 text-white"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: index * 0.15 + 0.3 }}
-                            >
-                                {project.title}
-                            </motion.h2>
-                            <motion.p
-                                className="text-gray-300 mb-4 text-sm leading-relaxed"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: index * 0.15 + 0.4 }}
-                            >
-                                {project.description}
-                            </motion.p>
+                            <div className="flex flex-col flex-1 flex-grow justify-between">
+                                <motion.h2
+                                    className="text-xl font-bold mb-3 text-white"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.3 }}
+                                >
+                                    {project.title}
+                                </motion.h2>
+
+                                <motion.p
+                                    className="text-gray-300 mb-4 text-sm leading-relaxed"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.4 }}
+                                >
+                                    {project.description}
+                                </motion.p>
+
+                                <motion.div
+                                    className="flex flex-wrap gap-2 mb-4"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.5 }}
+                                >
+                                    {project.tags.map((tag, tagIndex) => (
+                                        <motion.span
+                                            key={tagIndex}
+                                            className="bg-gray-700 text-gray-300 px-2 py-1 rounded-full text-xs font-medium border border-gray-600 hover:bg-gray-600 hover:border-purple-500 transition-colors duration-300"
+                                            initial={{ opacity: 0, scale: 0 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            transition={{
+                                                delay: index * 0.15 + 0.6 + tagIndex * 0.1,
+                                                type: "spring",
+                                                stiffness: 200
+                                            }}
+                                        >
+                                            {tag}
+                                        </motion.span>
+                                    ))}
+                                </motion.div>
+                            </div>
 
                             <motion.div
-                                className="flex flex-wrap gap-2 mb-4"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: index * 0.15 + 0.5 }}
-                            >
-                                {project.tags.map((tag, tagIndex) => (
-                                    <motion.span
-                                        key={tagIndex}
-                                        className="bg-gray-700 text-gray-300 px-2 py-1 rounded-full text-xs font-medium border border-gray-600"
-                                        initial={{ opacity: 0, scale: 0 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{
-                                            delay: index * 0.15 + 0.6 + tagIndex * 0.1,
-                                            type: "spring",
-                                            stiffness: 200
-                                        }}
-                                        whileHover={{ scale: 1.1 }}
-                                    >
-                                        {tag}
-                                    </motion.span>
-                                ))}
-                            </motion.div>
-
-                            <motion.div
-                                className="flex justify-between items-center mt-auto"
+                                className="flex justify-between items-center mt-auto pt-4"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: index * 0.15 + 0.7 }}
@@ -109,20 +108,33 @@ const Projects = () => {
                                         className="s-button flex flex-row items-center gap-2 px-4 py-2 text-sm font-medium"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
                                     >
                                         {t("projects.viewLive")}
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon">
+                                        <motion.svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            className="icon"
+                                            whileHover={{ x: 2, y: -2 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
                                             <path d="M18 13V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5" />
                                             <polyline points="15 3 21 3 21 9" />
                                             <line x1="10" y1="14" x2="21" y2="3" />
-                                        </svg>
+                                        </motion.svg>
                                     </motion.a>
                                 ) : (
-                                    <span className="s-button px-4 py-2 text-sm font-medium opacity-50">{t("projects.notAvailable")}</span>
+                                    <span className="s-button px-4 py-2 text-sm font-medium opacity-50">
+                                        {t("projects.notAvailable")}
+                                    </span>
                                 )}
+
                                 {project.gh_url ? (
                                     <motion.a
                                         href={project.gh_url}
@@ -131,12 +143,10 @@ const Projects = () => {
                                         rel="noopener noreferrer"
                                         title="View on GitHub"
                                         whileHover={{
-                                            scale: 1.1,
                                             rotate: 15
                                         }}
-                                        whileTap={{ scale: 0.9 }}
                                     >
-                                        <img
+                                        <motion.img
                                             src={githubIcon}
                                             alt="GitHub"
                                             className="w-8 h-8 filter invert"
@@ -155,7 +165,7 @@ const Projects = () => {
                                     </div>
                                 )}
                             </motion.div>
-                        </motion.div>
+                        </SpotlightCard>
                     ))}
                 </div>
             </div>
