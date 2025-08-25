@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getSkillCategories } from "../../../data/skillCategories";
 import profileImage from '../../../assets/logo.jpg';
-import APITester from "@/components/APITester";
 
 interface SocialLinkProps {
     href: string;
@@ -75,7 +74,6 @@ const Home: React.FC = () => {
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="max-w-6xl mx-auto px-4 py-20">
-                <APITester />
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Left Side - Text Content */}
                     <motion.div
