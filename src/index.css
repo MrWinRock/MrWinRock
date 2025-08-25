@@ -13,6 +13,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --color-neutral-800: rgb(38, 38, 38);
+  --color-neutral-900: rgb(23, 23, 23);
+  --color-gray-600: rgb(75, 85, 99);
+  --color-gray-700: rgb(55, 65, 81);
+  --color-purple-primary: rgb(255, 0, 255);
+  --color-cyan-primary: rgb(0, 255, 255);
 }
 
 *,

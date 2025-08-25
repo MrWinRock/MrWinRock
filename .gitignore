@@ -23,4 +23,12 @@ dist-ssr
 *.sln
 *.sw?
 
+### dotenv ###
 .env
+
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
