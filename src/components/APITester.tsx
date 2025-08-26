@@ -32,7 +32,7 @@ const APITester = () => {
             const res = await api.skills();
             setSkills(JSON.stringify(res, null, 2));
         } catch (e) {
-            setFish(e instanceof Error ? e.message : "Unknown error");
+            setSkills(e instanceof Error ? e.message : "Unknown error");
         }
     };
 
