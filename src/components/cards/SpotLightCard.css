@@ -1,0 +1,14 @@
+.spotlight-overlay {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    background: radial-gradient(circle at var(--spotlight-x, 0px) var(--spotlight-y, 0px),
+            var(--spotlight-color, rgba(255, 255, 255, 0.25)),
+            transparent 80%);
+}
+
+.spotlight-overlay.visible {
+    opacity: 0.6;
+}
