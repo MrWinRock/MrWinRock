@@ -15,6 +15,7 @@ const Projects = () => {
         { title: "ChadChat", description: "An Interactive Real-Time Chat Application.", url: "", gh_url: "https://github.com/MrWinRock/ChadChat", tags: ["React Native", "Typescript"] },
         { title: "ChadChat Backend", description: "Backend for the ChadChat application.", url: "", gh_url: "https://github.com/MrWinRock/chadchat-backend", tags: ["Node.js", "Express.js", "Socket.io", "MongoDB"] },
         { title: "Chronobreak", description: "World clock, Time zone converter, Alarm, Stopwatch, Timer", url: "", gh_url: "https://github.com/MrWinRock/chronobreak", tags: ["React Native", "Javascript", "Typescript", "PHP"] },
+        { title: "QRCode Generator", description: "A simple QR code generator app.", url: "https://github.com/MrWinRock/qrcode-generator/releases/tag/qrcode", gh_url: "https://github.com/MrWinRock/qrcode-generator", tags: ["Python", "tkinter"] },
         { title: "Todo App", description: "Basic Todo App.", url: "https://todo-react-group.web.app", gh_url: "https://github.com/MrWinRock/todoreact", tags: ["React", "Javascript"] },
         { title: "EarthMC Data Site", description: "EarthMC Server Data Site.", url: "https://mrwinrock.github.io/earthmc-web-data", gh_url: "https://github.com/MrWinRock/earthmc-web-data", tags: ["React", "Typescript", "Vite", "Tailwind CSS"] },
         { title: "EarthMC API Proxy", description: "EarthMC Proxy API Server For POST Requests.", url: "", gh_url: "https://github.com/MrWinRock/earthmc-api-proxy", tags: ["Node.js", "Express.js"] },
