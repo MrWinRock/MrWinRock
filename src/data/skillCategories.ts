@@ -45,6 +45,7 @@ import firebase_logo from "../images/skills/firebase.svg";
 // Cloud & DevOps
 import aws_logo from "../images/skills/aws.svg";
 import google_cloud_logo from "../images/skills/google_cloud.svg";
+import cloudflare_logo from "../images/skills/cloudflare.svg";
 import docker_logo from "../images/skills/docker.svg";
 import heroku_logo from "../images/skills/heroku.svg";
 import github_actions_logo from "../images/skills/github.svg";
@@ -138,6 +139,7 @@ export const getSkillCategories = (t: (key: string) => string) => [
         skills: [
             { name: 'AWS', image: aws_logo },
             { name: 'Google Cloud Platform', image: google_cloud_logo },
+            { name: 'Cloudflare', image: cloudflare_logo },
             { name: 'Docker', image: docker_logo },
             { name: 'Heroku', image: heroku_logo },
             { name: 'GitHub Actions', image: github_actions_logo },
