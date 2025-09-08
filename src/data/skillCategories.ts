@@ -41,6 +41,7 @@ import postgresql_logo from "../images/skills/postgresql.svg";
 import mongodb_logo from "../images/skills/mongodb.svg";
 import mariadb_logo from "../images/skills/mariadb.svg";
 import firebase_logo from "../images/skills/firebase.svg";
+import dbeaver_logo from "../images/skills/DBeaver.svg";
 
 // Cloud & DevOps
 import aws_logo from "../images/skills/aws.svg";
@@ -49,6 +50,8 @@ import cloudflare_logo from "../images/skills/cloudflare.svg";
 import docker_logo from "../images/skills/docker.svg";
 import heroku_logo from "../images/skills/heroku.svg";
 import github_actions_logo from "../images/skills/github.svg";
+import flyio_logo from "../images/skills/flyio.svg";
+import render_logo from "../images/skills/render.svg";
 
 // Dev Tools
 import vscode_logo from "../images/skills/vscode.svg";
@@ -74,6 +77,7 @@ import bun_logo from "../images/skills/bun.svg";
 import eslint_logo from "../images/skills/eslint.svg";
 import playwright_logo from "../images/skills/playwright.png";
 import robot_framework_logo from "../images/skills/robotframework.svg";
+import jira_logo from "../images/skills/jira.svg";
 
 export const getSkillCategories = (t: (key: string) => string) => [
     {
@@ -132,6 +136,7 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'MongoDB', image: mongodb_logo },
             { name: 'MariaDB', image: mariadb_logo },
             { name: 'Firebase', image: firebase_logo },
+            { name: 'DBeaver', image: dbeaver_logo },
         ]
     },
     {
@@ -143,6 +148,8 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'Docker', image: docker_logo },
             { name: 'Heroku', image: heroku_logo },
             { name: 'GitHub Actions', image: github_actions_logo },
+            { name: 'Fly.io', image: flyio_logo },
+            { name: 'Render', image: render_logo },
         ]
     },
     {
@@ -180,6 +187,7 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'ESLint', image: eslint_logo },
             { name: 'Playwright', image: playwright_logo },
             { name: 'Robot Framework', image: robot_framework_logo },
+            { name: 'Jira', image: jira_logo },
         ]
     }
 ];
