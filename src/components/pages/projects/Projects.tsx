@@ -117,7 +117,7 @@ const Projects = () => {
                                         </motion.a>
                                     ) : (
                                         <span className="s-button px-4 py-2 text-sm font-medium opacity-50">
-                                            {t("projects.notAvailable") || "Not Available"}
+                                            {t("projects.notAvailable")}
                                         </span>
                                     )}
 
