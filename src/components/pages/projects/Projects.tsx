@@ -95,12 +95,7 @@ const Projects = () => {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            {project.url.includes('github.com/') && project.url.includes('/releases/') ?
-                                                t("projects.download") || "Download" :
-                                                project.url.includes('github.com') ?
-                                                    t("projects.viewCode") || "View Code" :
-                                                    t("projects.viewLive") || "View Live"
-                                            }
+                                            {t("projects.viewLive")}
                                             <motion.svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"
