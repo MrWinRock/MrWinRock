@@ -14,7 +14,7 @@ function initGA(id: string): void {
 
   window.dataLayer = window.dataLayer ?? [];
   window.gtag = (...args: unknown[]): void => {
-    window.dataLayer!.push(args);
+    window.dataLayer?.push(args);
   };
 
   const s: HTMLScriptElement = document.createElement('script');
