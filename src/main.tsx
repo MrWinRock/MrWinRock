@@ -13,17 +13,17 @@ function initGA(id: string): void {
   window.__gaInitialized = true;
 
   window.dataLayer = window.dataLayer ?? [];
-  window.gtag = (...args: unknown[]): void => {
-    window.dataLayer?.push(args);
-  };
+  window.gtag = ((...args: unknown[]): void => {
+    window.dataLayer!.push(args);
+  }) as Gtag;
 
   const s: HTMLScriptElement = document.createElement('script');
   s.async = true;
   s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
   document.head.appendChild(s);
 
-  window.gtag('js', new Date());
-  window.gtag('config', id, { send_page_view: false });
+  window.gtag!('js', new Date());
+  window.gtag!('config', id, { send_page_view: false });
 }
 
 if (import.meta.env.PROD) initGA(GA_ID);
@@ -31,7 +31,7 @@ if (import.meta.env.PROD) initGA(GA_ID);
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <Analytics />
+      <Analytics gaId={GA_ID} />
       <App />
     </BrowserRouter>
   </StrictMode>,
