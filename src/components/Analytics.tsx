@@ -7,12 +7,14 @@ declare global {
     }
 }
 
+const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
+
 const Analytics = () => {
     const location = useLocation();
 
     useEffect(() => {
-        if (window.gtag) {
-            window.gtag('config', 'G-HC7GXBF73Z', {
+        if (window.gtag && GA_MEASUREMENT_ID) {
+            window.gtag('config', GA_MEASUREMENT_ID, {
                 page_path: location.pathname + location.search,
             });
         }
