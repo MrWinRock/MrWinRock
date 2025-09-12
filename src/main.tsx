@@ -6,33 +6,24 @@ import './i18n';
 import App from './App.tsx';
 import Analytics from './components/Analytics';
 
-type Gtag = (...args: unknown[]) => void;
-
-interface GAWindow extends Window {
-  dataLayer?: unknown[][];
-  gtag?: Gtag;
-  __gaInitialized?: boolean;
-}
-
 const GA_ID: string = String(import.meta.env.VITE_GA_MEASUREMENT_ID ?? '');
 
-function initGA(id: string, w: GAWindow = window as GAWindow): void {
-  if (!id) return;
-  if (w.__gaInitialized) return;
-  w.__gaInitialized = true;
+function initGA(id: string): void {
+  if (!id || window.__gaInitialized) return;
+  window.__gaInitialized = true;
 
-  w.dataLayer = w.dataLayer ?? [];
-  w.gtag = (...args: unknown[]): void => {
-    (w.dataLayer as unknown[][]).push(args);
+  window.dataLayer = window.dataLayer ?? [];
+  window.gtag = (...args: unknown[]): void => {
+    window.dataLayer!.push(args);
   };
 
   const s: HTMLScriptElement = document.createElement('script');
   s.async = true;
   s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
-  document.head?.appendChild(s);
+  document.head.appendChild(s);
 
-  w.gtag('js', new Date());
-  w.gtag('config', id, { send_page_view: false });
+  window.gtag('js', new Date());
+  window.gtag('config', id, { send_page_view: false });
 }
 
 if (import.meta.env.PROD) initGA(GA_ID);
