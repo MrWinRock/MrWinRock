@@ -9,6 +9,7 @@ import Experience from './components/pages/experience/Experience';
 import Contact from './components/pages/contact/Contact';
 
 import ScrollToTop from './components/ScrollToTop';
+import Analytics from './components/Analytics';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -18,6 +19,7 @@ function App() {
   return (
     <div className="App">
       <ScrollToTop />
+      <Analytics />
       <Navbar />
       <main className='min-h-screen max-w-[1200px] mx-auto mt-12 px-4 py-8'>
         <Routes>
