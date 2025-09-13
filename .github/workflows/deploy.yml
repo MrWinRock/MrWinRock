@@ -29,8 +29,20 @@ jobs:
 
       - name: Install dependencies
         run: bun install
+
+      - name: Check GA var
+        run: |
+          echo "GA ID: ${VITE_GA_MEASUREMENT_ID}"
+          test -n "$VITE_GA_MEASUREMENT_ID" || (echo "Missing GA ID" && exit 1)
+
       - name: Build
         run: bun run build
+        env:
+          VITE_GA_MEASUREMENT_ID: ${{ vars.VITE_GA_MEASUREMENT_ID }}
+
+      - name: Assert GA ID baked into dist
+        run: |
+          grep -R "$VITE_GA_MEASUREMENT_ID" dist || (echo "GA ID not found in dist" && exit 1)
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
