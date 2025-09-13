@@ -5,33 +5,33 @@ import './index.css';
 import './i18n';
 import App from './App.tsx';
 import Analytics from './components/Analytics';
-
-const GA_ID: string = String(import.meta.env.VITE_GA_MEASUREMENT_ID ?? '');
+import { GA_ID, TRACKING_ENABLED } from './config/analytics';
 
 function initGA(id: string): void {
   if (!id || window.__gaInitialized) return;
   window.__gaInitialized = true;
 
   window.dataLayer = window.dataLayer ?? [];
-  window.gtag = ((...args: unknown[]): void => {
-    window.dataLayer!.push(args);
-  }) as Gtag;
+  window.gtag = (...args: unknown[]): void => {
+    window.dataLayer!.push(args as unknown);
+  };
 
   const s: HTMLScriptElement = document.createElement('script');
   s.async = true;
   s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
   document.head.appendChild(s);
 
-  window.gtag!('js', new Date());
-  window.gtag!('config', id, { send_page_view: false });
+  const gtag = window.gtag as Gtag;
+  gtag('js', new Date());
+  gtag('config', id, { send_page_view: false });
 }
 
-if (import.meta.env.PROD) initGA(GA_ID);
+if (TRACKING_ENABLED) initGA(GA_ID);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <Analytics gaId={GA_ID} />
+      <Analytics />
       <App />
     </BrowserRouter>
   </StrictMode>,
