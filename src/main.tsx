@@ -12,9 +12,11 @@ function initGA(id: string): void {
   window.__gaInitialized = true;
 
   window.dataLayer = window.dataLayer ?? [];
-  window.gtag = ((...args: unknown[]): void => {
-    window.dataLayer!.push(args);
-  }) as Gtag;
+
+  window.gtag = function gtag(): void {
+    // eslint-disable-next-line prefer-rest-params
+    (window.dataLayer as unknown[]).push(arguments as unknown);
+  } as Gtag;
 
   const s: HTMLScriptElement = document.createElement('script');
   s.async = true;
@@ -25,6 +27,7 @@ function initGA(id: string): void {
   gtag('js', new Date());
   gtag('config', id, { send_page_view: false });
 }
+
 
 if (TRACKING_ENABLED) initGA(GA_ID);
 
