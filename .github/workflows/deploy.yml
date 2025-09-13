@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [release]
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -14,6 +15,8 @@ jobs:
       contents: read
       pages: write
       id-token: write
+    env:
+      VITE_GA_MEASUREMENT_ID: ${{ vars.VITE_GA_MEASUREMENT_ID }}
 
     steps:
       - name: Checkout
@@ -26,7 +29,6 @@ jobs:
 
       - name: Install dependencies
         run: bun install
-
       - name: Build
         run: bun run build
 
