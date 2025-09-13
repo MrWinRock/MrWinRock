@@ -4,17 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import './i18n';
 import App from './App.tsx';
-import Analytics from './components/Analytics';
-import { GA_ID, TRACKING_ENABLED } from './config/analytics';
+import Analytics from '@/components/Analytics';
+import { GA_ID, TRACKING_ENABLED } from '@/config/analytics';
 
 function initGA(id: string): void {
   if (!id || window.__gaInitialized) return;
   window.__gaInitialized = true;
 
   window.dataLayer = window.dataLayer ?? [];
-  window.gtag = (...args: unknown[]): void => {
-    window.dataLayer!.push(args as unknown);
-  };
+  window.gtag = ((...args: unknown[]): void => {
+    window.dataLayer!.push(args);
+  }) as Gtag;
 
   const s: HTMLScriptElement = document.createElement('script');
   s.async = true;
