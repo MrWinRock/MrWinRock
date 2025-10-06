@@ -78,6 +78,7 @@ import eslint_logo from "../images/skills/eslint.svg";
 import playwright_logo from "../images/skills/playwright.png";
 import robot_framework_logo from "../images/skills/robotframework.svg";
 import jira_logo from "../images/skills/jira.svg";
+import pytorch_logo from "../images/skills/pytorch.svg";
 
 export const getSkillCategories = (t: (key: string) => string) => [
     {
@@ -188,6 +189,7 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'Playwright', image: playwright_logo },
             { name: 'Robot Framework', image: robot_framework_logo },
             { name: 'Jira', image: jira_logo },
+            { name: 'PyTorch', image: pytorch_logo },
         ]
     }
 ];
