@@ -5,7 +5,8 @@
         "skills": "Skills",
         "projects": "Projects",
         "experience": "Experience",
-        "contact": "Contact"
+        "contact": "Contact",
+        "resume": "Resume"
     },
     "construction": {
         "title": "🚧 Under Construction...",
@@ -50,6 +51,12 @@
         "viewLive": "View Live",
         "notAvailable": "Not Available",
         "github": "View on GitHub"
+    },
+    "resume": {
+        "title": "Resume",
+        "download": "Download Resume",
+        "newTab": "Opens in new tab",
+        "browserError": "Your browser can't display PDFs inline."
     },
     "footer": {
         "rights": "All rights reserved",
