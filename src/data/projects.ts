@@ -11,7 +11,7 @@ export const projects = [
         description: "Backend API powering portfolio functionality.",
         url: "https://api.mrwinrock.com/",
         gh_url: "https://github.com/MrWinRock/mrwinrock-app",
-        tags: ["Bun", "Hono", "Zod", "Fly.io", "Cloudflare"]
+        tags: ["Bun", "Hono", "Zod", "GCP", "Cloudflare"]
     },
     {
         title: "Stringy",
