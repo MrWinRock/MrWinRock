@@ -28,6 +28,7 @@ export default tseslint.config([
     },
     rules: {
       // react-hooks recommended rules
+      ...reactHooks.configs.recommended.rules,
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
 
