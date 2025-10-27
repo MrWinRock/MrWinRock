@@ -11,7 +11,28 @@ export const projects = [
         description: "Backend API powering portfolio functionality.",
         url: "https://api.mrwinrock.com/",
         gh_url: "https://github.com/MrWinRock/mrwinrock-app",
-        tags: ["Bun", "Hono", "Zod", "GCP", "Cloudflare"]
+        tags: ["Bun", "TypeScript", "Hono", "Zod", "Google Cloud Platform", "Cloudflare"]
+    },
+    {
+        title: "InfoXP",
+        description: "AI-powered game knowledge platform leveraging LLMs for Q&A and insights, built as a TypeScript React web app.",
+        url: "",
+        gh_url: "https://github.com/MrWinRock/infoxp",
+        tags: ["React", "TypeScript", "Vite", "Tailwind CSS"]
+    },
+    {
+        title: "InfoXP Mobile",
+        description: "React Native mobile client providing on-the-go access to InfoXP’s LLM-driven game insights with a TypeScript codebase.",
+        url: "",
+        gh_url: "https://github.com/MrWinRock/infoxp-mobile",
+        tags: ["React Native", "TypeScript", "Expo"]
+    },
+    {
+        title: "InfoXP Backend",
+        description: "TypeScript API service on Bun powering LLM-backed game knowledge, containerized for scalable deployment.",
+        url: "",
+        gh_url: "https://github.com/MrWinRock/infoxp-app",
+        tags: ["Bun", "TypeScript", "Express.js", "Docker", "MongoDB"]
     },
     {
         title: "Stringy",
