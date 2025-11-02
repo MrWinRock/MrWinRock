@@ -40,7 +40,7 @@ const Projects = () => {
                         >
                             <div className="flex flex-col">
                                 <motion.h2
-                                    className="text-xl font-bold text-white h-[3.5rem] flex items-center"
+                                    className="text-xl font-bold text-white h-14 flex items-center"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: index * 0.15 + 0.3 }}
@@ -49,7 +49,7 @@ const Projects = () => {
                                 </motion.h2>
 
                                 <motion.p
-                                    className="text-gray-300 text-sm leading-relaxed h-[4.5rem] overflow-hidden"
+                                    className="text-gray-300 text-sm leading-relaxed h-18 overflow-hidden"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: index * 0.15 + 0.4 }}
@@ -60,7 +60,7 @@ const Projects = () => {
 
                             <div className="flex-1 flex flex-col justify-between">
                                 <motion.div
-                                    className="flex flex-wrap gap-2 min-h-[6rem] content-start"
+                                    className="flex flex-wrap gap-2 min-h-24 content-start"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: index * 0.15 + 0.5 }}
