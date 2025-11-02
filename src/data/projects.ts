@@ -115,7 +115,28 @@ export const projects = [
         title: "Horror Company",
         description: "A 2D game created for the Thailand Horror Jam 2024.",
         url: "https://marguro.itch.io/horror-company",
-        gh_url: "https://github.com/MrWinRock/project-H-jam",
+        gh_url: "https://github.com/MrWinRock/Horror_Company",
         tags: ["Unity", "C#"]
     },
+    {
+        title: "Give Me A Sign",
+        description: "A 2D psychological horror game created for Thailand Horror Jam 2025.",
+        url: "https://marguro.itch.io/give-me-a-sign",
+        gh_url: "https://github.com/MrWinRock/give-me-a-sign",
+        tags: ["Unity", "C#", "Whisper AI"]
+    },
+    {
+        title: "Elysia App",
+        description: "API service for Elysia framework experiments connecting to MongoDB.",
+        url: "",
+        gh_url: "https://github.com/MrWinRock/elysia-app",
+        tags: ["Bun", "TypeScript", "ElysiaJS", "MongoDB"]
+    },
+    {
+        title: "Next App",
+        description: "Full stack Next.js application, database integration, and responsive design.",
+        url: "",
+        gh_url: "https://github.com/MrWinRock/next-app",
+        tags: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "MongoDB"]
+    }
 ]

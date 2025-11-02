@@ -17,6 +17,7 @@ import gnu_bash_logo from "../images/skills/bash.svg";
 import html5_logo from "../images/skills/html5.svg";
 import css3_logo from "../images/skills/css3.svg";
 import react_logo from "../images/skills/react.svg";
+import nextjs_logo from "../images/skills/nextjs.svg";
 import tailwindcss_logo from "../images/skills/tailwindcss.svg";
 import bootstrap_logo from "../images/skills/bootstrap.svg";
 import motion_logo from "../images/skills/motion.png";
@@ -34,6 +35,7 @@ import spring_boot_logo from "../images/skills/spring-boot.svg";
 import jwt_logo from "../images/skills/jwt.svg";
 import hono_logo from "../images/skills/hono.svg";
 import zod_logo from "../images/skills/zod.webp";
+import elysiajs_logo from "../images/skills/elysiajs.svg";
 
 // Databases
 import mysql_logo from "../images/skills/mysql.svg";
@@ -104,6 +106,7 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'HTML5', image: html5_logo },
             { name: 'CSS3', image: css3_logo },
             { name: 'React', image: react_logo },
+            { name: 'Next.js', image: nextjs_logo },
             { name: 'Motion', image: motion_logo },
             { name: 'Tailwind CSS', image: tailwindcss_logo },
             { name: 'Bootstrap', image: bootstrap_logo },
@@ -127,6 +130,7 @@ export const getSkillCategories = (t: (key: string) => string) => [
             { name: 'JSON Web Tokens (JWT)', image: jwt_logo },
             { name: 'Hono', image: hono_logo },
             { name: 'Zod', image: zod_logo },
+            { name: 'ElysiaJS', image: elysiajs_logo },
         ]
     },
     {
