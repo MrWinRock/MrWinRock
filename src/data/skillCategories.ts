@@ -12,7 +12,6 @@ import dart_logo from "../images/skills/dart.svg";
 import go_logo from "../images/skills/go.svg";
 import gnu_bash_logo from "../images/skills/bash.svg";
 
-
 // Web Development
 import html5_logo from "../images/skills/html5.svg";
 import css3_logo from "../images/skills/css3.svg";
