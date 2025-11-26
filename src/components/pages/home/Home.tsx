@@ -3,7 +3,7 @@ import type { Variants } from "motion/react";
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getSkillCategories } from "../../../data/skillCategories";
+import { skills } from "../../../data/skills";
 import profileImage from '../../../assets/logo.jpg';
 
 interface SocialLinkProps {
@@ -19,14 +19,13 @@ const Home: React.FC = () => {
 
     const fullName: string = t("home.name");
 
-    const skillCategories = getSkillCategories(t);
     const featuredSkills = [
-        ...skillCategories[0].skills.slice(3, 6),
-        ...skillCategories[1].skills.slice(0, 3),
-        ...skillCategories[2].skills.slice(0, 2),
-        ...skillCategories[3].skills.slice(0, 1),
-        ...skillCategories[4].skills.slice(2, 4),
-        ...skillCategories[5].skills.slice(0, 1),
+        ...skills.filter(s => s.category === 'programming').slice(3, 6),
+        ...skills.filter(s => s.category === 'web').slice(0, 3),
+        ...skills.filter(s => s.category === 'mobile').slice(0, 2),
+        ...skills.filter(s => s.category === 'backend').slice(0, 1),
+        ...skills.filter(s => s.category === 'databases').slice(2, 4),
+        ...skills.filter(s => s.category === 'cloud').slice(0, 1),
     ];
 
     const TYPING_DELAY_MS = 75;
@@ -88,7 +87,7 @@ const Home: React.FC = () => {
                         >
                             {t("home.title")}{" "}
                             <br />
-                            <span className="bg-gradient-to-r from-[#FF00FF] via-[#8A2BE2] to-[#00FFFF] bg-clip-text text-transparent inline-block">
+                            <span className="bg-linear-to-r from-[#FF00FF] via-[#8A2BE2] to-[#00FFFF] bg-clip-text text-transparent inline-block">
                                 {displayedName}
                                 {!isTypingComplete && (
                                     <motion.span
@@ -132,7 +131,7 @@ const Home: React.FC = () => {
                             >
                                 <Link
                                     to="/projects"
-                                    className="group px-8 py-3 text-lg bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
+                                    className="group px-8 py-3 text-lg bg-linear-to-r from-[#FF00FF] to-[#00FFFF] text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
                                 >
                                     <span className="group-hover:tracking-wide transition-all duration-300">
                                         {t("home.viewWork")}
@@ -175,7 +174,7 @@ const Home: React.FC = () => {
                         <div className="relative group">
                             {/* Animated background glow */}
                             <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-[#FF00FF] via-[#8A2BE2] to-[#00FFFF] rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"
+                                className="absolute inset-0 bg-linear-to-r from-[#FF00FF] via-[#8A2BE2] to-[#00FFFF] rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"
                                 animate={{
                                     scale: [1, 1.05, 1],
                                     rotate: [0, 5, -5, 0]
@@ -188,7 +187,7 @@ const Home: React.FC = () => {
                             />
 
                             {/* Profile image with gradient border */}
-                            <div className="relative p-1 bg-gradient-to-r from-[#FF00FF] via-[#8A2BE2] to-[#00FFFF] rounded-full">
+                            <div className="relative p-1 bg-linear-to-r from-[#FF00FF] via-[#8A2BE2] to-[#00FFFF] rounded-full">
                                 <img
                                     src={profileImage}
                                     alt={t("home.name")}
@@ -237,7 +236,7 @@ const Home: React.FC = () => {
                                 }}
                             >
                                 <motion.img
-                                    src={skill.image}
+                                    src={skill.icon}
                                     alt={skill.name}
                                     className="w-8 h-8 md:w-10 md:h-10"
                                     whileHover={{
