@@ -87,7 +87,7 @@ export const projects: Project[] = [
         description: "An Interactive Real-Time Chat Application.",
         url: "",
         repo: "https://github.com/MrWinRock/ChadChat",
-        tech: ["React Native", "Typescript"],
+        tech: ["React Native", "TypeScript"],
         featured: false,
         order: 9
     },
@@ -105,7 +105,7 @@ export const projects: Project[] = [
         description: "World clock, Time zone converter, Alarm, Stopwatch, Timer",
         url: "",
         repo: "https://github.com/MrWinRock/chronobreak",
-        tech: ["React Native", "Javascript", "Typescript", "PHP"],
+        tech: ["React Native", "Javascript", "TypeScript", "PHP"],
         featured: false,
         order: 11
     },
@@ -132,7 +132,7 @@ export const projects: Project[] = [
         description: "EarthMC Server Data Site.",
         url: "https://mrwinrock.github.io/earthmc-web-data",
         repo: "https://github.com/MrWinRock/earthmc-web-data",
-        tech: ["React", "Typescript", "Vite", "Tailwind CSS"],
+        tech: ["React", "TypeScript", "Vite", "Tailwind CSS"],
         featured: false,
         order: 14
     },
