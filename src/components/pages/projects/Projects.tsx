@@ -65,7 +65,7 @@ const Projects = () => {
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: index * 0.15 + 0.5 }}
                                 >
-                                    {project.tags.map((tag, tagIndex) => (
+                                    {project.tech.map((tag, tagIndex) => (
                                         <motion.span
                                             key={tagIndex}
                                             className="bg-gray-700 text-gray-300 px-2 py-1 rounded-full text-xs font-medium border border-gray-600 hover:bg-gray-600 hover:border-purple-500 transition-colors duration-300 h-fit"
@@ -121,9 +121,9 @@ const Projects = () => {
                                         </span>
                                     )}
 
-                                    {project.gh_url ? (
+                                    {project.repo ? (
                                         <motion.a
-                                            href={project.gh_url}
+                                            href={project.repo}
                                             className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200"
                                             target="_blank"
                                             rel="noopener noreferrer"
