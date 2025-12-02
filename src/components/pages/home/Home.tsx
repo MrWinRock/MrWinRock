@@ -17,7 +17,8 @@ const Home: React.FC = () => {
     const [displayedName, setDisplayedName] = useState('');
     const [isTypingComplete, setIsTypingComplete] = useState(false);
 
-    const fullName: string = t("home.name");
+    const name: string = t("home.name");
+    const surname: string = t("home.surname");
 
     const featuredSkills = [
         ...skills.filter(s => s.category === 'programming').slice(3, 6),
@@ -31,8 +32,9 @@ const Home: React.FC = () => {
     const TYPING_DELAY_MS = 75;
 
     useEffect(() => {
-        if (!fullName) return;
+        if (!name || !surname) return;
 
+        const fullName = `${name}\n${surname}`;
         let index = 0;
         setDisplayedName('');
         setIsTypingComplete(false);
@@ -48,7 +50,7 @@ const Home: React.FC = () => {
         }, TYPING_DELAY_MS);
 
         return () => clearInterval(typingInterval);
-    }, [fullName]);
+    }, [name, surname]);
 
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
@@ -88,7 +90,12 @@ const Home: React.FC = () => {
                             {t("home.title")}{" "}
                             <br />
                             <span className="bg-linear-to-r from-[#FF00FF] via-[#8A2BE2] to-[#00FFFF] bg-clip-text text-transparent inline-block">
-                                {displayedName}
+                                {displayedName.split('\n').map((line, index) => (
+                                    <span key={index}>
+                                        {line}
+                                        {index < displayedName.split('\n').length - 1 && <br />}
+                                    </span>
+                                ))}
                                 {!isTypingComplete && (
                                     <motion.span
                                         className="text-white"

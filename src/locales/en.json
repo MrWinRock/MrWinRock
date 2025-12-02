@@ -14,7 +14,8 @@
     },
     "home": {
         "title": "Hi, I'm",
-        "name": "Pharthiwath Gristsoopharruth",
+        "name": "Pharthiwath",
+        "surname": "Gristsoopharruth",
         "subtitle": "Full-Stack Developer & Computer Science Student",
         "description": "Passionate about creating innovative web applications and exploring cybersecurity. Currently studying Computer Science at Suan Sunandha Rajabhat University.",
         "viewWork": "View My Work",
