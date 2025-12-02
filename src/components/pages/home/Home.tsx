@@ -90,12 +90,15 @@ const Home: React.FC = () => {
                             {t("home.title")}{" "}
                             <br />
                             <span className="bg-linear-to-r from-[#FF00FF] via-[#8A2BE2] to-[#00FFFF] bg-clip-text text-transparent inline-block">
-                                {displayedName.split('\n').map((line, index) => (
-                                    <span key={index}>
-                                        {line}
-                                        {index < displayedName.split('\n').length - 1 && <br />}
-                                    </span>
-                                ))}
+                                {(() => {
+                                    const nameLines = displayedName.split('\n');
+                                    return nameLines.map((line, index) => (
+                                        <span key={index}>
+                                            {line}
+                                            {index < nameLines.length - 1 && <br />}
+                                        </span>
+                                    ));
+                                })()}
                                 {!isTypingComplete && (
                                     <motion.span
                                         className="text-white"
