@@ -44,7 +44,7 @@ export const skills: Skill[] = [
     { name: 'Hono', category: 'backend', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/hono.svg", order: 6 },
     { name: 'Zod', category: 'backend', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/zod.webp", order: 7 },
     { name: 'ElysiaJS', category: 'backend', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/elysiajs.svg", order: 8 },
-    { name: '.NET Framework  ', category: 'backend', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/dotnet.svg", order: 9 },
+    { name: '.NET Framework', category: 'backend', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/dotnet.svg", order: 9 },
 
     // Databases
     { name: 'MySQL', category: 'databases', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/mysql.svg", order: 1 },
