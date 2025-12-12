@@ -66,9 +66,14 @@ export const skills: Skill[] = [
 
     // Dev Tools
     { name: 'VS Code', category: 'devtools', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/vscode.svg", order: 1 },
-    { name: 'Android Studio', category: 'devtools', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/androidstudio.svg", order: 2 },
-    { name: "JetBrains Rider", category: 'devtools', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/rider.svg", order: 3 },
-    { name: 'IntelliJ IDEA', category: 'devtools', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/intellij.svg", order: 4 },
+    { name: 'Visual Studio', category: 'devtools', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/visual_studio.svg", order: 2 },
+    { name: 'Antigravity', category: 'devtools', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/antigravity.svg", order: 3 },
+    { name: 'Zed', category: 'devtools', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/zed.svg", order: 4 },
+    { name: 'Cursor', category: 'devtools', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/cursor.svg", order: 5 },
+    { name: 'Android Studio', category: 'devtools', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/androidstudio.svg", order: 6 },
+    { name: "JetBrains Rider", category: 'devtools', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/rider.svg", order: 7 },
+    { name: 'IntelliJ IDEA', category: 'devtools', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/intellij.svg", order: 8 },
+    { name: 'PyCharm', category: 'devtools', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/pycharm.svg", order: 9 },
 
     // Game Development
     { name: 'Unity', category: 'game', icon: "https://storage.googleapis.com/mrwinrock-portfolio-images/skills/icons/unity.svg", order: 1 },
