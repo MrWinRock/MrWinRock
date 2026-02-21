@@ -1,11 +1,60 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
 import SpotlightCard from "@/components/cards/SpotLightCard";
-import { projects } from "../../../data/projects";
+import { projects as staticProjects, type Project } from "../../../data/projects";
+import { api } from "../../../lib/api";
 import githubIcon from "../../../assets/icons/github-icon.svg";
 
 const Projects = () => {
     const { t } = useTranslation();
+    const [projectList, setProjectList] = useState<Project[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        let cancelled = false;
+
+        const fetchProjects = async () => {
+            try {
+                const res = await api.projects();
+                if (!cancelled && res.ok && res.data) {
+                    const mapped: Project[] = res.data
+                        .map((p) => ({
+                            _id: p._id,
+                            title: p.title,
+                            description: p.description,
+                            url: p.url || undefined,
+                            repo: p.repo || undefined,
+                            tech: p.tech,
+                            order: p.order,
+                        }))
+                        .sort((a, b) => a.order - b.order);
+                    setProjectList(mapped);
+                }
+            } catch {
+                if (!cancelled) {
+                    setProjectList(staticProjects);
+                }
+            } finally {
+                if (!cancelled) setLoading(false);
+            }
+        };
+
+        fetchProjects();
+        return () => { cancelled = true; };
+    }, []);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen p-8 flex items-center justify-center">
+                <motion.div
+                    className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                />
+            </div>
+        );
+    }
 
     return (
         <motion.div
@@ -30,9 +79,9 @@ const Projects = () => {
                 </motion.h1>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {projects.map((project, index) => (
+                    {projectList.map((project, index) => (
                         <SpotlightCard
-                            key={index}
+                            key={project._id || index}
                             className="flex flex-col h-full"
                             index={index}
                             spotlightColor="rgba(255, 0, 255, 0.3)"

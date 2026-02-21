@@ -129,11 +129,44 @@ const post = <T = unknown>(
     opts?: Omit<RequestOptions, "method" | "json" | "rawBody">
 ) => req<T>(path, { ...opts, method: "POST", json: data });
 
+export interface ApiSkill {
+    _id: string;
+    name: string;
+    category: string;
+    icon: string;
+    order: number;
+}
+
+export interface ApiSkillCategory {
+    order_flag: number;
+    skills: ApiSkill[];
+}
+
+export interface SkillsResponse {
+    ok: boolean;
+    data: Record<string, ApiSkillCategory>;
+}
+
+export interface ApiProject {
+    _id: string;
+    title: string;
+    description: string;
+    url: string;
+    repo: string;
+    tech: string[];
+    order: number;
+}
+
+export interface ProjectsResponse {
+    ok: boolean;
+    data: ApiProject[];
+}
+
 export const api = {
     health: () => get<{ ok: boolean; status?: string }>("/health"),
     fish: () => get<{ ok: boolean; fish?: string }>("/fish"),
-    skills: () => get<{ ok: boolean; data?: string[] }>("/api/skills"),
-    projects: () => get<{ ok: boolean; data?: string[] }>("/api/projects"),
+    skills: () => get<SkillsResponse>("/api/skills"),
+    projects: () => get<ProjectsResponse>("/api/projects"),
     experience: () => get<{ ok: boolean; data?: string[] }>("/api/experience"),
     contact: (data: { name: string; email: string; message: string }) =>
         post<{ ok: boolean; message?: string }>("/api/contact", data),
