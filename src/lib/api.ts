@@ -162,6 +162,19 @@ export interface ProjectsResponse {
     data: ApiProject[];
 }
 
+export interface SettingsDoc {
+    showSkills: boolean;
+    showProjects: boolean;
+    showExperience: boolean;
+    showResume: boolean;
+    showContact: boolean;
+}
+
+export interface SettingsResponse {
+    ok: boolean;
+    data: SettingsDoc;
+}
+
 export const api = {
     health: () => get<{ ok: boolean; status?: string }>("/health"),
     fish: () => get<{ ok: boolean; fish?: string }>("/fish"),
@@ -170,6 +183,7 @@ export const api = {
     experience: () => get<{ ok: boolean; data?: string[] }>("/api/experience"),
     contact: (data: { name: string; email: string; message: string }) =>
         post<{ ok: boolean; message?: string }>("/api/contact", data),
+    settings: () => get<SettingsResponse>("/api/settings"),
     get,
     post,
     raw: req,
