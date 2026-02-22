@@ -32,7 +32,7 @@ const Contact = () => {
                                 title="Message"
                             ></textarea>
                         </div>
-                        <button className="bg-linear-to-r from-[#FF00FF] to-[#00FFFF] text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity">
+                        <button className="bg-linear-to-r from-[#8000FF] to-[#00FFFF] text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity">
                             Send Message
                         </button>
                     </form>

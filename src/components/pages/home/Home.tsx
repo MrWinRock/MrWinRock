@@ -118,7 +118,7 @@ const Home: React.FC = () => {
                         >
                             {t("home.title")}{" "}
                             <br />
-                            <span className="bg-linear-to-r from-[#FF00FF] via-[#8A2BE2] to-[#00FFFF] bg-clip-text text-transparent inline-block">
+                            <span className="bg-linear-to-r from-[#8000FF] via-[#8A2BE2] to-[#00FFFF] bg-clip-text text-transparent inline-block">
                                 {(() => {
                                     const nameLines = displayedName.split('\n');
                                     return nameLines.map((line, index) => (
@@ -170,7 +170,7 @@ const Home: React.FC = () => {
                             >
                                 <Link
                                     to="/projects"
-                                    className="group px-8 py-3 text-lg bg-linear-to-r from-[#FF00FF] to-[#00FFFF] text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
+                                    className="group px-8 py-3 text-lg bg-linear-to-r from-[#8000FF] to-[#00FFFF] text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
                                 >
                                     <span className="group-hover:tracking-wide transition-all duration-300">
                                         {t("home.viewWork")}
@@ -213,7 +213,7 @@ const Home: React.FC = () => {
                         <div className="relative group">
                             {/* Animated background glow */}
                             <motion.div
-                                className="absolute inset-0 bg-linear-to-r from-[#FF00FF] via-[#8A2BE2] to-[#00FFFF] rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"
+                                className="absolute inset-0 bg-linear-to-r from-[#8000FF] via-[#8A2BE2] to-[#00FFFF] rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"
                                 animate={{
                                     scale: [1, 1.05, 1],
                                     rotate: [0, 5, -5, 0]
@@ -226,7 +226,7 @@ const Home: React.FC = () => {
                             />
 
                             {/* Profile image with gradient border */}
-                            <div className="relative p-1 bg-linear-to-r from-[#FF00FF] via-[#8A2BE2] to-[#00FFFF] rounded-full">
+                            <div className="relative p-1 bg-linear-to-r from-[#8000FF] via-[#8A2BE2] to-[#00FFFF] rounded-full">
                                 <img
                                     src={profileImage}
                                     alt={t("home.name")}

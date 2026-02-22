@@ -52,6 +52,11 @@
         "viewLive": "ดูเว็บไซต์",
         "notAvailable": "ไม่พร้อมใช้งาน"
     },
+    "experience": {
+        "title": "ประสบการณ์",
+        "present": "ปัจจุบัน",
+        "achievements": "ผลงานสำคัญ"
+    },
     "resume": {
         "title": "เรซูเม่",
         "download": "ดาวน์โหลดเรซูเม่",

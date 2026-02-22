@@ -162,6 +162,25 @@ export interface ProjectsResponse {
     data: ApiProject[];
 }
 
+export interface ApiExperience {
+    _id: string;
+    title: string;
+    company: string;
+    location: string;
+    type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract";
+    startDate: string;
+    endDate?: string;
+    description: string;
+    achievements: string[];
+    tech: string[];
+    order: number;
+}
+
+export interface ExperiencesResponse {
+    ok: boolean;
+    data: ApiExperience[];
+}
+
 export interface SettingsDoc {
     showSkills: boolean;
     showProjects: boolean;
@@ -180,7 +199,7 @@ export const api = {
     fish: () => get<{ ok: boolean; fish?: string }>("/fish"),
     skills: () => get<SkillsResponse>("/api/skills"),
     projects: () => get<ProjectsResponse>("/api/projects"),
-    experience: () => get<{ ok: boolean; data?: string[] }>("/api/experience"),
+    experiences: () => get<ExperiencesResponse>("/api/experiences"),
     contact: (data: { name: string; email: string; message: string }) =>
         post<{ ok: boolean; message?: string }>("/api/contact", data),
     settings: () => get<SettingsResponse>("/api/settings"),
