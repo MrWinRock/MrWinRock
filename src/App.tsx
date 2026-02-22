@@ -11,7 +11,7 @@ import Contact from './components/pages/contact/Contact';
 
 import ScrollToTop from './components/ScrollToTop';
 
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { useSettings } from './contexts/useSettings';
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
           {settings.showExperience && <Route path="/experience" element={<Experience />} />}
           {settings.showContact && <Route path="/contact" element={<Contact />} />}
           {settings.showResume && <Route path="/resume" element={<Resume />} />}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
       <Footer />
