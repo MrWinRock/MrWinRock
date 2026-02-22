@@ -4,8 +4,7 @@ export interface Project {
     description: string;
     url?: string;
     repo?: string;
-    tech: string[];
-    featured: boolean;
+    tech: string[]
     order: number;
 }
 
@@ -16,7 +15,6 @@ export const projects: Project[] = [
         url: "/",
         repo: "https://github.com/MrWinRock/MrWinRock",
         tech: ["React", "TypeScript", "Vite", "Tailwind CSS"],
-        featured: true,
         order: 1
     },
     {
@@ -25,7 +23,6 @@ export const projects: Project[] = [
         url: "https://api.mrwinrock.com/",
         repo: "https://github.com/MrWinRock/mrwinrock-app",
         tech: ["Bun", "TypeScript", "Hono", "Zod", "Google Cloud Platform", "Cloudflare"],
-        featured: true,
         order: 2
     },
     {
@@ -34,7 +31,6 @@ export const projects: Project[] = [
         url: "",
         repo: "https://github.com/MrWinRock/infoxp",
         tech: ["React", "TypeScript", "Vite", "Tailwind CSS"],
-        featured: true,
         order: 3
     },
     {
@@ -43,7 +39,6 @@ export const projects: Project[] = [
         url: "",
         repo: "https://github.com/MrWinRock/infoxp-mobile",
         tech: ["React Native", "TypeScript", "Expo"],
-        featured: false,
         order: 4
     },
     {
@@ -52,7 +47,6 @@ export const projects: Project[] = [
         url: "",
         repo: "https://github.com/MrWinRock/infoxp-app",
         tech: ["Bun", "TypeScript", "Express.js", "Docker", "MongoDB"],
-        featured: false,
         order: 5
     },
     {
@@ -61,7 +55,6 @@ export const projects: Project[] = [
         url: "https://stringy-b8c5e.web.app/",
         repo: "https://github.com/MrWinRock/Stringy",
         tech: ["React", "Javascript"],
-        featured: false,
         order: 6
     },
     {
@@ -70,7 +63,6 @@ export const projects: Project[] = [
         url: "",
         repo: "",
         tech: ["Node.js", "Express.js", "JWT", "Google Cloud SQL", "Google Cloud Platform"],
-        featured: false,
         order: 7
     },
     {
@@ -79,7 +71,6 @@ export const projects: Project[] = [
         url: "https://mrwinrock.github.io/ssru-inter-map/",
         repo: "https://github.com/MrWinRock/ssru-inter-map",
         tech: ["React", "Javascript", "Zoom Pan Pitch"],
-        featured: false,
         order: 8
     },
     {
@@ -88,7 +79,6 @@ export const projects: Project[] = [
         url: "",
         repo: "https://github.com/MrWinRock/ChadChat",
         tech: ["React Native", "TypeScript"],
-        featured: false,
         order: 9
     },
     {
@@ -97,7 +87,6 @@ export const projects: Project[] = [
         url: "",
         repo: "https://github.com/MrWinRock/chadchat-backend",
         tech: ["Node.js", "Express.js", "Socket.io", "MongoDB"],
-        featured: false,
         order: 10
     },
     {
@@ -106,7 +95,6 @@ export const projects: Project[] = [
         url: "",
         repo: "https://github.com/MrWinRock/chronobreak",
         tech: ["React Native", "Javascript", "TypeScript", "PHP"],
-        featured: false,
         order: 11
     },
     {
@@ -115,7 +103,6 @@ export const projects: Project[] = [
         url: "https://github.com/MrWinRock/qrcode-generator/releases/tag/qrcode",
         repo: "https://github.com/MrWinRock/qrcode-generator",
         tech: ["Python", "tkinter"],
-        featured: false,
         order: 12
     },
     {
@@ -124,7 +111,6 @@ export const projects: Project[] = [
         url: "https://todo-react-group.web.app",
         repo: "https://github.com/MrWinRock/todoreact",
         tech: ["React", "Javascript"],
-        featured: false,
         order: 13
     },
     {
@@ -133,7 +119,6 @@ export const projects: Project[] = [
         url: "https://mrwinrock.github.io/earthmc-web-data",
         repo: "https://github.com/MrWinRock/earthmc-web-data",
         tech: ["React", "TypeScript", "Vite", "Tailwind CSS"],
-        featured: false,
         order: 14
     },
     {
@@ -142,7 +127,6 @@ export const projects: Project[] = [
         url: "",
         repo: "https://github.com/MrWinRock/earthmc-api-proxy",
         tech: ["Node.js", "Express.js"],
-        featured: false,
         order: 15
     },
     {
@@ -151,7 +135,6 @@ export const projects: Project[] = [
         url: "https://marguro.itch.io/crazy-dad-lore",
         repo: "https://github.com/MrWinRock/summer-jam-2025?tab=readme-ov-file",
         tech: ["Unity 3D", "C#"],
-        featured: false,
         order: 16
     },
     {
@@ -160,7 +143,6 @@ export const projects: Project[] = [
         url: "https://marguro.itch.io/horror-company",
         repo: "https://github.com/MrWinRock/Horror_Company",
         tech: ["Unity", "C#"],
-        featured: false,
         order: 17
     },
     {
@@ -169,7 +151,6 @@ export const projects: Project[] = [
         url: "https://marguro.itch.io/give-me-a-sign",
         repo: "https://github.com/MrWinRock/give-me-a-sign",
         tech: ["Unity", "C#", "Whisper AI"],
-        featured: false,
         order: 18
     },
     {
@@ -178,7 +159,6 @@ export const projects: Project[] = [
         url: "",
         repo: "https://github.com/MrWinRock/elysia-app",
         tech: ["Bun", "TypeScript", "ElysiaJS", "MongoDB"],
-        featured: false,
         order: 19
     },
     {
@@ -187,7 +167,6 @@ export const projects: Project[] = [
         url: "",
         repo: "https://github.com/MrWinRock/next-app",
         tech: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "MongoDB"],
-        featured: false,
         order: 20
     }
 ]

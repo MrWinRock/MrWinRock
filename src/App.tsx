@@ -11,10 +11,12 @@ import Contact from './components/pages/contact/Contact';
 
 import ScrollToTop from './components/ScrollToTop';
 
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { useSettings } from './contexts/useSettings';
 
 function App() {
   console.log(`%cWelcome to My Portfolio!`, 'color: #8B2BE2; font-size: 20px; font-weight: bold;');
+  const settings = useSettings();
 
   return (
     <div className="App">
@@ -24,11 +26,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/resume" element={<Resume />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/contact" element={<Contact />} />
+          {settings.showSkills && <Route path="/skills" element={<Skills />} />}
+          {settings.showProjects && <Route path="/projects" element={<Projects />} />}
+          {settings.showExperience && <Route path="/experience" element={<Experience />} />}
+          {settings.showContact && <Route path="/contact" element={<Contact />} />}
+          {settings.showResume && <Route path="/resume" element={<Resume />} />}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
       <Footer />

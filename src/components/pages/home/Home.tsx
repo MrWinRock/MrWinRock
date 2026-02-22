@@ -3,7 +3,8 @@ import type { Variants } from "motion/react";
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { skills } from "../../../data/skills";
+import { skills as staticSkills, type Skill } from "../../../data/skills";
+import { api } from "../../../lib/api";
 import profileImage from '../../../assets/logo.jpg';
 
 interface SocialLinkProps {
@@ -20,13 +21,40 @@ const Home: React.FC = () => {
     const name: string = t("home.name");
     const surname: string = t("home.surname");
 
+    const [allSkills, setAllSkills] = useState<Skill[]>(staticSkills);
+
+    useEffect(() => {
+        let cancelled = false;
+        const fetchSkills = async () => {
+            try {
+                const res = await api.skills();
+                if (!cancelled && res.ok && res.data) {
+                    const flat: Skill[] = Object.values(res.data).flatMap((cat) =>
+                        cat.skills.map((s) => ({
+                            _id: s._id,
+                            name: s.name,
+                            category: s.category,
+                            icon: s.icon,
+                            order: s.order,
+                        }))
+                    );
+                    setAllSkills(flat);
+                }
+            } catch {
+                // keep static fallback
+            }
+        };
+        fetchSkills();
+        return () => { cancelled = true; };
+    }, []);
+
     const featuredSkills = [
-        ...skills.filter(s => s.category === 'programming').slice(3, 6),
-        ...skills.filter(s => s.category === 'web').slice(0, 3),
-        ...skills.filter(s => s.category === 'mobile').slice(0, 2),
-        ...skills.filter(s => s.category === 'backend').slice(0, 1),
-        ...skills.filter(s => s.category === 'databases').slice(2, 4),
-        ...skills.filter(s => s.category === 'cloud').slice(0, 1),
+        ...allSkills.filter(s => s.category === 'programming').slice(3, 6),
+        ...allSkills.filter(s => s.category === 'web').slice(0, 3),
+        ...allSkills.filter(s => s.category === 'mobile').slice(0, 2),
+        ...allSkills.filter(s => s.category === 'backend').slice(0, 1),
+        ...allSkills.filter(s => s.category === 'databases').slice(2, 4),
+        ...allSkills.filter(s => s.category === 'cloud').slice(0, 1),
     ];
 
     const TYPING_DELAY_MS = 75;
@@ -75,6 +103,7 @@ const Home: React.FC = () => {
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="max-w-6xl mx-auto px-4 py-20">
+
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Left Side - Text Content */}
                     <motion.div

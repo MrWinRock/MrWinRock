@@ -5,6 +5,7 @@ const APITester = () => {
     const [health, setHealth] = useState<string>("");
     const [fish, setFish] = useState<string>("");
     const [skills, setSkills] = useState<string>("");
+    const [projects, setProjects] = useState<string>("");
 
     const healthTest = async () => {
         setHealth("Loading...");
@@ -36,6 +37,16 @@ const APITester = () => {
         }
     };
 
+    const projectTest = async () => {
+        setProjects("Loading...");
+        try {
+            const res = await api.projects();
+            setProjects(JSON.stringify(res, null, 2));
+        } catch (e) {
+            setProjects(e instanceof Error ? e.message : "Unknown error");
+        }
+    };
+
     return (
         <div className="mb-6 space-y-2">
             <h2 className="text-lg font-semibold">API Tester</h2>
@@ -53,6 +64,11 @@ const APITester = () => {
                 <h3 className="text-sm font-medium">SKILLS</h3>
                 <button className="p-button" onClick={skillTest}>Test Skills Endpoint</button>
                 <pre className="bg-gray-800 p-3 rounded text-sm overflow-auto max-h-48">{skills}</pre>
+            </div>
+            <div className="api-container">
+                <h3 className="text-sm font-medium">PROJECTS</h3>
+                <button className="p-button" onClick={projectTest}>Test Projects Endpoint</button>
+                <pre className="bg-gray-800 p-3 rounded text-sm overflow-auto max-h-48">{projects}</pre>
             </div>
         </div>
     );

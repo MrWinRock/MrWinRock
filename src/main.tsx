@@ -6,6 +6,7 @@ import './i18n';
 import App from './App.tsx';
 import Analytics from '@/components/Analytics';
 import { GA_ID, TRACKING_ENABLED } from '@/config/analytics';
+import { SettingsProvider } from './contexts/SettingsContext';
 
 function initGA(id: string): void {
   if (!id || window.__gaInitialized) return;
@@ -34,8 +35,10 @@ if (TRACKING_ENABLED) initGA(GA_ID);
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <Analytics />
-      <App />
+      <SettingsProvider>
+        <Analytics />
+        <App />
+      </SettingsProvider>
     </BrowserRouter>
   </StrictMode>,
 );

@@ -3,10 +3,12 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import logo from '../assets/logo.jpg';
 import LanguageSwitcher from './LanguageSwitcher';
+import { useSettings } from '../contexts/useSettings';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { t } = useTranslation();
+    const settings = useSettings();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -29,11 +31,11 @@ const Navbar = () => {
                 <div className="hidden lg:flex lg:gap-4 xl:gap-6 items-center">
                     <Link to="/" className="p-button">{t('nav.home')}</Link>
                     <Link to="/about" className="p-button">{t('nav.about')}</Link>
-                    <Link to="/skills" className="p-button">{t('nav.skills')}</Link>
-                    <Link to="/projects" className="p-button">{t('nav.projects')}</Link>
-                    <Link to="/resume" className="p-button">{t('nav.resume')}</Link>
-                    {/* <Link to="/experience" className="p-button">{t('nav.experience')}</Link> */}
-                    {/* <Link to="/contact" className="p-button">{t('nav.contact')}</Link> */}
+                    {settings.showSkills && <Link to="/skills" className="p-button">{t('nav.skills')}</Link>}
+                    {settings.showProjects && <Link to="/projects" className="p-button">{t('nav.projects')}</Link>}
+                    {settings.showExperience && <Link to="/experience" className="p-button">{t('nav.experience')}</Link>}
+                    {settings.showContact && <Link to="/contact" className="p-button">{t('nav.contact')}</Link>}
+                    {settings.showResume && <Link to="/resume" className="p-button">{t('nav.resume')}</Link>}
                     <LanguageSwitcher />
                 </div>
                 {/* Mobile Menu Button */}
@@ -55,11 +57,11 @@ const Navbar = () => {
                 <div className="flex flex-col gap-4 p-4 width-full">
                     <Link to="/" className="p-button text-center" onClick={closeMenu}>{t('nav.home')}</Link>
                     <Link to="/about" className="p-button text-center" onClick={closeMenu}>{t('nav.about')}</Link>
-                    <Link to="/skills" className="p-button text-center" onClick={closeMenu}>{t('nav.skills')}</Link>
-                    <Link to="/projects" className="p-button text-center" onClick={closeMenu}>{t('nav.projects')}</Link>
-                    <Link to="/resume" className="p-button text-center" onClick={closeMenu}>{t('nav.resume')}</Link>
-                    {/* <Link to="/experience" className="p-button text-center" onClick={closeMenu}>{t('nav.experience')}</Link> */}
-                    {/* <Link to="/contact" className="p-button text-center" onClick={closeMenu}>{t('nav.contact')}</Link> */}
+                    {settings.showSkills && <Link to="/skills" className="p-button text-center" onClick={closeMenu}>{t('nav.skills')}</Link>}
+                    {settings.showProjects && <Link to="/projects" className="p-button text-center" onClick={closeMenu}>{t('nav.projects')}</Link>}
+                    {settings.showExperience && <Link to="/experience" className="p-button text-center" onClick={closeMenu}>{t('nav.experience')}</Link>}
+                    {settings.showContact && <Link to="/contact" className="p-button text-center" onClick={closeMenu}>{t('nav.contact')}</Link>}
+                    {settings.showResume && <Link to="/resume" className="p-button text-center" onClick={closeMenu}>{t('nav.resume')}</Link>}
                 </div>
             </div>
         </nav>
