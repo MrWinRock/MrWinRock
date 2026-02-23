@@ -3,7 +3,7 @@ export interface Experience {
     title: string;
     company: string;
     location: string;
-    type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract";
+    type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract" | "Bachelor's Degree";
     startDate: string;
     endDate?: string;
     description: string;
@@ -13,6 +13,19 @@ export interface Experience {
 }
 
 export const experiences: Experience[] = [
+    {
+        title: "Computer Science Student",
+        company: "Suan Sunandha Rajabhat University",
+        location: "Bangkok, Thailand",
+        type: "Bachelor's Degree",
+        startDate: "2023-08",
+        description: "Computer Science, Faculty of Science",
+        achievements: [
+            "GPA: 3.68",
+        ],
+        tech: [],
+        order: 1,
+    },
     {
         title: "Software Developer Intern",
         company: "DevDee Thailand",
@@ -24,6 +37,6 @@ export const experiences: Experience[] = [
             // "",
         ],
         tech: ["React", ".NET Core", "MySQL"],
-        order: 1,
+        order: 2,
     },
 ];

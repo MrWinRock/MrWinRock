@@ -4,7 +4,9 @@ import { experiences as staticExperiences, type Experience as ExperienceType } f
 import SpotlightCard from "@/components/cards/SpotLightCard";
 
 const Experience = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+
+    const localeMap: Record<string, string> = { en: "en-US", th: "th-TH" };
 
     const experienceList: ExperienceType[] = [...staticExperiences].sort(
         (a, b) => a.order - b.order
@@ -13,7 +15,8 @@ const Experience = () => {
     const formatDate = (dateStr: string) => {
         const [year, month] = dateStr.split("-");
         const date = new Date(Number(year), Number(month) - 1);
-        return date.toLocaleDateString("en-US", {
+        const locale = localeMap[i18n.language] ?? i18n.language;
+        return date.toLocaleDateString(locale, {
             month: "short",
             year: "numeric",
         });
@@ -30,6 +33,7 @@ const Experience = () => {
             Internship: "from-green-500 to-emerald-500",
             Freelance: "from-amber-500 to-orange-500",
             Contract: "from-rose-500 to-red-500",
+            "Bachelor's Degree": "from-blue-500 to-cyan-500",
         };
         return colors[type] ?? "from-gray-500 to-gray-400";
     };
@@ -71,7 +75,7 @@ const Experience = () => {
 
                             return (
                                 <motion.div
-                                    key={exp._id || index}
+                                    key={exp._id || `${exp.company}-${exp.title}-${exp.startDate}`}
                                     className={`relative flex items-start ${isLeft
                                             ? "md:flex-row"
                                             : "md:flex-row-reverse"
