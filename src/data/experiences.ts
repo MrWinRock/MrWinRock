@@ -18,7 +18,7 @@ export const experiences: Experience[] = [
         company: "Suan Sunandha Rajabhat University",
         location: "Bangkok, Thailand",
         type: "Bachelor's Degree",
-        startDate: "2023-08",
+        startDate: "2022-06",
         description: "Computer Science, Faculty of Science",
         achievements: [
             "GPA: 3.68",
