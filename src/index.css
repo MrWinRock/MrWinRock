@@ -39,7 +39,7 @@ html {
 
 .p-button {
   text-decoration: none;
-  background: linear-gradient(to right, #FF00FF, #00FFFF);
+  background: linear-gradient(to right, #8000FF, #00FFFF);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -91,7 +91,7 @@ html {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(to right, #FF00FF, #00FFFF);
+  background: linear-gradient(to right, #8000FF, #00FFFF);
 }
 
 .navbar img {
@@ -112,7 +112,7 @@ html {
 
 .navbar-title {
   text-decoration: none;
-  background: linear-gradient(to right, #FF00FF, #00FFFF);
+  background: linear-gradient(to right, #8000FF, #00FFFF);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -141,5 +141,5 @@ html {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(to right, #FF00FF, #00FFFF);
+  background: linear-gradient(to right, #8000FF, #00FFFF);
 }

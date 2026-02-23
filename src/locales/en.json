@@ -53,6 +53,11 @@
         "notAvailable": "Not Available",
         "github": "View on GitHub"
     },
+    "experience": {
+        "title": "Experience",
+        "present": "Present",
+        "achievements": "Key Achievements"
+    },
     "resume": {
         "title": "Resume",
         "download": "Download Resume",
