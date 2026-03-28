@@ -208,6 +208,7 @@ export const api = {
     experiences: () => get<ExperiencesResponse>("/api/experiences"),
     contact: (data: { name: string; email: string; message: string }) =>
         post<{ ok: boolean; message?: string }>("/api/contact", data),
+    resume: () => get<Blob>("/api/resume", { responseType: "blob" }),
     settings: () => get<SettingsResponse>("/api/settings"),
     settingsStream: () => stream("/api/settings/stream"),
     get,
