@@ -129,6 +129,12 @@ const post = <T = unknown>(
     opts?: Omit<RequestOptions, "method" | "json" | "rawBody">
 ) => req<T>(path, { ...opts, method: "POST", json: data });
 
+const stream = (path: string): EventSource => {
+    const prefix = BASE_URL || "";
+    const url = path.startsWith("/") ? `${prefix}${path}` : `${prefix}/${path}`;
+    return new EventSource(url);
+};
+
 export interface ApiSkill {
     _id: string;
     name: string;
@@ -167,7 +173,7 @@ export interface ApiExperience {
     title: string;
     company: string;
     location: string;
-    type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract";
+    type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract" | "Bachelor" | "Master" | "PhD";
     startDate: string;
     endDate?: string;
     description: string;
@@ -203,7 +209,9 @@ export const api = {
     contact: (data: { name: string; email: string; message: string }) =>
         post<{ ok: boolean; message?: string }>("/api/contact", data),
     settings: () => get<SettingsResponse>("/api/settings"),
+    settingsStream: () => stream("/api/settings/stream"),
     get,
     post,
+    stream,
     raw: req,
 };
