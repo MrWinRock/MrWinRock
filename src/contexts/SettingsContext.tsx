@@ -6,13 +6,24 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     const [settings, setSettings] = useState<SettingsDoc>(SETTINGS_DEFAULTS);
 
     useEffect(() => {
-        api.settings()
-            .then((res) => {
-                if (res.ok && res.data) setSettings(res.data);
-            })
-            .catch(() => {
-                // keep defaults on error — all pages visible
-            });
+        const es = api.settingsStream();
+
+        es.onmessage = (event: MessageEvent) => {
+            try {
+                const newSettings = JSON.parse(event.data);
+                setSettings(newSettings);
+            } catch (err) {
+                console.error("Error parsing settings stream data:", err);
+            }
+        };
+
+        es.onerror = (err: Event) => {
+            console.error("Settings stream error:", err);
+        };
+
+        return () => {
+            es.close();
+        };
     }, []);
 
     return (

@@ -1,16 +1,36 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { experiences as staticExperiences, type Experience as ExperienceType } from "../../../data/experiences";
+import { useEffect, useState } from "react";
+import { type ApiExperience as ExperienceType, api } from "../../../lib/api";
 import SpotlightCard from "@/components/cards/SpotLightCard";
 
 const Experience = () => {
     const { t, i18n } = useTranslation();
+    const [experienceList, setExperienceList] = useState<ExperienceType[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     const localeMap: Record<string, string> = { en: "en-US", th: "th-TH" };
 
-    const experienceList: ExperienceType[] = [...staticExperiences].sort(
-        (a, b) => a.order - b.order
-    );
+    useEffect(() => {
+        const fetchExperiences = async () => {
+            try {
+                const response = await api.experiences();
+                if (response.ok && response.data) {
+                    setExperienceList(response.data);
+                } else {
+                    setError("Failed to load generic error");
+                }
+            } catch (err) {
+                console.error("Failed to fetch experiences:", err);
+                setError("Failed to load experience error");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchExperiences();
+    }, []);
 
     const formatDate = (dateStr: string) => {
         const [year, month] = dateStr.split("-");
@@ -27,16 +47,34 @@ const Experience = () => {
     };
 
     const getTypeBadgeColor = (type: ExperienceType["type"]) => {
-        const colors: Record<ExperienceType["type"], string> = {
+        const colors: Record<string, string> = {
             "Full-time": "from-purple-500 to-pink-500",
             "Part-time": "from-blue-500 to-cyan-500",
             Internship: "from-green-500 to-emerald-500",
             Freelance: "from-amber-500 to-orange-500",
             Contract: "from-rose-500 to-red-500",
-            "Bachelor's Degree": "from-blue-500 to-cyan-500",
+            Bachelor: "from-blue-500 to-cyan-500",
+            Master: "from-cyan-500 to-teal-500",
+            PhD: "from-indigo-500 to-purple-500",
         };
         return colors[type] ?? "from-gray-500 to-gray-400";
     };
+
+    if (isLoading) {
+        return (
+            <div className="min-h-screen flex justify-center items-center">
+                <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="min-h-screen flex justify-center items-center text-red-500">
+                {t("experience.error")}
+            </div>
+        );
+    }
 
     return (
         <motion.div
