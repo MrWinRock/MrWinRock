@@ -63,6 +63,21 @@
         "newTab": "เปิดในแท็บใหม่",
         "browserError": "เบราว์เซอร์ของคุณไม่รองรับการแสดงไฟล์ PDF"
     },
+    "contact": {
+        "title": "ติดต่อฉัน",
+        "subtitle": "มีโปรเจกต์ในใจ มีคำถาม หรืออยากทักทาย? ส่งข้อความมาได้เลย",
+        "name": "ชื่อ",
+        "namePlaceholder": "ชื่อของคุณ",
+        "email": "อีเมล",
+        "emailPlaceholder": "you@example.com",
+        "message": "ข้อความ",
+        "messagePlaceholder": "เล่าเกี่ยวกับโปรเจกต์หรือคำถามของคุณ...",
+        "send": "ส่งข้อความ",
+        "directTitle": "ช่องทางอื่นในการติดต่อ",
+        "directSubtitle": "อยากติดต่อโดยตรง? พบฉันได้ที่นี่",
+        "emailMe": "ส่งอีเมล",
+        "responseNote": "โดยปกติฉันจะตอบกลับภายในหนึ่งถึงสองวัน"
+    },
     "footer": {
         "rights": "สงวนลิขสิทธิ์ทั้งหมด",
         "builtWith": "สร้างด้วย React, TypeScript และ Tailwind CSS",

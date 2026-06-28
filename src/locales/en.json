@@ -64,6 +64,21 @@
         "newTab": "Opens in new tab",
         "browserError": "Your browser can't display PDFs inline."
     },
+    "contact": {
+        "title": "Get in Touch",
+        "subtitle": "Have a project in mind, a question, or just want to say hi? Drop me a message.",
+        "name": "Name",
+        "namePlaceholder": "Your name",
+        "email": "Email",
+        "emailPlaceholder": "you@example.com",
+        "message": "Message",
+        "messagePlaceholder": "Tell me about your project or question...",
+        "send": "Send Message",
+        "directTitle": "Other ways to reach me",
+        "directSubtitle": "Prefer a direct line? Find me here.",
+        "emailMe": "Email me",
+        "responseNote": "I usually reply within a day or two."
+    },
     "footer": {
         "rights": "All rights reserved",
         "builtWith": "Built with React, TypeScript, and Tailwind CSS",
