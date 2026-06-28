@@ -1,28 +1,37 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { api, type SettingsDoc } from '../lib/api';
+import { api } from '../lib/api';
+import type { SettingsDoc } from '../lib/api';
 import { SETTINGS_DEFAULTS, SettingsContext } from './settingsConstants';
+
+const POLL_INTERVAL_MS = 60_000;
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
     const [settings, setSettings] = useState<SettingsDoc>(SETTINGS_DEFAULTS);
 
     useEffect(() => {
-        const es = api.settingsStream();
+        let cancelled = false;
 
-        es.onmessage = (event: MessageEvent) => {
+        const load = async () => {
             try {
-                const newSettings = JSON.parse(event.data);
-                setSettings(newSettings);
+                const res = await api.settings();
+                if (!cancelled && res.ok) setSettings(res.data);
             } catch (err) {
-                console.error("Error parsing settings stream data:", err);
+                console.error('Failed to load settings:', err);
             }
         };
 
-        es.onerror = (err: Event) => {
-            console.error("Settings stream error:", err);
+        load();
+
+        const onVisible = () => {
+            if (document.visibilityState === 'visible') load();
         };
+        document.addEventListener('visibilitychange', onVisible);
+        const interval = window.setInterval(load, POLL_INTERVAL_MS);
 
         return () => {
-            es.close();
+            cancelled = true;
+            document.removeEventListener('visibilitychange', onVisible);
+            window.clearInterval(interval);
         };
     }, []);
 
@@ -32,4 +41,3 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         </SettingsContext.Provider>
     );
 }
-

@@ -129,12 +129,6 @@ const post = <T = unknown>(
     opts?: Omit<RequestOptions, "method" | "json" | "rawBody">
 ) => req<T>(path, { ...opts, method: "POST", json: data });
 
-const stream = (path: string): EventSource => {
-    const prefix = BASE_URL || "";
-    const url = path.startsWith("/") ? `${prefix}${path}` : `${prefix}/${path}`;
-    return new EventSource(url);
-};
-
 export interface ApiSkill {
     _id: string;
     name: string;
@@ -200,9 +194,21 @@ export interface SettingsResponse {
     data: SettingsDoc;
 }
 
+export interface AboutDoc {
+    story: string;
+    background: string;
+}
+
+export interface AboutResponse {
+    ok: boolean;
+    data: AboutDoc;
+}
+
 export const api = {
     health: () => get<{ ok: boolean; status?: string }>("/health"),
     fish: () => get<{ ok: boolean; fish?: string }>("/fish"),
+    about: (lang: "en" | "th") =>
+        get<AboutResponse>("/api/about", { query: { lang } }),
     skills: () => get<SkillsResponse>("/api/skills"),
     projects: () => get<ProjectsResponse>("/api/projects"),
     experiences: () => get<ExperiencesResponse>("/api/experiences"),
@@ -210,9 +216,7 @@ export const api = {
         post<{ ok: boolean; message?: string }>("/api/contact", data),
     resume: () => get<Blob>("/api/resume", { responseType: "blob" }),
     settings: () => get<SettingsResponse>("/api/settings"),
-    settingsStream: () => stream("/api/settings/stream"),
     get,
     post,
-    stream,
     raw: req,
 };
