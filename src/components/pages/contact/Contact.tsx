@@ -1,24 +1,41 @@
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import type { Variants } from "motion/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import SpotlightCard from "@/components/cards/SpotLightCard";
+import { api, ApiError } from "@/lib/api";
 
 const CONTACT_EMAIL = "mrwinrock11@gmail.com";
 const GITHUB_URL = "https://github.com/MrWinRock";
 const LINKEDIN_URL = "https://www.linkedin.com/in/pharthiwath-gristsoopharruth-232301240/";
 
+type SubmitStatus = "idle" | "sending" | "success" | "error";
+
 const Contact = () => {
     const { t } = useTranslation();
     const [form, setForm] = useState({ name: "", email: "", message: "" });
+    const [status, setStatus] = useState<SubmitStatus>("idle");
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const subject = encodeURIComponent(`Portfolio message from ${form.name || "a visitor"}`);
-        const body = encodeURIComponent(
-            `${form.message}\n\n— ${form.name}${form.email ? ` (${form.email})` : ""}`
-        );
-        window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+        if (status === "sending") return;
+
+        setStatus("sending");
+        setErrorMessage(null);
+        try {
+            const res = await api.contact({
+                name: form.name.trim(),
+                email: form.email.trim(),
+                message: form.message.trim(),
+            });
+            if (!res.ok) throw new ApiError(200, res, res.message ?? "Send failed");
+            setStatus("success");
+            setForm({ name: "", email: "", message: "" });
+        } catch (err) {
+            setStatus("error");
+            setErrorMessage(err instanceof ApiError ? err.message : t("contact.error"));
+        }
     };
 
     const container: Variants = {
@@ -64,9 +81,10 @@ const Contact = () => {
                                         id="name"
                                         type="text"
                                         required
+                                        disabled={status === "sending"}
                                         value={form.name}
                                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                                        className={fieldClass}
+                                        className={`${fieldClass} disabled:opacity-60`}
                                         placeholder={t("contact.namePlaceholder")}
                                     />
                                 </div>
@@ -78,9 +96,10 @@ const Contact = () => {
                                         id="email"
                                         type="email"
                                         required
+                                        disabled={status === "sending"}
                                         value={form.email}
                                         onChange={(e) => setForm({ ...form, email: e.target.value })}
-                                        className={fieldClass}
+                                        className={`${fieldClass} disabled:opacity-60`}
                                         placeholder={t("contact.emailPlaceholder")}
                                     />
                                 </div>
@@ -92,21 +111,52 @@ const Contact = () => {
                                         id="message"
                                         rows={5}
                                         required
+                                        minLength={10}
+                                        maxLength={5000}
+                                        disabled={status === "sending"}
                                         value={form.message}
                                         onChange={(e) => setForm({ ...form, message: e.target.value })}
-                                        className={`${fieldClass} resize-y`}
+                                        className={`${fieldClass} resize-y disabled:opacity-60`}
                                         placeholder={t("contact.messagePlaceholder")}
                                     />
                                 </div>
                                 <motion.button
                                     type="submit"
-                                    className="w-full bg-linear-to-r from-[#8000FF] to-[#00FFFF] text-white font-semibold px-6 py-3 rounded-lg"
-                                    whileHover={{ scale: 1.02, boxShadow: "0 8px 24px rgba(128,0,255,0.35)" }}
-                                    whileTap={{ scale: 0.98 }}
+                                    disabled={status === "sending"}
+                                    className="w-full bg-linear-to-r from-[#8000FF] to-[#00FFFF] text-white font-semibold px-6 py-3 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed"
+                                    whileHover={status === "sending" ? undefined : { scale: 1.02, boxShadow: "0 8px 24px rgba(128,0,255,0.35)" }}
+                                    whileTap={status === "sending" ? undefined : { scale: 0.98 }}
                                     transition={{ duration: 0.2 }}
                                 >
-                                    {t("contact.send")}
+                                    {status === "sending" ? t("contact.sending") : t("contact.send")}
                                 </motion.button>
+
+                                <AnimatePresence mode="wait">
+                                    {status === "success" && (
+                                        <motion.p
+                                            key="success"
+                                            initial={{ opacity: 0, y: -6 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0 }}
+                                            role="status"
+                                            className="text-sm text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-3"
+                                        >
+                                            {t("contact.success")}
+                                        </motion.p>
+                                    )}
+                                    {status === "error" && (
+                                        <motion.p
+                                            key="error"
+                                            initial={{ opacity: 0, y: -6 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0 }}
+                                            role="alert"
+                                            className="text-sm text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3"
+                                        >
+                                            {errorMessage || t("contact.error")}
+                                        </motion.p>
+                                    )}
+                                </AnimatePresence>
                             </form>
                         </SpotlightCard>
                     </motion.div>
