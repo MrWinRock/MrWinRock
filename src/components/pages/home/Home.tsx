@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import type { Variants } from "motion/react";
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { skills as staticSkills, type Skill } from "../../../data/skills";
 import { api } from "../../../lib/api";
 import profileImage from '../../../assets/logo.jpg';
@@ -48,14 +48,27 @@ const Home: React.FC = () => {
         return () => { cancelled = true; };
     }, []);
 
-    const featuredSkills = [
-        ...allSkills.filter(s => s.category === 'programming').slice(3, 6),
-        ...allSkills.filter(s => s.category === 'web').slice(0, 3),
-        ...allSkills.filter(s => s.category === 'mobile').slice(0, 2),
-        ...allSkills.filter(s => s.category === 'backend').slice(0, 1),
-        ...allSkills.filter(s => s.category === 'databases').slice(2, 4),
-        ...allSkills.filter(s => s.category === 'cloud').slice(0, 1),
-    ];
+    const featuredSkills = useMemo(() => {
+        const pickRandomSkills = (category: string, count: number) => {
+            const categorySkills = allSkills.filter((skill) => skill.category === category);
+
+            for (let index = categorySkills.length - 1; index > 0; index--) {
+                const randomIndex = Math.floor(Math.random() * (index + 1));
+                [categorySkills[index], categorySkills[randomIndex]] = [categorySkills[randomIndex], categorySkills[index]];
+            }
+
+            return categorySkills.slice(0, count);
+        };
+
+        return [
+            ...pickRandomSkills('programming', 3),
+            ...pickRandomSkills('web', 3),
+            ...pickRandomSkills('mobile', 2),
+            ...pickRandomSkills('backend', 1),
+            ...pickRandomSkills('databases', 2),
+            ...pickRandomSkills('cloud', 1),
+        ];
+    }, [allSkills]);
 
     const TYPING_DELAY_MS = 75;
 
