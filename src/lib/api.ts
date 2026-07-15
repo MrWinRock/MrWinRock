@@ -4,6 +4,7 @@ import axios, {
     type AxiosResponse,
     isAxiosError as axiosIsAxiosError,
 } from "axios";
+import { decryptResponse } from "./responseEncryption";
 
 const RAW_BASE = import.meta.env.VITE_BASE_URL ?? "";
 const BASE_URL = RAW_BASE.replace(/\/+$/, "");
@@ -38,8 +39,16 @@ const instance = axios.create({
 });
 
 instance.interceptors.response.use(
-    (res) => res,
-    (err) => Promise.reject(err)
+    async response => {
+        response.data = await decryptResponse(response.data);
+        return response;
+    },
+    async error => {
+        if (axiosIsAxiosError(error) && error.response) {
+            error.response.data = await decryptResponse(error.response.data);
+        }
+        return Promise.reject(error);
+    },
 );
 
 function buildParams(query?: RequestOptions["query"]) {
