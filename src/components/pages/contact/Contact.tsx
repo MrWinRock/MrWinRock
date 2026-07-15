@@ -123,7 +123,7 @@ const Contact = () => {
                                 <motion.button
                                     type="submit"
                                     disabled={status === "sending"}
-                                    className="w-full bg-linear-to-r from-[#8000FF] to-[#00FFFF] text-white font-semibold px-6 py-3 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed"
+                                    className="w-full bg-linear-to-r from-[#8000FF] to-[#00FFFF] text-white font-semibold px-6 py-3 rounded-lg cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                                     whileHover={status === "sending" ? undefined : { scale: 1.02, boxShadow: "0 8px 24px rgba(128,0,255,0.35)" }}
                                     whileTap={status === "sending" ? undefined : { scale: 0.98 }}
                                     transition={{ duration: 0.2 }}
