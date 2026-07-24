@@ -1,12 +1,13 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { api } from '../lib/api';
 import type { SettingsDoc } from '../lib/api';
-import { SETTINGS_DEFAULTS, SettingsContext } from './settingsConstants';
+import { HIDDEN_SETTINGS, SettingsContext } from './settingsConstants';
 
 const POLL_INTERVAL_MS = 60_000;
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
-    const [settings, setSettings] = useState<SettingsDoc>(SETTINGS_DEFAULTS);
+    const [settings, setSettings] = useState<SettingsDoc>(HIDDEN_SETTINGS);
+    const [isInitialLoading, setIsInitialLoading] = useState(true);
 
     useEffect(() => {
         let cancelled = false;
@@ -17,6 +18,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
                 if (!cancelled && res.ok) setSettings(res.data);
             } catch (err) {
                 console.error('Failed to load settings:', err);
+            } finally {
+                if (!cancelled) setIsInitialLoading(false);
             }
         };
 
@@ -36,7 +39,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     }, []);
 
     return (
-        <SettingsContext.Provider value={settings}>
+        <SettingsContext.Provider value={{ settings, isInitialLoading }}>
             {children}
         </SettingsContext.Provider>
     );

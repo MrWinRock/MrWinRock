@@ -1,13 +1,21 @@
 import { createContext } from 'react';
 import type { SettingsDoc } from '../lib/api';
 
-export const SETTINGS_DEFAULTS: SettingsDoc = {
-    showAbout: true,
-    showSkills: true,
-    showProjects: true,
-    showExperience: true,
-    showResume: true,
-    showContact: true,
+export const HIDDEN_SETTINGS: SettingsDoc = {
+    showAbout: false,
+    showSkills: false,
+    showProjects: false,
+    showExperience: false,
+    showResume: false,
+    showContact: false,
 };
 
-export const SettingsContext = createContext<SettingsDoc>(SETTINGS_DEFAULTS);
+export interface SettingsContextValue {
+    settings: SettingsDoc;
+    isInitialLoading: boolean;
+}
+
+export const SettingsContext = createContext<SettingsContextValue>({
+    settings: HIDDEN_SETTINGS,
+    isInitialLoading: true,
+});

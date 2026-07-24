@@ -16,7 +16,7 @@ interface SocialLinkProps {
 
 const Home: React.FC = () => {
     const { t } = useTranslation();
-    const settings = useSettings();
+    const { settings } = useSettings();
     const [displayedName, setDisplayedName] = useState('');
     const [isTypingComplete, setIsTypingComplete] = useState(false);
 
