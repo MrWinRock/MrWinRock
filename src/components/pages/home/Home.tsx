@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect, useMemo } from 'react';
 import { skills as staticSkills, type Skill } from "../../../data/skills";
 import { api } from "../../../lib/api";
+import { useSettings } from '../../../contexts/useSettings';
 import profileImage from '../../../assets/logo.jpg';
 
 interface SocialLinkProps {
@@ -15,6 +16,7 @@ interface SocialLinkProps {
 
 const Home: React.FC = () => {
     const { t } = useTranslation();
+    const settings = useSettings();
     const [displayedName, setDisplayedName] = useState('');
     const [isTypingComplete, setIsTypingComplete] = useState(false);
 
@@ -189,12 +191,14 @@ const Home: React.FC = () => {
                                         {t("home.viewWork")}
                                     </span>
                                 </Link>
-                                <Link
-                                    to="/about"
-                                    className="px-8 py-3 text-lg border-2 border-gray-600 text-gray-300 rounded-full font-semibold hover:border-white hover:text-white transition-all duration-300 hover:scale-105"
-                                >
-                                    {t("home.aboutMe")}
-                                </Link>
+                                {settings.showAbout && (
+                                    <Link
+                                        to="/about"
+                                        className="px-8 py-3 text-lg border-2 border-gray-600 text-gray-300 rounded-full font-semibold hover:border-white hover:text-white transition-all duration-300 hover:scale-105"
+                                    >
+                                        {t("home.aboutMe")}
+                                    </Link>
+                                )}
                             </motion.div>
 
                             {/* Social Links with improved styling */}

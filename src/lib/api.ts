@@ -191,6 +191,7 @@ export interface ExperiencesResponse {
 }
 
 export interface SettingsDoc {
+    showAbout: boolean;
     showSkills: boolean;
     showProjects: boolean;
     showExperience: boolean;

@@ -25,7 +25,7 @@ function App() {
       <main className='min-h-screen max-w-[1200px] mx-auto mt-12 px-4 py-8'>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          {settings.showAbout && <Route path="/about" element={<About />} />}
           {settings.showSkills && <Route path="/skills" element={<Skills />} />}
           {settings.showProjects && <Route path="/projects" element={<Projects />} />}
           {settings.showExperience && <Route path="/experience" element={<Experience />} />}
