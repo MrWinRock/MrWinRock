@@ -30,7 +30,7 @@ const Navbar = () => {
                 {/* Desktop Menu */}
                 <div className="hidden lg:flex lg:gap-4 xl:gap-6 items-center">
                     <Link to="/" className="p-button">{t('nav.home')}</Link>
-                    <Link to="/about" className="p-button">{t('nav.about')}</Link>
+                    {settings.showAbout && <Link to="/about" className="p-button">{t('nav.about')}</Link>}
                     {settings.showSkills && <Link to="/skills" className="p-button">{t('nav.skills')}</Link>}
                     {settings.showProjects && <Link to="/projects" className="p-button">{t('nav.projects')}</Link>}
                     {settings.showExperience && <Link to="/experience" className="p-button">{t('nav.experience')}</Link>}
@@ -56,7 +56,7 @@ const Navbar = () => {
             <div className={`lg:hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
                 <div className="flex flex-col gap-4 p-4 width-full">
                     <Link to="/" className="p-button text-center" onClick={closeMenu}>{t('nav.home')}</Link>
-                    <Link to="/about" className="p-button text-center" onClick={closeMenu}>{t('nav.about')}</Link>
+                    {settings.showAbout && <Link to="/about" className="p-button text-center" onClick={closeMenu}>{t('nav.about')}</Link>}
                     {settings.showSkills && <Link to="/skills" className="p-button text-center" onClick={closeMenu}>{t('nav.skills')}</Link>}
                     {settings.showProjects && <Link to="/projects" className="p-button text-center" onClick={closeMenu}>{t('nav.projects')}</Link>}
                     {settings.showExperience && <Link to="/experience" className="p-button text-center" onClick={closeMenu}>{t('nav.experience')}</Link>}

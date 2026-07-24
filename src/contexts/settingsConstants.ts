@@ -2,6 +2,7 @@ import { createContext } from 'react';
 import type { SettingsDoc } from '../lib/api';
 
 export const SETTINGS_DEFAULTS: SettingsDoc = {
+    showAbout: true,
     showSkills: true,
     showProjects: true,
     showExperience: true,
