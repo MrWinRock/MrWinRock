@@ -16,7 +16,15 @@ import { useSettings } from './contexts/useSettings';
 
 function App() {
   console.log(`%cWelcome to My Portfolio!`, 'color: #8B2BE2; font-size: 20px; font-weight: bold;');
-  const settings = useSettings();
+  const { settings, isInitialLoading } = useSettings();
+
+  if (isInitialLoading) {
+    return (
+      <div className="min-h-screen grid place-items-center" role="status">
+        <span className="text-gray-300">Loading site…</span>
+      </div>
+    );
+  }
 
   return (
     <div className="App">

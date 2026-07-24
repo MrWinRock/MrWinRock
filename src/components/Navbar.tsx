@@ -8,7 +8,7 @@ import { useSettings } from '../contexts/useSettings';
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { t } = useTranslation();
-    const settings = useSettings();
+    const { settings } = useSettings();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
