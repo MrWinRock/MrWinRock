@@ -44,25 +44,6 @@ During my software development internship at DevDee Thailand, I worked across Re
 | AI | LLM applications, Model Context Protocol, Ollama, Whisper |
 | Infrastructure | Linux, Docker, Nginx, Cloudflare, GitHub Actions, Grafana, Prometheus, Loki |
 
-## GitHub activity
-
-<p align="center">
-  <a href="https://github.com/MrWinRock">
-    <img
-      alt="GitHub stats"
-      height="165"
-      src="https://github-readme-stats.vercel.app/api?username=MrWinRock&show_icons=true&theme=transparent&hide_border=true"
-    />
-  </a>
-  <a href="https://github.com/MrWinRock?tab=repositories">
-    <img
-      alt="Top languages"
-      height="165"
-      src="https://github-readme-stats.vercel.app/api/top-langs/?username=MrWinRock&layout=compact&theme=transparent&hide_border=true&langs_count=8"
-    />
-  </a>
-</p>
-
 ---
 
 <p align="center">
