@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/badge/Nong_Labs-nonglabs.cloud-10b981?logo=linux&logoColor=white&style=flat" alt="Nong Labs" />
   </a>
   <a href="mailto:mrwinrock11@gmail.com">
-    <img src="https://img.shields.io/badge/Email-mrwinrock%40mrwinrock.com-D14836?logo=gmail&logoColor=white&style=flat" alt="Email" />
+    <img src="https://img.shields.io/badge/Email-mrwinrock11%40gmail.com-D14836?logo=gmail&logoColor=white&style=flat" alt="Email" />
   </a>
   <img src="https://komarev.com/ghpvc/?username=MrWinRock&label=Profile%20views&color=0ea5e9&style=flat" alt="Profile views" />
 </p>
