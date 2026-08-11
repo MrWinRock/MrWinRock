@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "benchmarks": {
+    "build": {
+      "program": "bun",
+      "args": [
+        "run",
+        "build"
+      ],
+      "recorded_at": "2026-07-29T15:09:46.9954523Z",
+      "platform": {
+        "os": "windows",
+        "arch": "x86_64"
+      },
+      "benchguard_version": "0.1.1",
+      "warmups": 2,
+      "runs": 1,
+      "timeout_ns": null,
+      "wall_ns": {
+        "median": 3922151700,
+        "mean": 3922151700,
+        "standard_deviation": 0,
+        "min": 3922151700,
+        "max": 3922151700,
+        "p50": 3922151700,
+        "p95": 3922151700,
+        "sample_count": 1
+      },
+      "cpu_ns": {
+        "median": 5578125000,
+        "mean": 5578125000,
+        "standard_deviation": 0,
+        "min": 5578125000,
+        "max": 5578125000,
+        "p50": 5578125000,
+        "p95": 5578125000,
+        "sample_count": 1
+      },
+      "peak_memory_bytes": {
+        "median": 425603072,
+        "mean": 425603072,
+        "standard_deviation": 0,
+        "min": 425603072,
+        "max": 425603072,
+        "p50": 425603072,
+        "p95": 425603072,
+        "sample_count": 1
+      },
+      "budgets": {
+        "wall_percent": 10.0,
+        "cpu_percent": null,
+        "peak_memory_percent": null
+      },
+      "noise_floors": {
+        "wall_ns": 1000000,
+        "cpu_ns": 1000000,
+        "peak_memory_bytes": 1048576
+      }
+    }
+  }
+}
