@@ -1,20 +1,27 @@
 import { useTranslation } from 'react-i18next';
 
+import { documentLanguage } from '../lib/documentLanguage';
+
 const LanguageSwitcher = () => {
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
+    const currentLanguage = documentLanguage(i18n.resolvedLanguage ?? i18n.language);
+    const targetLanguage = currentLanguage === 'en' ? 'th' : 'en';
 
     const toggleLanguage = () => {
-        const newLang = i18n.language === 'en' ? 'th' : 'en';
-        i18n.changeLanguage(newLang);
+        i18n.changeLanguage(targetLanguage);
     };
 
     return (
         <button
+            type="button"
             onClick={toggleLanguage}
             className="p-button"
+            aria-label={targetLanguage === 'th'
+                ? t('accessibility.switchLanguageToThai')
+                : t('accessibility.switchLanguageToEnglish')}
         >
             <span className="font-bold">
-                {i18n.language === 'en' ? 'TH' : 'EN'}
+                {targetLanguage === 'th' ? 'TH' : 'EN'}
             </span>
         </button>
     );

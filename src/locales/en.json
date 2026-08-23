@@ -12,7 +12,9 @@
     },
     "accessibility": {
         "skipToContent": "Skip to content",
-        "navigationUpdating": "Navigation is updating."
+        "navigationUpdating": "Navigation is updating.",
+        "switchLanguageToThai": "Switch language to Thai",
+        "switchLanguageToEnglish": "Switch language to English"
     },
     "construction": {
         "title": "🚧 Under Construction...",

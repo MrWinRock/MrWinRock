@@ -12,7 +12,9 @@
     },
     "accessibility": {
         "skipToContent": "ข้ามไปยังเนื้อหา",
-        "navigationUpdating": "กำลังอัปเดตการนำทาง"
+        "navigationUpdating": "กำลังอัปเดตการนำทาง",
+        "switchLanguageToThai": "เปลี่ยนภาษาเป็นภาษาไทย",
+        "switchLanguageToEnglish": "เปลี่ยนภาษาเป็นภาษาอังกฤษ"
     },
     "construction": {
         "title": "🚧 อยู่ระหว่างการพัฒนา...",
