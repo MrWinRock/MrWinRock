@@ -8,6 +8,7 @@ import thTranslations from './locales/th.json';
 
 type DocumentLanguageSyncState = {
     handler: (language: unknown) => void;
+    dispose: () => void;
     initialization?: Promise<unknown>;
 };
 
@@ -22,15 +23,20 @@ const synchronizeDocumentLanguage = (language: unknown) => {
     }
 };
 
-let documentLanguageSyncState = i18nWithDocumentLanguageSync[documentLanguageSyncStateKey];
+const previousDocumentLanguageSyncState = i18nWithDocumentLanguageSync[documentLanguageSyncStateKey];
 
-if (!documentLanguageSyncState) {
-    documentLanguageSyncState = {
-        handler: synchronizeDocumentLanguage,
-    };
-    i18nWithDocumentLanguageSync[documentLanguageSyncStateKey] = documentLanguageSyncState;
-    i18n.on('languageChanged', documentLanguageSyncState.handler);
+if (previousDocumentLanguageSyncState) {
+    i18n.off('languageChanged', previousDocumentLanguageSyncState.handler);
 }
+
+const documentLanguageSyncState: DocumentLanguageSyncState = {
+    handler: synchronizeDocumentLanguage,
+    dispose: () => i18n.off('languageChanged', synchronizeDocumentLanguage),
+    initialization: previousDocumentLanguageSyncState?.initialization,
+};
+
+i18nWithDocumentLanguageSync[documentLanguageSyncStateKey] = documentLanguageSyncState;
+i18n.on('languageChanged', documentLanguageSyncState.handler);
 
 if (!documentLanguageSyncState.initialization) {
     documentLanguageSyncState.initialization = i18n
@@ -53,6 +59,8 @@ if (!documentLanguageSyncState.initialization) {
         })
         .then(() => synchronizeDocumentLanguage(i18n.language));
 }
+
+import.meta.hot?.dispose(documentLanguageSyncState.dispose);
 
 void documentLanguageSyncState.initialization;
 
