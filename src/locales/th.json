@@ -6,7 +6,13 @@
         "projects": "โปรเจกต์",
         "experience": "ประสบการณ์",
         "contact": "ติดต่อ",
-        "resume": "เรซูเม่"
+        "resume": "เรซูเม่",
+        "openMenu": "เปิดเมนู",
+        "closeMenu": "ปิดเมนู"
+    },
+    "accessibility": {
+        "skipToContent": "ข้ามไปยังเนื้อหา",
+        "navigationUpdating": "กำลังอัปเดตการนำทาง"
     },
     "construction": {
         "title": "🚧 อยู่ระหว่างการพัฒนา...",

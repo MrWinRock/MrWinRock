@@ -13,32 +13,39 @@ import ScrollToTop from './components/ScrollToTop';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useSettings } from './contexts/useSettings';
+import { HIDDEN_SETTINGS } from './contexts/settingsConstants';
+import { useTranslation } from 'react-i18next';
 
 function App() {
   console.log(`%cWelcome to My Portfolio!`, 'color: #8B2BE2; font-size: 20px; font-weight: bold;');
   const { settings, isInitialLoading } = useSettings();
-
-  if (isInitialLoading) {
-    return (
-      <div className="min-h-screen grid place-items-center" role="status">
-        <span className="text-gray-300">Loading site…</span>
-      </div>
-    );
-  }
+  const { t } = useTranslation();
+  const visibleSettings = isInitialLoading ? HIDDEN_SETTINGS : settings;
 
   return (
     <div className="App">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:rounded-full focus:bg-linear-to-r focus:from-[#8000FF] focus:to-[#00FFFF] focus:px-4 focus:py-2 focus:font-semibold focus:text-white focus:shadow-lg"
+      >
+        {t('accessibility.skipToContent')}
+      </a>
+      {isInitialLoading && (
+        <div className="sr-only" role="status" aria-live="polite">
+          {t('accessibility.navigationUpdating')}
+        </div>
+      )}
       <ScrollToTop />
       <Navbar />
-      <main className='min-h-screen max-w-[1200px] mx-auto mt-12 px-4 py-8'>
+      <main id="main-content" tabIndex={-1} className='min-h-screen max-w-[1200px] mx-auto mt-12 px-4 py-8'>
         <Routes>
           <Route path="/" element={<Home />} />
-          {settings.showAbout && <Route path="/about" element={<About />} />}
-          {settings.showSkills && <Route path="/skills" element={<Skills />} />}
-          {settings.showProjects && <Route path="/projects" element={<Projects />} />}
-          {settings.showExperience && <Route path="/experience" element={<Experience />} />}
-          {settings.showContact && <Route path="/contact" element={<Contact />} />}
-          {settings.showResume && <Route path="/resume" element={<Resume />} />}
+          {visibleSettings.showAbout && <Route path="/about" element={<About />} />}
+          {visibleSettings.showSkills && <Route path="/skills" element={<Skills />} />}
+          {visibleSettings.showProjects && <Route path="/projects" element={<Projects />} />}
+          {visibleSettings.showExperience && <Route path="/experience" element={<Experience />} />}
+          {visibleSettings.showContact && <Route path="/contact" element={<Contact />} />}
+          {visibleSettings.showResume && <Route path="/resume" element={<Resume />} />}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

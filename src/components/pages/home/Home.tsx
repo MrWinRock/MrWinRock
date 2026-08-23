@@ -6,6 +6,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { skills as staticSkills, type Skill } from "../../../data/skills";
 import { api } from "../../../lib/api";
 import { useSettings } from '../../../contexts/useSettings';
+import { HIDDEN_SETTINGS } from '../../../contexts/settingsConstants';
 import profileImage from '../../../assets/logo.jpg';
 
 interface SocialLinkProps {
@@ -16,7 +17,8 @@ interface SocialLinkProps {
 
 const Home: React.FC = () => {
     const { t } = useTranslation();
-    const { settings } = useSettings();
+    const { settings, isInitialLoading } = useSettings();
+    const visibleSettings = isInitialLoading ? HIDDEN_SETTINGS : settings;
     const [displayedName, setDisplayedName] = useState('');
     const [isTypingComplete, setIsTypingComplete] = useState(false);
 
@@ -183,15 +185,17 @@ const Home: React.FC = () => {
                                 className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-8"
                                 variants={itemVariants}
                             >
-                                <Link
-                                    to="/projects"
-                                    className="group px-8 py-3 text-lg bg-linear-to-r from-[#8000FF] to-[#00FFFF] text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
-                                >
-                                    <span className="group-hover:tracking-wide transition-all duration-300">
-                                        {t("home.viewWork")}
-                                    </span>
-                                </Link>
-                                {settings.showAbout && (
+                                {visibleSettings.showProjects && (
+                                    <Link
+                                        to="/projects"
+                                        className="group px-8 py-3 text-lg bg-linear-to-r from-[#8000FF] to-[#00FFFF] text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
+                                    >
+                                        <span className="group-hover:tracking-wide transition-all duration-300">
+                                            {t("home.viewWork")}
+                                        </span>
+                                    </Link>
+                                )}
+                                {visibleSettings.showAbout && (
                                     <Link
                                         to="/about"
                                         className="px-8 py-3 text-lg border-2 border-gray-600 text-gray-300 rounded-full font-semibold hover:border-white hover:text-white transition-all duration-300 hover:scale-105"
@@ -313,19 +317,21 @@ const Home: React.FC = () => {
                         animate={{ opacity: isTypingComplete ? 1 : 0 }}
                         transition={{ duration: 0.5, delay: 2.2 }}
                     >
-                        <Link
-                            to="/skills"
-                            className="mt-8 inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-300 group"
-                        >
-                            {t("home.seeMore")}
-                            <motion.span
-                                className="ml-2"
-                                animate={{ x: [0, 5, 0] }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
+                        {visibleSettings.showSkills && (
+                            <Link
+                                to="/skills"
+                                className="mt-8 inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-300 group"
                             >
-                                →
-                            </motion.span>
-                        </Link>
+                                {t("home.seeMore")}
+                                <motion.span
+                                    className="ml-2"
+                                    animate={{ x: [0, 5, 0] }}
+                                    transition={{ duration: 1.5, repeat: Infinity }}
+                                >
+                                    →
+                                </motion.span>
+                            </Link>
+                        )}
                     </motion.div>
                 </motion.div>
             </div>

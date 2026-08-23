@@ -6,7 +6,13 @@
         "projects": "Projects",
         "experience": "Experience",
         "contact": "Contact",
-        "resume": "Resume"
+        "resume": "Resume",
+        "openMenu": "Open menu",
+        "closeMenu": "Close menu"
+    },
+    "accessibility": {
+        "skipToContent": "Skip to content",
+        "navigationUpdating": "Navigation is updating."
     },
     "construction": {
         "title": "🚧 Under Construction...",
