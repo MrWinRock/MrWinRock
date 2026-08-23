@@ -57,6 +57,24 @@ describe("API security boundary", () => {
         }
     });
 
+    test("preserves a non-200 2xx status for an application error", async () => {
+        const client = createApiClient({
+            adapter: axiosAdapter({ status: 201, data: { ok: false } }),
+        });
+
+        try {
+            await client.contact({ name: "Ada", email: "ada@example.test", message: "Hello there" });
+            throw new Error("Expected contact to reject");
+        } catch (error) {
+            expectSafeError(error);
+            expect(error).toMatchObject({
+                status: 201,
+                code: "application_error",
+                message: "Application error.",
+            });
+        }
+    });
+
     test("rejects malformed successful JSON", async () => {
         const client = createApiClient({
             adapter: axiosAdapter({ status: 200, data: { fish: 7 } }),
@@ -72,6 +90,24 @@ describe("API security boundary", () => {
                 code: "malformed_response",
                 message: "Malformed response.",
                 cancelled: false,
+            });
+        }
+    });
+
+    test("preserves a non-200 2xx status for malformed JSON", async () => {
+        const client = createApiClient({
+            adapter: axiosAdapter({ status: 204, data: { fish: 7 } }),
+        });
+
+        try {
+            await client.fish();
+            throw new Error("Expected fish to reject");
+        } catch (error) {
+            expectSafeError(error);
+            expect(error).toMatchObject({
+                status: 204,
+                code: "malformed_response",
+                message: "Malformed response.",
             });
         }
     });
@@ -176,6 +212,32 @@ describe("API security boundary", () => {
                 message: "Request failed.",
                 details: { fieldErrors: {}, formErrors: ["Unable to prepare resume"] },
                 cancelled: false,
+            });
+        }
+    });
+
+    test("normalizes a structured JSON error carried in a resume Blob", async () => {
+        const client = createApiClient({
+            adapter: axiosAdapter({
+                status: 500,
+                data: new Blob([
+                    JSON.stringify({
+                        details: { fieldErrors: { resume: ["Unavailable"] }, formErrors: [] },
+                    }),
+                ], { type: "application/problem+json" }),
+            }),
+        });
+
+        try {
+            await client.resume();
+            throw new Error("Expected resume to reject");
+        } catch (error) {
+            expectSafeError(error);
+            expect(error).toMatchObject({
+                status: 500,
+                code: "http_error",
+                message: "Request failed.",
+                details: { fieldErrors: { resume: ["Unavailable"] }, formErrors: [] },
             });
         }
     });

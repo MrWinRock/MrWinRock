@@ -112,7 +112,9 @@ function retryAfterSeconds(headers: AxiosResponse["headers"] | undefined): numbe
 }
 
 async function safeErrorBody(value: unknown): Promise<unknown> {
-    if (!(value instanceof Blob) || !/(^|\/)json($|;|\+)/i.test(value.type)) return value;
+    if (!(value instanceof Blob) || !/^application\/(?:[a-z0-9!#$&^_.+-]+\+)?json(?:\s*;|$)/i.test(value.type)) {
+        return value;
+    }
 
     try {
         return JSON.parse(await value.text()) as unknown;
@@ -159,44 +161,44 @@ async function normalizeError(error: unknown): Promise<ApiError> {
     });
 }
 
-function malformedResponse(): ApiError {
+function malformedResponse(status: number): ApiError {
     return new ApiError({
-        status: 200,
+        status,
         code: "malformed_response",
         message: "Malformed response.",
     });
 }
 
-function applicationError(): ApiError {
+function applicationError(status: number): ApiError {
     return new ApiError({
-        status: 200,
+        status,
         code: "application_error",
         message: "Application error.",
     });
 }
 
-function validateHealth(value: unknown): { ok: true; status: "live" } {
+function validateHealth(value: unknown, status: number): { ok: true; status: "live" } {
     if (isRecord(value) && value.ok === true && value.status === "live") {
         return { ok: true, status: "live" };
     }
-    throw malformedResponse();
+    throw malformedResponse(status);
 }
 
-function validateFish(value: unknown): { fish: string } {
+function validateFish(value: unknown, status: number): { fish: string } {
     if (isRecord(value) && typeof value.fish === "string") return { fish: value.fish };
-    throw malformedResponse();
+    throw malformedResponse(status);
 }
 
-function validateApplicationSuccess<T>(value: unknown): T {
-    if (!isRecord(value)) throw malformedResponse();
-    if (value.ok === false) throw applicationError();
-    if (value.ok !== true) throw malformedResponse();
+function validateApplicationSuccess<T>(value: unknown, status: number): T {
+    if (!isRecord(value)) throw malformedResponse(status);
+    if (value.ok === false) throw applicationError(status);
+    if (value.ok !== true) throw malformedResponse(status);
     return value as T;
 }
 
-function validateResume(value: unknown): Blob {
+function validateResume(value: unknown, status: number): Blob {
     if (value instanceof Blob) return value;
-    throw malformedResponse();
+    throw malformedResponse(status);
 }
 
 export interface ApiSkill {
@@ -289,7 +291,7 @@ export function createApiClient({ baseURL = BASE_URL, adapter }: CreateApiClient
         validateStatus: status => status >= 200 && status < 300,
     });
 
-    async function request(path: string, options: RequestOptions = {}): Promise<unknown> {
+    async function request(path: string, options: RequestOptions = {}): Promise<{ data: unknown; status: number }> {
         if (!normalizedBaseURL && !adapter) {
             throw new ApiError({
                 status: 0,
@@ -321,26 +323,35 @@ export function createApiClient({ baseURL = BASE_URL, adapter }: CreateApiClient
                 data: json !== undefined ? json : rawBody,
                 signal,
             });
-            return response.data;
+            return { data: response.data, status: response.status };
         } catch (error) {
             if (error instanceof ApiError) throw error;
             throw await normalizeError(error);
         }
     }
 
+    async function validated<T>(
+        path: string,
+        validator: (value: unknown, status: number) => T,
+        options?: RequestOptions,
+    ): Promise<T> {
+        const response = await request(path, options);
+        return validator(response.data, response.status);
+    }
+
     return {
         health: async (options?: Pick<RequestOptions, "signal" | "timeoutMs">) =>
-            validateHealth(await request("/health", options)),
-        fish: async () => validateFish(await request("/fish")),
+            validated("/health", validateHealth, options),
+        fish: async () => validated("/fish", validateFish),
         about: async (lang: "en" | "th") =>
-            validateApplicationSuccess<AboutResponse>(await request("/api/about", { query: { lang } })),
-        skills: async () => validateApplicationSuccess<SkillsResponse>(await request("/api/skills")),
-        projects: async () => validateApplicationSuccess<ProjectsResponse>(await request("/api/projects")),
-        experiences: async () => validateApplicationSuccess<ExperiencesResponse>(await request("/api/experiences")),
+            validated("/api/about", validateApplicationSuccess<AboutResponse>, { query: { lang } }),
+        skills: async () => validated("/api/skills", validateApplicationSuccess<SkillsResponse>),
+        projects: async () => validated("/api/projects", validateApplicationSuccess<ProjectsResponse>),
+        experiences: async () => validated("/api/experiences", validateApplicationSuccess<ExperiencesResponse>),
         contact: async (data: { name: string; email: string; message: string }) =>
-            validateApplicationSuccess<ContactResponse>(await request("/api/contact", { method: "POST", json: data })),
-        resume: async () => validateResume(await request("/api/resume", { responseType: "blob" })),
-        settings: async () => validateApplicationSuccess<SettingsResponse>(await request("/api/settings")),
+            validated("/api/contact", validateApplicationSuccess<ContactResponse>, { method: "POST", json: data }),
+        resume: async () => validated("/api/resume", validateResume, { responseType: "blob" }),
+        settings: async () => validated("/api/settings", validateApplicationSuccess<SettingsResponse>),
     };
 }
 
