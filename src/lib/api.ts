@@ -1,26 +1,16 @@
 import axios, {
+    type AxiosAdapter,
     type AxiosError,
     type AxiosRequestConfig,
     type AxiosResponse,
-    isAxiosError as axiosIsAxiosError,
+    isAxiosError,
 } from "axios";
-import { decryptResponse } from "./responseEncryption";
 
 const RAW_BASE = import.meta.env.VITE_BASE_URL ?? "";
 const BASE_URL = RAW_BASE.replace(/\/+$/, "");
-if (!BASE_URL) console.warn("VITE_BASE_URL is not defined. API calls will fail.");
-
-export class ApiError<T = unknown> extends Error {
-    status: number;
-    body: T | string | null;
-    constructor(status: number, body: T | string | null, message?: string) {
-        super(message ?? `API Error ${status}`);
-        this.status = status;
-        this.body = body;
-    }
-}
 
 type Primitive = string | number | boolean;
+
 export interface RequestOptions {
     method?: AxiosRequestConfig["method"];
     query?: Record<string, Primitive | null | undefined>;
@@ -32,111 +22,182 @@ export interface RequestOptions {
     responseType?: AxiosRequestConfig["responseType"];
 }
 
-const instance = axios.create({
-    baseURL: BASE_URL || undefined,
-    timeout: 15_000,
-    validateStatus: (s) => s >= 200 && s < 300,
-});
+export interface ValidationDetails {
+    fieldErrors: Record<string, string[]>;
+    formErrors: string[];
+}
 
-instance.interceptors.response.use(
-    async response => {
-        response.data = await decryptResponse(response.data);
-        return response;
-    },
-    async error => {
-        if (axiosIsAxiosError(error) && error.response) {
-            error.response.data = await decryptResponse(error.response.data);
-        }
-        return Promise.reject(error);
-    },
-);
+export type ApiErrorCode =
+    | "application_error"
+    | "cancelled"
+    | "http_error"
+    | "malformed_response"
+    | "network_error";
+
+export class ApiError extends Error {
+    readonly status: number;
+    readonly code: ApiErrorCode;
+    readonly details?: ValidationDetails;
+    readonly retryAfterSeconds?: number;
+    readonly cancelled: boolean;
+
+    constructor({
+        status,
+        code,
+        message,
+        details,
+        retryAfterSeconds,
+        cancelled = false,
+    }: {
+        status: number;
+        code: ApiErrorCode;
+        message: string;
+        details?: ValidationDetails;
+        retryAfterSeconds?: number;
+        cancelled?: boolean;
+    }) {
+        super(message);
+        delete this.stack;
+        this.status = status;
+        this.code = code;
+        if (details) this.details = details;
+        if (retryAfterSeconds !== undefined) this.retryAfterSeconds = retryAfterSeconds;
+        this.cancelled = cancelled;
+    }
+}
+
+export interface CreateApiClientOptions {
+    baseURL?: string;
+    adapter?: AxiosAdapter;
+}
 
 function buildParams(query?: RequestOptions["query"]) {
     if (!query) return undefined;
     const params: Record<string, string> = {};
-    for (const [k, v] of Object.entries(query)) {
-        if (v == null) continue;
-        params[k] = String(v);
+    for (const [key, value] of Object.entries(query)) {
+        if (value != null) params[key] = String(value);
     }
     return params;
 }
 
-function isAxiosError(e: unknown): e is AxiosError {
-    return axiosIsAxiosError(e);
+function isRecord(value: unknown): value is Record<string, unknown> {
+    return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-async function req<T = unknown>(
-    path: string,
-    opts: RequestOptions = {}
-): Promise<T> {
-    if (!BASE_URL) throw new Error("VITE_BASE_URL is not defined");
-    if (opts.json !== undefined && opts.rawBody !== undefined) {
-        throw new Error("Provide either 'json' or 'rawBody', not both.");
+function isStringArray(value: unknown): value is string[] {
+    return Array.isArray(value) && value.every(item => typeof item === "string");
+}
+
+function validationDetails(value: unknown): ValidationDetails | undefined {
+    if (!isRecord(value) || !isRecord(value.fieldErrors) || !isStringArray(value.formErrors)) {
+        return undefined;
     }
 
-    const {
-        query,
-        json,
-        rawBody,
-        timeoutMs,
-        headers,
-        method = "GET",
-        signal,
-        responseType,
-    } = opts;
+    const fieldErrors: Record<string, string[]> = {};
+    for (const [field, messages] of Object.entries(value.fieldErrors)) {
+        if (!isStringArray(messages)) return undefined;
+        fieldErrors[field] = [...messages];
+    }
 
-    const config: AxiosRequestConfig = {
-        url: path.startsWith("/") ? path : `/${path}`,
-        method,
-        params: buildParams(query),
-        timeout: timeoutMs ?? 15_000,
-        responseType,
-        headers: {
-            Accept: "application/json",
-            ...(json !== undefined ? { "Content-Type": "application/json" } : {}),
-            ...headers,
-        },
-        data: json !== undefined ? json : rawBody,
-        signal,
-    };
+    return { fieldErrors, formErrors: [...value.formErrors] };
+}
+
+function retryAfterSeconds(headers: AxiosResponse["headers"] | undefined): number | undefined {
+    const value = headers?.["retry-after"];
+    const text = Array.isArray(value) ? value[0] : value;
+    if (typeof text !== "string" || !/^\d+$/.test(text)) return undefined;
+
+    const seconds = Number(text);
+    return Number.isSafeInteger(seconds) ? seconds : undefined;
+}
+
+async function safeErrorBody(value: unknown): Promise<unknown> {
+    if (!(value instanceof Blob) || !/(^|\/)json($|;|\+)/i.test(value.type)) return value;
 
     try {
-        const res: AxiosResponse<T> = await instance.request<T>(config);
-        return res.data;
-    } catch (error) {
-        if (isAxiosError(error)) {
-            const status = error.response?.status ?? 0;
-            const data = (error.response?.data ?? null) as T | string | null;
-
-
-            const msg =
-                (typeof data === "object" &&
-                    data &&
-                    (() => {
-                        const record = data as Record<string, unknown>;
-                        if ("message" in record && record.message != null) return String(record.message);
-                        if ("error" in record && record.error != null) return String(record.error);
-                        return undefined;
-                    })()) ||
-                error.message ||
-                `API Error ${status}`;
-
-            throw new ApiError<T>(status, data, msg);
-        }
-        throw error;
+        return JSON.parse(await value.text()) as unknown;
+    } catch {
+        return undefined;
     }
 }
 
-const get = <T = unknown>(
-    path: string,
-    opts?: Omit<RequestOptions, "method" | "json" | "rawBody">
-) => req<T>(path, { ...opts, method: "GET" });
+async function normalizeError(error: unknown): Promise<ApiError> {
+    if (axios.isCancel(error) || (isAxiosError(error) && error.code === "ERR_CANCELED")) {
+        return new ApiError({
+            status: 0,
+            code: "cancelled",
+            message: "Request cancelled.",
+            cancelled: true,
+        });
+    }
 
-const post = <T = unknown>(
-    path: string,
-    data?: unknown,
-    opts?: Omit<RequestOptions, "method" | "json" | "rawBody">
-) => req<T>(path, { ...opts, method: "POST", json: data });
+    if (isAxiosError(error)) {
+        const axiosError = error as AxiosError<unknown>;
+        const response = axiosError.response;
+        if (!response) {
+            return new ApiError({
+                status: 0,
+                code: "network_error",
+                message: "Network request failed.",
+            });
+        }
+
+        const data = await safeErrorBody(response.data);
+        return new ApiError({
+            status: response.status,
+            code: "http_error",
+            message: "Request failed.",
+            details: validationDetails(isRecord(data) ? data.details : undefined),
+            retryAfterSeconds: retryAfterSeconds(response.headers),
+        });
+    }
+
+    return new ApiError({
+        status: 0,
+        code: "network_error",
+        message: "Network request failed.",
+    });
+}
+
+function malformedResponse(): ApiError {
+    return new ApiError({
+        status: 200,
+        code: "malformed_response",
+        message: "Malformed response.",
+    });
+}
+
+function applicationError(): ApiError {
+    return new ApiError({
+        status: 200,
+        code: "application_error",
+        message: "Application error.",
+    });
+}
+
+function validateHealth(value: unknown): { ok: true; status: "live" } {
+    if (isRecord(value) && value.ok === true && value.status === "live") {
+        return { ok: true, status: "live" };
+    }
+    throw malformedResponse();
+}
+
+function validateFish(value: unknown): { fish: string } {
+    if (isRecord(value) && typeof value.fish === "string") return { fish: value.fish };
+    throw malformedResponse();
+}
+
+function validateApplicationSuccess<T>(value: unknown): T {
+    if (!isRecord(value)) throw malformedResponse();
+    if (value.ok === false) throw applicationError();
+    if (value.ok !== true) throw malformedResponse();
+    return value as T;
+}
+
+function validateResume(value: unknown): Blob {
+    if (value instanceof Blob) return value;
+    throw malformedResponse();
+}
 
 export interface ApiSkill {
     _id: string;
@@ -152,7 +213,7 @@ export interface ApiSkillCategory {
 }
 
 export interface SkillsResponse {
-    ok: boolean;
+    ok: true;
     data: Record<string, ApiSkillCategory>;
 }
 
@@ -167,7 +228,7 @@ export interface ApiProject {
 }
 
 export interface ProjectsResponse {
-    ok: boolean;
+    ok: true;
     data: ApiProject[];
 }
 
@@ -186,7 +247,7 @@ export interface ApiExperience {
 }
 
 export interface ExperiencesResponse {
-    ok: boolean;
+    ok: true;
     data: ApiExperience[];
 }
 
@@ -200,7 +261,7 @@ export interface SettingsDoc {
 }
 
 export interface SettingsResponse {
-    ok: boolean;
+    ok: true;
     data: SettingsDoc;
 }
 
@@ -210,23 +271,77 @@ export interface AboutDoc {
 }
 
 export interface AboutResponse {
-    ok: boolean;
+    ok: true;
     data: AboutDoc;
 }
 
-export const api = {
-    health: () => get<{ ok: boolean; status?: string }>("/health"),
-    fish: () => get<{ ok: boolean; fish?: string }>("/fish"),
-    about: (lang: "en" | "th") =>
-        get<AboutResponse>("/api/about", { query: { lang } }),
-    skills: () => get<SkillsResponse>("/api/skills"),
-    projects: () => get<ProjectsResponse>("/api/projects"),
-    experiences: () => get<ExperiencesResponse>("/api/experiences"),
-    contact: (data: { name: string; email: string; message: string }) =>
-        post<{ ok: boolean; message?: string }>("/api/contact", data),
-    resume: () => get<Blob>("/api/resume", { responseType: "blob" }),
-    settings: () => get<SettingsResponse>("/api/settings"),
-    get,
-    post,
-    raw: req,
-};
+export interface ContactResponse {
+    ok: true;
+    message?: string;
+}
+
+export function createApiClient({ baseURL = BASE_URL, adapter }: CreateApiClientOptions = {}) {
+    const normalizedBaseURL = baseURL.replace(/\/+$/, "");
+    const instance = axios.create({
+        baseURL: normalizedBaseURL || undefined,
+        timeout: 15_000,
+        adapter,
+        validateStatus: status => status >= 200 && status < 300,
+    });
+
+    async function request(path: string, options: RequestOptions = {}): Promise<unknown> {
+        if (!normalizedBaseURL && !adapter) {
+            throw new ApiError({
+                status: 0,
+                code: "network_error",
+                message: "Network request failed.",
+            });
+        }
+        if (options.json !== undefined && options.rawBody !== undefined) {
+            throw new ApiError({
+                status: 0,
+                code: "malformed_response",
+                message: "Malformed response.",
+            });
+        }
+
+        const { query, json, rawBody, timeoutMs, headers, method = "GET", signal, responseType } = options;
+        try {
+            const response = await instance.request({
+                url: path.startsWith("/") ? path : `/${path}`,
+                method,
+                params: buildParams(query),
+                timeout: timeoutMs ?? 15_000,
+                responseType,
+                headers: {
+                    Accept: "application/json",
+                    ...(json !== undefined ? { "Content-Type": "application/json" } : {}),
+                    ...headers,
+                },
+                data: json !== undefined ? json : rawBody,
+                signal,
+            });
+            return response.data;
+        } catch (error) {
+            if (error instanceof ApiError) throw error;
+            throw await normalizeError(error);
+        }
+    }
+
+    return {
+        health: async (options?: Pick<RequestOptions, "signal" | "timeoutMs">) =>
+            validateHealth(await request("/health", options)),
+        fish: async () => validateFish(await request("/fish")),
+        about: async (lang: "en" | "th") =>
+            validateApplicationSuccess<AboutResponse>(await request("/api/about", { query: { lang } })),
+        skills: async () => validateApplicationSuccess<SkillsResponse>(await request("/api/skills")),
+        projects: async () => validateApplicationSuccess<ProjectsResponse>(await request("/api/projects")),
+        experiences: async () => validateApplicationSuccess<ExperiencesResponse>(await request("/api/experiences")),
+        contact: async (data: { name: string; email: string; message: string }) =>
+            validateApplicationSuccess<ContactResponse>(await request("/api/contact", { method: "POST", json: data })),
+        resume: async () => validateResume(await request("/api/resume", { responseType: "blob" })),
+        settings: async () => validateApplicationSuccess<SettingsResponse>(await request("/api/settings")),
+    };
+}
+
+export const api = createApiClient();

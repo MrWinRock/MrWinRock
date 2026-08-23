@@ -3,7 +3,7 @@ import type { Variants } from "motion/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import SpotlightCard from "@/components/cards/SpotLightCard";
-import { api, ApiError } from "@/lib/api";
+import { api } from "@/lib/api";
 
 const CONTACT_EMAIL = "mrwinrock11@gmail.com";
 const GITHUB_URL = "https://github.com/MrWinRock";
@@ -15,26 +15,22 @@ const Contact = () => {
     const { t } = useTranslation();
     const [form, setForm] = useState({ name: "", email: "", message: "" });
     const [status, setStatus] = useState<SubmitStatus>("idle");
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (status === "sending") return;
 
         setStatus("sending");
-        setErrorMessage(null);
         try {
-            const res = await api.contact({
+            await api.contact({
                 name: form.name.trim(),
                 email: form.email.trim(),
                 message: form.message.trim(),
             });
-            if (!res.ok) throw new ApiError(200, res, res.message ?? "Send failed");
             setStatus("success");
             setForm({ name: "", email: "", message: "" });
-        } catch (err) {
+        } catch {
             setStatus("error");
-            setErrorMessage(err instanceof ApiError ? err.message : t("contact.error"));
         }
     };
 
@@ -153,7 +149,7 @@ const Contact = () => {
                                             role="alert"
                                             className="text-sm text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3"
                                         >
-                                            {errorMessage || t("contact.error")}
+                                            {t("contact.error")}
                                         </motion.p>
                                     )}
                                 </AnimatePresence>
