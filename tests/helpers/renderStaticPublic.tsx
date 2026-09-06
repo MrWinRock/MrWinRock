@@ -1,13 +1,13 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
-import { mock } from 'bun:test';
+import { vi } from 'vitest';
 import type { SettingsDoc } from '../../src/lib/api';
 import i18n from '../../src/i18n';
 import { HIDDEN_SETTINGS, SettingsContext } from '../../src/contexts/settingsConstants';
 
-mock.module('@/components/cards/SpotLightCard', () => ({ default: () => null }));
-mock.module('@/lib/api', () => ({ api: {} }));
+vi.mock('@/components/cards/SpotLightCard', () => ({ default: () => null }));
+vi.mock('@/lib/api', () => ({ api: {} }));
 
 const { default: App } = await import('../../src/App');
 

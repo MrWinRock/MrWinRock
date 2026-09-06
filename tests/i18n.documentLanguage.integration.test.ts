@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'bun:test';
+import { describe, expect, test } from 'vitest';
 import type { i18n as I18next } from 'i18next';
 
 type DocumentLanguageSyncState = {
@@ -6,10 +6,16 @@ type DocumentLanguageSyncState = {
     dispose: () => void;
 };
 
-let importSequence = 0;
 const documentLanguageSyncStateKey = Symbol.for('mrwinrock.document-language-sync');
 
-const importI18n = () => import(`../src/i18n.ts?document-language-test=${importSequence++}`);
+// Literal imports let Vite transform each module while retaining the shared i18next singleton.
+const imports = [
+    () => import('../src/i18n.ts?document-language-test=0'),
+    () => import('../src/i18n.ts?document-language-test=1'),
+    () => import('../src/i18n.ts?document-language-test=2'),
+];
+let importSequence = 0;
+const importI18n = () => imports[importSequence++]();
 
 const waitForInitialization = async (instance: I18next) => {
     if (!instance.isInitialized) {

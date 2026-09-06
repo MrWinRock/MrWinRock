@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'bun:test';
+import { describe, expect, test } from 'vitest';
 import { HIDDEN_SETTINGS } from '../src/contexts/settingsConstants';
 
 describe('HIDDEN_SETTINGS', () => {

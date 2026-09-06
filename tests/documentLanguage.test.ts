@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'bun:test';
+import { describe, expect, test } from 'vitest';
 import { documentLanguage, syncDocumentLanguage } from '../src/lib/documentLanguage';
 
 describe('documentLanguage', () => {

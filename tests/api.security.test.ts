@@ -1,4 +1,5 @@
-import { describe, expect, test } from "bun:test";
+// @vitest-environment node
+import { describe, expect, test } from "vitest";
 import { createApiClient } from "../src/lib/api";
 import { axiosAdapter, networkFailure } from "./helpers/axiosAdapter";
 
