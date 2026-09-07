@@ -2,8 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { api } from '../lib/api';
 import type { SettingsDoc } from '../lib/api';
 import { HIDDEN_SETTINGS, SettingsContext } from './settingsConstants';
-
-const POLL_INTERVAL_MS = 60_000;
+import { SETTINGS_POLL_INTERVAL_MS, settingsRetryDelayMs } from './settingsPolling';
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
     const [settings, setSettings] = useState<SettingsDoc>(HIDDEN_SETTINGS);
@@ -11,15 +10,32 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         let cancelled = false;
+        let etag: string | undefined;
+        let failures = 0;
+        let timer: ReturnType<typeof setTimeout> | undefined;
+        let active: AbortController | undefined;
 
         const load = async () => {
+            if (cancelled || active) return;
+            clearTimeout(timer);
+            const controller = new AbortController();
+            active = controller;
             try {
-                const res = await api.settings();
-                if (!cancelled && res.ok) setSettings(res.data);
-            } catch (err) {
-                console.error('Failed to load settings:', err);
+                const res = await api.settings({ etag, signal: controller.signal });
+                if (cancelled) return;
+                if (res.kind === 'modified') {
+                    setSettings(res.data);
+                    etag = res.etag;
+                } else if (res.etag) etag = res.etag;
+                failures = 0;
+            } catch {
+                if (!cancelled) failures += 1;
             } finally {
-                if (!cancelled) setIsInitialLoading(false);
+                active = undefined;
+                if (!cancelled) {
+                    setIsInitialLoading(false);
+                    timer = setTimeout(load, failures ? settingsRetryDelayMs(failures) : SETTINGS_POLL_INTERVAL_MS);
+                }
             }
         };
 
@@ -29,12 +45,12 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
             if (document.visibilityState === 'visible') load();
         };
         document.addEventListener('visibilitychange', onVisible);
-        const interval = window.setInterval(load, POLL_INTERVAL_MS);
 
         return () => {
             cancelled = true;
             document.removeEventListener('visibilitychange', onVisible);
-            window.clearInterval(interval);
+            clearTimeout(timer);
+            active?.abort();
         };
     }, []);
 

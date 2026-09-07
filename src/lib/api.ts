@@ -1,6 +1,9 @@
+import { createInflightReadRegistry } from "./inflightReads";
+import type { AboutResponse, SkillsResponse, ProjectsResponse, ExperiencesResponse, ContactInput, ContactResponse, SettingsResponse, SettingsDoc, HealthResponse, FishResponse } from "./apiTypes";
+export type * from "./apiTypes";
 import axios, {
+    AxiosError,
     type AxiosAdapter,
-    type AxiosError,
     type AxiosRequestConfig,
     type AxiosResponse,
     isAxiosError,
@@ -27,35 +30,35 @@ export interface ValidationDetails {
     formErrors: string[];
 }
 
-export type ApiErrorCode =
-    | "application_error"
-    | "cancelled"
-    | "http_error"
-    | "malformed_response"
-    | "network_error";
+export type ApiErrorCode = string;
+export interface SafeValidationDetails {
+    fieldErrors?: Record<string, string[]>;
+    formErrors?: string[];
+}
+export interface ApiErrorInit {
+    status?: number;
+    code: string;
+    message: string;
+    details?: SafeValidationDetails;
+    retryAfterSeconds?: number;
+    cancelled?: boolean;
+}
 
 export class ApiError extends Error {
     readonly status: number;
     readonly code: ApiErrorCode;
-    readonly details?: ValidationDetails;
+    readonly details?: SafeValidationDetails;
     readonly retryAfterSeconds?: number;
     readonly cancelled: boolean;
 
     constructor({
-        status,
+        status = 0,
         code,
         message,
         details,
         retryAfterSeconds,
         cancelled = false,
-    }: {
-        status: number;
-        code: ApiErrorCode;
-        message: string;
-        details?: ValidationDetails;
-        retryAfterSeconds?: number;
-        cancelled?: boolean;
-    }) {
+    }: ApiErrorInit) {
         super(message);
         delete this.stack;
         this.status = status;
@@ -86,6 +89,32 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function isStringArray(value: unknown): value is string[] {
     return Array.isArray(value) && value.every(item => typeof item === "string");
+}
+
+function optionalStrings(value: Record<string, unknown>, keys: string[]): boolean {
+    return keys.every(key => value[key] === undefined || typeof value[key] === 'string');
+}
+
+function isProject(value: unknown): boolean {
+    return isRecord(value) && typeof value.title === 'string' && typeof value.description === 'string'
+        && typeof value.order === 'number' && Number.isFinite(value.order) && isStringArray(value.tech)
+        && optionalStrings(value, ['_id', 'url', 'repo']);
+}
+
+function isExperience(value: unknown): boolean {
+    return isRecord(value) && ['title', 'company', 'description', 'location', 'startDate'].every(key => typeof value[key] === 'string')
+        && typeof value.order === 'number' && Number.isFinite(value.order)
+        && isStringArray(value.tech) && isStringArray(value.achievements)
+        && optionalStrings(value, ['_id', 'endDate'])
+        && ['Full-time', 'Part-time', 'Internship', 'Freelance', 'Contract', 'Bachelor', 'Master', 'PhD'].includes(String(value.type));
+}
+
+function isSkills(value: unknown): boolean {
+    return isRecord(value) && Object.values(value).every(category => isRecord(category)
+        && typeof category.order_flag === 'number' && Number.isFinite(category.order_flag)
+        && Array.isArray(category.skills) && category.skills.every(skill => isRecord(skill)
+            && typeof skill.name === 'string' && typeof skill.order === 'number' && Number.isFinite(skill.order)
+            && optionalStrings(skill, ['_id', 'category', 'icon'])));
 }
 
 function validationDetails(value: unknown): ValidationDetails | undefined {
@@ -201,97 +230,34 @@ function validateResume(value: unknown, status: number): Blob {
     throw malformedResponse(status);
 }
 
-export interface ApiSkill {
-    _id: string;
-    name: string;
-    category: string;
-    icon: string;
-    order: number;
+export interface ReadOptions { signal?: AbortSignal; }
+export interface MutationOptions { signal?: AbortSignal; }
+export type SettingsFetchResult =
+    | { kind: "modified"; data: SettingsDoc; etag?: string }
+    | { kind: "not-modified"; etag?: string };
+export interface PublicApi {
+    health(options?: ReadOptions): Promise<HealthResponse>;
+    fish(options?: ReadOptions): Promise<FishResponse>;
+    about(lang: "en" | "th", options?: ReadOptions): Promise<AboutResponse>;
+    skills(options?: ReadOptions): Promise<SkillsResponse>;
+    projects(options?: ReadOptions): Promise<ProjectsResponse>;
+    experiences(options?: ReadOptions): Promise<ExperiencesResponse>;
+    contact(input: ContactInput, options?: MutationOptions): Promise<ContactResponse>;
+    resume(options?: ReadOptions): Promise<Blob>;
+    settings(options?: ReadOptions & { etag?: string }): Promise<SettingsFetchResult>;
 }
 
-export interface ApiSkillCategory {
-    order_flag: number;
-    skills: ApiSkill[];
-}
-
-export interface SkillsResponse {
-    ok: true;
-    data: Record<string, ApiSkillCategory>;
-}
-
-export interface ApiProject {
-    _id: string;
-    title: string;
-    description: string;
-    url: string;
-    repo: string;
-    tech: string[];
-    order: number;
-}
-
-export interface ProjectsResponse {
-    ok: true;
-    data: ApiProject[];
-}
-
-export interface ApiExperience {
-    _id: string;
-    title: string;
-    company: string;
-    location: string;
-    type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract" | "Bachelor" | "Master" | "PhD";
-    startDate: string;
-    endDate?: string;
-    description: string;
-    achievements: string[];
-    tech: string[];
-    order: number;
-}
-
-export interface ExperiencesResponse {
-    ok: true;
-    data: ApiExperience[];
-}
-
-export interface SettingsDoc {
-    showAbout: boolean;
-    showSkills: boolean;
-    showProjects: boolean;
-    showExperience: boolean;
-    showResume: boolean;
-    showContact: boolean;
-}
-
-export interface SettingsResponse {
-    ok: true;
-    data: SettingsDoc;
-}
-
-export interface AboutDoc {
-    story: string;
-    background: string;
-}
-
-export interface AboutResponse {
-    ok: true;
-    data: AboutDoc;
-}
-
-export interface ContactResponse {
-    ok: true;
-    message?: string;
-}
-
-export function createApiClient({ baseURL = BASE_URL, adapter }: CreateApiClientOptions = {}) {
+export function createApiClient({ baseURL = BASE_URL, adapter }: CreateApiClientOptions = {}): PublicApi {
+    const reads = createInflightReadRegistry();
     const normalizedBaseURL = baseURL.replace(/\/+$/, "");
     const instance = axios.create({
         baseURL: normalizedBaseURL || undefined,
         timeout: 15_000,
         adapter,
-        validateStatus: status => status >= 200 && status < 300,
+        validateStatus: status => (status >= 200 && status < 300) || status === 304,
     });
 
-    async function request(path: string, options: RequestOptions = {}): Promise<{ data: unknown; status: number }> {
+    async function request(path: string, options: RequestOptions = {}): Promise<{ data: unknown; status: number; headers: AxiosResponse["headers"] }> {
         if (!normalizedBaseURL && !adapter) {
             throw new ApiError({
                 status: 0,
@@ -323,7 +289,10 @@ export function createApiClient({ baseURL = BASE_URL, adapter }: CreateApiClient
                 data: json !== undefined ? json : rawBody,
                 signal,
             });
-            return { data: response.data, status: response.status };
+            if ((response.status < 200 || response.status >= 300) && !(path === "/api/settings" && response.status === 304)) {
+                throw new AxiosError("Request failed", undefined, response.config, undefined, response);
+            }
+            return { data: response.data, status: response.status, headers: response.headers };
         } catch (error) {
             if (error instanceof ApiError) throw error;
             throw await normalizeError(error);
@@ -339,20 +308,41 @@ export function createApiClient({ baseURL = BASE_URL, adapter }: CreateApiClient
         return validator(response.data, response.status);
     }
 
+    function read<T>(path: string, validator: (value: unknown, status: number) => T, options: RequestOptions = {}, key = path): Promise<T> {
+        return reads.run(key, signal => validated(path, validator, { ...options, signal }), options.signal);
+    }
+    function envelope<T>(shape: (value: unknown) => boolean) {
+        return (value: unknown, status: number): T => {
+            const result = validateApplicationSuccess<T>(value, status);
+            if (!shape(value)) throw malformedResponse(status);
+            return result;
+        };
+    }
     return {
-        health: async (options?: Pick<RequestOptions, "signal" | "timeoutMs">) =>
-            validated("/health", validateHealth, options),
-        fish: async () => validated("/fish", validateFish),
-        about: async (lang: "en" | "th") =>
-            validated("/api/about", validateApplicationSuccess<AboutResponse>, { query: { lang } }),
-        skills: async () => validated("/api/skills", validateApplicationSuccess<SkillsResponse>),
-        projects: async () => validated("/api/projects", validateApplicationSuccess<ProjectsResponse>),
-        experiences: async () => validated("/api/experiences", validateApplicationSuccess<ExperiencesResponse>),
-        contact: async (data: { name: string; email: string; message: string }) =>
-            validated("/api/contact", validateApplicationSuccess<ContactResponse>, { method: "POST", json: data }),
-        resume: async () => validated("/api/resume", validateResume, { responseType: "blob" }),
-        settings: async () => validated("/api/settings", validateApplicationSuccess<SettingsResponse>),
+        health: options => read("/health", validateHealth, options),
+        fish: options => read("/fish", validateFish, options),
+        about: (lang, options) => read("/api/about", envelope<AboutResponse>(v => isRecord(v) && isRecord(v.data) && typeof v.data.story === "string" && typeof v.data.background === "string"), { ...options, query: { lang } }, `about:${lang}`),
+        skills: options => read("/api/skills", envelope<SkillsResponse>(v => isRecord(v) && isSkills(v.data)), options),
+        projects: options => read("/api/projects", envelope<ProjectsResponse>(v => isRecord(v) && Array.isArray(v.data) && v.data.every(isProject)), options),
+        experiences: options => read("/api/experiences", envelope<ExperiencesResponse>(v => isRecord(v) && Array.isArray(v.data) && v.data.every(isExperience)), options),
+        contact: (input, options) => validated("/api/contact", envelope<ContactResponse>(v => isRecord(v) && typeof v.message === "string"), { ...options, method: "POST", json: input }),
+        resume: options => reads.run('/api/resume', async signal => {
+            const response = await request('/api/resume', { signal, responseType: 'blob' });
+            const parsed = await safeErrorBody(response.data);
+            if (parsed !== response.data) {
+                if (isRecord(parsed) && parsed.ok === false) throw applicationError(response.status);
+                throw malformedResponse(response.status);
+            }
+            return validateResume(response.data, response.status);
+        }, options?.signal),
+        settings: (options = {}) => reads.run(`settings:${options.etag ?? ""}`, async signal => {
+            const response = await request("/api/settings", { signal, headers: options.etag ? { "If-None-Match": options.etag } : undefined });
+            const etag = typeof response.headers.etag === "string" ? response.headers.etag : undefined;
+            if (response.status === 304) return { kind: "not-modified", etag };
+            const result = envelope<SettingsResponse>(v => isRecord(v) && isRecord(v.data) && ["showAbout", "showSkills", "showProjects", "showExperience", "showResume", "showContact"].every(key => typeof (v.data as Record<string, unknown>)[key] === "boolean"))(response.data, response.status);
+            return { kind: "modified", data: result.data, etag };
+        }, options.signal),
     };
 }
 
-export const api = createApiClient();
+export const api: PublicApi = createApiClient();
