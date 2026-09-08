@@ -3,11 +3,15 @@ import type { Variants } from "motion/react";
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useMemo } from 'react';
-import { skills as staticSkills, type Skill } from "../../../data/skills";
+import { usePublicResource } from '../../../hooks/usePublicResource';
+import { PublicDataNotice } from '../../../components/PublicDataNotice';
+import type { Skill } from "../../../data/skills";
 import { api } from "../../../lib/api";
 import { useSettings } from '../../../contexts/useSettings';
 import { HIDDEN_SETTINGS } from '../../../contexts/settingsConstants';
 import profileImage from '../../../assets/logo.jpg';
+
+const EMPTY_SKILLS: Skill[] = [];
 
 interface SocialLinkProps {
     href: string;
@@ -25,32 +29,12 @@ const Home: React.FC = () => {
     const name: string = t("home.name");
     const surname: string = t("home.surname");
 
-    const [allSkills, setAllSkills] = useState<Skill[]>(staticSkills);
-
-    useEffect(() => {
-        let cancelled = false;
-        const fetchSkills = async () => {
-            try {
-                const res = await api.skills();
-                if (!cancelled && res.ok && res.data) {
-                    const flat: Skill[] = Object.values(res.data).flatMap((cat) =>
-                        cat.skills.map((s) => ({
-                            _id: s._id,
-                            name: s.name,
-                            category: s.category,
-                            icon: s.icon,
-                            order: s.order,
-                        }))
-                    );
-                    setAllSkills(flat);
-                }
-            } catch {
-                // keep static fallback
-            }
-        };
-        fetchSkills();
-        return () => { cancelled = true; };
-    }, []);
+    const resource = usePublicResource<Skill[]>({
+        key: 'home-skills',
+        load: signal => api.skills({ signal }).then(response => Object.entries(response.data).flatMap(([category, group]) => group.skills.map(skill => ({ ...skill, category: skill.category ?? category, icon: skill.icon ?? '' })))),
+        isEmpty: skills => skills.length === 0,
+    });
+    const allSkills = 'data' in resource.state ? resource.state.data : EMPTY_SKILLS;
 
     const featuredSkills = useMemo(() => {
         const pickRandomSkills = (category: string, count: number) => {
@@ -271,6 +255,7 @@ const Home: React.FC = () => {
                     </h3>
 
                     <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-4xl mx-auto">
+                        <PublicDataNotice {...resource} />
                         {featuredSkills.map((skill, index) => (
                             <motion.div
                                 key={skill.name}

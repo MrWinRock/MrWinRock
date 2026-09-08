@@ -13,14 +13,13 @@ import ScrollToTop from './components/ScrollToTop';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useSettings } from './contexts/useSettings';
-import { HIDDEN_SETTINGS } from './contexts/settingsConstants';
+import { SectionGuard } from './components/SectionGuard';
 import { useTranslation } from 'react-i18next';
 
 function App() {
   console.log(`%cWelcome to My Portfolio!`, 'color: #8B2BE2; font-size: 20px; font-weight: bold;');
-  const { settings, isInitialLoading } = useSettings();
+  const { isInitialLoading } = useSettings();
   const { t } = useTranslation();
-  const visibleSettings = isInitialLoading ? HIDDEN_SETTINGS : settings;
 
   return (
     <div className="App">
@@ -40,12 +39,12 @@ function App() {
       <main id="main-content" tabIndex={-1} className='min-h-screen max-w-[1200px] mx-auto mt-12 px-4 py-8'>
         <Routes>
           <Route path="/" element={<Home />} />
-          {visibleSettings.showAbout && <Route path="/about" element={<About />} />}
-          {visibleSettings.showSkills && <Route path="/skills" element={<Skills />} />}
-          {visibleSettings.showProjects && <Route path="/projects" element={<Projects />} />}
-          {visibleSettings.showExperience && <Route path="/experience" element={<Experience />} />}
-          {visibleSettings.showContact && <Route path="/contact" element={<Contact />} />}
-          {visibleSettings.showResume && <Route path="/resume" element={<Resume />} />}
+          <Route path="/about" element={<SectionGuard setting="showAbout"><About /></SectionGuard>} />
+          <Route path="/skills" element={<SectionGuard setting="showSkills"><Skills /></SectionGuard>} />
+          <Route path="/projects" element={<SectionGuard setting="showProjects"><Projects /></SectionGuard>} />
+          <Route path="/experience" element={<SectionGuard setting="showExperience"><Experience /></SectionGuard>} />
+          <Route path="/contact" element={<SectionGuard setting="showContact"><Contact /></SectionGuard>} />
+          <Route path="/resume" element={<SectionGuard setting="showResume"><Resume /></SectionGuard>} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

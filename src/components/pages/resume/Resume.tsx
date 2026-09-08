@@ -1,54 +1,16 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { usePublicResource } from '../../../hooks/usePublicResource';
+import { useObjectUrl } from '../../../hooks/useObjectUrl';
+import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import { api } from "../../../lib/api";
 
 const Resume = () => {
     const { t } = useTranslation();
-    const [resumeUrl, setResumeUrl] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        let objectUrl: string | null = null;
-        
-        const fetchResume = async () => {
-            try {
-                const blob = await api.resume();
-                objectUrl = URL.createObjectURL(blob);
-                setResumeUrl(objectUrl);
-            } catch (err) {
-                console.error("Failed to fetch resume:", err);
-                setError(t("resume.error") || "Failed to load resume");
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchResume();
-
-        return () => {
-            if (objectUrl) {
-                URL.revokeObjectURL(objectUrl);
-            }
-        };
-    }, [t]);
-
-    if (isLoading) {
-        return (
-            <div className="min-h-screen flex justify-center items-center">
-                <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-        );
-    }
-
-    if (error || !resumeUrl) {
-        return (
-            <div className="min-h-screen flex justify-center items-center text-red-500">
-                {error || t("resume.error") || "Failed to load resume"}
-            </div>
-        );
-    }
+    const resource = usePublicResource({
+        key: 'resume', load: signal => api.resume({ signal }), isEmpty: blob => blob.size === 0,
+    });
+    const resumeUrl = useObjectUrl('data' in resource.state ? resource.state.data : null);
 
     return (
         <motion.div
@@ -62,6 +24,8 @@ const Resume = () => {
                     {t("resume.title")}
                 </h1>
 
+                <PublicDataNotice {...resource} />
+                {resumeUrl && <>
                 <div className="flex flex-wrap justify-center gap-3 mb-6">
                     <a
                         href={resumeUrl}
@@ -82,6 +46,7 @@ const Resume = () => {
 
                 <div className="rounded-lg border border-gray-700 overflow-hidden bg-gray-900">
                     <object
+                        aria-label={t("resume.title")}
                         data={resumeUrl}
                         type="application/pdf"
                         className="w-full h-[75vh]"
@@ -93,6 +58,7 @@ const Resume = () => {
                         </div>
                     </object>
                 </div>
+                </>}
             </div>
         </motion.div>
     );

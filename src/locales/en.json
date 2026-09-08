@@ -88,11 +88,27 @@
         "directTitle": "Other ways to reach me",
         "directSubtitle": "Prefer a direct line? Find me here.",
         "emailMe": "Email me",
-        "responseNote": "I usually reply within a day or two."
+        "responseNote": "I usually reply within a day or two.",
+        "unavailable": "Contact service is temporarily unavailable. Please try again later or email me directly.",
+        "validation": {
+            "name": "Please enter your name.",
+            "email": "Please enter a valid email address.",
+            "message": "Please enter a message between 10 and 5000 characters."
+        },
+        "rateLimited": "Too many requests. Please wait before sending again."
     },
     "footer": {
         "rights": "All rights reserved",
         "builtWith": "Built with React, TypeScript, and Tailwind CSS",
         "followMe": "Follow me on"
+    },
+    "resource": {
+        "loading": "Loading content…",
+        "empty": "No content has been published yet.",
+        "disabled": "This section is currently unavailable.",
+        "stale": "Cached content — showing bundled content while the service is unavailable.",
+        "unavailable": "Content is temporarily unavailable. Please try again.",
+        "rateLimited": "Too many requests. Retry available in {{count}} seconds.",
+        "retry": "Retry"
     }
 }

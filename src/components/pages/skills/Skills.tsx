@@ -1,8 +1,9 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import { usePublicResource } from '../../../hooks/usePublicResource';
+import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import { skills as staticSkills, type Skill } from "../../../data/skills";
-import { api, type ApiSkillCategory } from "../../../lib/api";
+import { api } from "../../../lib/api";
 
 interface CategoryGroup {
     id: string;
@@ -13,8 +14,6 @@ interface CategoryGroup {
 
 const Skills = () => {
     const { t } = useTranslation();
-    const [categoryGroups, setCategoryGroups] = useState<CategoryGroup[]>([]);
-    const [loading, setLoading] = useState(true);
 
     const categoryTitles: Record<string, string> = {
         programming: t("skills.categories.programming"),
@@ -29,71 +28,19 @@ const Skills = () => {
         other: t("skills.categories.other"),
     };
 
-    useEffect(() => {
-        let cancelled = false;
-
-        const fetchSkills = async () => {
-            try {
-                const res = await api.skills();
-                if (!cancelled && res.ok && res.data) {
-                    const groups: CategoryGroup[] = Object.entries(res.data)
-                        .map(([id, cat]: [string, ApiSkillCategory]) => ({
-                            id,
-                            title: categoryTitles[id] || id,
-                            orderFlag: cat.order_flag,
-                            skills: cat.skills
-                                .map((s) => ({
-                                    _id: s._id,
-                                    name: s.name,
-                                    category: s.category,
-                                    icon: s.icon,
-                                    order: s.order,
-                                }))
-                                .sort((a, b) => a.order - b.order),
-                        }))
-                        .sort((a, b) => a.orderFlag - b.orderFlag);
-                    setCategoryGroups(groups);
-                }
-            } catch {
-                // Fallback to static data
-                if (!cancelled) {
-                    const fallbackOrder = [
-                        "programming", "web", "mobile", "backend",
-                        "databases", "cloud", "devtools", "game",
-                        "design", "other",
-                    ];
-                    const groups: CategoryGroup[] = fallbackOrder
-                        .map((id, index) => ({
-                            id,
-                            title: categoryTitles[id] || id,
-                            orderFlag: index + 1,
-                            skills: staticSkills
-                                .filter((s) => s.category === id)
-                                .sort((a, b) => a.order - b.order),
-                        }))
-                        .filter((g) => g.skills.length > 0);
-                    setCategoryGroups(groups);
-                }
-            } finally {
-                if (!cancelled) setLoading(false);
-            }
-        };
-
-        fetchSkills();
-        return () => { cancelled = true; };
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    if (loading) {
-        return (
-            <div className="min-h-screen p-8 flex items-center justify-center">
-                <motion.div
-                    className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                />
-            </div>
-        );
-    }
+    const resource = usePublicResource<CategoryGroup[]>({
+        key: 'skills',
+        load: signal => api.skills({ signal }).then(response => Object.entries(response.data).map(([id, cat]) => ({
+            id, title: id, orderFlag: cat.order_flag,
+            skills: cat.skills.map(skill => ({ ...skill, category: skill.category ?? id, icon: skill.icon ?? '' })).sort((a, b) => a.order - b.order),
+        })).sort((a, b) => a.orderFlag - b.orderFlag)),
+        fallback: Object.keys(categoryTitles).map((id, index) => ({
+            id, title: id, orderFlag: index + 1,
+            skills: staticSkills.filter(skill => skill.category === id).sort((a, b) => a.order - b.order),
+        })).filter(group => group.skills.length > 0),
+        isEmpty: groups => groups.every(group => group.skills.length === 0),
+    });
+    const categoryGroups = 'data' in resource.state ? resource.state.data : [];
 
     return (
         <motion.div
@@ -112,6 +59,7 @@ const Skills = () => {
                     {t("skills.title")}
                 </motion.h1>
 
+                <PublicDataNotice {...resource} />
                 <div className="space-y-12">
                     {categoryGroups.map((category, categoryIndex) => (
                         <motion.div
@@ -129,7 +77,7 @@ const Skills = () => {
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: categoryIndex * 0.2 + 0.5 }}
                             >
-                                {category.title}
+                                {categoryTitles[category.id] || category.id}
                             </motion.h2>
 
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

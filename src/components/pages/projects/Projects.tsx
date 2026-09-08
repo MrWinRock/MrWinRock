@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import { usePublicResource } from '../../../hooks/usePublicResource';
+import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import SpotlightCard from "@/components/cards/SpotLightCard";
 import { projects as staticProjects, type Project } from "../../../data/projects";
 import { api } from "../../../lib/api";
@@ -8,53 +9,13 @@ import { ProjectActions } from "./ProjectActions";
 
 const Projects = () => {
     const { t } = useTranslation();
-    const [projectList, setProjectList] = useState<Project[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        let cancelled = false;
-
-        const fetchProjects = async () => {
-            try {
-                const res = await api.projects();
-                if (!cancelled && res.ok && res.data) {
-                    const mapped: Project[] = res.data
-                        .map((p) => ({
-                            _id: p._id,
-                            title: p.title,
-                            description: p.description,
-                            url: p.url || undefined,
-                            repo: p.repo || undefined,
-                            tech: p.tech,
-                            order: p.order,
-                        }))
-                        .sort((a, b) => a.order - b.order);
-                    setProjectList(mapped);
-                }
-            } catch {
-                if (!cancelled) {
-                    setProjectList(staticProjects);
-                }
-            } finally {
-                if (!cancelled) setLoading(false);
-            }
-        };
-
-        fetchProjects();
-        return () => { cancelled = true; };
-    }, []);
-
-    if (loading) {
-        return (
-            <div className="min-h-screen p-8 flex items-center justify-center">
-                <motion.div
-                    className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                />
-            </div>
-        );
-    }
+    const resource = usePublicResource<Project[]>({
+        key: 'projects',
+        load: signal => api.projects({ signal }).then(response => response.data.map(p => ({ ...p, url: p.url || undefined, repo: p.repo || undefined })).sort((a, b) => a.order - b.order)),
+        fallback: staticProjects,
+        isEmpty: value => value.length === 0,
+    });
+    const projectList = 'data' in resource.state ? resource.state.data : [];
 
     return (
         <motion.div
@@ -78,6 +39,7 @@ const Projects = () => {
                     {t("projects.title")}
                 </motion.h1>
 
+                <PublicDataNotice {...resource} />
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {projectList.map((project, index) => (
                         <SpotlightCard

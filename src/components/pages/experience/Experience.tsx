@@ -1,36 +1,18 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { usePublicResource } from '../../../hooks/usePublicResource';
+import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import { type ApiExperience as ExperienceType, api } from "../../../lib/api";
 import SpotlightCard from "@/components/cards/SpotLightCard";
 
 const Experience = () => {
     const { t, i18n } = useTranslation();
-    const [experienceList, setExperienceList] = useState<ExperienceType[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-
-    const localeMap: Record<string, string> = { en: "en-US", th: "th-TH" };
-
-    useEffect(() => {
-        const fetchExperiences = async () => {
-            try {
-                const response = await api.experiences();
-                if (response.ok && response.data) {
-                    setExperienceList(response.data);
-                } else {
-                    setError("Failed to load generic error");
-                }
-            } catch (err) {
-                console.error("Failed to fetch experiences:", err);
-                setError("Failed to load experience error");
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchExperiences();
-    }, []);
+    const localeMap: Record<string, string> = { en: 'en-US', th: 'th-TH' };
+    const resource = usePublicResource({
+        key: 'experiences', load: signal => api.experiences({ signal }).then(response => response.data),
+        isEmpty: value => value.length === 0,
+    });
+    const experienceList = 'data' in resource.state ? resource.state.data : [];
 
     const formatDate = (dateStr: string) => {
         const [year, month] = dateStr.split("-");
@@ -60,22 +42,6 @@ const Experience = () => {
         return colors[type] ?? "from-gray-500 to-gray-400";
     };
 
-    if (isLoading) {
-        return (
-            <div className="min-h-screen flex justify-center items-center">
-                <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="min-h-screen flex justify-center items-center text-red-500">
-                {t("experience.error")}
-            </div>
-        );
-    }
-
     return (
         <motion.div
             className="min-h-screen p-8"
@@ -93,6 +59,7 @@ const Experience = () => {
                     {t("experience.title")}
                 </motion.h1>
 
+                <PublicDataNotice {...resource} />
                 {/* Timeline */}
                 <div className="relative">
                     {/* Gradient timeline line */}
