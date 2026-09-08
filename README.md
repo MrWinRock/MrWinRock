@@ -73,3 +73,28 @@ Hi! I'm Pharthiwath Gristsoopharruth, a Computer Science student at Suan Sunandh
   [![BuyMeACoffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/mrwinrock)
 
 <!-- Created with GPRM -->
+
+## Public site development
+
+Use Bun 1.3.13. The public client consumes the API-owned OpenAPI artifact from the sibling checkout `../mrwinrock-app/docs/openapi.json` on `dev`. Keep the repositories next to each other. Do not edit `src/generated/openapi.ts` by hand.
+
+```sh
+bun install --frozen-lockfile
+bun run contract:generate -- ../mrwinrock-app/docs/openapi.json
+bun run contract:check -- ../mrwinrock-app/docs/openapi.json
+bun run typecheck:contract
+bun run test:run
+bun run lint
+bun run build
+bun run typecheck:e2e
+bunx playwright install chromium
+bun run test:e2e
+```
+
+`contract:check` regenerates in memory and fails if checked-in bytes differ, without rewriting the file. Contract types protect required public paths; the runtime API boundary checks successful response shapes, handles binary PDFs separately, and exposes only safe error metadata. Concurrent GET subscribers share requests, with independent cancellation. Contact POSTs are never shared.
+
+Set `VITE_BASE_URL` to the API origin when building. `VITE_GA_MEASUREMENT_ID` is optional for local development; the existing production deployment requires it. These values are public build-time configuration. No browser secret is required. Keep local environment files untracked.
+
+Content has explicit loading, live, empty, disabled, unavailable, rate-limited, and retry states. Only Projects and Skills use bundled fallback, visibly labeled Cached content. About, Home, and Experience show unavailable instead of silently substituting bundled copy. Settings retain the last successful response, revalidate ETags, refresh on visibility, and back off after failure. Disabled deep links retain their URL and display a disabled notice. Contact retains input on failure and clears it only after accepted delivery. Resume URLs are revoked on replacement and unmount.
+
+Vitest covers the API boundary, cancellation, settings, resource states, forms, and Blob URL ownership. Playwright covers desktop (1440×900) and mobile (390×844) keyboard navigation, language, live and cached data, contact validation/503/429/success, resume retry, disabled routes, overflow, and reduced motion. Browser tests intercept API calls and do not submit real messages. Linux CI installs Chromium with `--with-deps` and checks against the API's `dev` artifact. Deployment depends on this reusable CI gate.
