@@ -4,6 +4,9 @@ on:
     branches: [dev]
   pull_request:
   workflow_call:
+    secrets:
+      API_REPOSITORY_SSH_KEY:
+        required: true
 
 permissions:
   contents: read
@@ -23,6 +26,8 @@ jobs:
           repository: MrWinRock/mrwinrock-app
           ref: dev
           path: mrwinrock-app
+          ssh-key: ${{ secrets.API_REPOSITORY_SSH_KEY }}
+          persist-credentials: false
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.3.13
