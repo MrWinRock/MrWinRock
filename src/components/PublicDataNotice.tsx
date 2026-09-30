@@ -10,7 +10,7 @@ export function PublicDataNotice<T>({ state, retry }: { state: PublicResourceSta
   return (
     <div className="my-6 rounded-xl border border-violet-400/40 bg-[#20182c] px-5 py-4 text-gray-100">
       <p role={state.status === 'unavailable' ? 'alert' : 'status'}>
-        {t(`resource.${state.status}`)}
+        {t(`resource.${state.status === 'stale' && state.source === 'snapshot' ? 'snapshot' : state.status}`)}
       </p>
       {failed && state.reason === 'rate-limited' && <p aria-live="off">{t('resource.rateLimited', { count: seconds })}</p>}
       {failed && retry && <button type="button" onClick={retry} disabled={seconds > 0}

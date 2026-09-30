@@ -5,6 +5,15 @@ import { createApiClient } from '../src/lib/api';
 import { deferred } from './helpers/deferred';
 import type { ProjectsResponse, SkillsResponse, ExperiencesResponse } from '../src/lib/apiTypes';
 
+it.each([
+    new Blob(['<html>error</html>'], { type: 'text/html' }),
+    new Blob(['not a pdf'], { type: 'application/pdf' }),
+    new Blob([], { type: 'application/pdf' }),
+])('rejects unusable resume bytes before offering a PDF', async blob => {
+    const adapter: AxiosAdapter = async config => ({ config, status: 200, statusText: '200', headers: {}, data: blob });
+    await expect(createApiClient({ adapter }).resume()).rejects.toMatchObject({ code: 'malformed_response' });
+});
+
 it('accepts generated-contract content shapes', async () => {
     const projects: ProjectsResponse = { ok: true, data: [{ title: 'Project', description: '', order: 0, tech: [] }] };
     const skills: SkillsResponse = { ok: true, data: { Languages: { order_flag: 0, skills: [{ name: 'TypeScript', order: 0 }] } } };

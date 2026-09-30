@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from "motion/react";
 import SpotlightCard from "@/components/cards/SpotLightCard";
 import { api } from '../../../lib/api';
+import { getPublicSnapshot } from '../../../lib/publicSnapshot';
 
 const About = () => {
     const { t, i18n } = useTranslation();
@@ -11,6 +12,7 @@ const About = () => {
     const resource = usePublicResource({
         key: 'about:' + lang,
         load: signal => api.about(lang, { signal }).then(response => response.data),
+        snapshot: () => { const published = getPublicSnapshot(); return published?.settings.showAbout ? published.about[lang] : undefined; },
         isEmpty: value => !value.story && !value.background,
     });
     const about = 'data' in resource.state ? resource.state.data : null;
@@ -18,15 +20,15 @@ const About = () => {
 
     return (
         <motion.div
-            className="min-h-screen p-8"
-            initial={{ opacity: 0 }}
+            className="min-h-screen py-6 md:p-8"
+            initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
         >
             <div className="max-w-5xl mx-auto">
                 <motion.h1
                     className="text-4xl font-bold mb-10 text-center"
-                    initial={{ opacity: 0, y: -30 }}
+                    initial={false}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                 >

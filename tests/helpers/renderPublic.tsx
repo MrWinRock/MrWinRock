@@ -20,6 +20,8 @@ export function renderPublic(
       <SettingsContext.Provider value={{
         settings: options?.settings ?? ALL_SECTIONS_ENABLED,
         isInitialLoading: false,
+        settingsStatus: 'ready',
+        retrySettings: () => {},
       }}>
         <MemoryRouter initialEntries={[options?.route ?? '/']}>
           {ui}

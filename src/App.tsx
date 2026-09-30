@@ -2,22 +2,26 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 import Home from './components/pages/home/Home';
-import About from './components/pages/about/About';
-import Skills from './components/pages/skills/Skills';
-import Projects from './components/pages/projects/Projects';
-import Resume from './components/pages/resume/Resume';
-import Experience from './components/pages/experience/Experience';
-import Contact from './components/pages/contact/Contact';
+import { lazy, Suspense } from 'react';
+const About = lazy(() => import('./components/pages/about/About'));
+const Skills = lazy(() => import('./components/pages/skills/Skills'));
+const Projects = lazy(() => import('./components/pages/projects/Projects'));
+const ProjectDetail = lazy(() => import('./components/pages/projects/ProjectDetail'));
+const Resume = lazy(() => import('./components/pages/resume/Resume'));
+const Experience = lazy(() => import('./components/pages/experience/Experience'));
+const Contact = lazy(() => import('./components/pages/contact/Contact'));
+const NotFound = lazy(() => import('./components/pages/NotFound'));
+import { PageMetadata } from './components/PageMetadata';
+import { PublicDataNotice } from './components/PublicDataNotice';
 
 import ScrollToTop from './components/ScrollToTop';
 
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { useSettings } from './contexts/useSettings';
 import { SectionGuard } from './components/SectionGuard';
 import { useTranslation } from 'react-i18next';
 
 function App() {
-  console.log(`%cWelcome to My Portfolio!`, 'color: #8B2BE2; font-size: 20px; font-weight: bold;');
   const { isInitialLoading } = useSettings();
   const { t } = useTranslation();
 
@@ -35,18 +39,20 @@ function App() {
         </div>
       )}
       <ScrollToTop />
+      <PageMetadata />
       <Navbar />
       <main id="main-content" tabIndex={-1} className='min-h-screen max-w-[1200px] mx-auto mt-12 px-4 py-8'>
-        <Routes>
+        <Suspense fallback={<PublicDataNotice state={{ status: 'loading' }} />}><Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<SectionGuard setting="showAbout"><About /></SectionGuard>} />
           <Route path="/skills" element={<SectionGuard setting="showSkills"><Skills /></SectionGuard>} />
           <Route path="/projects" element={<SectionGuard setting="showProjects"><Projects /></SectionGuard>} />
+          <Route path="/projects/:slug" element={<SectionGuard setting="showProjects"><ProjectDetail /></SectionGuard>} />
           <Route path="/experience" element={<SectionGuard setting="showExperience"><Experience /></SectionGuard>} />
           <Route path="/contact" element={<SectionGuard setting="showContact"><Contact /></SectionGuard>} />
           <Route path="/resume" element={<SectionGuard setting="showResume"><Resume /></SectionGuard>} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Routes></Suspense>
       </main>
       <Footer />
     </div>

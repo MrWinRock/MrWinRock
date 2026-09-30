@@ -4,6 +4,7 @@ import { usePublicResource } from '../../../hooks/usePublicResource';
 import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import { skills as staticSkills, type Skill } from "../../../data/skills";
 import { api } from "../../../lib/api";
+import { getPublicSnapshot } from '../../../lib/publicSnapshot';
 
 interface CategoryGroup {
     id: string;
@@ -30,6 +31,7 @@ const Skills = () => {
 
     const resource = usePublicResource<CategoryGroup[]>({
         key: 'skills',
+        snapshot: () => { const published = getPublicSnapshot(); return published?.settings.showSkills ? Object.entries(published.skills).map(([id, cat]) => ({ id, title: id, orderFlag: cat.order_flag, skills: cat.skills.map(skill => ({ ...skill, category: skill.category ?? id, icon: skill.icon ?? '' })) })).sort((a,b)=>a.orderFlag-b.orderFlag) : undefined; },
         load: signal => api.skills({ signal }).then(response => Object.entries(response.data).map(([id, cat]) => ({
             id, title: id, orderFlag: cat.order_flag,
             skills: cat.skills.map(skill => ({ ...skill, category: skill.category ?? id, icon: skill.icon ?? '' })).sort((a, b) => a.order - b.order),
@@ -44,15 +46,15 @@ const Skills = () => {
 
     return (
         <motion.div
-            className="min-h-screen p-8"
-            initial={{ opacity: 0 }}
+            className="min-h-screen py-6 md:p-8"
+            initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
         >
             <div className="max-w-6xl mx-auto">
                 <motion.h1
                     className="text-4xl font-bold mb-8 text-center"
-                    initial={{ opacity: 0, y: -50 }}
+                    initial={false}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
@@ -64,7 +66,7 @@ const Skills = () => {
                     {categoryGroups.map((category, categoryIndex) => (
                         <motion.div
                             key={category.id}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{
                                 duration: 0.6,
@@ -73,7 +75,7 @@ const Skills = () => {
                         >
                             <motion.h2
                                 className="text-2xl font-semibold mb-6 text-center"
-                                initial={{ opacity: 0 }}
+                                initial={false}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: categoryIndex * 0.2 + 0.5 }}
                             >
@@ -84,8 +86,8 @@ const Skills = () => {
                                 {category.skills.map((skill, skillIndex) => (
                                     <motion.div
                                         key={skill._id || skill.name}
-                                        className="p-button p-4 flex flex-col gap-2 items-center justify-center text-center"
-                                        initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                                        className="rounded-xl border border-gray-600 bg-[#232326] p-3 md:p-4 flex flex-col gap-2 items-center justify-center text-center"
+                                        initial={false}
                                         animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                                         transition={{
                                             duration: 0.6,

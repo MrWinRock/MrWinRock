@@ -12,7 +12,7 @@ const Footer = () => {
                     className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200"
                     target="_blank"
                     rel="noopener noreferrer"
-                    title="View on GitHub"
+                    title={t('projects.github')}
                 >
                     <img
                         src={githubIcon}
@@ -23,7 +23,7 @@ const Footer = () => {
             </div>
             <div className="container mx-auto text-center">
                 <p>&copy; {new Date().getFullYear()} MrWinRock. {t('footer.rights')}</p>
-                <p className="text-gray-500 text-sm mt-2">
+                <p className="text-gray-400 text-sm mt-2">
                     {t('footer.builtWith')}
                 </p>
             </div>
@@ -34,7 +34,7 @@ const Footer = () => {
                         <a href="https://github.com/MrWinRock" className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">
                             GitHub
                         </a>{" "}
-                        and{" "}
+                        {t('footer.and')}{" "}
                         <a href="https://www.linkedin.com/in/pharthiwath-gristsoopharruth-232301240/" className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">
                             LinkedIn
                         </a>

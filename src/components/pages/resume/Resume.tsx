@@ -4,6 +4,7 @@ import { usePublicResource } from '../../../hooks/usePublicResource';
 import { useObjectUrl } from '../../../hooks/useObjectUrl';
 import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import { api } from "../../../lib/api";
+import { trackPortfolioEvent } from '../../../lib/portfolioEvents';
 
 const Resume = () => {
     const { t } = useTranslation();
@@ -15,7 +16,7 @@ const Resume = () => {
     return (
         <motion.div
             className="min-h-screen p-4 md:p-8"
-            initial={{ opacity: 0 }}
+            initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
         >
@@ -30,6 +31,7 @@ const Resume = () => {
                     <a
                         href={resumeUrl}
                         download="Pharthiwath_Gristsoopharruth_Resume.pdf"
+                        onClick={()=>trackPortfolioEvent('resume_download')}
                         className="p-button inline-flex items-center justify-center"
                     >
                         {t("resume.download")}

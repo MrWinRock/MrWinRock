@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import { syncDocumentLanguage } from './lib/documentLanguage';
+import { documentLanguage, syncDocumentLanguage } from './lib/documentLanguage';
 import enTranslations from './locales/en.json';
 import thTranslations from './locales/th.json';
 
@@ -43,11 +43,11 @@ if (!documentLanguageSyncState.initialization) {
         .use(LanguageDetector)
         .use(initReactI18next)
         .init({
+            ...(typeof window !== 'undefined' && /^\/th(?:\/|$)/.test(window.location.pathname) ? { lng: 'th' } : {}),
             resources: {
                 en: { translation: enTranslations },
                 th: { translation: thTranslations }
             },
-            lng: 'en',
             fallbackLng: 'en',
             interpolation: {
                 escapeValue: false
@@ -55,6 +55,7 @@ if (!documentLanguageSyncState.initialization) {
             detection: {
                 order: ['localStorage', 'navigator', 'htmlTag'],
                 caches: ['localStorage']
+                ,convertDetectedLanguage: (code: string) => documentLanguage(code)
             }
         })
         .then(() => synchronizeDocumentLanguage(i18n.language));

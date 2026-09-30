@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "dev:lan": "vite --host 0.0.0.0",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && bun scripts/prerender.mjs",
+    "snapshot:generate": "bun scripts/generate-public-snapshot.ts",
     "lint": "eslint .",
     "preview": "vite preview",
     "preview:lan": "vite preview --host 0.0.0.0",
@@ -16,7 +17,7 @@
     "typecheck:contract": "tsc -p tsconfig.contract.json --noEmit",
     "contract:generate": "node scripts/generate-openapi-types.mjs",
     "contract:check": "node scripts/generate-openapi-types.mjs --check",
-    "test:e2e": "playwright test",
+    "test:e2e": "node scripts/run-e2e.mjs",
     "typecheck:e2e": "tsc -p tsconfig.e2e.json --noEmit"
   },
   "dependencies": {

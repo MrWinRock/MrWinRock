@@ -3,6 +3,12 @@ import { describe, expect, it, vi } from 'vitest';
 import { usePublicResource } from '../src/hooks/usePublicResource';
 
 describe('public resources', () => {
+  it.each([403,503])('uses an approved snapshot for outages while live %s governs disabled content', async status => {
+    const { result }=renderHook(()=>usePublicResource({key:'published',load:async()=>{throw {status};},snapshot:()=>['approved'],fallback:['bundled'],isEmpty:value=>!value.length}));
+    await waitFor(()=>expect(result.current.state.status).toBe(status===403?'disabled':'stale'));
+    if(status===503)expect(result.current.state).toMatchObject({data:['approved'],source:'snapshot'});
+    else expect('data' in result.current.state).toBe(false);
+  });
   it('replaces language keys and ignores the prior language response', async () => {
     let finish!: (value: string[]) => void;
     let firstSignal!: AbortSignal;

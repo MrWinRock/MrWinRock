@@ -1,110 +1,21 @@
-import { motion } from "motion/react";
-import { useTranslation } from "react-i18next";
-import { usePublicResource } from '../../../hooks/usePublicResource';
-import { PublicDataNotice } from '../../../components/PublicDataNotice';
-import SpotlightCard from "@/components/cards/SpotLightCard";
-import { projects as staticProjects, type Project } from "../../../data/projects";
-import { api } from "../../../lib/api";
-import { ProjectActions } from "./ProjectActions";
-
-const Projects = () => {
-    const { t } = useTranslation();
-    const resource = usePublicResource<Project[]>({
-        key: 'projects',
-        load: signal => api.projects({ signal }).then(response => response.data.map(p => ({ ...p, url: p.url || undefined, repo: p.repo || undefined })).sort((a, b) => a.order - b.order)),
-        fallback: staticProjects,
-        isEmpty: value => value.length === 0,
-    });
-    const projectList = 'data' in resource.state ? resource.state.data : [];
-
-    return (
-        <motion.div
-            className="min-h-screen p-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-        >
-            <div className="max-w-6xl mx-auto">
-                <motion.h1
-                    className="text-4xl font-bold mb-8 text-center"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{
-                        duration: 0.8,
-                        delay: 0.2,
-                        type: "spring",
-                        stiffness: 120
-                    }}
-                >
-                    {t("projects.title")}
-                </motion.h1>
-
-                <PublicDataNotice {...resource} />
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {projectList.map((project, index) => (
-                        <SpotlightCard
-                            key={project._id || index}
-                            className="flex flex-col h-full"
-                            index={index}
-                            spotlightColor="rgba(255, 0, 255, 0.3)"
-                            motionProps={{ whileHover: { transition: { duration: 0.3 } } }}
-                        >
-                            <div className="flex flex-col">
-                                <motion.h2
-                                    className="text-xl font-bold text-white h-14 flex items-center"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: index * 0.15 + 0.3 }}
-                                >
-                                    <span className="line-clamp-2">{project.title}</span>
-                                </motion.h2>
-
-                                <motion.p
-                                    className="text-gray-300 text-sm leading-relaxed h-18 overflow-hidden"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: index * 0.15 + 0.4 }}
-                                >
-                                    <span className="line-clamp-3">{project.description}</span>
-                                </motion.p>
-                            </div>
-
-                            <div className="flex-1 flex flex-col justify-between">
-                                <motion.div
-                                    className="flex flex-wrap gap-2 min-h-24 content-start"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: index * 0.15 + 0.5 }}
-                                >
-                                    {project.tech.map((tag, tagIndex) => (
-                                        <motion.span
-                                            key={tagIndex}
-                                            className="bg-gray-700 text-gray-300 px-2 py-1 rounded-full text-xs font-medium border border-gray-600 hover:bg-gray-600 hover:border-purple-500 transition-colors duration-300 h-fit"
-                                            initial={{ opacity: 0, scale: 0 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            transition={{
-                                                delay: index * 0.15 + 0.6 + tagIndex * 0.1,
-                                                type: "spring",
-                                                stiffness: 200
-                                            }}
-                                        >
-                                            {tag}
-                                        </motion.span>
-                                    ))}
-                                </motion.div>
-
-                                <ProjectActions
-                                    url={project.url}
-                                    repo={project.repo}
-                                    delay={index * 0.15 + 0.7}
-                                />
-                            </div>
-                        </SpotlightCard>
-                    ))}
-                </div>
-            </div>
-        </motion.div>
-    );
-};
-
-export default Projects;
+import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
+import { useProjects } from '../../../hooks/useProjects';
+import { groupProjects, localizeProject, isCompanyProject, isFeaturedProject } from '../../../lib/portfolio';
+import { PublicDataNotice } from '../../PublicDataNotice';
+import { ProjectCard } from './ProjectCard';
+export default function Projects() {
+    const { t, i18n } = useTranslation(); const resource = useProjects(); const [params, setParams] = useSearchParams();
+    const query = params.get('tech') ?? '';
+    const records = 'data' in resource.state ? groupProjects(resource.state.data).filter(project=>!isCompanyProject(project)).map(project => localizeProject({...project,featured:isFeaturedProject(project)}, i18n.language)) : [];
+    const filtered = records.filter(project => !query || project.tech.some(tech => tech.toLowerCase().includes(query.toLowerCase())));
+    const featured = filtered.filter(project => project.featured).slice(0,3);
+    const archive = filtered.filter(project => !featured.includes(project));
+    return <div className="page-shell"><p className="eyebrow">{t('projects.selected')}</p><h1 className="page-title">{t('projects.title')}</h1><p className="page-description">{t('projects.intro')}</p><PublicDataNotice {...resource} />
+        {!!records.length && <div className="my-7 max-w-sm"><label htmlFor="tech-filter" className="block text-sm text-gray-300 mb-2">{t('projects.filter')}</label><input id="tech-filter" className="search-field" value={query} onChange={event => { const next = new URLSearchParams(params); if(event.target.value) next.set('tech', event.target.value); else next.delete('tech'); setParams(next, { replace: true }); }} /></div>}
+        {!!featured.length && <section aria-label={t('projects.selected')}><h2 className="sr-only">{t('projects.selected')}</h2><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">{featured.map((project,index) => <ProjectCard key={project._id ?? project.title} project={project} number={index + 1} />)}</div></section>}
+        {!!archive.length && <section className="mt-12"><h2 className="text-2xl mb-6">{t('projects.archive')}</h2><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">{archive.map(project => <ProjectCard key={project._id ?? project.title} project={project} />)}</div></section>}
+        {!!records.length && !filtered.length && <p role="status">{t('projects.noMatches')}</p>}
+        {resource.state.status !== 'disabled' && <aside className="company-link"><p className="eyebrow">{t('projects.company')}</p><a href="https://carbon.devdeethailand.com" target="_blank" rel="noopener noreferrer">Carbon Footprint <span aria-hidden="true">↗</span></a><p>{t('projects.publicLink')}</p></aside>}
+    </div>;
+}

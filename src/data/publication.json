@@ -1,0 +1,6 @@
+{
+  "enabled": false,
+  "maxAgeHours": 72,
+  "settings": { "showAbout": false, "showSkills": false, "showProjects": false, "showExperience": false, "showResume": false, "showContact": false },
+  "projectSlugs": []
+}

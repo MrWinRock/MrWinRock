@@ -1,4 +1,5 @@
 import { createInflightReadRegistry } from "./inflightReads";
+import { validPortfolioExtras } from './portfolioShape';
 import type { AboutResponse, SkillsResponse, ProjectsResponse, ExperiencesResponse, ContactInput, ContactResponse, SettingsResponse, SettingsDoc, HealthResponse, FishResponse } from "./apiTypes";
 export type * from "./apiTypes";
 import axios, {
@@ -98,14 +99,14 @@ function optionalStrings(value: Record<string, unknown>, keys: string[]): boolea
 function isProject(value: unknown): boolean {
     return isRecord(value) && typeof value.title === 'string' && typeof value.description === 'string'
         && typeof value.order === 'number' && Number.isFinite(value.order) && isStringArray(value.tech)
-        && optionalStrings(value, ['_id', 'url', 'repo']);
+        && optionalStrings(value, ['_id', 'url', 'repo']) && validPortfolioExtras(value);
 }
 
 function isExperience(value: unknown): boolean {
     return isRecord(value) && ['title', 'company', 'description', 'location', 'startDate'].every(key => typeof value[key] === 'string')
         && typeof value.order === 'number' && Number.isFinite(value.order)
         && isStringArray(value.tech) && isStringArray(value.achievements)
-        && optionalStrings(value, ['_id', 'endDate'])
+        && optionalStrings(value, ['_id', 'endDate']) && validPortfolioExtras(value)
         && ['Full-time', 'Part-time', 'Internship', 'Freelance', 'Contract', 'Bachelor', 'Master', 'PhD'].includes(String(value.type));
 }
 
@@ -225,8 +226,9 @@ function validateApplicationSuccess<T>(value: unknown, status: number): T {
     return value as T;
 }
 
-function validateResume(value: unknown, status: number): Blob {
-    if (value instanceof Blob) return value;
+async function validateResume(value: unknown, status: number): Promise<Blob> {
+    if (value instanceof Blob && value.size >= 5 && /^application\/pdf(?:\s*;|$)/i.test(value.type)
+        && await value.slice(0, 5).text() === '%PDF-') return value;
     throw malformedResponse(status);
 }
 

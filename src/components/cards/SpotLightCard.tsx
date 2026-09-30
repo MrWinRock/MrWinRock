@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { motion, type MotionProps } from "motion/react";
+import { motion, useReducedMotion, type MotionProps } from "motion/react";
 import "./SpotLightCard.css";
 
 type CSSVarName = `--${string}`;
@@ -24,6 +24,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
     const containerRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
     const [active, setActive] = useState(false);
+    const reducedMotion = useReducedMotion();
 
     useEffect(() => {
         overlayRef.current?.style.setProperty("--spotlight-color", spotlightColor);
@@ -40,14 +41,14 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
     const deactivate = () => setActive(false);
 
     const defaultMotionProps: MotionProps = {
-        initial: { opacity: 0, y: 50, rotateX: -15 },
+        initial: reducedMotion ? false : { opacity: 0, y: 16 },
         animate: { opacity: 1, y: 0, rotateX: 0 },
-        transition: { duration: 0.6, delay: index * 0.15, type: "spring", stiffness: 100 },
+        transition: reducedMotion ? { duration: 0 } : { duration: 0.25, delay: Math.min(index * 0.04, 0.2) },
         whileHover: {
 
             transition: { duration: 0.3 },
         },
-        whileTap: { scale: 0.97 },
+        whileTap: reducedMotion ? undefined : { scale: 0.99 },
     };
 
     const { whileHover: userWhileHover, ...restMotionProps } = motionProps;
@@ -79,7 +80,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
             onBlur={deactivate}
             onMouseEnter={activate}
             onMouseLeave={deactivate}
-            className={`relative rounded-3xl border overflow-hidden p-8 flex h-full ${className}`}
+            className={`relative rounded-2xl border overflow-hidden p-5 md:p-7 flex h-full ${className}`}
             style={{
                 ...cssVar("--border-color", "rgb(38 38 38)"),
                 backgroundColor: "rgb(42 42 42)",
@@ -97,8 +98,8 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
                     background:
                         "linear-gradient(to right, rgba(147, 51, 234, 0.05), transparent, rgba(6, 182, 212, 0.05))",
                 }}
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "100%" }}
+                initial={false}
+                whileHover={reducedMotion ? undefined : { opacity: 0.3 }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
             />
 

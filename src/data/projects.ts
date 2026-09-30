@@ -1,18 +1,11 @@
-export interface Project {
-    _id?: string;
-    title: string;
-    description: string;
-    url?: string;
-    repo?: string;
-    tech: string[]
-    order: number;
-}
+import type { ApiProject } from '../lib/apiTypes';
+export type Project = ApiProject;
 
-export const projects: Project[] = [
+const projectRecords: Project[] = [
     {
         title: "MrWinRock",
         description: "My Portfolio Website.",
-        url: "/",
+        url: "https://mrwinrock.com/",
         repo: "https://github.com/MrWinRock/MrWinRock",
         tech: ["React", "TypeScript", "Vite", "Tailwind CSS"],
         order: 1
@@ -170,3 +163,11 @@ export const projects: Project[] = [
         order: 20
     }
 ]
+
+const featured = new Set(['InfoXP', 'Stringy', 'ChadChat']);
+export const projects: Project[] = projectRecords.map(project => ({
+    ...project,
+    slug: project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+    featured: featured.has(project.title),
+}));
+projects.push({ title: 'Carbon Footprint', description: 'Company project · public website link.', url: 'https://carbon.devdeethailand.com', tech: [], order: 21, featured: false });

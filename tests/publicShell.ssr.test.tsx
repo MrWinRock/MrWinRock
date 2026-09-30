@@ -19,7 +19,7 @@ describe('public shell SSR', () => {
         expect(html).toContain('<nav');
         expect(html).toContain('<main');
         expect(html).toContain('<footer');
-        expect(html).toContain('Hi, I&#x27;m');
+        expect(html).toContain('Full-Stack Developer');
         expect(html).toContain('role="status"');
         expect(html).toContain('Navigation is updating.');
         expect(html).not.toContain('Loading site…');

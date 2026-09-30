@@ -7,6 +7,7 @@ import App from './App.tsx';
 import Analytics from '@/components/Analytics';
 import { GA_ID, TRACKING_ENABLED } from '@/config/analytics';
 import { SettingsProvider } from './contexts/SettingsContext';
+import { MotionConfig } from 'motion/react';
 
 function initGA(id: string): void {
   if (!id || window.__gaInitialized) return;
@@ -34,11 +35,11 @@ if (TRACKING_ENABLED) initGA(GA_ID);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <SettingsProvider>
+    <BrowserRouter basename={/^\/th(?:\/|$)/.test(window.location.pathname) ? '/th' : undefined}>
+      <MotionConfig reducedMotion="user"><SettingsProvider>
         <Analytics />
         <App />
-      </SettingsProvider>
+      </SettingsProvider></MotionConfig>
     </BrowserRouter>
   </StrictMode>,
 );

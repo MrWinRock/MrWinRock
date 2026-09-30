@@ -854,6 +854,15 @@ export interface operations {
                             /** @default [] */
                             tech: string[];
                             title: string;
+                            translations?: {
+                                th?: {
+                                    achievements?: string[];
+                                    company?: string;
+                                    description?: string;
+                                    location?: string;
+                                    title?: string;
+                                };
+                            };
                             /** @enum {string} */
                             type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract" | "Bachelor" | "Master" | "PhD";
                         }[];
@@ -902,6 +911,15 @@ export interface operations {
                     /** @default [] */
                     tech?: string[];
                     title: string;
+                    translations?: {
+                        th?: {
+                            achievements?: string[];
+                            company?: string;
+                            description?: string;
+                            location?: string;
+                            title?: string;
+                        };
+                    };
                     /** @enum {string} */
                     type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract" | "Bachelor" | "Master" | "PhD";
                 };
@@ -929,6 +947,15 @@ export interface operations {
                             /** @default [] */
                             tech: string[];
                             title: string;
+                            translations?: {
+                                th?: {
+                                    achievements?: string[];
+                                    company?: string;
+                                    description?: string;
+                                    location?: string;
+                                    title?: string;
+                                };
+                            };
                             /** @enum {string} */
                             type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract" | "Bachelor" | "Master" | "PhD";
                         };
@@ -1015,6 +1042,15 @@ export interface operations {
                             /** @default [] */
                             tech: string[];
                             title: string;
+                            translations?: {
+                                th?: {
+                                    achievements?: string[];
+                                    company?: string;
+                                    description?: string;
+                                    location?: string;
+                                    title?: string;
+                                };
+                            };
                             /** @enum {string} */
                             type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract" | "Bachelor" | "Master" | "PhD";
                         }[];
@@ -1086,6 +1122,15 @@ export interface operations {
                     /** @default [] */
                     tech?: string[];
                     title: string;
+                    translations?: {
+                        th?: {
+                            achievements?: string[];
+                            company?: string;
+                            description?: string;
+                            location?: string;
+                            title?: string;
+                        };
+                    };
                     /** @enum {string} */
                     type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract" | "Bachelor" | "Master" | "PhD";
                 };
@@ -1113,6 +1158,15 @@ export interface operations {
                             /** @default [] */
                             tech: string[];
                             title: string;
+                            translations?: {
+                                th?: {
+                                    achievements?: string[];
+                                    company?: string;
+                                    description?: string;
+                                    location?: string;
+                                    title?: string;
+                                };
+                            };
                             /** @enum {string} */
                             type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract" | "Bachelor" | "Master" | "PhD";
                         };
@@ -1367,14 +1421,58 @@ export interface operations {
                     "application/json": {
                         data: {
                             _id?: string;
+                            caseStudy?: {
+                                /** @default [] */
+                                decisions: string[];
+                                /** @default [] */
+                                outcomes: string[];
+                                problem: string;
+                                /** @default [] */
+                                repositories: {
+                                    label: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                                role: string;
+                                /** @default [] */
+                                screenshots: {
+                                    alt: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                            };
                             description: string;
+                            featured?: boolean;
                             /** @default 0 */
                             order: number;
                             /** Format: uri */
                             repo?: string;
+                            slug?: string;
                             /** @default [] */
                             tech: string[];
                             title: string;
+                            translations?: {
+                                th?: {
+                                    caseStudy?: {
+                                        decisions?: string[];
+                                        outcomes?: string[];
+                                        problem?: string;
+                                        repositories?: {
+                                            label: string;
+                                            /** Format: uri */
+                                            url: string;
+                                        }[];
+                                        role?: string;
+                                        screenshots?: {
+                                            alt: string;
+                                            /** Format: uri */
+                                            url: string;
+                                        }[];
+                                    };
+                                    description?: string;
+                                    title?: string;
+                                };
+                            };
                             /** Format: uri */
                             url?: string;
                         }[];
@@ -1413,12 +1511,56 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
+                    caseStudy?: {
+                        /** @default [] */
+                        decisions?: string[];
+                        /** @default [] */
+                        outcomes?: string[];
+                        problem: string;
+                        /** @default [] */
+                        repositories?: {
+                            label: string;
+                            /** Format: uri */
+                            url: string;
+                        }[];
+                        role: string;
+                        /** @default [] */
+                        screenshots?: {
+                            alt: string;
+                            /** Format: uri */
+                            url: string;
+                        }[];
+                    };
                     description: string;
+                    featured?: boolean;
                     /** Format: uri */
                     repo?: string;
+                    slug?: string;
                     /** @default [] */
                     tech?: string[];
                     title: string;
+                    translations?: {
+                        th?: {
+                            caseStudy?: {
+                                decisions?: string[];
+                                outcomes?: string[];
+                                problem?: string;
+                                repositories?: {
+                                    label: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                                role?: string;
+                                screenshots?: {
+                                    alt: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                            };
+                            description?: string;
+                            title?: string;
+                        };
+                    };
                     /** Format: uri */
                     url?: string;
                 };
@@ -1434,14 +1576,58 @@ export interface operations {
                     "application/json": {
                         data: {
                             _id?: string;
+                            caseStudy?: {
+                                /** @default [] */
+                                decisions: string[];
+                                /** @default [] */
+                                outcomes: string[];
+                                problem: string;
+                                /** @default [] */
+                                repositories: {
+                                    label: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                                role: string;
+                                /** @default [] */
+                                screenshots: {
+                                    alt: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                            };
                             description: string;
+                            featured?: boolean;
                             /** @default 0 */
                             order: number;
                             /** Format: uri */
                             repo?: string;
+                            slug?: string;
                             /** @default [] */
                             tech: string[];
                             title: string;
+                            translations?: {
+                                th?: {
+                                    caseStudy?: {
+                                        decisions?: string[];
+                                        outcomes?: string[];
+                                        problem?: string;
+                                        repositories?: {
+                                            label: string;
+                                            /** Format: uri */
+                                            url: string;
+                                        }[];
+                                        role?: string;
+                                        screenshots?: {
+                                            alt: string;
+                                            /** Format: uri */
+                                            url: string;
+                                        }[];
+                                    };
+                                    description?: string;
+                                    title?: string;
+                                };
+                            };
                             /** Format: uri */
                             url?: string;
                         };
@@ -1487,6 +1673,25 @@ export interface operations {
                     "text/plain": string;
                 };
             };
+            /** @description Response for status 409 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        details?: {
+                            fieldErrors: {
+                                [key: string]: string[];
+                            };
+                            formErrors: string[];
+                        };
+                        error: string;
+                        /** @constant */
+                        ok: false;
+                    };
+                };
+            };
         };
     };
     patchAdminProjectsReorder: {
@@ -1516,14 +1721,58 @@ export interface operations {
                     "application/json": {
                         data: {
                             _id?: string;
+                            caseStudy?: {
+                                /** @default [] */
+                                decisions: string[];
+                                /** @default [] */
+                                outcomes: string[];
+                                problem: string;
+                                /** @default [] */
+                                repositories: {
+                                    label: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                                role: string;
+                                /** @default [] */
+                                screenshots: {
+                                    alt: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                            };
                             description: string;
+                            featured?: boolean;
                             /** @default 0 */
                             order: number;
                             /** Format: uri */
                             repo?: string;
+                            slug?: string;
                             /** @default [] */
                             tech: string[];
                             title: string;
+                            translations?: {
+                                th?: {
+                                    caseStudy?: {
+                                        decisions?: string[];
+                                        outcomes?: string[];
+                                        problem?: string;
+                                        repositories?: {
+                                            label: string;
+                                            /** Format: uri */
+                                            url: string;
+                                        }[];
+                                        role?: string;
+                                        screenshots?: {
+                                            alt: string;
+                                            /** Format: uri */
+                                            url: string;
+                                        }[];
+                                    };
+                                    description?: string;
+                                    title?: string;
+                                };
+                            };
                             /** Format: uri */
                             url?: string;
                         }[];
@@ -1583,14 +1832,58 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
+                    caseStudy?: {
+                        /** @default [] */
+                        decisions?: string[];
+                        /** @default [] */
+                        outcomes?: string[];
+                        problem: string;
+                        /** @default [] */
+                        repositories?: {
+                            label: string;
+                            /** Format: uri */
+                            url: string;
+                        }[];
+                        role: string;
+                        /** @default [] */
+                        screenshots?: {
+                            alt: string;
+                            /** Format: uri */
+                            url: string;
+                        }[];
+                    };
                     description: string;
+                    featured?: boolean;
                     /** @default 0 */
                     order?: number;
                     /** Format: uri */
                     repo?: string;
+                    slug?: string;
                     /** @default [] */
                     tech?: string[];
                     title: string;
+                    translations?: {
+                        th?: {
+                            caseStudy?: {
+                                decisions?: string[];
+                                outcomes?: string[];
+                                problem?: string;
+                                repositories?: {
+                                    label: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                                role?: string;
+                                screenshots?: {
+                                    alt: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                            };
+                            description?: string;
+                            title?: string;
+                        };
+                    };
                     /** Format: uri */
                     url?: string;
                 };
@@ -1606,14 +1899,58 @@ export interface operations {
                     "application/json": {
                         data: {
                             _id?: string;
+                            caseStudy?: {
+                                /** @default [] */
+                                decisions: string[];
+                                /** @default [] */
+                                outcomes: string[];
+                                problem: string;
+                                /** @default [] */
+                                repositories: {
+                                    label: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                                role: string;
+                                /** @default [] */
+                                screenshots: {
+                                    alt: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                            };
                             description: string;
+                            featured?: boolean;
                             /** @default 0 */
                             order: number;
                             /** Format: uri */
                             repo?: string;
+                            slug?: string;
                             /** @default [] */
                             tech: string[];
                             title: string;
+                            translations?: {
+                                th?: {
+                                    caseStudy?: {
+                                        decisions?: string[];
+                                        outcomes?: string[];
+                                        problem?: string;
+                                        repositories?: {
+                                            label: string;
+                                            /** Format: uri */
+                                            url: string;
+                                        }[];
+                                        role?: string;
+                                        screenshots?: {
+                                            alt: string;
+                                            /** Format: uri */
+                                            url: string;
+                                        }[];
+                                    };
+                                    description?: string;
+                                    title?: string;
+                                };
+                            };
                             /** Format: uri */
                             url?: string;
                         };
@@ -1661,6 +1998,25 @@ export interface operations {
             };
             /** @description Response for status 404 */
             404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        details?: {
+                            fieldErrors: {
+                                [key: string]: string[];
+                            };
+                            formErrors: string[];
+                        };
+                        error: string;
+                        /** @constant */
+                        ok: false;
+                    };
+                };
+            };
+            /** @description Response for status 409 */
+            409: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -2967,6 +3323,15 @@ export interface operations {
                             /** @default [] */
                             tech: string[];
                             title: string;
+                            translations?: {
+                                th?: {
+                                    achievements?: string[];
+                                    company?: string;
+                                    description?: string;
+                                    location?: string;
+                                    title?: string;
+                                };
+                            };
                             /** @enum {string} */
                             type: "Full-time" | "Part-time" | "Internship" | "Freelance" | "Contract" | "Bachelor" | "Master" | "PhD";
                         }[];
@@ -3197,14 +3562,58 @@ export interface operations {
                     "application/json": {
                         data: {
                             _id?: string;
+                            caseStudy?: {
+                                /** @default [] */
+                                decisions: string[];
+                                /** @default [] */
+                                outcomes: string[];
+                                problem: string;
+                                /** @default [] */
+                                repositories: {
+                                    label: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                                role: string;
+                                /** @default [] */
+                                screenshots: {
+                                    alt: string;
+                                    /** Format: uri */
+                                    url: string;
+                                }[];
+                            };
                             description: string;
+                            featured?: boolean;
                             /** @default 0 */
                             order: number;
                             /** Format: uri */
                             repo?: string;
+                            slug?: string;
                             /** @default [] */
                             tech: string[];
                             title: string;
+                            translations?: {
+                                th?: {
+                                    caseStudy?: {
+                                        decisions?: string[];
+                                        outcomes?: string[];
+                                        problem?: string;
+                                        repositories?: {
+                                            label: string;
+                                            /** Format: uri */
+                                            url: string;
+                                        }[];
+                                        role?: string;
+                                        screenshots?: {
+                                            alt: string;
+                                            /** Format: uri */
+                                            url: string;
+                                        }[];
+                                    };
+                                    description?: string;
+                                    title?: string;
+                                };
+                            };
                             /** Format: uri */
                             url?: string;
                         }[];

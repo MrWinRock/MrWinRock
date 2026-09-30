@@ -6,11 +6,11 @@ export type PublicResourceState<T> =
   | { status: 'ready'; data: T; source: 'live' }
   | { status: 'empty' }
   | { status: 'disabled' }
-  | ({ status: 'stale'; data: T } & Failure)
+  | ({ status: 'stale'; data: T; source?: 'snapshot' } & Failure)
   | ({ status: 'unavailable' } & Failure);
 
 export function usePublicResource<T>(options: {
-  key: string; load(signal: AbortSignal): Promise<T>; fallback?: T; isEmpty(value: T): boolean;
+  key: string; load(signal: AbortSignal): Promise<T>; fallback?: T; snapshot?: () => T | undefined; isEmpty(value: T): boolean;
 }) {
   const latest = useRef(options);
   useEffect(() => { latest.current = options; });
@@ -34,6 +34,8 @@ export function usePublicResource<T>(options: {
       const reason: Failure = failure?.status === 429
         ? { reason: 'rate-limited', retryAt: Date.now() + Math.max(0, failure.retryAfterSeconds ?? 60) * 1000 }
         : { reason: 'unavailable' };
+      const published = current.snapshot?.();
+      if (published !== undefined) { publish({ status: 'stale', data: published, source: 'snapshot', ...reason }); return; }
       publish(current.fallback !== undefined
         ? { status: 'stale', data: current.fallback, ...reason }
         : { status: 'unavailable', ...reason });

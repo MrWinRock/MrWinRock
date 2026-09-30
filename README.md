@@ -12,7 +12,7 @@
 
 # 💫 About Me
 
-Hi! I'm Pharthiwath Gristsoopharruth, a Computer Science student at Suan Sunandha Rajabhat University, based in Bangkok, Thailand. I'm passionate about full-stack development and have a strong interest in cybersecurity. I’ve worked on several projects including Stringy, a blog platform for IT discussions, and Chadchat, a simple real-time one-on-one chat application. Outside of coding, I enjoy gaming, exploring cybersecurity, watching football, and motorsport. My goal is to grow into a senior role in the computer science field and contribute to impactful, secure software systems.
+Hi! I'm Pharthiwath Gristsoopharruth, a Computer Science graduate of Suan Sunandha Rajabhat University, based in Bangkok, Thailand. I'm passionate about full-stack development and have a strong interest in cybersecurity. I’ve worked on several projects including Stringy, a blog platform for IT discussions, and Chadchat, a simple real-time one-on-one chat application. Outside of coding, I enjoy gaming, exploring cybersecurity, watching football, and motorsport. My goal is to grow into a senior role in the computer science field and contribute to impactful, secure software systems.
 
 ## 🌐 Socials
 
@@ -95,7 +95,7 @@ bun run test:e2e
 
 Set `VITE_BASE_URL` to the API origin when building. `VITE_GA_MEASUREMENT_ID` is optional for local development; the existing production deployment requires it. These values are public build-time configuration. No browser secret is required. Keep local environment files untracked.
 
-Content has explicit loading, live, empty, disabled, unavailable, rate-limited, and retry states. Only Projects and Skills use bundled fallback, visibly labeled Cached content. About, Home, and Experience show unavailable instead of silently substituting bundled copy. Settings retain the last successful response, revalidate ETags, refresh on visibility, and back off after failure. Disabled deep links retain their URL and display a disabled notice. Contact retains input on failure and clears it only after accepted delivery. Resume URLs are revoked on replacement and unmount.
+Content has explicit loading, live, empty, disabled, unavailable, rate-limited, and retry states. Projects and Skills can use visibly labeled bundled fallback. Approved, unexpired snapshots can support public content and initial settings during outages; snapshot publishing starts disabled. About and Experience do not substitute bundled copy. See [public publishing](docs/public-publishing.md) for approval, expiry, and revocation. Settings retain the last successful response, revalidate ETags, refresh on visibility, and back off after failure. Disabled deep links retain their URL and display a disabled notice. Contact retains input on failure and clears it only after accepted delivery. Resume URLs are revoked on replacement and unmount.
 
 Vitest covers the API boundary, cancellation, settings, resource states, forms, and Blob URL ownership. Playwright covers desktop (1440×900) and mobile (390×844) keyboard navigation, language, live and cached data, contact validation/503/429/success, resume retry, disabled routes, overflow, and reduced motion. Browser tests intercept API calls and do not submit real messages. Linux CI installs Chromium with `--with-deps` and checks against the API's `dev` artifact. Deployment depends on this reusable CI gate.
 

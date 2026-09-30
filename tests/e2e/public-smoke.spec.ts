@@ -80,3 +80,43 @@ test('reduced motion disables control transitions', async ({ page }) => {
   const duration = await page.locator('.navbar-title').evaluate(element => getComputedStyle(element).transitionDuration);
   expect(duration.split(',').every(value => parseFloat(value) <= 0.001)).toBe(true);
 });
+
+test('settings failure recovers immediately without treating it as disabled', async ({ page }) => {
+  let available = false;
+  await page.route('**/api/settings', route => route.fulfill(available ? {json:{ok:true,data:settings}} : {status:503,json:{ok:false}}));
+  await page.goto('/projects');
+  await expect(page.getByRole('alert')).toContainText(/temporarily unavailable/i);
+  await expect(page.getByText(/section is currently unavailable/i)).toHaveCount(0);
+  available = true;
+  await page.getByRole('button',{name:/retry/i}).click();
+  await expect(page.getByRole('heading',{name:'My Projects',exact:true})).toBeVisible();
+});
+
+test('language survives reload and reduced motion keeps Home content immediately available', async ({ page }) => {
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.goto('/');
+  await expect(page.getByRole('heading',{level:1})).toContainText('Pharthiwath');
+  await expect(page.getByText('Full-Stack Developer',{exact:true})).toBeVisible();
+  await page.getByRole('button',{name:/switch language to thai/i}).click();
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('lang','th');
+});
+
+test('short viewport menu supports scrolling and Escape', async ({ page }) => {
+  await page.setViewportSize({width:390,height:390});
+  await page.goto('/');
+  const toggle=page.getByRole('button',{name:/open menu/i}); await toggle.click();
+  const resume=page.locator('#mobile-navigation').getByRole('link',{name:'Resume'});
+  await resume.scrollIntoViewIfNeeded(); await expect(resume).toBeInViewport();
+  await resume.focus(); await page.keyboard.press('Escape');
+  await expect(toggle).toBeFocused(); await expect(toggle).toHaveAttribute('aria-expanded','false');
+});
+test('English selected from a Thai URL survives reload and keeps the route', async ({ page }) => {
+ await page.goto('/th/projects');
+ await expect(page.locator('html')).toHaveAttribute('lang','th');
+ await page.getByRole('button',{name:/อังกฤษ|english/i}).click();
+ await expect(page).toHaveURL(/\/projects$/);
+ await page.reload();
+ await expect(page.locator('html')).toHaveAttribute('lang','en');
+ await expect(page).not.toHaveURL(/\/th\//);
+});

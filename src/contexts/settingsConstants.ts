@@ -13,9 +13,13 @@ export const HIDDEN_SETTINGS: SettingsDoc = {
 export interface SettingsContextValue {
     settings: SettingsDoc;
     isInitialLoading: boolean;
+    settingsStatus: 'loading' | 'ready' | 'unavailable' | 'snapshot';
+    retrySettings: () => void;
 }
 
 export const SettingsContext = createContext<SettingsContextValue>({
     settings: HIDDEN_SETTINGS,
     isInitialLoading: true,
+    settingsStatus: 'loading',
+    retrySettings: () => {},
 });

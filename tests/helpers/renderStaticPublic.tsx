@@ -25,7 +25,7 @@ export function renderStaticPublic({
     return renderToStaticMarkup(
         <MemoryRouter initialEntries={[route]}>
             <I18nextProvider i18n={i18n}>
-                <SettingsContext.Provider value={{ settings, isInitialLoading }}>
+                <SettingsContext.Provider value={{ settings, isInitialLoading, settingsStatus: isInitialLoading ? 'loading' : 'ready', retrySettings: () => {} }}>
                     <App />
                 </SettingsContext.Provider>
             </I18nextProvider>

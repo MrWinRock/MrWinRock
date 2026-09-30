@@ -1,4 +1,4 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { useContext } from 'react';
 import { afterEach, expect, it, vi } from 'vitest';
 import { api } from '../src/lib/api';
@@ -9,6 +9,20 @@ import { settingsRetryDelayMs } from '../src/contexts/settingsPolling';
 vi.mock('../src/lib/api', () => ({ api: { settings: vi.fn() } }));
 function Probe() { const { settings, isInitialLoading } = useContext(SettingsContext); return <span>{isInitialLoading ? 'loading' : settings.showProjects ? 'visible' : 'hidden'}</span>; }
 afterEach(() => { vi.useRealTimers(); vi.resetAllMocks(); });
+
+it('distinguishes initial failure and allows immediate non-overlapping recovery', async () => {
+    function Recovery() { const context = useContext(SettingsContext); return <><span>{context.settingsStatus}</span><button onClick={context.retrySettings}>Recover</button><Probe /></>; }
+    const pending = deferred<{ kind: 'modified'; data: typeof HIDDEN_SETTINGS }>();
+    vi.mocked(api.settings).mockRejectedValueOnce(new Error('offline')).mockReturnValueOnce(pending.promise);
+    render(<SettingsProvider><Recovery /></SettingsProvider>);
+    await act(async () => {});
+    expect(screen.getByText('unavailable')).toBeInTheDocument();
+    fireEvent.click(screen.getByText('Recover')); fireEvent.click(screen.getByText('Recover'));
+    expect(api.settings).toHaveBeenCalledTimes(2);
+    await act(async () => pending.resolve({ kind: 'modified', data: { ...HIDDEN_SETTINGS, showProjects: true } }));
+    expect(screen.getByText('ready')).toBeInTheDocument();
+    expect(screen.getByText('visible')).toBeInTheDocument();
+});
 
 it('retains settings through 304 and failures, backs off, and resets after success', async () => {
     vi.useFakeTimers();

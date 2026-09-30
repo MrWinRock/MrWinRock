@@ -9,6 +9,9 @@ const LanguageSwitcher = () => {
 
     const toggleLanguage = () => {
         i18n.changeLanguage(targetLanguage);
+        if (targetLanguage === 'en' && /^\/th(?:\/|$)/.test(window.location.pathname)) {
+            window.location.assign((window.location.pathname.replace(/^\/th(?=\/|$)/, '') || '/') + window.location.search + window.location.hash);
+        }
     };
 
     return (

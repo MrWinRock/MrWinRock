@@ -4,15 +4,18 @@ import { usePublicResource } from '../../../hooks/usePublicResource';
 import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import { type ApiExperience as ExperienceType, api } from "../../../lib/api";
 import SpotlightCard from "@/components/cards/SpotLightCard";
+import { localizeExperience } from '../../../lib/portfolio';
+import { getPublicSnapshot } from '../../../lib/publicSnapshot';
 
 const Experience = () => {
     const { t, i18n } = useTranslation();
     const localeMap: Record<string, string> = { en: 'en-US', th: 'th-TH' };
     const resource = usePublicResource({
         key: 'experiences', load: signal => api.experiences({ signal }).then(response => response.data),
+        snapshot: () => { const published = getPublicSnapshot(); return published?.settings.showExperience ? published.experiences : undefined; },
         isEmpty: value => value.length === 0,
     });
-    const experienceList = 'data' in resource.state ? resource.state.data : [];
+    const experienceList = 'data' in resource.state ? resource.state.data.map(item => localizeExperience(item, i18n.language)) : [];
 
     const formatDate = (dateStr: string) => {
         const [year, month] = dateStr.split("-");
@@ -44,15 +47,15 @@ const Experience = () => {
 
     return (
         <motion.div
-            className="min-h-screen p-8"
-            initial={{ opacity: 0 }}
+            className="min-h-screen py-6 md:p-8"
+            initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
         >
             <div className="max-w-5xl mx-auto">
                 <motion.h1
                     className="text-4xl font-bold mb-16 text-center"
-                    initial={{ opacity: 0, y: -50 }}
+                    initial={false}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
@@ -69,7 +72,7 @@ const Experience = () => {
                             background:
                                 "linear-gradient(to bottom, #8000FF, #00FFFF, #8000FF)",
                         }}
-                        initial={{ scaleY: 0, originY: 0 }}
+                        initial={false}
                         animate={{ scaleY: 1 }}
                         transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
                     />
@@ -85,7 +88,7 @@ const Experience = () => {
                                             ? "md:flex-row"
                                             : "md:flex-row-reverse"
                                         }`}
-                                    initial={{ opacity: 0, y: 60 }}
+                                    initial={false}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{
                                         duration: 0.7,
@@ -97,7 +100,7 @@ const Experience = () => {
                                     {/* Timeline dot */}
                                     <motion.div
                                         className="absolute left-2 md:left-1/2 -translate-x-1/2 z-20 flex items-center justify-center"
-                                        initial={{ scale: 0 }}
+                                        initial={false}
                                         animate={{ scale: 1 }}
                                         transition={{
                                             delay: index * 0.25 + 0.8,
@@ -139,7 +142,7 @@ const Experience = () => {
                                                         className={`px-3 py-0.5 rounded-full text-xs font-bold text-white bg-linear-to-r ${getTypeBadgeColor(
                                                             exp.type
                                                         )}`}
-                                                        initial={{ opacity: 0, scale: 0 }}
+                                                        initial={false}
                                                         animate={{ opacity: 1, scale: 1 }}
                                                         transition={{
                                                             delay: index * 0.25 + 1,
@@ -147,7 +150,7 @@ const Experience = () => {
                                                             stiffness: 200,
                                                         }}
                                                     >
-                                                        {exp.type}
+                                                        {t('experience.types.' + exp.type, { defaultValue: exp.type })}
                                                     </motion.span>
                                                     <span className="text-xs text-gray-400">
                                                         {getDateRange(
@@ -217,10 +220,7 @@ const Experience = () => {
                                                                 <motion.li
                                                                     key={aIdx}
                                                                     className="flex items-start gap-2 text-sm text-gray-400"
-                                                                    initial={{
-                                                                        opacity: 0,
-                                                                        x: -10,
-                                                                    }}
+                                                                    initial={false}
                                                                     animate={{
                                                                         opacity: 1,
                                                                         x: 0,
@@ -253,10 +253,7 @@ const Experience = () => {
                                                     <motion.span
                                                         key={tagIdx}
                                                         className="bg-gray-700 text-gray-300 px-2 py-1 rounded-full text-xs font-medium border border-gray-600 hover:bg-gray-600 hover:border-purple-500 transition-colors duration-300"
-                                                        initial={{
-                                                            opacity: 0,
-                                                            scale: 0,
-                                                        }}
+                                                        initial={false}
                                                         animate={{
                                                             opacity: 1,
                                                             scale: 1,

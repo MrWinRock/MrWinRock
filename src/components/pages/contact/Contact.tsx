@@ -1,3 +1,4 @@
+import { trackPortfolioEvent } from '../../../lib/portfolioEvents';
 import { motion, AnimatePresence } from "motion/react";
 import type { Variants } from "motion/react";
 import { useEffect, useRef, useState } from 'react';
@@ -81,8 +82,8 @@ const Contact = () => {
 
     return (
         <motion.div
-            className="min-h-screen p-8"
-            initial="hidden"
+            className="min-h-screen py-6 md:p-8"
+            initial={false}
             animate="visible"
             variants={container}
         >
@@ -174,7 +175,7 @@ const Contact = () => {
                                     {status === "success" && (
                                         <motion.p
                                             key="success"
-                                            initial={{ opacity: 0, y: -6 }}
+                                            initial={false}
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0 }}
                                             role="status"
@@ -186,7 +187,7 @@ const Contact = () => {
                                     {(status === "error" || status === "unavailable") && (
                                         <motion.p
                                             key="error"
-                                            initial={{ opacity: 0, y: -6 }}
+                                            initial={false}
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0 }}
                                             role="alert"
@@ -229,7 +230,7 @@ const Contact = () => {
                                 />
                             </div>
 
-                            <p className="text-xs text-gray-500 mt-auto pt-6">{t("contact.responseNote")}</p>
+                            <p className="text-xs text-gray-300 mt-auto pt-6">{t("contact.responseNote")}</p>
                         </SpotlightCard>
                     </motion.div>
                 </div>
@@ -249,6 +250,7 @@ interface ContactLinkProps {
 const ContactLink: React.FC<ContactLinkProps> = ({ href, label, value, icon, external }) => (
     <motion.a
         href={href}
+        onClick={()=>trackPortfolioEvent('contact_intent')}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
         className="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-purple-500/50 hover:bg-white/[0.06] transition-colors duration-200 group"
