@@ -16,12 +16,12 @@ export const ProjectActions = ({ url, repo }: ProjectActionsProps) => {
 
     return (
         <div
-            className="flex justify-between items-center mt-auto"
+            className="project-actions"
         >
             {liveUrl ? (
                 <a
                     href={liveUrl}
-                    className="s-button flex flex-row items-center gap-2 px-4 py-2 text-sm font-medium"
+                    className="project-action-live"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
@@ -44,7 +44,7 @@ export const ProjectActions = ({ url, repo }: ProjectActionsProps) => {
                     </svg>
                 </a>
             ) : (
-                <span className="s-button px-4 py-2 text-sm font-medium opacity-50">
+                <span className="project-action-live project-action-unavailable" aria-disabled="true">
                     {t("projects.notAvailable")}
                 </span>
             )}
@@ -52,7 +52,7 @@ export const ProjectActions = ({ url, repo }: ProjectActionsProps) => {
             {repositoryUrl ? (
                 <a
                     href={repositoryUrl}
-                    className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200"
+                    className="project-action-repository"
                     target="_blank"
                     rel="noopener noreferrer"
                     title={t('projects.github')}
@@ -60,18 +60,18 @@ export const ProjectActions = ({ url, repo }: ProjectActionsProps) => {
                     <img
                         src={githubIcon}
                         alt="GitHub"
-                        className="w-8 h-8 filter invert"
+                        className="filter invert"
                     />
                 </a>
             ) : (
                 <div
-                    className="p-2 rounded-full cursor-not-allowed opacity-30"
+                    className="project-action-repository project-action-unavailable" aria-disabled="true"
                     title={t('projects.noRepository')}
                 >
                     <img
                         src={githubIcon}
                         alt="GitHub"
-                        className="w-8 h-8 filter invert"
+                        className="filter invert"
                     />
                 </div>
             )}

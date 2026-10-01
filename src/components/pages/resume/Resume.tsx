@@ -15,7 +15,7 @@ const Resume = () => {
 
     return (
         <motion.div
-            className="min-h-screen p-4 md:p-8"
+            className="secondary-page"
             initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
@@ -27,7 +27,7 @@ const Resume = () => {
 
                 <PublicDataNotice {...resource} />
                 {resumeUrl && <>
-                <div className="flex flex-wrap justify-center gap-3 mb-6">
+                <div className="flex flex-wrap gap-3 mb-6">
                     <a
                         href={resumeUrl}
                         download="Pharthiwath_Gristsoopharruth_Resume.pdf"
@@ -46,7 +46,7 @@ const Resume = () => {
                     </a>
                 </div>
 
-                <div className="rounded-lg border border-gray-700 overflow-hidden bg-gray-900">
+                <div className="resume-frame border border-gray-700 overflow-hidden bg-gray-900">
                     <object
                         aria-label={t("resume.title")}
                         data={resumeUrl}

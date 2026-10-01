@@ -46,7 +46,7 @@ const Skills = () => {
 
     return (
         <motion.div
-            className="min-h-screen py-6 md:p-8"
+            className="secondary-page"
             initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
@@ -74,7 +74,7 @@ const Skills = () => {
                             }}
                         >
                             <motion.h2
-                                className="text-2xl font-semibold mb-6 text-center"
+                                className="skill-category-title"
                                 initial={false}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: categoryIndex * 0.2 + 0.5 }}
@@ -86,7 +86,7 @@ const Skills = () => {
                                 {category.skills.map((skill, skillIndex) => (
                                     <motion.div
                                         key={skill._id || skill.name}
-                                        className="rounded-xl border border-gray-600 bg-[#232326] p-3 md:p-4 flex flex-col gap-2 items-center justify-center text-center"
+                                        className="skill-tile"
                                         initial={false}
                                         animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                                         transition={{

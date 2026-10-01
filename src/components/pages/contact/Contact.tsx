@@ -76,13 +76,11 @@ const Contact = () => {
         visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
     };
 
-    const fieldClass =
-        "w-full px-4 py-3 rounded-lg bg-[#1f1f1f] border border-white/10 text-white placeholder-gray-500 " +
-        "focus:outline-none focus:border-[#8A2BE2] focus:ring-2 focus:ring-[#8A2BE2]/30 transition-colors duration-200";
+    const fieldClass = "contact-field";
 
     return (
         <motion.div
-            className="min-h-screen py-6 md:p-8"
+            className="secondary-page"
             initial={false}
             animate="visible"
             variants={container}
@@ -161,8 +159,8 @@ const Contact = () => {
                                 <motion.button
                                     type="submit"
                                     disabled={status === "sending" || seconds > 0}
-                                    className="w-full bg-linear-to-r from-[#8000FF] to-[#00FFFF] text-white font-semibold px-6 py-3 rounded-lg cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-                                    whileHover={status === "sending" ? undefined : { scale: 1.02, boxShadow: "0 8px 24px rgba(128,0,255,0.35)" }}
+                                    className="primary-action w-full disabled:opacity-60 disabled:cursor-not-allowed"
+
                                     whileTap={status === "sending" ? undefined : { scale: 0.98 }}
                                     transition={{ duration: 0.2 }}
                                 >
@@ -253,8 +251,8 @@ const ContactLink: React.FC<ContactLinkProps> = ({ href, label, value, icon, ext
         onClick={()=>trackPortfolioEvent('contact_intent')}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
-        className="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-purple-500/50 hover:bg-white/[0.06] transition-colors duration-200 group"
-        whileHover={{ x: 3 }}
+        className="direct-link group"
+
     >
         <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/[0.05] text-gray-300 group-hover:text-white transition-colors shrink-0">
             {icon}

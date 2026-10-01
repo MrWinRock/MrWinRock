@@ -20,7 +20,7 @@ const About = () => {
 
     return (
         <motion.div
-            className="min-h-screen py-6 md:p-8"
+            className="secondary-page"
             initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
@@ -39,7 +39,7 @@ const About = () => {
                 {about && <div className="grid md:grid-cols-2 gap-6 items-stretch">
                     <SpotlightCard index={0} className="flex flex-col" spotlightColor="rgba(128, 0, 255, 0.3)">
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="grid place-items-center w-10 h-10 rounded-xl bg-linear-to-br from-[#8000FF] to-[#00FFFF] text-white shrink-0">
+                            <span className="neutral-icon">
                                 <StoryIcon />
                             </span>
                             <h2 className="text-2xl font-semibold">{t("about.myStory")}</h2>
@@ -51,7 +51,7 @@ const About = () => {
 
                     <SpotlightCard index={1} className="flex flex-col" spotlightColor="rgba(0, 255, 255, 0.3)">
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="grid place-items-center w-10 h-10 rounded-xl bg-linear-to-br from-[#00FFFF] to-[#8000FF] text-white shrink-0">
+                            <span className="neutral-icon">
                                 <EducationIcon />
                             </span>
                             <h2 className="text-2xl font-semibold">{t("about.education")}</h2>

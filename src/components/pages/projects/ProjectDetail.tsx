@@ -17,6 +17,6 @@ export default function ProjectDetail() {
         {!!study?.decisions?.length && <section className="evidence-panel"><h2>{t('projects.decisions')}</h2><ul>{study.decisions.map((text, index) => <li key={index}>{text}</li>)}</ul></section>}
         {!!study?.outcomes?.length && <section className="evidence-panel"><h2>{t('projects.outcomes')}</h2><ul>{study.outcomes.map((text, index) => <li key={index}>{text}</li>)}</ul></section>}</div>
         {!!study?.repositories?.length && <section className="mt-10"><h2 className="text-2xl mb-4">{t('projects.repositories')}</h2><div className="flex flex-wrap gap-3">{study.repositories.map(item => safeExternalUrl(item.url) && <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" className="s-button">{item.label} ↗</a>)}</div></section>}
-        {!!study?.screenshots?.length && <section className="grid gap-6 mt-10">{study.screenshots.map(item => safeExternalUrl(item.url) && <figure key={item.url}><img className="rounded-xl w-full" src={item.url} alt={item.alt} loading="lazy" /><figcaption className="mt-2 text-gray-300">{item.alt}</figcaption></figure>)}</section>}
+        {!!study?.screenshots?.length && <section className="grid gap-6 mt-10">{study.screenshots.map(item => safeExternalUrl(item.url) && <figure key={item.url}><img className="project-screenshot w-full" src={item.url} alt={item.alt} loading="lazy" /><figcaption className="mt-2 text-gray-300">{item.alt}</figcaption></figure>)}</section>}
         </article>;
 }
