@@ -25,3 +25,11 @@ it('rejects objects hidden inside public scalar fields', () => {
  expect(parsePublicSnapshot({...base,experiences:[{title:'Role',company:'Co',description:'Work',location:'Bangkok',startDate:'2026-01',type:'Full-time',order:0,tech:[],achievements:[],endDate:{secret:'private'}}]},now)).toBeNull();
  expect(parsePublicSnapshot({...base,skills:{Web:{order_flag:0,skills:[{name:'React',order:0,category:{secret:'private'}}]}}},now)).toBeNull();
 });
+it('preserves personal work type and excludes company links from approved fallback', () => {
+ const now=Date.now(); const personal={title:'Personal',slug:'personal',description:'Public',order:0,tech:[],workType:'personal'};
+ const company={title:'Company Portal',slug:'company-portal',description:'Company',order:1,tech:[],workType:'company',url:'https://company.example.com'};
+ const value={version:1,publishedAt:new Date(now-1000).toISOString(),expiresAt:new Date(now+1000).toISOString(),settings:{...HIDDEN_SETTINGS,showProjects:true},projects:[personal,company],skills:{},about:{en:{story:'',background:''},th:{story:'',background:''}},experiences:[]};
+ expect(parsePublicSnapshot(value,now)?.projects[0]).toMatchObject({workType:'personal'});
+ expect(approvedPublicSnapshot(value,{enabled:true,settings:{showProjects:true},projectSlugs:['personal','company-portal']},now)?.projects.map(item=>item.title)).toEqual(['Personal']);
+ expect(parsePublicSnapshot({...value,projects:[{...personal,workType:'invalid'}]},now)).toBeNull();
+});

@@ -35,3 +35,11 @@ it('does not show skills or resource notices when skills are disabled', () => {
   renderPublic(<Home />, { settings: HIDDEN_SETTINGS });
   expect(screen.queryByRole('heading', { name: /technologies/i })).toBeNull();
 });
+it('excludes typed company records from selected work even when flagged featured', async () => {
+  vi.mocked(api.skills).mockResolvedValue({ ok: true, data: {} });
+  vi.mocked(api.projects).mockResolvedValue({ ok: true, data: [{ title: 'Company Portal', description: 'Private claim', order: 0, tech: [], workType: 'company', featured: true }, { title: 'Personal Work', description: 'Public work', order: 1, tech: [], featured: true }] });
+  renderPublic(<Home />);
+  expect(await screen.findByRole('heading', { name: 'Personal Work' })).toBeInTheDocument();
+  expect(screen.queryByText('Company Portal')).toBeNull();
+  expect(screen.queryByText('Private claim')).toBeNull();
+});

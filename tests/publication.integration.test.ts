@@ -13,9 +13,9 @@ it('generates approved bilingual HTML with safe nested fields and enforces revoc
  const write=(path:string,value:unknown)=>writeFileSync(path,JSON.stringify(value));
  const run=(script:string,args:string[])=>spawnSync(process.platform==='win32'?'bun.exe':'bun',[script,...args],{cwd:resolve('.'),encoding:'utf8'});
  try {
-  const policy={enabled:true,maxAgeHours:72,settings:{...HIDDEN_SETTINGS,showProjects:true},projectSlugs:['infoxp','carbon-footprint']};
+  const policy={enabled:true,maxAgeHours:72,settings:{...HIDDEN_SETTINGS,showProjects:true},projectSlugs:['infoxp','company-portal']};
   write(manifest,policy);
-  write(source,{projects:[{title:'InfoXP',slug:'infoxp',description:'Verified overview',order:0,tech:['React'],caseStudy:{problem:'Verified problem',role:'Developer',decisions:['Decision'],secret:'private',repositories:[]},translations:{th:{title:'กรณีศึกษา',caseStudy:{role:'นักพัฒนา',secret:'private'}}}},{title:'InfoXP Backend',description:'Backend',order:1,tech:['Bun'],repo:'https://github.com/example/api'},{title:'Carbon Footprint',slug:'carbon-footprint',description:'Private company detail',order:2,tech:[],url:'https://carbon.devdeethailand.com',caseStudy:{problem:'Private company detail',role:'',screenshots:[{url:'https://example.com/private.png',alt:'Private'}]}}],skills:{},experiences:[],about:{en:{story:'',background:''},th:{story:'',background:''}}});
+  write(source,{projects:[{title:'InfoXP',workType:'personal',slug:'infoxp',description:'Verified overview',order:0,tech:['React'],caseStudy:{problem:'Verified problem',role:'Developer',decisions:['Decision'],secret:'private',repositories:[]},translations:{th:{title:'กรณีศึกษา',caseStudy:{role:'นักพัฒนา',secret:'private'}}}},{title:'InfoXP Backend',description:'Backend',order:1,tech:['Bun'],repo:'https://github.com/example/api'},{title:'Company Portal',workType:'company',slug:'company-portal',description:'Private company detail',order:2,tech:[],url:'https://company.example.com',caseStudy:{problem:'Private company detail',role:'',screenshots:[{url:'https://example.com/private.png',alt:'Private'}]}}],skills:{},experiences:[],about:{en:{story:'',background:''},th:{story:'',background:''}}});
   const generated=run('scripts/generate-public-snapshot.ts',['--manifest',manifest,'--source',source,'--output',snapshot]);
   expect(generated.status,generated.stderr).toBe(0);
   const published=JSON.parse(readFileSync(snapshot,'utf8'));
@@ -35,7 +35,7 @@ it('generates approved bilingual HTML with safe nested fields and enforces revoc
     expect(thai).toContain('hreflang="en"');expect(thai).toContain('https://mrwinrock.com/th/projects/infoxp/');
     expect(home).toContain('/projects/infoxp/');
    } else {expect(home).not.toContain('/projects/infoxp/');expect(sitemap).not.toContain('/projects/infoxp/');}
-   expect(home+sitemap).not.toContain('carbon-footprint');
+   expect(home+sitemap).not.toContain('company-portal');
   }
  } finally {
   rmSync(directory,{recursive:true,force:true});

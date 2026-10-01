@@ -1475,6 +1475,8 @@ export interface operations {
                             };
                             /** Format: uri */
                             url?: string;
+                            /** @enum {string} */
+                            workType?: "personal" | "company";
                         }[];
                         /** @constant */
                         ok: true;
@@ -1563,6 +1565,8 @@ export interface operations {
                     };
                     /** Format: uri */
                     url?: string;
+                    /** @enum {string} */
+                    workType?: "personal" | "company";
                 };
             };
         };
@@ -1630,6 +1634,8 @@ export interface operations {
                             };
                             /** Format: uri */
                             url?: string;
+                            /** @enum {string} */
+                            workType?: "personal" | "company";
                         };
                         /** @constant */
                         ok: true;
@@ -1775,6 +1781,8 @@ export interface operations {
                             };
                             /** Format: uri */
                             url?: string;
+                            /** @enum {string} */
+                            workType?: "personal" | "company";
                         }[];
                         /** @constant */
                         ok: true;
@@ -1886,6 +1894,8 @@ export interface operations {
                     };
                     /** Format: uri */
                     url?: string;
+                    /** @enum {string} */
+                    workType?: "personal" | "company";
                 };
             };
         };
@@ -1953,6 +1963,8 @@ export interface operations {
                             };
                             /** Format: uri */
                             url?: string;
+                            /** @enum {string} */
+                            workType?: "personal" | "company";
                         };
                         /** @constant */
                         ok: true;
@@ -3616,6 +3628,8 @@ export interface operations {
                             };
                             /** Format: uri */
                             url?: string;
+                            /** @enum {string} */
+                            workType?: "personal" | "company";
                         }[];
                         /** @constant */
                         ok: true;
