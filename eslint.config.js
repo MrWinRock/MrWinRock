@@ -9,6 +9,10 @@ import { globalIgnores } from 'eslint/config'
 export default tseslint.config([
   globalIgnores(['dist']),
   {
+    files: ['src/generated/openapi.ts'],
+    linterOptions: { reportUnusedDisableDirectives: 'off' },
+  },
+  {
     files: ['**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,

@@ -1,40 +1,69 @@
+import { trackPortfolioEvent } from '../../../lib/portfolioEvents';
 import { motion, AnimatePresence } from "motion/react";
 import type { Variants } from "motion/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from 'react';
+import type { ContactInput } from '../../../lib/apiTypes';
+import { validateContact, type ContactFieldErrors } from './contactValidation';
+import { useRetryCountdown } from '../../../hooks/useRetryCountdown';
 import { useTranslation } from "react-i18next";
 import SpotlightCard from "@/components/cards/SpotLightCard";
-import { api, ApiError } from "@/lib/api";
+import { api } from "@/lib/api";
 
 const CONTACT_EMAIL = "mrwinrock11@gmail.com";
 const GITHUB_URL = "https://github.com/MrWinRock";
 const LINKEDIN_URL = "https://www.linkedin.com/in/pharthiwath-gristsoopharruth-232301240/";
 
-type SubmitStatus = "idle" | "sending" | "success" | "error";
+type SubmitStatus = "idle" | "sending" | "success" | "error" | "unavailable" | "rate-limited";
 
 const Contact = () => {
     const { t } = useTranslation();
-    const [form, setForm] = useState({ name: "", email: "", message: "" });
+    const [form, setForm] = useState<ContactInput>({ name: "", email: "", message: "" });
     const [status, setStatus] = useState<SubmitStatus>("idle");
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+    const [errors, setErrors] = useState<ContactFieldErrors>({});
+    const [retryAt, setRetryAt] = useState<number>();
+    const seconds = useRetryCountdown(retryAt);
+    const active = useRef<AbortController | null>(null);
+    useEffect(() => () => active.current?.abort(), []);
+    useEffect(() => {
+        const firstInvalid = (['name', 'email', 'message'] as const).find(field => errors[field]);
+        if (firstInvalid) document.getElementById(firstInvalid)?.focus();
+    }, [errors]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (status === "sending") return;
-
-        setStatus("sending");
-        setErrorMessage(null);
+        if (active.current || (retryAt !== undefined && Date.now() < retryAt)) return;
+        const input = { name: form.name.trim(), email: form.email.trim(), message: form.message.trim() };
+        const invalid = validateContact(input);
+        setErrors(invalid);
+        if (Object.keys(invalid).length) return;
+        const controller = new AbortController();
+        active.current = controller;
+        setStatus('sending');
         try {
-            const res = await api.contact({
-                name: form.name.trim(),
-                email: form.email.trim(),
-                message: form.message.trim(),
-            });
-            if (!res.ok) throw new ApiError(200, res, res.message ?? "Send failed");
-            setStatus("success");
-            setForm({ name: "", email: "", message: "" });
-        } catch (err) {
-            setStatus("error");
-            setErrorMessage(err instanceof ApiError ? err.message : t("contact.error"));
+            await api.contact(input, { signal: controller.signal });
+            if (controller.signal.aborted) return;
+            setStatus('success');
+            setForm({ name: '', email: '', message: '' });
+        } catch (error) {
+            if (controller.signal.aborted) return;
+            const failure = error as { status?: number; cancelled?: boolean; retryAfterSeconds?: number; details?: { fieldErrors?: Record<string, string[]> } } | null;
+            if (failure?.cancelled) { setStatus('idle'); return; }
+            if (failure?.status === 429) {
+                setRetryAt(Date.now() + Math.max(0, failure.retryAfterSeconds ?? 60) * 1000);
+                setStatus('rate-limited');
+            } else {
+                setStatus(failure?.status === 503 ? 'unavailable' : 'error');
+                if (failure?.status === 400 && failure.details?.fieldErrors) {
+                    const fields: ContactFieldErrors = {};
+                    for (const key of ['name', 'email', 'message'] as const) {
+                        if (failure.details.fieldErrors[key]?.length) fields[key] = 'contact.validation.' + key;
+                    }
+                    setErrors(fields);
+                }
+            }
+        } finally {
+            if (active.current === controller) active.current = null;
         }
     };
 
@@ -47,14 +76,12 @@ const Contact = () => {
         visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
     };
 
-    const fieldClass =
-        "w-full px-4 py-3 rounded-lg bg-[#1f1f1f] border border-white/10 text-white placeholder-gray-500 " +
-        "focus:outline-none focus:border-[#8A2BE2] focus:ring-2 focus:ring-[#8A2BE2]/30 transition-colors duration-200";
+    const fieldClass = "contact-field";
 
     return (
         <motion.div
-            className="min-h-screen p-8"
-            initial="hidden"
+            className="secondary-page"
+            initial={false}
             animate="visible"
             variants={container}
         >
@@ -72,13 +99,15 @@ const Contact = () => {
                     {/* Form */}
                     <motion.div className="md:col-span-3" variants={item}>
                         <SpotlightCard index={0} className="flex flex-col">
-                            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                            <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-5">
                                 <div>
                                     <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">
                                         {t("contact.name")}
                                     </label>
                                     <input
                                         id="name"
+                                        aria-invalid={!!errors.name}
+                                        aria-describedby={errors.name ? 'name-error' : undefined}
                                         type="text"
                                         required
                                         disabled={status === "sending"}
@@ -87,6 +116,7 @@ const Contact = () => {
                                         className={`${fieldClass} disabled:opacity-60`}
                                         placeholder={t("contact.namePlaceholder")}
                                     />
+                                    {errors.name && <p id="name-error" className="mt-2 text-sm text-rose-300">{t(errors.name)}</p>}
                                 </div>
                                 <div>
                                     <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-300">
@@ -94,6 +124,8 @@ const Contact = () => {
                                     </label>
                                     <input
                                         id="email"
+                                        aria-invalid={!!errors.email}
+                                        aria-describedby={errors.email ? 'email-error' : undefined}
                                         type="email"
                                         required
                                         disabled={status === "sending"}
@@ -102,6 +134,7 @@ const Contact = () => {
                                         className={`${fieldClass} disabled:opacity-60`}
                                         placeholder={t("contact.emailPlaceholder")}
                                     />
+                                    {errors.email && <p id="email-error" className="mt-2 text-sm text-rose-300">{t(errors.email)}</p>}
                                 </div>
                                 <div>
                                     <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-300">
@@ -109,6 +142,8 @@ const Contact = () => {
                                     </label>
                                     <textarea
                                         id="message"
+                                        aria-invalid={!!errors.message}
+                                        aria-describedby={errors.message ? 'message-error' : undefined}
                                         rows={5}
                                         required
                                         minLength={10}
@@ -119,23 +154,26 @@ const Contact = () => {
                                         className={`${fieldClass} resize-y disabled:opacity-60`}
                                         placeholder={t("contact.messagePlaceholder")}
                                     />
+                                    {errors.message && <p id="message-error" className="mt-2 text-sm text-rose-300">{t(errors.message)}</p>}
                                 </div>
                                 <motion.button
                                     type="submit"
-                                    disabled={status === "sending"}
-                                    className="w-full bg-linear-to-r from-[#8000FF] to-[#00FFFF] text-white font-semibold px-6 py-3 rounded-lg cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-                                    whileHover={status === "sending" ? undefined : { scale: 1.02, boxShadow: "0 8px 24px rgba(128,0,255,0.35)" }}
+                                    disabled={status === "sending" || seconds > 0}
+                                    className="primary-action w-full disabled:opacity-60 disabled:cursor-not-allowed"
+
                                     whileTap={status === "sending" ? undefined : { scale: 0.98 }}
                                     transition={{ duration: 0.2 }}
                                 >
                                     {status === "sending" ? t("contact.sending") : t("contact.send")}
                                 </motion.button>
 
+                                {status === "sending" && <p role="status">{t("contact.sending")}</p>}
+                                {status === "rate-limited" && <><p role="alert">{t("contact.rateLimited")}</p><p aria-live="off">{t("resource.rateLimited", { count: seconds })}</p></>}
                                 <AnimatePresence mode="wait">
                                     {status === "success" && (
                                         <motion.p
                                             key="success"
-                                            initial={{ opacity: 0, y: -6 }}
+                                            initial={false}
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0 }}
                                             role="status"
@@ -144,16 +182,16 @@ const Contact = () => {
                                             {t("contact.success")}
                                         </motion.p>
                                     )}
-                                    {status === "error" && (
+                                    {(status === "error" || status === "unavailable") && (
                                         <motion.p
                                             key="error"
-                                            initial={{ opacity: 0, y: -6 }}
+                                            initial={false}
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0 }}
                                             role="alert"
                                             className="text-sm text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3"
                                         >
-                                            {errorMessage || t("contact.error")}
+                                            {t(status === "unavailable" ? "contact.unavailable" : "contact.error")}
                                         </motion.p>
                                     )}
                                 </AnimatePresence>
@@ -190,7 +228,7 @@ const Contact = () => {
                                 />
                             </div>
 
-                            <p className="text-xs text-gray-500 mt-auto pt-6">{t("contact.responseNote")}</p>
+                            <p className="text-xs text-gray-300 mt-auto pt-6">{t("contact.responseNote")}</p>
                         </SpotlightCard>
                     </motion.div>
                 </div>
@@ -210,10 +248,11 @@ interface ContactLinkProps {
 const ContactLink: React.FC<ContactLinkProps> = ({ href, label, value, icon, external }) => (
     <motion.a
         href={href}
+        onClick={()=>trackPortfolioEvent('contact_intent')}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
-        className="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-purple-500/50 hover:bg-white/[0.06] transition-colors duration-200 group"
-        whileHover={{ x: 3 }}
+        className="direct-link group"
+
     >
         <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/[0.05] text-gray-300 group-hover:text-white transition-colors shrink-0">
             {icon}

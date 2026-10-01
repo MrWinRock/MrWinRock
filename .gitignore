@@ -34,3 +34,5 @@ dist-ssr
 logs
 **/*.backup.*
 **/*.back.*
+playwright-report/
+test-results/

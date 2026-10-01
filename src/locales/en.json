@@ -6,7 +6,16 @@
         "projects": "Projects",
         "experience": "Experience",
         "contact": "Contact",
-        "resume": "Resume"
+        "resume": "Resume",
+        "openMenu": "Open menu",
+        "closeMenu": "Close menu",
+        "primary": "Primary navigation"
+    },
+    "accessibility": {
+        "skipToContent": "Skip to content",
+        "navigationUpdating": "Navigation is updating.",
+        "switchLanguageToThai": "Switch language to Thai",
+        "switchLanguageToEnglish": "Switch language to English"
     },
     "construction": {
         "title": "🚧 Under Construction...",
@@ -16,18 +25,22 @@
         "title": "Hi, I'm",
         "name": "Pharthiwath",
         "surname": "Gristsoopharruth",
-        "subtitle": "Full-Stack Developer & Computer Science Student",
-        "description": "Passionate about creating innovative web applications and exploring cybersecurity. Currently studying Computer Science at Suan Sunandha Rajabhat University.",
+        "subtitle": "Full-Stack Developer",
+        "description": "I build web applications, APIs, and mobile experiences. A Computer Science graduate based in Bangkok, with an interest in secure, practical software.",
         "viewWork": "View My Work",
         "aboutMe": "About Me",
         "techTitle": "Technologies I Work With",
-        "seeMore": "See More"
+        "seeMore": "See More",
+        "selectedTitle": "Selected work",
+        "evidence": "Skills in practice",
+        "brandAlt": "MrWinRock skull illustration",
+        "contactTitle": "Let’s talk about your next project."
     },
     "about": {
         "title": "About Me",
         "myStory": "My Story",
         "education": "Education",
-        "description1": "Hi! I'm Pharthiwath Gristsoopharruth, a Computer Science student at Suan Sunandha Rajabhat University, based in Bangkok, Thailand. I'm passionate about full-stack development and have a strong interest in cybersecurity. I’ve worked on several projects including ",
+        "description1": "Hi! I'm Pharthiwath Gristsoopharruth, a Computer Science graduate of Suan Sunandha Rajabhat University, based in Bangkok, Thailand. I'm passionate about full-stack development and have a strong interest in cybersecurity. I’ve worked on several projects including ",
         "description2": ", a blog platform for IT discussions, and ",
         "description3": ", a simple real-time one-on-one chat application. Outside of coding, I enjoy gaming, exploring cybersecurity, watching football, and motorsport. My goal is to grow into a senior role in the computer science field and contribute to impactful, secure software systems.",
         "educationDesc": "I'm currently pursuing a Bachelor's degree in Computer Science at Suan Sunandha Rajabhat University, with a GPA of 3.66. My studies focus on artificial intelligence, full-stack web and mobile application development, backend systems, and cybersecurity. This academic foundation, combined with hands-on projects, is shaping me into a versatile and forward-thinking developer."
@@ -51,18 +64,48 @@
         "title": "My Projects",
         "viewLive": "View Live",
         "notAvailable": "Not Available",
-        "github": "View on GitHub"
+        "github": "View on GitHub",
+        "selected": "Selected projects",
+        "all": "All projects",
+        "intro": "Web, mobile, and backend work. Explore the implementation and the repositories behind each project.",
+        "archive": "More projects",
+        "details": "Explore project",
+        "technologies": "Technologies",
+        "filter": "Filter by technology",
+        "noMatches": "No projects match this technology.",
+        "company": "Company work",
+        "publicLink": "Public website link.",
+        "notFound": "Project not found",
+        "back": "Back to projects",
+        "caseStudy": "Project overview",
+        "problem": "The problem",
+        "role": "My contribution",
+        "decisions": "Technical decisions",
+        "outcomes": "Verified outcomes",
+        "repositories": "Repositories",
+        "noRepository": "GitHub repository not available"
     },
     "experience": {
         "title": "Experience",
         "present": "Present",
-        "achievements": "Key Achievements"
+        "achievements": "Key Achievements",
+        "types": {
+            "Full-time": "Full-time",
+            "Part-time": "Part-time",
+            "Internship": "Internship",
+            "Freelance": "Freelance",
+            "Contract": "Contract",
+            "Bachelor": "Bachelor",
+            "Master": "Master",
+            "PhD": "PhD"
+        }
     },
     "resume": {
         "title": "Resume",
         "download": "Download Resume",
         "newTab": "Opens in new tab",
-        "browserError": "Your browser can't display PDFs inline."
+        "browserError": "Your browser can't display PDFs inline.",
+        "downloadError": "Unable to download. Try again or open the résumé page."
     },
     "contact": {
         "title": "Get in Touch",
@@ -80,11 +123,33 @@
         "directTitle": "Other ways to reach me",
         "directSubtitle": "Prefer a direct line? Find me here.",
         "emailMe": "Email me",
-        "responseNote": "I usually reply within a day or two."
+        "responseNote": "I usually reply within a day or two.",
+        "unavailable": "Contact service is temporarily unavailable. Please try again later or email me directly.",
+        "validation": {
+            "name": "Please enter your name.",
+            "email": "Please enter a valid email address.",
+            "message": "Please enter a message between 10 and 5000 characters."
+        },
+        "rateLimited": "Too many requests. Please wait before sending again."
     },
     "footer": {
         "rights": "All rights reserved",
         "builtWith": "Built with React, TypeScript, and Tailwind CSS",
-        "followMe": "Follow me on"
+        "followMe": "Follow me on",
+        "and": "and"
+    },
+    "resource": {
+        "loading": "Loading content…",
+        "empty": "No content has been published yet.",
+        "disabled": "This section is currently unavailable.",
+        "stale": "Cached content — showing bundled content while the service is unavailable.",
+        "unavailable": "Content is temporarily unavailable. Please try again.",
+        "rateLimited": "Too many requests. Retry available in {{count}} seconds.",
+        "retry": "Retry",
+        "snapshot": "Published content — using the last deployed public version."
+    },
+    "notFound": {
+        "title": "Page not found",
+        "description": "This address does not match a published page."
     }
 }
