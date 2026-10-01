@@ -18,7 +18,7 @@ const LanguageSwitcher = () => {
         <button
             type="button"
             onClick={toggleLanguage}
-            className="p-button"
+            className="p-button language-switcher"
             aria-label={targetLanguage === 'th'
                 ? t('accessibility.switchLanguageToThai')
                 : t('accessibility.switchLanguageToEnglish')}

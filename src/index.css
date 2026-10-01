@@ -72,12 +72,13 @@ h1,h2,h3 {
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:12px;
-  min-height:44px;
-  padding:11px 18px;
+  gap:8px;
+  min-height:40px;
+  padding:8px 14px;
   border:1px solid var(--border);
   border-radius:var(--radius);
-  font-size:1rem;
+  font-size:.9rem;
+  line-height:1.4;
   font-weight:600;
   color:#eceef1;
   background:#191c21;
@@ -103,6 +104,16 @@ h1,h2,h3 {
 .p-button:disabled,.s-button:disabled {
   opacity:.5;
   cursor:not-allowed
+}
+
+.navbar .language-switcher {
+  width:40px;
+  height:36px;
+  min-height:36px;
+  padding:0;
+  font-size:.8rem;
+  border-radius:12px;
+  flex-shrink:0
 }
 
 .navbar {
@@ -167,7 +178,9 @@ h1,h2,h3 {
 .nav-resume {
   border:1px solid #424954;
   border-radius:var(--radius);
-  padding-inline:14px
+  min-height:40px;
+  padding:8px 12px;
+  line-height:1.4
 }
 
 .menu-toggle {
@@ -376,10 +389,10 @@ h1,h2,h3 {
 .project-detail-link {
   display:inline-flex;
   align-items:center;
-  gap:24px;
+  gap:8px;
   font-size:.9rem;
   color:var(--brand-cyan);
-  min-height:44px
+  min-height:40px
 }
 
 .project-detail-link:hover {
@@ -691,10 +704,6 @@ h1,h2,h3 {
     min-height:68px
   }
 
-  .navbar .p-button {
-    padding:8px 12px
-  }
-
   .hero {
     grid-template-columns:1fr;
     gap:0;
@@ -926,7 +935,7 @@ h1,h2,h3 {
 /* Project actions keep identical geometry across every availability state. */
 .project-actions {
   display:grid;
-  grid-template-columns:minmax(0,1fr) 44px;
+  grid-template-columns:minmax(0,1fr) 40px;
   gap:12px;
   width:200px;
   max-width:100%;
@@ -937,7 +946,7 @@ h1,h2,h3 {
   align-items:center;
   justify-content:center;
   gap:8px;
-  height:44px;
+  height:40px;
   border:1px solid #3c434e;
   border-radius:var(--radius);
   background:#191c21;
@@ -951,7 +960,7 @@ a.project-action-live:hover,a.project-action-repository:hover {
   background:#252a32;
   border-color:#687385;
 }
-.project-action-repository {width:44px}
+.project-action-repository {width:40px}
 .project-action-repository img {width:20px;height:20px}
 .project-action-unavailable {
   background:transparent;
@@ -961,7 +970,7 @@ a.project-action-live:hover,a.project-action-repository:hover {
 }
 .project-action-unavailable img {opacity:.45}
 .project-links {align-items:stretch}
-.project-detail-link {justify-content:space-between}
+.project-detail-link {justify-content:flex-start;width:fit-content;max-width:100%}
 .public-notice {
   margin:24px 0;
   border:1px solid var(--border);
@@ -1026,5 +1035,10 @@ a.project-action-live:hover,a.project-action-repository:hover {
 @media(max-width:767px) {
   :root {font-size:17px}
   .project-links {flex-direction:column;align-items:flex-start;gap:8px}
-  .project-detail-link {width:200px;max-width:100%}
+  .p-button,.s-button,.primary-action {min-height:44px}
+  .nav-resume {min-height:44px}
+  .navbar .language-switcher {width:44px;height:40px;min-height:40px}
+  .project-actions {grid-template-columns:minmax(0,1fr) 44px}
+  .project-action-live,.project-action-repository {height:44px}
+  .project-action-repository {width:44px}
 }
