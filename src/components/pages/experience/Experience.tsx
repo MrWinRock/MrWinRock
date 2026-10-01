@@ -32,7 +32,8 @@ const Experience = () => {
     return <div className="secondary-page">
         <h1>{t('experience.title')}</h1><PublicDataNotice {...resource} />
         <div className="experience-list">{experienceList.map(exp => <article className="experience-row" key={exp._id || `${exp.company}-${exp.title}-${exp.startDate}`}>
-            <div className="experience-meta"><p>{getDateRange(exp.startDate,exp.endDate)}</p><span>{t('experience.types.'+exp.type,{defaultValue:exp.type})}</span></div>
+            <span className="experience-marker" aria-hidden="true" />
+            <div className="experience-meta"><p className="experience-period">{getDateRange(exp.startDate,exp.endDate)}</p><span className="experience-kind">{t('experience.types.'+exp.type,{defaultValue:exp.type})}</span></div>
             <div className="experience-body"><h2>{exp.title}</h2><p className="experience-company">{exp.company} · {exp.location}</p><p>{exp.description}</p>
                 {!!exp.achievements.length && <div><h3>{t('experience.achievements')}</h3><ul>{exp.achievements.map((achievement,index)=><li key={index}>{achievement}</li>)}</ul></div>}
                 <div className="flex flex-wrap gap-2">{exp.tech.map((tag,index)=><span className="tech-tag" key={index}>{tag}</span>)}</div>

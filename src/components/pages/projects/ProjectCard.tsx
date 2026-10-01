@@ -8,7 +8,7 @@ import { trackPortfolioEvent } from '../../../lib/portfolioEvents';
 export function ProjectCard({ project, number }: { project: Project; number?: number }) {
     const { t } = useTranslation();
     const screenshot = project.caseStudy?.screenshots?.find(item => safeExternalUrl(item.url));
-    return <article className="project-card">
+    return <article className="project-card" data-featured={number ? true : undefined}>
         <span className="project-number" aria-hidden="true">{number ? String(number).padStart(2, '0') : '↗'}</span>
         <div className="project-card-body"><div className="project-summary"><h3>{project.title}</h3><p>{project.description}</p>
             <ul className="flex flex-wrap gap-2" aria-label={t('projects.technologies')}>{project.tech.map(tag => <li key={tag} className="tech-tag">{tag}</li>)}</ul></div>
