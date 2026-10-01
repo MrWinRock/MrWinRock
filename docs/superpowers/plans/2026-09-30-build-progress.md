@@ -17,7 +17,7 @@ Task status: implementation and local verification complete. Changes remain revi
 | 5 | Explicit opt-in manifest, versioned/expiring snapshot generation, recursive public allowlist, runtime authorization, live 403 precedence, bilingual editors/fallback, Home/project prerendering, sitemap and language alternates | Publication starts disabled; choose approved content, generate and deploy before offline snapshots or static case studies become public |
 | 6 | Three-suite verification, both production browser engines, responsive/axe QA, intent-only interaction analytics, release and rollback documentation | Hosted CI/production rollout remains to be run |
 
-Confirmed content decisions: Home and README say Full-Stack Developer and Computer Science graduate. Carbon Footprint is a public website link only, with no company screenshots, descriptions of internal work, or contribution claims. InfoXP, Stringy, and ChadChat remain featured. English and Thai interface copy is complete; content translation fields are optional and retain English evidence when absent.
+Confirmed content decisions: Home and README say Full-Stack Developer and Computer Science graduate. Company work is managed in backend project records with `workType: "company"` and appears only as public website links from the live API, with no company screenshots, descriptions of internal work, or contribution claims. InfoXP, Stringy, and ChadChat remain featured. English and Thai interface copy is complete; content translation fields are optional and retain English evidence when absent.
 
 Final evidence:
 

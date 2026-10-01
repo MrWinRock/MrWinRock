@@ -120,3 +120,31 @@ test('English selected from a Thai URL survives reload and keeps the route', asy
  await expect(page.locator('html')).toHaveAttribute('lang','en');
  await expect(page).not.toHaveURL(/\/th\//);
 });
+
+test('API company work stays link-only and disappears after deletion or disablement', async ({ page }) => {
+ const company = { _id: 'company-one', title: 'Company Portal', slug: 'company-portal', workType: 'company', url: 'https://company.example.com', description: 'Private contribution claim', order: 2, tech: ['PrivateTech'], featured: true, repo: 'https://github.com/example/private', caseStudy: { problem: 'Private problem', screenshots: [{ url: 'https://example.com/private.png', alt: 'Private screenshot' }] }, translations: { th: { title: 'เว็บไซต์บริษัท' } } };
+ let records = [company, { ...company, _id: 'company-two', title: 'Public Tool', slug: 'public-tool', url: 'https://tool.example.com', order: 1, translations: { th: { title: 'เครื่องมือสาธารณะ' } } }];
+ let status = 200;
+ await page.route('**/api/projects', route => route.fulfill({ status, json: status === 200 ? { ok: true, data: records } : { ok: false } }));
+ await page.goto('/projects?tech=Missing');
+ const links = page.locator('.company-link a');
+ await expect(links).toHaveCount(2);
+ await expect(links.first()).toHaveText('Public Tool ↗');
+ await expect(page.getByRole('link', { name: /Company Portal/ })).toHaveAttribute('href', 'https://company.example.com/');
+ await expect(page.locator('.company-link img')).toHaveCount(0);
+ await expect(page.getByText(/Private contribution|PrivateTech|Private problem/)).toHaveCount(0);
+ await expect(page.locator('a[href="/projects/company-portal"], a[href="https://github.com/example/private"]')).toHaveCount(0);
+ await page.getByRole('button', { name: /switch language to thai/i }).click();
+ await expect(page.getByRole('link', { name: /เว็บไซต์บริษัท/ })).toHaveAttribute('href', 'https://company.example.com/');
+ await page.goto('/projects/company-portal');
+ await expect(page.getByRole('heading', { name: /not found|ไม่พบ/ })).toBeVisible();
+ await expect(page.getByText(/Private contribution|Private problem/)).toHaveCount(0);
+ records = [];
+ await page.goto('/projects');
+ await expect(page.getByRole('status')).toContainText(/no content|ยังไม่มี/);
+ await expect(page.locator('.company-link')).toHaveCount(0);
+ records = [company]; status = 403;
+ await page.reload();
+ await expect(page.getByRole('status')).toContainText(/currently unavailable|ไม่พร้อม/);
+ await expect(page.locator('.company-link')).toHaveCount(0);
+});

@@ -25,6 +25,15 @@ it('accepts generated-contract content shapes', async () => {
     await expect(client.skills()).resolves.toEqual(skills);
     await expect(client.experiences()).resolves.toEqual(experiences);
 });
+it.each(['company', 'personal', undefined])('accepts optional project work type %s', async workType => {
+    const data = [{ title: 'Product', description: '', order: 0, tech: [], ...(workType ? { workType } : {}) }];
+    const adapter: AxiosAdapter = async config => ({ config, status: 200, statusText: '200', headers: {}, data: { ok: true, data } });
+    await expect(createApiClient({ adapter }).projects()).resolves.toMatchObject({ data });
+});
+it.each(['invalid', null, { secret: 'private' }])('rejects invalid project work type %s', async workType => {
+    const adapter: AxiosAdapter = async config => ({ config, status: 200, statusText: '200', headers: {}, data: { ok: true, data: [{ title: 'Product', description: '', order: 0, tech: [], workType }] } });
+    await expect(createApiClient({ adapter }).projects()).rejects.toMatchObject({ code: 'malformed_response' });
+});
 
 it.each([
     ['projects', [{ title: 'Broken project', tech: null }]],

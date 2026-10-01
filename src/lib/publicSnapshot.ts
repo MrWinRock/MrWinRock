@@ -2,6 +2,7 @@ import snapshot from '../data/public-snapshot.json';
 import publication from '../data/publication.json';
 import type { AboutDoc, ApiExperience, ApiProject, SettingsDoc, SkillsResponse } from './apiTypes';
 import { validPortfolioExtras } from './portfolioShape';
+import { isCompanyProject } from './portfolio';
 
 export interface PublicSnapshot { version: 1; publishedAt: string; expiresAt: string; settings: SettingsDoc; projects: ApiProject[]; experiences: ApiExperience[]; skills: SkillsResponse['data']; about: { en: AboutDoc; th: AboutDoc } }
 const record = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' && !Array.isArray(value);
@@ -32,7 +33,7 @@ function cleanStudy(value: NonNullable<ApiProject['caseStudy']> | NonNullable<No
 function cleanSnapshot(value: PublicSnapshot): PublicSnapshot {
     return {
         version:1,publishedAt:value.publishedAt,expiresAt:value.expiresAt,settings:pick(value.settings,['showAbout','showSkills','showProjects','showExperience','showResume','showContact']),
-        projects:value.projects.map(project=>({...pick(project,['title','description','url','repo','tech','order','slug','featured']),
+        projects:value.projects.map(project=>({...pick(project,['title','description','url','repo','tech','order','slug','featured','workType']),
             ...(project.caseStudy ? {caseStudy:cleanStudy(project.caseStudy)} : {}),
             ...(project.translations?.th ? {translations:{th:{...pick(project.translations.th,['title','description']),...(project.translations.th.caseStudy?{caseStudy:cleanStudy(project.translations.th.caseStudy)}:{})}}} : {}),
         })),
@@ -45,6 +46,6 @@ export function approvedPublicSnapshot(value: unknown, manifest: {enabled:boolea
     if (!manifest.enabled) return null;
     const parsed=parsePublicSnapshot(value,now); if (!parsed) return null;
     const settings=Object.fromEntries(Object.entries(parsed.settings).map(([key,allowed])=>[key,allowed && manifest.settings[key as keyof SettingsDoc]===true])) as SettingsDoc;
-    return {...parsed,settings,projects:settings.showProjects?parsed.projects.filter(project=>project.slug&&manifest.projectSlugs.includes(project.slug)):[],experiences:settings.showExperience?parsed.experiences:[],skills:settings.showSkills?parsed.skills:{},about:settings.showAbout?parsed.about:{en:{story:'',background:''},th:{story:'',background:''}}};
+    return {...parsed,settings,projects:settings.showProjects?parsed.projects.filter(project=>!isCompanyProject(project)&&project.slug&&manifest.projectSlugs.includes(project.slug)):[],experiences:settings.showExperience?parsed.experiences:[],skills:settings.showSkills?parsed.skills:{},about:settings.showAbout?parsed.about:{en:{story:'',background:''},th:{story:'',background:''}}};
 }
 export const getPublicSnapshot = () => approvedPublicSnapshot(snapshot,publication);

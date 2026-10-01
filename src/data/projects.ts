@@ -170,4 +170,3 @@ export const projects: Project[] = projectRecords.map(project => ({
     slug: project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
     featured: featured.has(project.title),
 }));
-projects.push({ title: 'Carbon Footprint', description: 'Company project · public website link.', url: 'https://carbon.devdeethailand.com', tech: [], order: 21, featured: false });

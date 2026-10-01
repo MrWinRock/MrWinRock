@@ -11,6 +11,7 @@ function study(value: unknown): boolean {
     return true;
 }
 export function validPortfolioExtras(value: Record<string, unknown>): boolean {
+    if (value.workType !== undefined && value.workType !== 'personal' && value.workType !== 'company') return false;
     if (!texts(value, ['slug']) || (value.slug !== undefined && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(String(value.slug)))) return false;
     if (value.featured !== undefined && typeof value.featured !== 'boolean') return false;
     if (value.caseStudy !== undefined && !study(value.caseStudy)) return false;
