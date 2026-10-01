@@ -251,7 +251,7 @@ h1,h2,h3 {
   border-radius:50%;
   object-fit:cover;
   border:1px solid #404651;
-  filter:grayscale(1);
+  filter:none;
   margin-bottom:18px
 }
 
@@ -287,7 +287,7 @@ h1,h2,h3 {
 }
 
 .section-heading>a {
-  color:#c1c8d3;
+  color:var(--brand-cyan);
   font-size:.9rem
 }
 
@@ -448,8 +448,11 @@ h1,h2,h3 {
   align-items:center;
   flex-wrap:wrap;
   gap:24px;
-  border-top:1px solid var(--border);
-  padding:48px 0 0
+  border:1px solid #584275;
+  border-radius:var(--radius-panel);
+  background:var(--brand-wash);
+  padding:28px;
+  margin-top:24px
 }
 
 .page-shell,.secondary-page {
@@ -568,7 +571,7 @@ h1,h2,h3 {
 .skill-category-title {
   text-align:left;
   font-size:1rem;
-  color:#c6ccd7;
+  color:var(--brand-ink);
   margin-bottom:20px;
   font-weight:600
 }
@@ -577,14 +580,19 @@ h1,h2,h3 {
   display:flex;
   gap:14px;
   align-items:center;
-  padding:18px 0;
-  border-bottom:1px solid var(--border);
+  padding:18px;
+  border:1px solid #493859;
+  border-radius:var(--radius);
+  background:linear-gradient(125deg,#8000FF12,#8A2BE208,#00FFFF08),var(--surface);
+  min-width:0;
+  overflow-wrap:anywhere;
   font-size:1rem
 }
 
 .skill-tile img {
-  width:28px;
-  height:28px;
+  width:32px;
+  height:32px;
+  flex-shrink:0;
   object-fit:contain
 }
 
@@ -595,25 +603,35 @@ h1,h2,h3 {
 .neutral-icon {
   display:grid;
   place-items:center;
-  width:32px;
-  height:32px;
-  color:#bac4d4
+  width:44px;
+  height:44px;
+  flex-shrink:0;
+  border:1px solid #584275;
+  border-radius:var(--radius);
+  background:var(--brand-wash);
+  color:var(--brand-ink)
 }
 
 .direct-link {
   display:flex;
   align-items:center;
   gap:14px;
-  padding:14px 0;
-  border-bottom:1px solid var(--border)
+  padding:14px;
+  border:1px solid #493859;
+  border-radius:var(--radius);
+  background:linear-gradient(125deg,#8000FF10,#00FFFF06);
+  transition:border-color .25s,background-color .25s
 }
 
 .direct-link:hover {
-  color:#b1e3e8
+  color:var(--brand-cyan);
+  border-color:#8d6aba
 }
 
 .footer {
-  border-top:1px solid var(--border);
+  border-top:1px solid transparent;
+  border-image:var(--brand-gradient) 1;
+  background:#14151a;
   padding:28px 32px;
   color:#a5adba;
   font-size:.8rem
@@ -635,7 +653,8 @@ h1,h2,h3 {
 }
 
 .footer a {
-  padding:10px 0
+  padding:10px 0;
+  color:var(--brand-cyan)
 }
 
 .footer a:hover {
@@ -736,7 +755,7 @@ h1,h2,h3 {
   }
 
   .contact-rail {
-    padding-top:32px
+    padding:24px
   }
 
   .footer {
@@ -884,6 +903,22 @@ h1,h2,h3 {
 .collection-heading {display:flex;align-items:center;gap:14px;margin:32px 0 20px}
 .collection-heading h2 {font-size:1.3rem;font-weight:600}
 .collection-count {display:grid;place-items:center;min-width:32px;min-height:32px;padding:2px 8px;border-radius:10px;border:1px solid #584275;background:var(--brand-wash);color:var(--brand-ink);font-size:.8rem}
+.public-skill-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.skill-category-title {display:flex;align-items:center;gap:12px}
+.skill-category-title::before {content:'';width:4px;height:24px;flex-shrink:0;background:var(--brand-gradient);border-radius:4px}
+.surface-panel,.evidence-panel {position:relative}
+.surface-panel::before,.evidence-panel::before {content:'';position:absolute;top:0;left:28px;right:28px;height:2px;background:var(--brand-gradient);border-radius:2px}
+.direct-link>span:first-child {border:1px solid #584275;border-radius:12px;background:var(--brand-wash);color:var(--brand-ink)}
+.contact-field,.search-field {border-color:#584275;background:linear-gradient(125deg,#8000FF07,#00FFFF04),#15181c}
+.resume-toolbar {padding:20px;border:1px solid #493859;border-radius:var(--radius-panel);background:var(--brand-wash)}
+.resume-frame {border-color:#584275;background:#181a1e}
+.hero {isolation:isolate}
+.hero::after {content:'';position:absolute;inset:12px -20px 32px;border-radius:var(--radius-panel);background:linear-gradient(110deg,#8000FF08,transparent 50%,#00FFFF08);z-index:-1;pointer-events:none}
+.hero-identity img {border:2px solid transparent;background:linear-gradient(#17191e,#17191e) padding-box,var(--brand-gradient) border-box}
+.company-link {border:1px solid #493859;border-radius:var(--radius-panel);padding:24px;background:var(--brand-wash)}
+@media(max-width:1023px){.public-skill-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:767px){.public-skill-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero::after{inset:12px -12px 20px}}
+@media(max-width:479px){.public-skill-grid{grid-template-columns:1fr}.contact-rail{padding:20px}.direct-link{padding:12px;gap:10px}}
 .page-title::after,.secondary-page h1::after {content:'';display:block;width:64px;height:4px;border-radius:4px;background:var(--brand-gradient);margin-top:20px}
 
 .text-gray-500 {color:#9ba5b5}

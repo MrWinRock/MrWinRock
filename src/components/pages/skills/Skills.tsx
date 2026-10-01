@@ -82,7 +82,7 @@ const Skills = () => {
                                 {categoryTitles[category.id] || category.id}
                             </motion.h2>
 
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            <div className="public-skill-grid">
                                 {category.skills.map((skill, skillIndex) => (
                                     <motion.div
                                         key={skill._id || skill.name}

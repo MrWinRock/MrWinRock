@@ -27,7 +27,7 @@ const Resume = () => {
 
                 <PublicDataNotice {...resource} />
                 {resumeUrl && <>
-                <div className="flex flex-wrap gap-3 mb-6">
+                <div className="resume-toolbar flex flex-wrap gap-3 mb-6">
                     <a
                         href={resumeUrl}
                         download="Pharthiwath_Gristsoopharruth_Resume.pdf"
