@@ -1,16 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Prompt:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 :root {
-  font-family:"Manrope","Prompt",sans-serif;
-  line-height:1.6;
-  font-weight:400;
+  font-family:"Space Grotesk","Noto Sans Thai",sans-serif;
+  font-size:18px;
+  line-height:1.65;
+  font-weight:500;
   color-scheme:dark;
   color:#eceef1;
   background:#111214;
   font-synthesis:none;
   text-rendering:optimizeLegibility;
   -webkit-font-smoothing:antialiased;
-  --radius:6px;
+  --radius:14px;
+  --radius-panel:22px;
+  --motion-ease:cubic-bezier(.22,1,.36,1);
   --brand-gradient:linear-gradient(110deg,#8000FF,#8A2BE2,#00FFFF);
   --surface:#181a1e;
   --border:#2c3037;
@@ -52,8 +55,7 @@ h1,h2,h3 {
   letter-spacing:-.035em
 }
 
-.font-bold,.font-black {
-  font-weight:600
+.font-bold,.font-black { font-weight:700
 }
 
 .App>main {
@@ -72,8 +74,8 @@ h1,h2,h3 {
   padding:11px 18px;
   border:1px solid var(--border);
   border-radius:var(--radius);
-  font-size:.85rem;
-  font-weight:500;
+  font-size:1rem;
+  font-weight:600;
   color:#eceef1;
   background:#191c21;
   cursor:pointer;
@@ -136,8 +138,8 @@ h1,h2,h3 {
   position:relative;
   color:#a5adba;
   padding:10px 9px;
-  font-size:.75rem;
-  font-weight:500;
+  font-size:.85rem;
+  font-weight:600;
   min-height:44px;
   display:inline-flex;
   align-items:center
@@ -213,14 +215,14 @@ h1,h2,h3 {
   color:#b6bdc9;
   text-transform:uppercase;
   letter-spacing:.16em;
-  font-size:.65rem;
-  font-weight:500
+  font-size:.75rem;
+  font-weight:600
 }
 
 .hero-name {
   font-size:clamp(2.5rem,5.4vw,4.65rem);
   line-height:1.08;
-  font-weight:500;
+  font-weight:600;
   letter-spacing:-.055em;
   margin:24px 0;
   overflow-wrap:anywhere
@@ -228,7 +230,7 @@ h1,h2,h3 {
 
 .hero-description {
   max-width:53ch;
-  font-size:1rem;
+  font-size:1.1rem;
   line-height:1.9;
   color:var(--muted)
 }
@@ -250,7 +252,7 @@ h1,h2,h3 {
 
 .hero-identity p {
   color:#a5adba;
-  font-size:.7rem;
+  font-size:.8rem;
   line-height:1.8
 }
 
@@ -275,13 +277,13 @@ h1,h2,h3 {
 
 .section-heading h2,.contact-rail h2 {
   font-size:clamp(1.6rem,3vw,2rem);
-  font-weight:500;
+  font-weight:600;
   margin-top:10px
 }
 
 .section-heading>a {
   color:#c1c8d3;
-  font-size:.8rem
+  font-size:.9rem
 }
 
 .section-heading>a:hover {
@@ -304,7 +306,7 @@ h1,h2,h3 {
 
 .project-number {
   color:#9ba5b5;
-  font-size:.7rem;
+  font-size:.8rem;
   font-variant-numeric:tabular-nums;
   padding-top:6px
 }
@@ -325,11 +327,11 @@ h1,h2,h3 {
 
 .project-summary h3 {
   font-size:1.45rem;
-  font-weight:500
+  font-weight:600
 }
 
 .project-summary p {
-  font-size:.85rem;
+  font-size:1rem;
   line-height:1.8;
   max-width:65ch;
   color:#a5adba
@@ -357,7 +359,7 @@ h1,h2,h3 {
   display:inline-flex;
   align-items:center;
   gap:24px;
-  font-size:.8rem;
+  font-size:.9rem;
   color:#eceef1;
   min-height:44px
 }
@@ -368,7 +370,7 @@ h1,h2,h3 {
 
 .project-links .s-button {
   padding:8px 12px;
-  font-size:.7rem
+  font-size:.8rem
 }
 
 .project-links>div {
@@ -381,7 +383,7 @@ h1,h2,h3 {
 }
 
 .tech-tag {
-  font-size:.65rem;
+  font-size:.75rem;
   color:#b3bccb;
   padding:2px 0
 }
@@ -401,7 +403,7 @@ h1,h2,h3 {
   border:1px solid var(--border);
   border-radius:var(--radius);
   color:#c1c8d3;
-  font-size:.8rem
+  font-size:.9rem
 }
 
 .skill-evidence:hover {
@@ -436,7 +438,7 @@ h1,h2,h3 {
 
 .page-title,.secondary-page h1 {
   font-size:clamp(2.25rem,5vw,3.5rem);
-  font-weight:500;
+  font-weight:600;
   line-height:1.2;
   letter-spacing:-.05em;
   margin:16px 0 24px;
@@ -444,7 +446,7 @@ h1,h2,h3 {
 }
 
 .page-description {
-  font-size:.95rem;
+  font-size:1.05rem;
   color:var(--muted);
   max-width:65ch;
   line-height:1.9
@@ -469,13 +471,13 @@ h1,h2,h3 {
 }
 
 .secondary-page h2 {
-  font-weight:500
+  font-weight:600
 }
 
 .surface-panel,.evidence-panel {
   padding:28px;
   border:1px solid var(--border);
-  border-radius:var(--radius);
+  border-radius:var(--radius-panel);
   background:var(--surface);
   overflow-wrap:anywhere
 }
@@ -491,12 +493,12 @@ h1,h2,h3 {
 
 .evidence-panel h2 {
   font-size:1.2rem;
-  font-weight:500;
+  font-weight:600;
   margin-bottom:16px
 }
 
 .evidence-panel p,.evidence-panel li {
-  font-size:.9rem;
+  font-size:1rem;
   color:var(--muted);
   line-height:1.9;
   white-space:pre-line
@@ -515,7 +517,7 @@ h1,h2,h3 {
   background:#15181c;
   padding:12px 14px;
   color:#eceef1;
-  font-size:.9rem
+  font-size:1rem
 }
 
 .search-field:focus,.contact-field:focus {
@@ -538,7 +540,7 @@ h1,h2,h3 {
 }
 
 .company-link>p:last-child {
-  font-size:.75rem;
+  font-size:.85rem;
   color:var(--muted)
 }
 
@@ -547,7 +549,7 @@ h1,h2,h3 {
   font-size:1rem;
   color:#c6ccd7;
   margin-bottom:20px;
-  font-weight:500
+  font-weight:600
 }
 
 .skill-tile {
@@ -556,7 +558,7 @@ h1,h2,h3 {
   align-items:center;
   padding:18px 0;
   border-bottom:1px solid var(--border);
-  font-size:.85rem
+  font-size:1rem
 }
 
 .skill-tile img {
@@ -566,7 +568,7 @@ h1,h2,h3 {
 }
 
 .skill-tile span {
-  font-weight:400
+  font-weight:500
 }
 
 .neutral-icon {
@@ -593,7 +595,7 @@ h1,h2,h3 {
   border-top:1px solid var(--border);
   padding:28px 32px;
   color:#a5adba;
-  font-size:.7rem
+  font-size:.8rem
 }
 
 .footer-inner {
@@ -672,7 +674,7 @@ h1,h2,h3 {
   }
 
   .hero-description {
-    font-size:.95rem
+    font-size:1.05rem
   }
 
   .home-section {
@@ -729,7 +731,7 @@ h1,h2,h3 {
   }
 
   .tech-tag {
-    font-size:.6rem
+    font-size:.75rem
   }
 
 }
@@ -758,7 +760,7 @@ h1,h2,h3 {
 
 .experience-meta {
   color:#a5adba;
-  font-size:.75rem
+  font-size:.85rem
 }
 
 .experience-meta span {
@@ -778,7 +780,7 @@ h1,h2,h3 {
 
 .experience-body p,.experience-body li {
   color:#a5adba;
-  font-size:.85rem;
+  font-size:1rem;
   line-height:1.8
 }
 
@@ -787,7 +789,7 @@ h1,h2,h3 {
 }
 
 .experience-body h3 {
-  font-size:.8rem;
+  font-size:.9rem;
   margin-bottom:12px
 }
 
@@ -839,8 +841,8 @@ h1,h2,h3 {
   border-radius:var(--radius);
   background:#191c21;
   color:#d7dde7;
-  font-size:.75rem;
-  font-weight:500;
+  font-size:.85rem;
+  font-weight:600;
   white-space:nowrap;
   transition:background-color .15s,border-color .15s;
 }
@@ -862,14 +864,66 @@ a.project-action-live:hover,a.project-action-repository:hover {
 .public-notice {
   margin:24px 0;
   border:1px solid var(--border);
-  border-radius:var(--radius);
+  border-radius:var(--radius-panel);
   background:var(--surface);
   padding:20px;
   color:#cbd2dd;
-  font-size:.85rem;
+  font-size:1rem;
 }
-.project-screenshot,.resume-frame {border-radius:var(--radius)}
+.project-cover,.project-screenshot,.resume-frame {border-radius:var(--radius-panel)}
+
+/* A shared rhythm for entrances and interactive movement. */
+.route-enter {animation:page-arrive .55s var(--motion-ease) backwards}
+@keyframes page-arrive {
+  from {opacity:0;transform:translateY(14px)}
+  to {opacity:1;transform:translateY(0)}
+}
+@keyframes content-arrive {
+  from {opacity:0;transform:translateY(20px)}
+  to {opacity:1;transform:translateY(0)}
+}
+@keyframes accent-arrive {
+  from {transform:scaleX(0)}
+  to {transform:scaleX(1)}
+}
+@media(prefers-reduced-motion:no-preference) {
+  .hero>div:first-child>* {animation:content-arrive .7s var(--motion-ease) both}
+  .hero>div:first-child>:nth-child(2) {animation-delay:.06s}
+  .hero>div:first-child>:nth-child(3) {animation-delay:.12s}
+  .hero>div:first-child>:nth-child(4) {animation-delay:.18s}
+  .hero>div:first-child>:nth-child(5) {animation-delay:.24s}
+  .hero-identity {animation:content-arrive .9s .2s var(--motion-ease) both}
+  .hero::before {transform-origin:left;animation:accent-arrive .9s .1s var(--motion-ease) both}
+  .project-card,.experience-row,.skill-tile,.surface-panel,.evidence-panel {
+    animation:content-arrive .65s var(--motion-ease) both;
+  }
+  .project-card:nth-child(2),.experience-row:nth-child(2),.skill-tile:nth-child(2) {animation-delay:.07s}
+  .project-card:nth-child(3),.experience-row:nth-child(3),.skill-tile:nth-child(3) {animation-delay:.14s}
+  .project-card:nth-child(n+4),.experience-row:nth-child(n+4),.skill-tile:nth-child(n+4) {animation-delay:.21s}
+  .mobile-navigation {animation:page-arrive .3s var(--motion-ease) both}
+  .p-button,.s-button,.primary-action,.skill-evidence,a.project-action-live,a.project-action-repository {
+    transition:transform .28s var(--motion-ease),background-color .2s,border-color .2s,box-shadow .28s;
+  }
+  .project-detail-link span,.company-link a span,.skill-evidence>span {
+    display:inline-block;transition:transform .28s var(--motion-ease);
+  }
+  .nav-link[aria-current=page]::after {transform-origin:left;animation:accent-arrive .4s var(--motion-ease) both}
+  @supports(animation-timeline:view()) {
+    .home-section .section-heading,.work-list .project-summary,.contact-rail {
+      animation:content-arrive linear both;
+      animation-timeline:view();
+      animation-range:entry 0% entry 70%;
+    }
+  }
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference) {
+  .p-button:not(:disabled):hover,.s-button:not(:disabled):hover,.primary-action:hover,
+  a.skill-evidence:hover,a.project-action-live:hover,a.project-action-repository:hover {transform:translateY(-3px);box-shadow:0 7px 18px #0003}
+  .project-detail-link:hover span,.company-link a:hover span,.skill-evidence:hover>span {transform:translate(3px,-2px)}
+}
+
 @media(max-width:767px) {
+  :root {font-size:17px}
   .project-links {flex-direction:column;align-items:flex-start;gap:8px}
   .project-detail-link {width:200px;max-width:100%}
 }

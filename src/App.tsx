@@ -3,6 +3,7 @@ import Footer from './components/Footer';
 
 import Home from './components/pages/home/Home';
 import { lazy, Suspense } from 'react';
+import { MotionConfig } from 'motion/react';
 const About = lazy(() => import('./components/pages/about/About'));
 const Skills = lazy(() => import('./components/pages/skills/Skills'));
 const Projects = lazy(() => import('./components/pages/projects/Projects'));
@@ -16,17 +17,18 @@ import { PublicDataNotice } from './components/PublicDataNotice';
 
 import ScrollToTop from './components/ScrollToTop';
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { useSettings } from './contexts/useSettings';
 import { SectionGuard } from './components/SectionGuard';
 import { useTranslation } from 'react-i18next';
 
 function App() {
+  const { pathname } = useLocation();
   const { isInitialLoading } = useSettings();
   const { t } = useTranslation();
 
   return (
-    <div className="App">
+    <MotionConfig reducedMotion="user"><div className="App">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:rounded-full focus:bg-linear-to-r focus:from-[#8000FF] focus:to-[#00FFFF] focus:px-4 focus:py-2 focus:font-semibold focus:text-white focus:shadow-lg"
@@ -42,7 +44,7 @@ function App() {
       <PageMetadata />
       <Navbar />
       <main id="main-content" tabIndex={-1} className='min-h-screen max-w-[1200px] mx-auto mt-12 px-4 py-8'>
-        <Suspense fallback={<PublicDataNotice state={{ status: 'loading' }} />}><Routes>
+        <Suspense fallback={<PublicDataNotice state={{ status: 'loading' }} />}><div key={pathname} className="route-enter"><Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<SectionGuard setting="showAbout"><About /></SectionGuard>} />
           <Route path="/skills" element={<SectionGuard setting="showSkills"><Skills /></SectionGuard>} />
@@ -52,10 +54,10 @@ function App() {
           <Route path="/contact" element={<SectionGuard setting="showContact"><Contact /></SectionGuard>} />
           <Route path="/resume" element={<SectionGuard setting="showResume"><Resume /></SectionGuard>} />
           <Route path="*" element={<NotFound />} />
-        </Routes></Suspense>
+        </Routes></div></Suspense>
       </main>
       <Footer />
-    </div>
+    </div></MotionConfig>
   )
 }
 
