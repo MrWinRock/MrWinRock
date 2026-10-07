@@ -95,6 +95,13 @@ bun run test:e2e
 
 Set `VITE_BASE_URL` to the API origin when building. `VITE_GA_MEASUREMENT_ID` is optional for local development; the existing production deployment requires it. These values are public build-time configuration. No browser secret is required. Keep local environment files untracked.
 
+The Projects page can match a visitor's description to published personal projects.
+It calls `POST /api/projects/match` on the configured API, shows up to three matches,
+and labels keyword fallback when JEV is unavailable. The query is sent to an AI
+service by the backend. Keep `JEV_API_KEY` only in `../mrwinrock-app/.env` and restart
+the backend after configuring it; never add the key to a `VITE_*` variable.
+For local development, use `VITE_BASE_URL=http://localhost:8080` with `bun run dev`.
+
 Content has explicit loading, live, empty, disabled, unavailable, rate-limited, and retry states. Projects and Skills can use visibly labeled bundled fallback. Approved, unexpired snapshots can support public content and initial settings during outages; snapshot publishing starts disabled. About and Experience do not substitute bundled copy. See [public publishing](docs/public-publishing.md) for approval, expiry, and revocation. Settings retain the last successful response, revalidate ETags, refresh on visibility, and back off after failure. Disabled deep links retain their URL and display a disabled notice. Contact retains input on failure and clears it only after accepted delivery. Resume URLs are revoked on replacement and unmount.
 
 Vitest covers the API boundary, cancellation, settings, resource states, forms, and Blob URL ownership. Playwright covers desktop (1440×900) and mobile (390×844) keyboard navigation, language, live and cached data, contact validation/503/429/success, resume retry, disabled routes, overflow, and reduced motion. Browser tests intercept API calls and do not submit real messages. Linux CI installs Chromium with `--with-deps` and checks against the API's `dev` artifact. Deployment depends on this reusable CI gate.

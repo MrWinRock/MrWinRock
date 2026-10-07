@@ -148,3 +148,54 @@ test('API company work stays link-only and disappears after deletion or disablem
  await expect(page.getByRole('status')).toContainText(/currently unavailable|ไม่พร้อม/);
  await expect(page.locator('.company-link')).toHaveCount(0);
 });
+
+test('project matching preserves browsing, clears edited results and localizes fallback', async ({ page }, info) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const storefront = { ...project, _id: 'store', slug: 'store', title: 'Web Store', description: 'An online storefront', translations: { th: { title: 'ร้านค้าเว็บ', description: 'หน้าร้านออนไลน์' } } };
+  const chat = { ...project, _id: 'chat', slug: 'chat', title: 'Chat Tool', description: 'Live conversations', tech: ['Bun'], order: 2, translations: { th: { title: 'ระบบแชต', description: 'การสนทนาแบบเรียลไทม์' } } };
+  let source: 'jev' | 'keyword' = 'jev';
+  let status = 200;
+  const queries: unknown[] = [];
+  await page.route('**/api/projects', route => route.fulfill({ json: { ok: true, data: [storefront, chat] } }));
+  await page.route('**/api/projects/match', route => {
+    queries.push(route.request().postDataJSON());
+    return route.fulfill({ status, headers: { 'Retry-After': '2' }, json: status === 200
+      ? { ok: true, data: { source, matches: [{ project: chat, score: 1, confidence: source === 'jev' ? 0.9 : null }, { project: storefront, score: 0.5, confidence: source === 'jev' ? 0.6 : null }] } }
+      : { ok: false, message: 'Private provider details' } });
+  });
+  await page.goto('/projects?tech=TypeScript');
+  const query = page.getByLabel(/what do you need/i);
+  const send = page.getByRole('button', { name: /find relevant projects/i });
+  await expect(query).toHaveAccessibleDescription(/sent to an AI service/i);
+  await send.click();
+  await expect(query).toHaveAttribute('aria-invalid', 'true');
+  await expect(query).toBeFocused();
+  await query.fill('  I need a live chat application  ');
+  expect(queries).toEqual([]);
+  await page.evaluate(async () => { await document.fonts.ready; window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); });
+  await page.screenshot({ path: info.outputPath(`jev-matcher-${info.project.name}-en.png`), fullPage: true });
+  await send.click();
+  const results = page.getByRole('region', { name: /^relevant projects$/i });
+  await expect(results.getByRole('heading', { level: 3 })).toHaveText(['Chat Tool', 'Web Store']);
+  expect(queries).toEqual([{ query: 'I need a live chat application' }]);
+  await expect(page.getByLabel(/filter by technology/i)).toHaveValue('TypeScript');
+  await query.fill('I now need an online storefront');
+  await expect(results).toHaveCount(0);
+  status = 429;
+  await send.click();
+  await expect(page.getByRole('alert')).toContainText(/please wait/i);
+  await expect(send).toBeDisabled();
+  await expect(query).toHaveValue('I now need an online storefront');
+  await expect(page.getByText('Private provider details')).toHaveCount(0);
+  await expect(send).toBeEnabled({ timeout: 4000 });
+  status = 200; source = 'keyword';
+  await page.getByRole('button', { name: /switch language to thai/i }).click();
+  await page.getByRole('button', { name: 'ค้นหาโปรเจกต์ที่เกี่ยวข้อง', exact: true }).click();
+  await expect(page.getByText(/ค้นหาด้วยคีย์เวิร์ด/)).toBeVisible();
+  const thaiResults = page.getByRole('region', { name: 'โปรเจกต์ที่เกี่ยวข้อง', exact: true });
+  await expect(thaiResults.getByRole('heading', { level: 3 })).toHaveText(['ระบบแชต', 'ร้านค้าเว็บ']);
+  await expect(page.locator('html')).toHaveAttribute('lang', 'th');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.evaluate(async () => { await document.fonts.ready; window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); });
+  await page.screenshot({ path: info.outputPath(`jev-matcher-${info.project.name}-th.png`), fullPage: true });
+});

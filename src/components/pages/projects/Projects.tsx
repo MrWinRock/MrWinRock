@@ -4,6 +4,7 @@ import { useProjects } from '../../../hooks/useProjects';
 import { groupProjects, localizeProject, isCompanyProject, isFeaturedProject } from '../../../lib/portfolio';
 import { PublicDataNotice } from '../../PublicDataNotice';
 import { ProjectCard } from './ProjectCard';
+import { ProjectMatcher } from './ProjectMatcher';
 import { safeExternalUrl } from '../../../lib/safeExternalUrl';
 export default function Projects() {
     const { t, i18n } = useTranslation(); const resource = useProjects(); const [params, setParams] = useSearchParams();
@@ -18,6 +19,7 @@ export default function Projects() {
     const featured = filtered.filter(project => project.featured).slice(0,3);
     const archive = filtered.filter(project => !featured.includes(project));
     return <div className="page-shell"><p className="eyebrow">{t('projects.selected')}</p><h1 className="page-title">{t('projects.title')}</h1><p className="page-description">{t('projects.intro')}</p><PublicDataNotice {...resource} />
+        {resource.state.status !== 'disabled' && <ProjectMatcher projects={'data' in resource.state ? resource.state.data : []} />}
         {!!records.length && <div className="my-7 max-w-sm"><label htmlFor="tech-filter" className="block text-sm text-gray-300 mb-2">{t('projects.filter')}</label><input id="tech-filter" className="search-field" value={query} onChange={event => { const next = new URLSearchParams(params); if(event.target.value) next.set('tech', event.target.value); else next.delete('tech'); setParams(next, { replace: true }); }} /></div>}
         {!!featured.length && <section aria-label={t('projects.selected')}><div className="collection-heading"><h2>{t('projects.selected')}</h2><span className="collection-count">{featured.length}</span></div><div className="work-list">{featured.map((project,index) => <ProjectCard key={project._id ?? project.title} project={project} number={index + 1} />)}</div></section>}
         {!!archive.length && <section className="mt-12"><div className="collection-heading"><h2>{t('projects.archive')}</h2><span className="collection-count">{archive.length}</span></div><div className="work-list">{archive.map(project => <ProjectCard key={project._id ?? project.title} project={project} />)}</div></section>}
