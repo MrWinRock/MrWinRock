@@ -1,6 +1,6 @@
 import { createInflightReadRegistry } from "./inflightReads";
 import { validPortfolioExtras } from './portfolioShape';
-import type { AboutResponse, SkillsResponse, ProjectsResponse, ExperiencesResponse, ContactInput, ContactResponse, SettingsResponse, SettingsDoc, HealthResponse, FishResponse } from "./apiTypes";
+import type { AboutResponse, SkillsResponse, ProjectsResponse, ProjectMatchInput, ProjectMatchResponse, ExperiencesResponse, ContactInput, ContactResponse, SettingsResponse, SettingsDoc, HealthResponse, FishResponse } from "./apiTypes";
 export type * from "./apiTypes";
 import axios, {
     AxiosError,
@@ -100,6 +100,18 @@ function isProject(value: unknown): boolean {
     return isRecord(value) && typeof value.title === 'string' && typeof value.description === 'string'
         && typeof value.order === 'number' && Number.isFinite(value.order) && isStringArray(value.tech)
         && optionalStrings(value, ['_id', 'url', 'repo']) && validPortfolioExtras(value);
+}
+
+function isProbability(value: unknown): boolean {
+    return typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 1;
+}
+
+function isProjectMatchData(value: unknown): boolean {
+    return isRecord(value) && (value.source === 'jev' || value.source === 'keyword')
+        && Array.isArray(value.matches) && value.matches.length <= 3
+        && value.matches.every(match => isRecord(match) && isProject(match.project)
+            && isRecord(match.project) && match.project.workType !== 'company'
+            && isProbability(match.score) && (match.confidence === null || isProbability(match.confidence)));
 }
 
 function isExperience(value: unknown): boolean {
@@ -243,6 +255,7 @@ export interface PublicApi {
     about(lang: "en" | "th", options?: ReadOptions): Promise<AboutResponse>;
     skills(options?: ReadOptions): Promise<SkillsResponse>;
     projects(options?: ReadOptions): Promise<ProjectsResponse>;
+    matchProjects(input: ProjectMatchInput, options?: MutationOptions): Promise<ProjectMatchResponse>;
     experiences(options?: ReadOptions): Promise<ExperiencesResponse>;
     contact(input: ContactInput, options?: MutationOptions): Promise<ContactResponse>;
     resume(options?: ReadOptions): Promise<Blob>;
@@ -326,6 +339,7 @@ export function createApiClient({ baseURL = BASE_URL, adapter }: CreateApiClient
         about: (lang, options) => read("/api/about", envelope<AboutResponse>(v => isRecord(v) && isRecord(v.data) && typeof v.data.story === "string" && typeof v.data.background === "string"), { ...options, query: { lang } }, `about:${lang}`),
         skills: options => read("/api/skills", envelope<SkillsResponse>(v => isRecord(v) && isSkills(v.data)), options),
         projects: options => read("/api/projects", envelope<ProjectsResponse>(v => isRecord(v) && Array.isArray(v.data) && v.data.every(isProject)), options),
+        matchProjects: (input, options) => validated('/api/projects/match', envelope<ProjectMatchResponse>(v => isRecord(v) && isProjectMatchData(v.data)), { ...options, method: 'POST', json: input }),
         experiences: options => read("/api/experiences", envelope<ExperiencesResponse>(v => isRecord(v) && Array.isArray(v.data) && v.data.every(isExperience)), options),
         contact: (input, options) => validated("/api/contact", envelope<ContactResponse>(v => isRecord(v) && typeof v.message === "string"), { ...options, method: "POST", json: input }),
         resume: options => reads.run('/api/resume', async signal => {

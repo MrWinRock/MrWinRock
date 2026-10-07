@@ -353,6 +353,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/projects/match": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Match public personal projects to a visitor need
+         * @description Returns up to three evidence-based matches. Uses deterministic keyword ranking when AI evaluation is unavailable. Queries contain 10–1000 trimmed characters. Limited per client to 1 request/second, 6/minute, and 60/rolling day.
+         */
+        post: operations["postApiProjectsMatch"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/resume": {
         parameters: {
             query?: never;
@@ -3666,6 +3686,210 @@ export interface operations {
                 headers: {
                     /** @description Seconds to wait before retrying the request. */
                     "Retry-After"?: string;
+                    /** @description Configured request limit. */
+                    "X-RateLimit-Limit"?: string;
+                    /** @description Requests remaining in the active limit window. */
+                    "X-RateLimit-Remaining"?: string;
+                    /** @description Unix timestamp when the active limit window resets. */
+                    "X-RateLimit-Reset"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        details?: {
+                            fieldErrors: {
+                                [key: string]: string[];
+                            };
+                            formErrors: string[];
+                        };
+                        error: string;
+                        /** @constant */
+                        ok: false;
+                    };
+                };
+            };
+        };
+    };
+    postApiProjectsMatch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    query: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    /** @description Configured request limit. */
+                    "X-RateLimit-Limit"?: string;
+                    /** @description Requests remaining in the active limit window. */
+                    "X-RateLimit-Remaining"?: string;
+                    /** @description Unix timestamp when the active limit window resets. */
+                    "X-RateLimit-Reset"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            matches: {
+                                confidence: number | null;
+                                project: {
+                                    _id?: string;
+                                    caseStudy?: {
+                                        /** @default [] */
+                                        decisions: string[];
+                                        /** @default [] */
+                                        outcomes: string[];
+                                        problem: string;
+                                        /** @default [] */
+                                        repositories: {
+                                            label: string;
+                                            /** Format: uri */
+                                            url: string;
+                                        }[];
+                                        role: string;
+                                        /** @default [] */
+                                        screenshots: {
+                                            alt: string;
+                                            /** Format: uri */
+                                            url: string;
+                                        }[];
+                                    };
+                                    description: string;
+                                    featured?: boolean;
+                                    /** @default 0 */
+                                    order: number;
+                                    /** Format: uri */
+                                    repo?: string;
+                                    slug?: string;
+                                    /** @default [] */
+                                    tech: string[];
+                                    title: string;
+                                    translations?: {
+                                        th?: {
+                                            caseStudy?: {
+                                                decisions?: string[];
+                                                outcomes?: string[];
+                                                problem?: string;
+                                                repositories?: {
+                                                    label: string;
+                                                    /** Format: uri */
+                                                    url: string;
+                                                }[];
+                                                role?: string;
+                                                screenshots?: {
+                                                    alt: string;
+                                                    /** Format: uri */
+                                                    url: string;
+                                                }[];
+                                            };
+                                            description?: string;
+                                            title?: string;
+                                        };
+                                    };
+                                    /** Format: uri */
+                                    url?: string;
+                                    /** @enum {string} */
+                                    workType?: "personal" | "company";
+                                };
+                                score: number;
+                            }[];
+                            /** @enum {string} */
+                            source: "jev" | "keyword";
+                        };
+                        /** @constant */
+                        ok: true;
+                    };
+                };
+            };
+            /** @description Response for status 400 */
+            400: {
+                headers: {
+                    /** @description Configured request limit. */
+                    "X-RateLimit-Limit"?: string;
+                    /** @description Requests remaining in the active limit window. */
+                    "X-RateLimit-Remaining"?: string;
+                    /** @description Unix timestamp when the active limit window resets. */
+                    "X-RateLimit-Reset"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        details?: {
+                            fieldErrors: {
+                                [key: string]: string[];
+                            };
+                            formErrors: string[];
+                        };
+                        error: string;
+                        /** @constant */
+                        ok: false;
+                    };
+                };
+            };
+            /** @description Response for status 403 */
+            403: {
+                headers: {
+                    /** @description Configured request limit. */
+                    "X-RateLimit-Limit"?: string;
+                    /** @description Requests remaining in the active limit window. */
+                    "X-RateLimit-Remaining"?: string;
+                    /** @description Unix timestamp when the active limit window resets. */
+                    "X-RateLimit-Reset"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        details?: {
+                            fieldErrors: {
+                                [key: string]: string[];
+                            };
+                            formErrors: string[];
+                        };
+                        error: string;
+                        /** @constant */
+                        ok: false;
+                    };
+                };
+            };
+            /** @description Response for status 429 */
+            429: {
+                headers: {
+                    /** @description Seconds to wait before retrying the request. */
+                    "Retry-After"?: string;
+                    /** @description Configured request limit. */
+                    "X-RateLimit-Limit"?: string;
+                    /** @description Requests remaining in the active limit window. */
+                    "X-RateLimit-Remaining"?: string;
+                    /** @description Unix timestamp when the active limit window resets. */
+                    "X-RateLimit-Reset"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        details?: {
+                            fieldErrors: {
+                                [key: string]: string[];
+                            };
+                            formErrors: string[];
+                        };
+                        error: string;
+                        /** @constant */
+                        ok: false;
+                    };
+                };
+            };
+            /** @description Response for status 500 */
+            500: {
+                headers: {
                     /** @description Configured request limit. */
                     "X-RateLimit-Limit"?: string;
                     /** @description Requests remaining in the active limit window. */

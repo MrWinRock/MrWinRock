@@ -2,6 +2,8 @@ import type { paths } from '@/generated/openapi';
 
 export type ProjectsResponse = paths['/api/projects']['get']['responses'][200]['content']['application/json'];
 export type ApiProject = ProjectsResponse['data'][number];
+export type ProjectMatchInput = paths['/api/projects/match']['post']['requestBody']['content']['application/json'];
+export type ProjectMatchResponse = paths['/api/projects/match']['post']['responses'][200]['content']['application/json'];
 export type SkillsResponse = paths['/api/skills']['get']['responses'][200]['content']['application/json'];
 export type ApiSkillCategory = SkillsResponse['data'][string];
 export type ApiSkill = ApiSkillCategory['skills'][number];
