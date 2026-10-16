@@ -30,6 +30,8 @@ test('keyboard navigation, cached fallback, retry, language and responsive layou
   }
   const link = page.getByRole('navigation').getByRole('link', { name: /^projects$/i });
   await link.focus(); await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/projects$/);
+  await expect(page.getByRole('heading', { name: 'My Projects', exact: true })).toBeVisible();
   await expect(page.getByText(/cached content/i)).toBeVisible();
   const retry = page.getByRole('button', { name: /^retry$/i });
   await tabTo(page, retry);
