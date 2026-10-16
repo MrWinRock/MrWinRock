@@ -38,11 +38,12 @@
         "portfolioLabel": "Developer portfolio",
         "location": "Bangkok, Thailand",
         "startConversation": "Start a conversation",
-        "insideCode": "Inside this portfolio",
-        "sourceLabel": "Actual TypeScript source for HTTPS link validation",
-        "realSource": "Actual source, from this site",
-        "browseSource": "Browse code",
-        "sourceCaption": "A small detail from this codebase: external links use HTTPS and reject embedded credentials."
+        "buildFocus": {
+            "title": "What I build",
+            "web": { "title": "Web apps", "description": "I mostly work with React and TypeScript. This portfolio is one example." },
+            "api": { "title": "Backend APIs", "description": "I build APIs with Bun and Node.js, and connect them to databases." },
+            "ai": { "title": "AI projects", "description": "InfoXP uses LLMs for game questions. This site uses JEV to find relevant projects." }
+        }
     },
     "about": {
         "title": "About Me",

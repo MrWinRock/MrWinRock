@@ -38,11 +38,12 @@
         "portfolioLabel": "แฟ้มผลงานนักพัฒนา",
         "location": "กรุงเทพฯ ประเทศไทย",
         "startConversation": "เริ่มต้นพูดคุย",
-        "insideCode": "เบื้องหลังพอร์ตโฟลิโอนี้",
-        "sourceLabel": "โค้ด TypeScript จริงสำหรับตรวจสอบลิงก์ HTTPS",
-        "realSource": "โค้ดจริงจากเว็บไซต์นี้",
-        "browseSource": "ดูซอร์สโค้ด",
-        "sourceCaption": "รายละเอียดเล็ก ๆ ในโค้ดนี้: ลิงก์ภายนอกใช้ HTTPS และไม่อนุญาต URL ที่ฝังชื่อผู้ใช้หรือรหัสผ่าน"
+        "buildFocus": {
+            "title": "งานที่ผมทำ",
+            "web": { "title": "เว็บแอปพลิเคชัน", "description": "ส่วนใหญ่ผมใช้ React กับ TypeScript พอร์ตโฟลิโอนี้ก็เป็นหนึ่งในนั้น" },
+            "api": { "title": "Backend API", "description": "ผมพัฒนา API ด้วย Bun และ Node.js รวมถึงเชื่อมต่อฐานข้อมูล" },
+            "ai": { "title": "โปรเจกต์ AI", "description": "InfoXP ใช้ LLM ตอบคำถามเกี่ยวกับเกม ส่วนเว็บนี้ใช้ JEV ช่วยค้นหาโปรเจกต์ที่เกี่ยวข้อง" }
+        }
     },
     "about": {
         "title": "เกี่ยวกับฉัน",

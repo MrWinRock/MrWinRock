@@ -12,7 +12,7 @@ import { ResumeDownloadButton } from '../../ResumeDownloadButton';
 import profileImage from '../../../assets/logo.webp';
 import { trackPortfolioEvent } from '../../../lib/portfolioEvents';
 import { getPublicSnapshot } from '../../../lib/publicSnapshot';
-import { SourcePeek } from './SourcePeek';
+import { BuildFocus } from './BuildFocus';
 
 const priorities = ['TypeScript', 'React', 'Node.js', 'Bun', 'MongoDB', 'Docker'];
 export default function Home() {
@@ -34,7 +34,7 @@ export default function Home() {
             <div className="hero-actions">{visible.showProjects && <Link className="primary-action" to="/projects">{t('home.viewWork')} <span aria-hidden="true">↗</span></Link>}{visible.showResume && <ResumeDownloadButton />}{visible.showContact && <Link className="s-button inline-flex items-center" onClick={()=>trackPortfolioEvent('contact_intent')} to="/contact">{t('nav.contact')}</Link>}</div>
             <div className="hero-socials"><a href="https://github.com/MrWinRock" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/pharthiwath-gristsoopharruth-232301240/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>{visible.showAbout && <Link to="/about">{t('home.aboutMe')} <span aria-hidden="true">→</span></Link>}</div>
             </div>
-            <div className="developer-source"><p className="source-kicker"><span aria-hidden="true">{'{ }'}</span>{t('home.insideCode')}</p><SourcePeek /><p className="source-caption">{t('home.sourceCaption')}</p></div>
+            <BuildFocus />
         </section>
         {settingsStatus === 'unavailable' && <PublicDataNotice state={{ status: 'unavailable', reason: 'unavailable' }} retry={retrySettings} />}
         {settingsStatus === 'snapshot' && <div className="public-notice"><p role="status">{t('resource.snapshot')}</p><button type="button" className="s-button mt-3" onClick={retrySettings}>{t('resource.retry')}</button></div>}
