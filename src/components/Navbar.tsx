@@ -21,11 +21,11 @@ export default function Navbar() {
         ['/contact', 'contact', visible.showContact], ['/resume', 'resume', visible.showResume],
     ] as const;
     const links = (mobile: boolean) => destinations.filter(([, , show]) => show).map(([to, key]) =>
-        <NavLink key={to} to={to} end={to === '/'} className={`nav-link ${key === 'resume' ? 'nav-resume' : ''}`} onClick={() => mobile && setIsMenuOpen(false)}>{t(`nav.${key}`)}</NavLink>);
+        <NavLink key={to} to={to} end={to === '/'} className={`nav-link ${key === 'resume' ? 'nav-resume' : ''}`} onClick={() => mobile && setIsMenuOpen(false)}><span className="nav-slash" aria-hidden="true">/</span>{t(`nav.${key}`)}</NavLink>);
     return <nav className="navbar fixed top-0 left-0 w-full z-50 bg-[#1b1b1b]/95 backdrop-blur" aria-label={t('nav.primary')}
         onKeyDown={event => { if (event.key === 'Escape' && isMenuOpen) { setIsMenuOpen(false); toggle.current?.focus(); } }}>
         <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-4 py-3">
-            <Link to="/" className="flex items-center font-black text-xl shrink-0"><img src={logo} alt="" width="32" height="32" /><span className="navbar-title">MrWinRock</span></Link>
+            <Link to="/" className="navbar-brand flex items-center font-black text-xl shrink-0"><img src={logo} alt="" width="32" height="32" /><span className="navbar-title">mrwinrock<span aria-hidden="true">_</span></span></Link>
             <div className="hidden lg:flex items-center gap-1 xl:gap-3">{links(false)}<LanguageSwitcher /></div>
             <div className="lg:hidden flex items-center gap-2"><LanguageSwitcher /><button ref={toggle} type="button" className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={t(isMenuOpen ? 'nav.closeMenu' : 'nav.openMenu')} aria-expanded={isMenuOpen} aria-controls="mobile-navigation"><span aria-hidden="true">{isMenuOpen ? '×' : '☰'}</span></button></div>
         </div>

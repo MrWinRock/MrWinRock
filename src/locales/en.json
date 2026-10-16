@@ -34,7 +34,15 @@
         "selectedTitle": "Selected work",
         "evidence": "Skills in practice",
         "brandAlt": "MrWinRock skull illustration",
-        "contactTitle": "Let’s talk about your next project."
+        "contactTitle": "Let’s talk about your next project.",
+        "portfolioLabel": "Developer portfolio",
+        "location": "Bangkok, Thailand",
+        "startConversation": "Start a conversation",
+        "insideCode": "Inside this portfolio",
+        "sourceLabel": "Actual TypeScript source for HTTPS link validation",
+        "realSource": "Actual source, from this site",
+        "browseSource": "Browse code",
+        "sourceCaption": "A small detail from this codebase: external links use HTTPS and reject embedded credentials."
     },
     "about": {
         "title": "About Me",

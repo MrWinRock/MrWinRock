@@ -1,0 +1,4 @@
+interface:
+  display_name: "Modern Portfolio UI"
+  short_description: "Distinctive, polished developer portfolio interfaces"
+  default_prompt: "Use $modern-portfolio-ui to refine this portfolio with a distinctive visual direction, clear project presentation, and responsive layouts."
