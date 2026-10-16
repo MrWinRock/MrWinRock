@@ -102,6 +102,19 @@ service by the backend. Keep `JEV_API_KEY` only in `../mrwinrock-app/.env` and r
 the backend after configuring it; never add the key to a `VITE_*` variable.
 For local development, use `VITE_BASE_URL=http://localhost:8080` with `bun run dev`.
 
+Matched projects can include “Why this matches” excerpts from their published
+description, technologies, or case study. The API returns field/index references;
+the UI resolves the current language and links to the corresponding case-study
+section. Companion excerpts appear only when that evidence is present in the
+canonical project. Keyword fallback selects excerpts with actual query overlap.
+Older API responses without evidence remain supported.
+
+The contact form has an optional “Review my brief” action, calling
+`POST /api/contact/brief` with only the message. JEV suggests a project category
+and checks audience, scope, and timeline. Suggestions never modify the draft or
+send a message. Editing invalidates the review, and review failures or throttling
+leave normal contact submission available. Both features support English/Thai.
+
 Content has explicit loading, live, empty, disabled, unavailable, rate-limited, and retry states. Projects and Skills can use visibly labeled bundled fallback. Approved, unexpired snapshots can support public content and initial settings during outages; snapshot publishing starts disabled. About and Experience do not substitute bundled copy. See [public publishing](docs/public-publishing.md) for approval, expiry, and revocation. Settings retain the last successful response, revalidate ETags, refresh on visibility, and back off after failure. Disabled deep links retain their URL and display a disabled notice. Contact retains input on failure and clears it only after accepted delivery. Resume URLs are revoked on replacement and unmount.
 
 Vitest covers the API boundary, cancellation, settings, resource states, forms, and Blob URL ownership. Playwright covers desktop (1440×900) and mobile (390×844) keyboard navigation, language, live and cached data, contact validation/503/429/success, resume retry, disabled routes, overflow, and reduced motion. Browser tests intercept API calls and do not submit real messages. Linux CI installs Chromium with `--with-deps` and checks against the API's `dev` artifact. Deployment depends on this reusable CI gate.

@@ -4,6 +4,7 @@ import { useRetryCountdown } from '../../../hooks/useRetryCountdown';
 import { api, type ApiProject, type ProjectMatchResponse } from '../../../lib/api';
 import { canonicalMatchedProjects, localizeProject } from '../../../lib/portfolio';
 import { ProjectCard } from './ProjectCard';
+import { MatchEvidence } from './MatchEvidence';
 
 type MatchStatus = 'idle' | 'loading' | 'complete' | 'validation' | 'unavailable' | 'rate-limited';
 
@@ -100,7 +101,9 @@ export function ProjectMatcher({ projects }: { projects: ApiProject[] }) {
             {!!matchedProjects.length && <section aria-labelledby={`${id}-results`}>
                 <div className="collection-heading"><h2 id={`${id}-results`}>{t('projects.match.results')}</h2><span className="collection-count">{matchedProjects.length}</span></div>
                 <div className="work-list">{matchedProjects.map((project, index) => <ProjectCard
-                    key={project._id ?? project.slug ?? project.title} project={localizeProject(project, i18n.language)} number={index + 1} />)}</div>
+                    key={project._id ?? project.slug ?? project.title} project={localizeProject(project, i18n.language)} number={index + 1}>
+                    <MatchEvidence project={project} matches={result.matches} projects={projects} />
+                </ProjectCard>)}</div>
             </section>}
         </>}
     </section>;

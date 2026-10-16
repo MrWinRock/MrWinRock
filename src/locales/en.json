@@ -81,6 +81,8 @@
         "technologies": "Technologies",
         "filter": "Filter by technology",
         "match": {
+            "why": "Why this matches",
+            "evidence": { "description": "Project description", "tech": "Technology", "problem": "The problem", "role": "My contribution", "decisions": "Technical decision", "outcomes": "Published outcome" },
             "eyebrow": "A starting point",
             "title": "Find a project for your idea",
             "intro": "Describe what you want to build. Find relevant examples from my personal projects, then explore how they work.",
@@ -134,6 +136,21 @@
         "downloadError": "Unable to download. Try again or open the résumé page."
     },
     "contact": {
+        "brief": {
+            "title": "Make your project brief clearer",
+            "privacy": "Optional: send your message to an AI service for suggestions. Name and email fields are excluded. Leave personal or confidential details out of the message.",
+            "review": "Review my brief",
+            "loading": "Reviewing your brief…",
+            "ready": "Brief review is ready. Suggestions are optional.",
+            "results": "Brief review",
+            "category": "Suggested project type",
+            "categories": { "website": "Website", "web-app": "Web application", "mobile-app": "Mobile application", "api-integration": "API or integration", "other": "Other project" },
+            "fields": { "audience": "Audience", "scope": "Scope", "deadline": "Timeline" },
+            "states": { "present": "Included in your brief", "missing": "Consider adding this detail", "uncertain": "Not sure — check this detail" },
+            "hints": { "audience": "Who will use the project?", "scope": "Which features or deliverables do you need?", "deadline": "When would you like it ready, or is timing flexible?" },
+            "unavailable": "Brief review is temporarily unavailable. You can still edit and send your message.",
+            "advisory": "These suggestions may be wrong. Edit your message if helpful, then send whenever you are ready."
+        },
         "title": "Get in Touch",
         "subtitle": "Have a project in mind, a question, or just want to say hi? Drop me a message.",
         "name": "Name",

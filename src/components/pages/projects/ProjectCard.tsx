@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
+import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Project } from '../../../data/projects';
 import { projectSlug } from '../../../lib/portfolio';
 import { safeExternalUrl } from '../../../lib/safeExternalUrl';
 import { ProjectActions } from './ProjectActions';
 import { trackPortfolioEvent } from '../../../lib/portfolioEvents';
-export function ProjectCard({ project, number, variant }: { project: Project; number?: number; variant?: 'showcase' }) {
+export function ProjectCard({ project, number, variant, children }: { project: Project; number?: number; variant?: 'showcase'; children?: ReactNode }) {
     const { t } = useTranslation();
     const screenshot = project.caseStudy?.screenshots?.find(item => safeExternalUrl(item.url));
     return <article className={`project-card${variant === 'showcase' ? ' project-showcase' : ''}`} data-featured={number ? true : undefined}>
@@ -15,6 +16,7 @@ export function ProjectCard({ project, number, variant }: { project: Project; nu
             <ul className="flex flex-wrap gap-2" aria-label={t('projects.technologies')}>{project.tech.map(tag => <li key={tag} className="tech-tag">{tag}</li>)}</ul></div>
             <div className="project-links"><Link className="project-detail-link" onClick={()=>trackPortfolioEvent('project_open',projectSlug(project))} to={'/projects/' + projectSlug(project)}>{t('projects.details')} <span aria-hidden="true">↗</span></Link><ProjectActions url={project.url} repo={project.repo} /></div>
         </div>
+        {children}
         {screenshot && <img src={screenshot.url} alt={screenshot.alt} loading="lazy" width="640" height="360" className="project-cover" />}
     </article>;
 }

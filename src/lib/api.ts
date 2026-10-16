@@ -1,6 +1,6 @@
 import { createInflightReadRegistry } from "./inflightReads";
 import { validPortfolioExtras } from './portfolioShape';
-import type { AboutResponse, SkillsResponse, ProjectsResponse, ProjectMatchInput, ProjectMatchResponse, ExperiencesResponse, ContactInput, ContactResponse, SettingsResponse, SettingsDoc, HealthResponse, FishResponse } from "./apiTypes";
+import type { AboutResponse, SkillsResponse, ProjectsResponse, ProjectMatchInput, ProjectMatchResponse, ContactBriefInput, ContactBriefResponse, ExperiencesResponse, ContactInput, ContactResponse, SettingsResponse, SettingsDoc, HealthResponse, FishResponse } from "./apiTypes";
 export type * from "./apiTypes";
 import axios, {
     AxiosError,
@@ -111,7 +111,36 @@ function isProjectMatchData(value: unknown): boolean {
         && Array.isArray(value.matches) && value.matches.length <= 3
         && value.matches.every(match => isRecord(match) && isProject(match.project)
             && isRecord(match.project) && match.project.workType !== 'company'
-            && isProbability(match.score) && (match.confidence === null || isProbability(match.confidence)));
+            && isProbability(match.score) && (match.confidence === null || isProbability(match.confidence))
+            && (match.evidence === undefined || (Array.isArray(match.evidence) && match.evidence.length <= 3
+                && match.evidence.every(reference => isProjectEvidence(reference, match.project)))));
+}
+
+function isProjectEvidence(value: unknown, project: unknown): boolean {
+    if (!isRecord(value) || !isRecord(project)) return false;
+    if (['description', 'problem', 'role'].includes(String(value.field))) {
+        if (Object.keys(value).length !== 1) return false;
+        const study = isRecord(project.caseStudy) ? project.caseStudy : {};
+        const thai = isRecord(project.translations) && isRecord(project.translations.th) ? project.translations.th : {};
+        const translatedStudy = isRecord(thai.caseStudy) ? thai.caseStudy : {};
+        const texts = value.field === 'description' ? [project.description, thai.description] : [study[String(value.field)], translatedStudy[String(value.field)]];
+        return texts.some(text => typeof text === 'string' && !!text.trim());
+    }
+    if (!['tech', 'decisions', 'outcomes'].includes(String(value.field)) || Object.keys(value).length !== 2
+        || typeof value.index !== 'number' || !Number.isInteger(value.index) || value.index < 0 || value.index > 11) return false;
+    const study = isRecord(project.caseStudy) ? project.caseStudy : {};
+    const thai = isRecord(project.translations) && isRecord(project.translations.th) ? project.translations.th : {};
+    const translatedStudy = isRecord(thai.caseStudy) ? thai.caseStudy : {};
+    const values = value.field === 'tech' ? [project.tech] : [study[String(value.field)], translatedStudy[String(value.field)]];
+    return values.some(list => Array.isArray(list) && typeof list[value.index as number] === 'string' && !!list[value.index as number].trim());
+}
+
+function isContactBriefData(value: unknown): boolean {
+    if (!isRecord(value) || !['jev', 'unavailable'].includes(String(value.source)) || !isRecord(value.checks)
+        || (value.category !== null && !['website', 'web-app', 'mobile-app', 'api-integration', 'other'].includes(String(value.category)))) return false;
+    const checks = value.checks;
+    return ['audience', 'scope', 'deadline'].every(field => ['present', 'missing', 'uncertain'].includes(String(checks[field])))
+        && (value.source !== 'unavailable' || (value.category === null && Object.values(checks).every(check => check === 'uncertain')));
 }
 
 function isExperience(value: unknown): boolean {
@@ -256,6 +285,7 @@ export interface PublicApi {
     skills(options?: ReadOptions): Promise<SkillsResponse>;
     projects(options?: ReadOptions): Promise<ProjectsResponse>;
     matchProjects(input: ProjectMatchInput, options?: MutationOptions): Promise<ProjectMatchResponse>;
+    reviewContactBrief(input: ContactBriefInput, options?: MutationOptions): Promise<ContactBriefResponse>;
     experiences(options?: ReadOptions): Promise<ExperiencesResponse>;
     contact(input: ContactInput, options?: MutationOptions): Promise<ContactResponse>;
     resume(options?: ReadOptions): Promise<Blob>;
@@ -340,6 +370,7 @@ export function createApiClient({ baseURL = BASE_URL, adapter }: CreateApiClient
         skills: options => read("/api/skills", envelope<SkillsResponse>(v => isRecord(v) && isSkills(v.data)), options),
         projects: options => read("/api/projects", envelope<ProjectsResponse>(v => isRecord(v) && Array.isArray(v.data) && v.data.every(isProject)), options),
         matchProjects: (input, options) => validated('/api/projects/match', envelope<ProjectMatchResponse>(v => isRecord(v) && isProjectMatchData(v.data)), { ...options, method: 'POST', json: input }),
+        reviewContactBrief: (input, options) => validated('/api/contact/brief', envelope<ContactBriefResponse>(v => isRecord(v) && isContactBriefData(v.data)), { ...options, method: 'POST', json: input }),
         experiences: options => read("/api/experiences", envelope<ExperiencesResponse>(v => isRecord(v) && Array.isArray(v.data) && v.data.every(isExperience)), options),
         contact: (input, options) => validated("/api/contact", envelope<ContactResponse>(v => isRecord(v) && typeof v.message === "string"), { ...options, method: "POST", json: input }),
         resume: options => reads.run('/api/resume', async signal => {

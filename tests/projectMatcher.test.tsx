@@ -169,6 +169,28 @@ it('keeps the matching form and result cards accessible', async () => {
   expect((await axe.run(container, { rules: { 'color-contrast': { enabled: false } } })).violations).toEqual([]);
 });
 
+it('quotes selected published evidence with a link to the matching case-study section', async () => {
+  const detailed = { ...web, caseStudy: { decisions: ['Used WebSocket events for live messages'] }, translations: { th: { caseStudy: { decisions: ['ใช้ WebSocket ส่งข้อความทันที'] } } } };
+  vi.mocked(api.projects).mockResolvedValue({ ok: true, data: [detailed] });
+  vi.mocked(api.matchProjects).mockResolvedValue({ ok: true, data: { source: 'jev', matches: [{ project: detailed, score: 1, confidence: 0.9, evidence: [{ field: 'decisions', index: 0 }] }] } });
+  renderPublic(<Projects />); submit();
+  const results = await screen.findByRole('region', { name: /relevant projects/i });
+  expect(within(results).getByRole('link', { name: /used websocket events/i })).toHaveAttribute('href', '/projects/web#decisions');
+  await act(async () => i18n.changeLanguage('th'));
+  expect(screen.getByRole('link', { name: /ใช้ WebSocket/ })).toHaveAttribute('href', '/projects/web#decisions');
+});
+
+it('maps companion technology evidence to the parent without attributing its private role to the parent', async () => {
+  const parent = { ...web, slug: 'parent', title: 'InfoXP', caseStudy: { role: 'Built the frontend' } };
+  const child = { ...chat, title: 'InfoXP Backend', caseStudy: { role: 'Built a separate backend' } };
+  vi.mocked(api.projects).mockResolvedValue({ ok: true, data: [parent, child] });
+  vi.mocked(api.matchProjects).mockResolvedValue({ ok: true, data: { source: 'jev', matches: [{ project: child, score: 1, confidence: 0.9, evidence: [{ field: 'tech', index: 0 }, { field: 'role' }] }] } });
+  renderPublic(<Projects />); submit();
+  const results = await screen.findByRole('region', { name: /relevant projects/i });
+  expect(within(results).getByRole('link', { name: /Bun/ })).toHaveAttribute('href', '/projects/parent#technologies');
+  expect(within(results).queryByText('Built a separate backend')).toBeNull();
+});
+
 it.each([
   ['InfoXP', 'InfoXP Backend'],
   ['InfoXP', 'InfoXP Mobile'],

@@ -8,6 +8,7 @@ import { useRetryCountdown } from '../../../hooks/useRetryCountdown';
 import { useTranslation } from "react-i18next";
 import SpotlightCard from "@/components/cards/SpotLightCard";
 import { api } from "@/lib/api";
+import { ContactBrief } from './ContactBrief';
 
 const CONTACT_EMAIL = "mrwinrock11@gmail.com";
 const GITHUB_URL = "https://github.com/MrWinRock";
@@ -150,12 +151,13 @@ const Contact = () => {
                                         maxLength={5000}
                                         disabled={status === "sending"}
                                         value={form.message}
-                                        onChange={(e) => setForm({ ...form, message: e.target.value })}
+                                        onChange={(e) => { setForm({ ...form, message: e.target.value }); setErrors(previous => ({ ...previous, message: undefined })); }}
                                         className={`${fieldClass} resize-y disabled:opacity-60`}
                                         placeholder={t("contact.messagePlaceholder")}
                                     />
                                     {errors.message && <p id="message-error" className="mt-2 text-sm text-rose-300">{t(errors.message)}</p>}
                                 </div>
+                                <ContactBrief message={form.message} sending={status === 'sending'} onInvalid={() => setErrors(previous => ({ ...previous, message: 'contact.validation.message' }))} />
                                 <motion.button
                                     type="submit"
                                     disabled={status === "sending" || seconds > 0}
