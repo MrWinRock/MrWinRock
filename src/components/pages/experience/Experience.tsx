@@ -30,7 +30,9 @@ const Experience = () => {
     };
 
     return <div className="secondary-page">
-        <h1>{t('experience.title')}</h1><PublicDataNotice {...resource} />
+        <p className="eyebrow"><span aria-hidden="true">03 / </span>{t('nav.experience')}</p>
+        <h1 className="page-title">{t('experience.title')}</h1>
+        <PublicDataNotice {...resource} />
         <div className="experience-list">{experienceList.map(exp => <article className="experience-row" key={exp._id || `${exp.company}-${exp.title}-${exp.startDate}`}>
             <span className="experience-marker" aria-hidden="true" />
             <div className="experience-meta"><p className="experience-period">{getDateRange(exp.startDate,exp.endDate)}</p><span className="experience-kind">{t('experience.types.'+exp.type,{defaultValue:exp.type})}</span></div>

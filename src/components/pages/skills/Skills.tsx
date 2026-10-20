@@ -49,66 +49,58 @@ const Skills = () => {
             className="secondary-page"
             initial={false}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.45 }}
         >
-            <div className="max-w-6xl mx-auto">
+            <div>
+                <p className="eyebrow"><span aria-hidden="true">02 / </span>{t("nav.skills")}</p>
                 <motion.h1
-                    className="text-4xl font-bold mb-8 text-center"
+                    className="page-title"
                     initial={false}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
+                    transition={{ duration: 0.45 }}
                 >
                     {t("skills.title")}
                 </motion.h1>
 
                 <PublicDataNotice {...resource} />
-                <div className="space-y-12">
+                <div className="space-y-10 mt-8">
                     {categoryGroups.map((category, categoryIndex) => (
-                        <motion.div
+                        <motion.section
                             key={category.id}
+                            className="skill-category-section"
                             initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{
-                                duration: 0.6,
-                                delay: categoryIndex * 0.2 + 0.4
+                                duration: 0.4,
+                                delay: Math.min(categoryIndex * 0.05, 0.25)
                             }}
                         >
-                            <motion.h2
-                                className="skill-category-title"
-                                initial={false}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: categoryIndex * 0.2 + 0.5 }}
-                            >
-                                {categoryTitles[category.id] || category.id}
-                            </motion.h2>
+                            <div className="skill-category-header">
+                                <h2 className="skill-category-title">
+                                    {categoryTitles[category.id] || category.id}
+                                </h2>
+                                <span className="collection-count" aria-hidden="true">{category.skills.length}</span>
+                            </div>
 
                             <div className="public-skill-grid">
-                                {category.skills.map((skill, skillIndex) => (
-                                    <motion.div
+                                {category.skills.map((skill) => (
+                                    <div
                                         key={skill._id || skill.name}
                                         className="skill-tile"
-                                        initial={false}
-                                        animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                                        transition={{
-                                            duration: 0.6,
-                                            delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.6
-                                        }}
-                                        whileHover={{ scale: 1.05 }}
                                     >
-                                        <motion.img
-                                            src={skill.icon}
-                                            alt={skill.name}
-                                            className="w-10 h-10"
-                                            whileHover={{
-                                                scale: 1.1,
-                                                transition: { duration: 0.6 }
-                                            }}
-                                        />
+                                        <span className="skill-icon-well">
+                                            <img
+                                                src={skill.icon}
+                                                alt={skill.name}
+                                                loading="lazy"
+                                                className="w-8 h-8"
+                                            />
+                                        </span>
                                         <span className="text-sm font-semibold">{skill.name}</span>
-                                    </motion.div>
+                                    </div>
                                 ))}
                             </div>
-                        </motion.div>
+                        </motion.section>
                     ))}
                 </div>
             </div>

@@ -104,6 +104,22 @@ test('language survives reload and reduced motion keeps Home content immediately
   await expect(page.locator('html')).toHaveAttribute('lang','th');
 });
 
+test('home fits narrow screens in English and Thai without horizontal scrolling', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  for (const language of ['en', 'th']) {
+    if (language === 'th') {
+      await page.getByRole('button', { name: /switch language to thai/i }).click();
+    }
+    await expect(page.locator('html')).toHaveAttribute('lang', language);
+    for (const width of [320, 375]) {
+      await page.setViewportSize({ width, height: 844 });
+      const documentWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+      expect(documentWidth, `${language} home at ${width}px`).toBeLessThanOrEqual(width);
+    }
+  }
+});
+
 test('short viewport menu supports scrolling and Escape', async ({ page }) => {
   await page.setViewportSize({width:390,height:390});
   await page.goto('/');

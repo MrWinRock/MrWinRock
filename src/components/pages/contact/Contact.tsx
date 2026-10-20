@@ -70,11 +70,11 @@ const Contact = () => {
 
     const container: Variants = {
         hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+        visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
     };
     const item: Variants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+        hidden: { opacity: 0, y: 16 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
     };
 
     const fieldClass = "contact-field";
@@ -86,20 +86,19 @@ const Contact = () => {
             animate="visible"
             variants={container}
         >
-            <div className="max-w-5xl mx-auto">
-                <motion.h1 className="text-4xl font-bold mb-3 text-center" variants={item}>
-                    <span className="bg-linear-to-r from-[#8000FF] via-[#8A2BE2] to-[#00FFFF] bg-clip-text text-transparent">
-                        {t("contact.title")}
-                    </span>
+            <div>
+                <p className="eyebrow"><span aria-hidden="true">04 / </span>{t("nav.contact")}</p>
+                <motion.h1 className="page-title" variants={item}>
+                    {t("contact.title")}
                 </motion.h1>
-                <motion.p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto" variants={item}>
+                <motion.p className="page-description mb-10" variants={item}>
                     {t("contact.subtitle")}
                 </motion.p>
 
                 <div className="grid md:grid-cols-5 gap-6 items-stretch">
                     {/* Form */}
                     <motion.div className="md:col-span-3" variants={item}>
-                        <SpotlightCard index={0} className="flex flex-col">
+                        <SpotlightCard index={0} className="flex flex-col" spotlightColor="rgba(128, 0, 255, 0.22)">
                             <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-5">
                                 <div>
                                     <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">
@@ -162,7 +161,6 @@ const Contact = () => {
                                     type="submit"
                                     disabled={status === "sending" || seconds > 0}
                                     className="primary-action w-full disabled:opacity-60 disabled:cursor-not-allowed"
-
                                     whileTap={status === "sending" ? undefined : { scale: 0.98 }}
                                     transition={{ duration: 0.2 }}
                                 >
@@ -203,7 +201,7 @@ const Contact = () => {
 
                     {/* Direct contact methods */}
                     <motion.div className="md:col-span-2" variants={item}>
-                        <SpotlightCard index={1} spotlightColor="rgba(0, 255, 255, 0.3)" className="flex flex-col">
+                        <SpotlightCard index={1} spotlightColor="rgba(0, 255, 255, 0.2)" className="flex flex-col">
                             <h2 className="text-lg font-semibold text-white mb-1">{t("contact.directTitle")}</h2>
                             <p className="text-sm text-gray-400 mb-6">{t("contact.directSubtitle")}</p>
 
@@ -254,7 +252,6 @@ const ContactLink: React.FC<ContactLinkProps> = ({ href, label, value, icon, ext
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
         className="direct-link group"
-
     >
         <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/[0.05] text-gray-300 group-hover:text-white transition-colors shrink-0">
             {icon}
@@ -267,7 +264,7 @@ const ContactLink: React.FC<ContactLinkProps> = ({ href, label, value, icon, ext
 );
 
 const MailIcon = () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="3" y="5" width="18" height="14" rx="2" />
         <path d="m3 7 9 6 9-6" />
     </svg>

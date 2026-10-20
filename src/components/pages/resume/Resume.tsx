@@ -18,10 +18,11 @@ const Resume = () => {
             className="secondary-page"
             initial={false}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.45 }}
         >
-            <div className="max-w-6xl mx-auto">
-                <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">
+            <div>
+                <p className="eyebrow"><span aria-hidden="true">05 / </span>{t("nav.resume")}</p>
+                <h1 className="page-title">
                     {t("resume.title")}
                 </h1>
 
@@ -46,7 +47,7 @@ const Resume = () => {
                     </a>
                 </div>
 
-                <div className="resume-frame border border-gray-700 overflow-hidden bg-gray-900">
+                <div className="resume-frame border overflow-hidden">
                     <object
                         aria-label={t("resume.title")}
                         data={resumeUrl}
