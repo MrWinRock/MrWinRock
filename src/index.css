@@ -194,6 +194,34 @@ textarea.contact-field { min-height: 150px; resize: vertical; }
 .experience-body li + li { margin-top: 8px; }
 .experience-body li::marker { color: var(--brand-ink); }
 
+/* Projects: published work leads; matching supports browsing. */
+.projects-header { display: grid; grid-template-columns: minmax(0, 1fr) 320px; align-items: end; gap: 48px; margin-bottom: 44px; }
+.project-filter label { display: block; margin-bottom: 10px; font-size: .85rem; color: var(--muted); }
+.projects-overview { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 40px; align-items: start; }
+.project-selection, .project-discovery { min-width: 0; }
+.projects-page .project-card { padding-inline: 24px; transition: background-color .2s; }
+.project-selection .collection-heading { margin-top: 0; }
+.project-selection > .public-notice:first-child { margin-top: 0; }
+.project-selection .project-card-body { grid-template-columns: minmax(0, 1fr) 160px; gap: 24px; }
+.project-selection .project-summary h3 { font-size: 1.5rem; }
+.project-selection .project-summary p { font-size: .9rem; }
+.project-discovery .project-matcher { margin: 0; }
+.project-discovery .matcher-panel { padding: 24px; }
+.project-discovery .matcher-panel h2 { font-size: 1.25rem; }
+.project-discovery .matcher-intro { font-size: .85rem; line-height: 1.8; margin-bottom: 20px; }
+.project-discovery .matcher-actions { flex-direction: column; align-items: stretch; gap: 16px; }
+.project-discovery .matcher-privacy { font-size: .75rem; }
+.project-discovery .project-card-body { grid-template-columns: 1fr; gap: 16px; }
+.project-discovery .project-summary h3 { font-size: 1.25rem; }
+.project-discovery .project-summary p { font-size: .85rem; }
+.project-discovery .collection-heading { align-items: baseline; }
+.project-discovery .collection-heading h2 { font-size: 1.2rem; }
+.project-archive, .company-work { margin-top: 56px; }
+.project-archive .project-card { padding-block: 26px; }
+.project-archive .project-summary h3 { font-size: 1.4rem; }
+.project-archive .project-summary p { font-size: .9rem; margin-bottom: 12px; }
+.project-summary h3, .project-summary p, .experience-body h2, .experience-body p { overflow-wrap: anywhere; }
+
 /* Honest resource states and optional assistants */
 .public-notice { margin: 24px 0; padding: 20px 24px; background: #1a1721; border: 1px solid var(--border); border-radius: 12px; color: #c9c4d5; font-size: .9rem; }
 .public-notice .s-button { min-height: 44px; padding: 8px 16px; }
@@ -258,6 +286,10 @@ textarea.contact-field { min-height: 150px; resize: vertical; }
   .hero-actions .s-button, .hero-actions .primary-action { padding-inline: 14px; font-size: .8rem; }
 }
 @media (max-width: 1023px) {
+  .projects-header { grid-template-columns: 1fr; gap: 24px; margin-bottom: 36px; }
+  .project-filter { max-width: 420px; }
+  .projects-overview { grid-template-columns: 1fr; gap: 36px; }
+  .project-discovery .matcher-actions { flex-direction: row; align-items: center; }
   .App > main { padding-inline: 32px; }
   .navbar > div:first-child { padding-inline: 32px; }
   .hero { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 30px; }
@@ -269,6 +301,11 @@ textarea.contact-field { min-height: 150px; resize: vertical; }
   .contact-rail { padding: 40px; }
 }
 @media (max-width: 767px) {
+  .projects-page .project-card { padding-inline: 16px; }
+  .projects-header { margin-bottom: 32px; }
+  .project-selection .project-card-body { grid-template-columns: 1fr; gap: 20px; }
+  .project-discovery .matcher-actions { flex-direction: column; align-items: stretch; }
+  .project-archive, .company-work { margin-top: 40px; }
   .App > main { margin-top: 72px; padding: 0 24px 64px; }
   .navbar > div:first-child { min-height: 72px; padding: 12px 24px; }
   .navbar-title { font-size: 1rem; }
