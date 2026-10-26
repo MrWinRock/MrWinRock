@@ -147,7 +147,7 @@ test('API company work stays link-only and disappears after deletion or disablem
  await page.goto('/projects?tech=Missing');
  const links = page.locator('.company-link a');
  await expect(links).toHaveCount(2);
- await expect(links.first()).toHaveText('Public Tool ↗');
+  await expect(links.first()).toHaveAccessibleName('Public Tool');
  await expect(page.getByRole('link', { name: /Company Portal/ })).toHaveAttribute('href', 'https://company.example.com/');
  await expect(page.locator('.company-link img')).toHaveCount(0);
  await expect(page.getByText(/Private contribution|PrivateTech|Private problem/)).toHaveCount(0);
