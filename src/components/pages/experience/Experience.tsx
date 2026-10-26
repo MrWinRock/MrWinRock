@@ -25,20 +25,43 @@ const Experience = () => {
         });
     };
 
-    const getDateRange = (start: string, end?: string) => {
-        return `${formatDate(start)} — ${end ? formatDate(end) : t("experience.present")}`;
-    };
-
     return <div className="secondary-page">
-        <h1 className="page-title">{t('experience.title')}</h1>
+        <h1 className="page-title" id="experience-title">{t('experience.title')}</h1>
         <PublicDataNotice {...resource} />
-        <div className="experience-list">{experienceList.map(exp => <article className="experience-row" key={exp._id || `${exp.company}-${exp.title}-${exp.startDate}`}>
-            <div className="experience-meta"><p className="experience-period">{getDateRange(exp.startDate,exp.endDate)}</p><span className="experience-kind">{t('experience.types.'+exp.type,{defaultValue:exp.type})}</span></div>
-            <div className="experience-body"><h2>{exp.title}</h2><p className="experience-company">{exp.company} · {exp.location}</p><p>{exp.description}</p>
-                {!!exp.achievements.length && <div><h3>{t('experience.achievements')}</h3><ul>{exp.achievements.map((achievement,index)=><li key={index}>{achievement}</li>)}</ul></div>}
-                <div className="flex flex-wrap gap-2">{exp.tech.map((tag,index)=><span className="tech-tag" key={index}>{tag}</span>)}</div>
-            </div>
-        </article>)}</div>
+        {!!experienceList.length && <ol className="experience-list" role="list" aria-labelledby="experience-title">
+            {experienceList.map(exp => <li key={exp._id || `${exp.company}-${exp.title}-${exp.startDate}`}>
+                <article className="experience-row" data-current={!exp.endDate}>
+                    <div className="experience-meta">
+                        <p className="experience-period">
+                            <svg className="experience-calendar" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                <rect x="3" y="5" width="18" height="16" rx="2" />
+                                <path d="M16 3v4M8 3v4M3 11h18M8 15h2M14 15h2" />
+                            </svg>
+                            <span>
+                                <time dateTime={exp.startDate}>{formatDate(exp.startDate)}</time>
+                                {' — '}
+                                {exp.endDate ? <time dateTime={exp.endDate}>{formatDate(exp.endDate)}</time> : t('experience.present')}
+                            </span>
+                        </p>
+                    </div>
+                    <div className="experience-body">
+                        <div className="experience-heading">
+                            <h2>{exp.title}</h2>
+                            <span className="experience-kind">{t('experience.types.' + exp.type, { defaultValue: exp.type })}</span>
+                        </div>
+                        <p className="experience-company">{[exp.company, exp.location].filter(Boolean).join(' · ')}</p>
+                        <p>{exp.description}</p>
+                        {!!exp.achievements.length && <div>
+                            <h3>{t('experience.achievements')}</h3>
+                            <ul>{exp.achievements.map((achievement, index) => <li key={index}>{achievement}</li>)}</ul>
+                        </div>}
+                        {!!exp.tech.length && <div className="flex flex-wrap gap-2">
+                            {exp.tech.map((tag, index) => <span className="tech-tag" key={index}>{tag}</span>)}
+                        </div>}
+                    </div>
+                </article>
+            </li>)}
+        </ol>}
     </div>;
 };
 export default Experience;

@@ -180,12 +180,23 @@ textarea.contact-field { min-height: 150px; resize: vertical; }
 .skill-tile span { overflow-wrap: anywhere; }
 .skill-icon-well { display: grid; place-items: center; flex-shrink: 0; width: 36px; height: 36px; }
 .skill-tile img { width: 28px; height: 28px; object-fit: contain; }
-.experience-list { margin-top: 42px; }
-.experience-row { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px; padding: 38px 0; border-top: 1px solid var(--border); }
-.experience-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-.experience-period { font-size: .85rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+.experience-list { --timeline-axis: 50%; max-width: 1120px; margin: 56px auto 0; list-style: none; padding: 0; }
+.experience-row { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 96px; padding-bottom: 64px; }
+.experience-row::before { content: ''; position: absolute; left: var(--timeline-axis); top: 25px; bottom: -25px; width: 1px; background: linear-gradient(var(--brand-ink), var(--brand-cyan)); opacity: .45; }
+.experience-row::after { content: ''; position: absolute; left: calc(var(--timeline-axis) - 7px); top: 18px; width: 15px; height: 15px; border: 2px solid var(--brand-ink); border-radius: 50%; background: #0c0c10; }
+.experience-row[data-current=true]::after { border-color: transparent; background: var(--brand-gradient); }
+.experience-list > li:last-child > .experience-row { padding-bottom: 0; }
+.experience-list > li:last-child > .experience-row::before { display: none; }
+.experience-meta { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; align-items: flex-end; text-align: right; min-width: 0; }
+.experience-list > li:nth-child(even) .experience-meta { grid-column: 2; align-items: flex-start; text-align: left; }
+.experience-list > li:nth-child(even) .experience-body { grid-column: 1; }
+.experience-period { display: inline-flex; align-items: center; gap: 12px; max-width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius); color: var(--brand-cyan); background: var(--brand-wash); font-size: .85rem; font-weight: 500; font-variant-numeric: tabular-nums; text-align: left; }
+.experience-calendar { flex-shrink: 0; }
 .experience-kind { font-size: .75rem; padding: 3px 10px; border-radius: 6px; color: var(--brand-ink); background: #241c32; }
-.experience-body { display: grid; gap: 16px; min-width: 0; }
+.experience-body { position: relative; grid-column: 2; grid-row: 1; display: grid; align-content: start; gap: 16px; width: 100%; min-width: 0; padding: 32px; border: 1px solid var(--border); border-radius: var(--radius-panel); background: var(--surface); }
+.experience-body::before { content: ''; position: absolute; left: -48px; top: 24px; width: 48px; height: 1px; background: var(--border-strong); }
+.experience-list > li:nth-child(even) .experience-body::before { left: auto; right: -48px; }
+.experience-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .experience-body h2 { font-size: 1.5rem; }
 .experience-body h3 { font-size: 1rem; margin-bottom: 12px; }
 .experience-body p, .experience-body li { color: var(--muted); }
@@ -286,6 +297,12 @@ textarea.contact-field { min-height: 150px; resize: vertical; }
   .hero-actions .s-button, .hero-actions .primary-action { padding-inline: 14px; font-size: .8rem; }
 }
 @media (max-width: 1023px) {
+  .experience-list { --timeline-axis: 7px; max-width: 680px; margin-top: 40px; }
+  .experience-row { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 0 0 48px 32px; }
+  .experience-meta, .experience-list > li:nth-child(even) .experience-meta { grid-column: 1; grid-row: auto; flex-direction: row; align-items: center; flex-wrap: wrap; text-align: left; }
+  .experience-body, .experience-list > li:nth-child(even) .experience-body { grid-column: 1; grid-row: auto; }
+  .experience-body { padding: 24px; }
+  .experience-body::before { display: none; }
   .projects-header { grid-template-columns: 1fr; gap: 24px; margin-bottom: 36px; }
   .project-filter { max-width: 420px; }
   .projects-overview { grid-template-columns: 1fr; gap: 36px; }
@@ -351,8 +368,10 @@ textarea.contact-field { min-height: 150px; resize: vertical; }
   .public-skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .skill-tile { padding: 14px; gap: 10px; }
   .skill-tile .text-sm { font-size: .8rem; }
-  .experience-row { grid-template-columns: 1fr; gap: 24px; padding-block: 28px; }
-  .experience-meta { flex-direction: row; align-items: center; flex-wrap: wrap; }
+  .experience-list { margin-top: 36px; }
+  .experience-row { padding-bottom: 40px; }
+  .experience-body { padding: 16px; }
+  .experience-body h2 { font-size: 1.3rem; }
   .matcher-actions { flex-direction: column; align-items: stretch; gap: 18px; }
   .matcher-privacy { font-size: .75rem; }
   .matcher-panel h2 { font-size: 1.4rem; }
