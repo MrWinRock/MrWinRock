@@ -36,3 +36,10 @@ logs
 **/*.back.*
 playwright-report/
 test-results/
+
+# Impeccable machine-local consent and generated review artifacts
+.impeccable/config.local.json
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/build/
+.impeccable/hook.cache.json

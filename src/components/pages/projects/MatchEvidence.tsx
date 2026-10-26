@@ -1,3 +1,4 @@
+import { ArrowIcon } from '../../ArrowIcon';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import type { ApiProject, ProjectEvidence, ProjectMatchResponse } from '../../../lib/apiTypes';
@@ -33,7 +34,7 @@ export function MatchEvidence({ project, matches, projects }: { project: ApiProj
         <ul>{evidence.map(item => <li key={`${item.field}:${item.text}`}>
             <span className="match-evidence-label">{t(`projects.match.evidence.${item.field}`)}</span>
             <Link to={`/projects/${encodeURIComponent(projectSlug(project))}#${item.anchor}`}>
-                <span>{item.text.length > 320 ? `${item.text.slice(0, 320).trimEnd()}…` : item.text}</span><span aria-hidden="true">↗</span>
+                <span>{item.text.length > 320 ? `${item.text.slice(0, 320).trimEnd()}…` : item.text}</span><ArrowIcon />
             </Link>
         </li>)}</ul>
     </div>;

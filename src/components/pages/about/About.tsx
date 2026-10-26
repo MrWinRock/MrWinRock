@@ -25,7 +25,6 @@ const About = () => {
             transition={{ duration: 0.45 }}
         >
             <div>
-                <p className="eyebrow"><span aria-hidden="true">01 / </span>{t("nav.about")}</p>
                 <motion.h1
                     className="page-title"
                     initial={false}

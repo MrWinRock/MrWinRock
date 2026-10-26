@@ -87,7 +87,6 @@ const Contact = () => {
             variants={container}
         >
             <div>
-                <p className="eyebrow"><span aria-hidden="true">04 / </span>{t("nav.contact")}</p>
                 <motion.h1 className="page-title" variants={item}>
                     {t("contact.title")}
                 </motion.h1>

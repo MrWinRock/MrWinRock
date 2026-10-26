@@ -31,7 +31,7 @@ function App() {
     <MotionConfig reducedMotion="user"><div className="App">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:rounded-full focus:bg-linear-to-r focus:from-[#8000FF] focus:to-[#00FFFF] focus:px-4 focus:py-2 focus:font-semibold focus:text-white focus:shadow-lg"
+        className="skip-link sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60]"
       >
         {t('accessibility.skipToContent')}
       </a>

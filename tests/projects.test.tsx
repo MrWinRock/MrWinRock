@@ -41,7 +41,10 @@ it('renders ordered API company links independently of tech filters without priv
   expect(link).toHaveAttribute('href', 'https://company.example.com/');
   expect(link).toHaveAttribute('target', '_blank');
   expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-  expect(Array.from(container.querySelectorAll('.company-link a')).map(item => item.textContent)).toEqual(['Public Tool ↗', 'Company Portal ↗']);
+  const companyLinks = container.querySelectorAll('.company-link a');
+  expect(companyLinks).toHaveLength(2);
+  expect(companyLinks[0]).toHaveAccessibleName('Public Tool');
+  expect(companyLinks[1]).toHaveAccessibleName('Company Portal');
   expect(container.querySelectorAll('img')).toHaveLength(0);
   expect(container.querySelector('a[href*="/projects/company-portal"]')).toBeNull();
   expect(container.querySelector('a[href*="github.com/example/private"]')).toBeNull();

@@ -4,6 +4,7 @@ import { useRetryCountdown } from '../../../hooks/useRetryCountdown';
 import { api, type ApiProject, type ProjectMatchResponse } from '../../../lib/api';
 import { canonicalMatchedProjects, localizeProject } from '../../../lib/portfolio';
 import { ProjectCard } from './ProjectCard';
+import { ArrowIcon } from '../../ArrowIcon';
 import { MatchEvidence } from './MatchEvidence';
 
 type MatchStatus = 'idle' | 'loading' | 'complete' | 'validation' | 'unavailable' | 'rate-limited';
@@ -71,7 +72,6 @@ export function ProjectMatcher({ projects }: { projects: ApiProject[] }) {
 
     return <section className="project-matcher" aria-labelledby={`${id}-title`}>
         <div className="matcher-panel">
-            <p className="eyebrow">{t('projects.match.eyebrow')}</p>
             <h2 id={`${id}-title`}>{t('projects.match.title')}</h2>
             <p className="matcher-intro">{t('projects.match.intro')}</p>
             <form noValidate onSubmit={submit}>
@@ -85,7 +85,7 @@ export function ProjectMatcher({ projects }: { projects: ApiProject[] }) {
                     <p id={`${id}-privacy`} className="matcher-privacy">{t('projects.match.privacy')}</p>
                     <button type="submit" className="p-button" disabled={status === 'loading' || seconds > 0}>
                         {t(status === 'loading' ? 'projects.match.loading' : 'projects.match.submit')}
-                        <span aria-hidden="true">↗</span>
+                        <ArrowIcon />
                     </button>
                 </div>
             </form>

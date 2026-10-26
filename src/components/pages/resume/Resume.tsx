@@ -21,7 +21,6 @@ const Resume = () => {
             transition={{ duration: 0.45 }}
         >
             <div>
-                <p className="eyebrow"><span aria-hidden="true">05 / </span>{t("nav.resume")}</p>
                 <h1 className="page-title">
                     {t("resume.title")}
                 </h1>

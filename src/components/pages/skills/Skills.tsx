@@ -52,7 +52,6 @@ const Skills = () => {
             transition={{ duration: 0.45 }}
         >
             <div>
-                <p className="eyebrow"><span aria-hidden="true">02 / </span>{t("nav.skills")}</p>
                 <motion.h1
                     className="page-title"
                     initial={false}

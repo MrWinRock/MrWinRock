@@ -1,0 +1,418 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-26T01:12:04.592Z",
+  "title": "Design System: MrWinRock",
+  "extensions": {
+    "colorMeta": {
+      "background": {
+        "role": "neutral",
+        "displayName": "Night Ink",
+        "canonical": "#0c0c10",
+        "tonalRamp": [
+          "oklch(15.00% 0.00845 285.38)",
+          "oklch(26.43% 0.00845 285.38)",
+          "oklch(37.86% 0.00845 285.38)",
+          "oklch(49.29% 0.00845 285.38)",
+          "oklch(60.71% 0.00845 285.38)",
+          "oklch(72.14% 0.00845 285.38)",
+          "oklch(83.57% 0.00845 285.38)",
+          "oklch(95.00% 0.00845 285.38)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Cool Lettering",
+        "canonical": "#f3f1f8",
+        "tonalRamp": [
+          "oklch(15.00% 0.00952 299.24)",
+          "oklch(26.43% 0.00952 299.24)",
+          "oklch(37.86% 0.00952 299.24)",
+          "oklch(49.29% 0.00952 299.24)",
+          "oklch(60.71% 0.00952 299.24)",
+          "oklch(72.14% 0.00952 299.24)",
+          "oklch(83.57% 0.00952 299.24)",
+          "oklch(95.00% 0.00952 299.24)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Quiet Lilac Gray",
+        "canonical": "#aaa7b7",
+        "tonalRamp": [
+          "oklch(15.00% 0.02302 294.43)",
+          "oklch(26.43% 0.02302 294.43)",
+          "oklch(37.86% 0.02302 294.43)",
+          "oklch(49.29% 0.02302 294.43)",
+          "oklch(60.71% 0.02302 294.43)",
+          "oklch(72.14% 0.02302 294.43)",
+          "oklch(83.57% 0.02302 294.43)",
+          "oklch(95.00% 0.02302 294.43)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Catalog Surface",
+        "canonical": "#151419",
+        "tonalRamp": [
+          "oklch(15.00% 0.01006 294.62)",
+          "oklch(26.43% 0.01006 294.62)",
+          "oklch(37.86% 0.01006 294.62)",
+          "oklch(49.29% 0.01006 294.62)",
+          "oklch(60.71% 0.01006 294.62)",
+          "oklch(72.14% 0.01006 294.62)",
+          "oklch(83.57% 0.01006 294.62)",
+          "oklch(95.00% 0.01006 294.62)"
+        ]
+      },
+      "surface-elevated": {
+        "role": "neutral",
+        "displayName": "Raised Ink",
+        "canonical": "#1c1b23",
+        "tonalRamp": [
+          "oklch(15.00% 0.01542 290.85)",
+          "oklch(26.43% 0.01542 290.85)",
+          "oklch(37.86% 0.01542 290.85)",
+          "oklch(49.29% 0.01542 290.85)",
+          "oklch(60.71% 0.01542 290.85)",
+          "oklch(72.14% 0.01542 290.85)",
+          "oklch(83.57% 0.01542 290.85)",
+          "oklch(95.00% 0.01542 290.85)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Fine Rule",
+        "canonical": "#302e39",
+        "tonalRamp": [
+          "oklch(15.00% 0.01972 293.54)",
+          "oklch(26.43% 0.01972 293.54)",
+          "oklch(37.86% 0.01972 293.54)",
+          "oklch(49.29% 0.01972 293.54)",
+          "oklch(60.71% 0.01972 293.54)",
+          "oklch(72.14% 0.01972 293.54)",
+          "oklch(83.57% 0.01972 293.54)",
+          "oklch(95.00% 0.01972 293.54)"
+        ]
+      },
+      "border-strong": {
+        "role": "neutral",
+        "displayName": "Control Rule",
+        "canonical": "#514d60",
+        "tonalRamp": [
+          "oklch(15.00% 0.03138 294.70)",
+          "oklch(26.43% 0.03138 294.70)",
+          "oklch(37.86% 0.03138 294.70)",
+          "oklch(49.29% 0.03138 294.70)",
+          "oklch(60.71% 0.03138 294.70)",
+          "oklch(72.14% 0.03138 294.70)",
+          "oklch(83.57% 0.03138 294.70)",
+          "oklch(95.00% 0.03138 294.70)"
+        ]
+      },
+      "brand-ink": {
+        "role": "primary",
+        "displayName": "Sleeve Lavender",
+        "canonical": "#c6b5ff",
+        "tonalRamp": [
+          "oklch(15.00% 0.10417 294.51)",
+          "oklch(26.43% 0.10417 294.51)",
+          "oklch(37.86% 0.10417 294.51)",
+          "oklch(49.29% 0.10417 294.51)",
+          "oklch(60.71% 0.10417 294.51)",
+          "oklch(72.14% 0.10417 294.51)",
+          "oklch(83.57% 0.10417 294.51)",
+          "oklch(95.00% 0.10417 294.51)"
+        ]
+      },
+      "brand-cyan": {
+        "role": "primary",
+        "displayName": "Ice Cyan",
+        "canonical": "#a0e8ee",
+        "tonalRamp": [
+          "oklch(15.00% 0.07180 202.53)",
+          "oklch(26.43% 0.07180 202.53)",
+          "oklch(37.86% 0.07180 202.53)",
+          "oklch(49.29% 0.07180 202.53)",
+          "oklch(60.71% 0.07180 202.53)",
+          "oklch(72.14% 0.07180 202.53)",
+          "oklch(83.57% 0.07180 202.53)",
+          "oklch(95.00% 0.07180 202.53)"
+        ]
+      },
+      "control-ink": {
+        "role": "neutral",
+        "displayName": "Control Ink",
+        "canonical": "#14101f",
+        "tonalRamp": [
+          "oklch(15.00% 0.03049 295.55)",
+          "oklch(26.43% 0.03049 295.55)",
+          "oklch(37.86% 0.03049 295.55)",
+          "oklch(49.29% 0.03049 295.55)",
+          "oklch(60.71% 0.03049 295.55)",
+          "oklch(72.14% 0.03049 295.55)",
+          "oklch(83.57% 0.03049 295.55)",
+          "oklch(95.00% 0.03049 295.55)"
+        ]
+      },
+      "primary-hover": {
+        "role": "neutral",
+        "displayName": "Primary Hover",
+        "canonical": "#ded3ff",
+        "tonalRamp": [
+          "oklch(15.00% 0.06090 296.60)",
+          "oklch(26.43% 0.06090 296.60)",
+          "oklch(37.86% 0.06090 296.60)",
+          "oklch(49.29% 0.06090 296.60)",
+          "oklch(60.71% 0.06090 296.60)",
+          "oklch(72.14% 0.06090 296.60)",
+          "oklch(83.57% 0.06090 296.60)",
+          "oklch(95.00% 0.06090 296.60)"
+        ]
+      },
+      "field-background": {
+        "role": "neutral",
+        "displayName": "Field Background",
+        "canonical": "#0e0d12",
+        "tonalRamp": [
+          "oklch(15.00% 0.01053 294.37)",
+          "oklch(26.43% 0.01053 294.37)",
+          "oklch(37.86% 0.01053 294.37)",
+          "oklch(49.29% 0.01053 294.37)",
+          "oklch(60.71% 0.01053 294.37)",
+          "oklch(72.14% 0.01053 294.37)",
+          "oklch(83.57% 0.01053 294.37)",
+          "oklch(95.00% 0.01053 294.37)"
+        ]
+      },
+      "placeholder": {
+        "role": "neutral",
+        "displayName": "Placeholder",
+        "canonical": "#9d97ac",
+        "tonalRamp": [
+          "oklch(15.00% 0.03113 298.63)",
+          "oklch(26.43% 0.03113 298.63)",
+          "oklch(37.86% 0.03113 298.63)",
+          "oklch(49.29% 0.03113 298.63)",
+          "oklch(60.71% 0.03113 298.63)",
+          "oklch(72.14% 0.03113 298.63)",
+          "oklch(83.57% 0.03113 298.63)",
+          "oklch(95.00% 0.03113 298.63)"
+        ]
+      },
+      "error": {
+        "role": "neutral",
+        "displayName": "Error",
+        "canonical": "#f4a4bb",
+        "tonalRamp": [
+          "oklch(15.00% 0.09842 0.81)",
+          "oklch(26.43% 0.09842 0.81)",
+          "oklch(37.86% 0.09842 0.81)",
+          "oklch(49.29% 0.09842 0.81)",
+          "oklch(60.71% 0.09842 0.81)",
+          "oklch(72.14% 0.09842 0.81)",
+          "oklch(83.57% 0.09842 0.81)",
+          "oklch(95.00% 0.09842 0.81)"
+        ]
+      },
+      "project-hover": {
+        "role": "neutral",
+        "displayName": "Project Hover",
+        "canonical": "#1c1726",
+        "tonalRamp": [
+          "oklch(15.00% 0.02968 299.24)",
+          "oklch(26.43% 0.02968 299.24)",
+          "oklch(37.86% 0.02968 299.24)",
+          "oklch(49.29% 0.02968 299.24)",
+          "oklch(60.71% 0.02968 299.24)",
+          "oklch(72.14% 0.02968 299.24)",
+          "oklch(83.57% 0.02968 299.24)",
+          "oklch(95.00% 0.02968 299.24)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "First-name hero treatment; responsive overrides are documented in DESIGN.md."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Fluid section headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Standard project titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "English and Thai reading default."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Primary and secondary control text."
+      }
+    },
+    "shadows": [
+      {
+        "name": "skull-artwork",
+        "value": "0 24px 42px -22px #21113b70",
+        "purpose": "Original skull inside the identity sleeve only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-sleeve",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Identity sheen and action-arrow movement."
+      },
+      {
+        "name": "sleeve-arrival",
+        "value": "1.8s",
+        "purpose": "One sleeve-sheen animation on arrival."
+      },
+      {
+        "name": "sleeve-hover",
+        "value": "1s",
+        "purpose": "Sleeve sheen transition on hover."
+      },
+      {
+        "name": "arrow-shift",
+        "value": ".3s",
+        "purpose": "Translate primary and project-detail arrows by 2px -2px on hover."
+      },
+      {
+        "name": "control-state",
+        "value": ".2s",
+        "purpose": "Control background, border, and text state transitions."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "none",
+        "purpose": "Under prefers-reduced-motion: reduce, disable animation and transitions and use automatic scrolling."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-hero-max",
+        "value": "1100px"
+      },
+      {
+        "name": "tablet-max",
+        "value": "1023px"
+      },
+      {
+        "name": "mobile-max",
+        "value": "767px"
+      },
+      {
+        "name": "narrow-max",
+        "value": "359px"
+      },
+      {
+        "name": "desktop-navigation-min",
+        "value": "1024px"
+      },
+      {
+        "name": "wide-navigation-gap-min",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Gradient action. Source: src/index.css controls; src/components/pages/home/Home.tsx; SVG: src/components/ArrowIcon.tsx.",
+      "html": "<a class=\"ds-primary\" href=\"#work\">View work <svg class=\"ds-arrow\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a>",
+      "css": ".ds-primary{font-family:'Noto Sans Thai',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:48px;padding:12px 22px;border-radius:var(--radius,8px);border:1px solid var(--border-strong,#514d60);font-size:.875rem;font-weight:600;line-height:1.5;text-decoration:none;transition:background-color .2s,border-color .2s,color .2s;color:#14101f;background:var(--brand-gradient,linear-gradient(115deg,#a48aff 0%,#d6a5f6 45%,#a0e8ee 100%));border-color:transparent}.ds-primary:hover{background:#ded3ff}.ds-primary:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-arrow{display:inline-block;flex:0 0 auto;vertical-align:middle}@media(prefers-reduced-motion:no-preference){.ds-primary .ds-arrow{transition:translate .3s var(--motion-ease,cubic-bezier(.16,1,.3,1))}.ds-primary:hover .ds-arrow{translate:2px -2px}}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "Secondary Action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outlined secondary action. Source: src/index.css controls; src/components/pages/home/Home.tsx.",
+      "html": "<button class=\"ds-secondary\" type=\"button\">Contact</button>",
+      "css": ".ds-secondary{font-family:'Noto Sans Thai',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:48px;padding:12px 22px;border-radius:var(--radius,8px);border:1px solid var(--border-strong,#514d60);font-size:.875rem;font-weight:600;line-height:1.5;text-decoration:none;transition:background-color .2s,border-color .2s,color .2s;color:var(--ink,#f3f1f8);background:transparent;cursor:pointer}.ds-secondary:hover{border-color:#b8a0ef;background:#221d2e}.ds-secondary:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-secondary:disabled{opacity:.55;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "Reading Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Contact/search input. Source: src/index.css search-field and contact-field rules.",
+      "html": "<input class=\"ds-field\" aria-label=\"Message\" placeholder=\"Your message\" />",
+      "css": ".ds-field{font-family:'Noto Sans Thai',sans-serif;display:block;width:100%;min-height:50px;padding:13px 16px;background:#0e0d12;color:var(--ink,#f3f1f8);border:1px solid var(--border-strong,#514d60);border-radius:8px;line-height:1.7;caret-color:var(--brand-ink,#c6b5ff)}.ds-field::placeholder{color:#9d97ac;opacity:1}.ds-field:focus,.ds-field:focus-visible{outline:2px solid var(--brand-ink,#c6b5ff);outline-offset:2px}.ds-field[aria-invalid=true]{border-color:#f4a4bb}"
+    },
+    {
+      "name": "Catalog Navigation",
+      "kind": "nav",
+      "refersTo": "navigation-link",
+      "description": "Active and resting navigation links. Source: src/components/Navbar.tsx; src/index.css navigation rules.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Preview navigation\"><a class=\"ds-nav-link\" href=\"#home\" aria-current=\"page\">Home</a><a class=\"ds-nav-link\" href=\"#projects\">Projects</a><a class=\"ds-nav-link\" href=\"#contact\">Contact</a></nav>",
+      "css": ".ds-nav{font-family:'Noto Sans Thai',sans-serif;display:flex;gap:4px;padding:14px;background:#0c0c10;border-bottom:1px solid var(--border,#302e39)}.ds-nav-link{display:inline-flex;align-items:center;min-height:44px;padding:8px 11px;font-size:.82rem;line-height:1.75;color:var(--muted,#aaa7b7);border-radius:6px;text-decoration:none}.ds-nav-link:hover,.ds-nav-link[aria-current=page]{color:var(--ink,#f3f1f8);background:#211c2c}.ds-nav-link:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}"
+    },
+    {
+      "name": "Technology Tags",
+      "kind": "chip",
+      "refersTo": "technology-tag",
+      "description": "Noninteractive slash-separated technology labels. Source: src/components/pages/projects/ProjectCard.tsx; src/index.css tech-tag rules.",
+      "html": "<ul class=\"ds-tags\" aria-label=\"Technologies\"><li class=\"ds-tag\">TypeScript</li><li class=\"ds-tag\">React</li><li class=\"ds-tag\">Node.js</li></ul>",
+      "css": ".ds-tags{font-family:'Noto Sans Thai',sans-serif;display:flex;flex-wrap:wrap;gap:8px 16px;margin:0;padding:0;list-style:none}.ds-tag{display:inline-flex;align-items:center;padding:2px 0;color:#c5bfd4;font-size:.75rem;line-height:1.7}.ds-tag:not(:last-child)::after{content:'/';color:#74707f;margin-left:14px}"
+    },
+    {
+      "name": "Open Project Row",
+      "kind": "card",
+      "refersTo": "project-row",
+      "description": "Signature open catalog listing, with a flexible summary and aligned detail action. Source: src/components/pages/projects/ProjectCard.tsx; src/index.css project-card rules; SVG: src/components/ArrowIcon.tsx.",
+      "html": "<article class=\"ds-project\"><div class=\"ds-summary\"><h3 class=\"ds-project-title\">Project title</h3><p class=\"ds-project-copy\">Published project description.</p></div><a class=\"ds-detail\" href=\"#project\">View details <svg class=\"ds-arrow\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a></article>",
+      "css": ".ds-project{font-family:'Noto Sans Thai',sans-serif;display:grid;grid-template-columns:minmax(0,1fr) 200px;gap:44px;align-items:center;padding:32px 0;background:transparent;border-block:1px solid var(--border,#302e39)}.ds-project:hover,.ds-project:focus-within{background:#1c1726}.ds-summary{min-width:0}.ds-project-title{font-family:var(--font-display,Sora,'Noto Sans Thai',sans-serif);font-size:1.65rem;font-weight:500;line-height:1.25;color:var(--ink,#f3f1f8);margin:0 0 12px}.ds-project-copy{max-width:68ch;color:var(--muted,#aaa7b7);line-height:1.85;font-size:.95rem;margin:0 0 18px}.ds-detail{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:44px;font-size:.85rem;color:var(--brand-ink,#c6b5ff);text-decoration:none}.ds-detail:hover{color:var(--ink,#f3f1f8)}.ds-detail:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-arrow{display:inline-block;flex:0 0 auto;vertical-align:middle}@media(max-width:767px){.ds-project{grid-template-columns:1fr;gap:20px;padding:28px 0}.ds-detail{max-width:250px}}@media(prefers-reduced-motion:no-preference){.ds-detail .ds-arrow{transition:translate .3s var(--motion-ease,cubic-bezier(.16,1,.3,1))}.ds-detail:hover .ds-arrow{translate:2px -2px}}"
+    },
+    {
+      "name": "Evidence Panel",
+      "kind": "card",
+      "refersTo": "evidence-panel",
+      "description": "Enclosed reading container used where evidence needs grouping. Source: src/index.css surface-panel and evidence-panel rules.",
+      "html": "<section class=\"ds-panel\"><h2 class=\"ds-panel-title\">Project evidence</h2><p class=\"ds-panel-copy\">Available technical decisions and contribution details appear here.</p></section>",
+      "css": ".ds-panel{font-family:'Noto Sans Thai',sans-serif;position:relative;padding:32px;border:1px solid var(--border,#302e39);border-radius:16px;background:var(--surface,#151419);min-width:0}.ds-panel-title{font-family:var(--font-display,Sora,'Noto Sans Thai',sans-serif);font-size:1.4rem;font-weight:500;line-height:1.25;letter-spacing:-.035em;color:var(--ink,#f3f1f8);margin:0 0 18px}.ds-panel-copy{color:var(--muted,#aaa7b7);max-width:70ch;line-height:1.9;margin:0}@media(max-width:767px){.ds-panel{padding:24px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Independent Catalog",
+    "overview": "The system treats personal work as a catalog: clear names, open listings, fine rules, and enough space to inspect the evidence. Ink-dark fields and cool lettering provide a quiet reading surface; the original skull anchors recognition inside an expressive gradient sleeve.\n\nThis name, the descriptive color names, and the named rules below are designer decisions made under the owner's delegated visual brief. The durable owner commitments are the MrWinRock identity, the existing skull, dark surfaces, gradients, and useful English and Thai journeys. Sora supplies the display voice while Noto Sans Thai carries reading and Thai coverage.",
+    "keyCharacteristics": [
+      "Ink-dark reading surfaces and cool, solid-color text.",
+      "Original skull artwork on a violet, lilac, and cyan sleeve.",
+      "Open project rows, fine dividers, and restrained tonal states.",
+      "Bilingual typography, visible focus, and static reduced-motion behavior."
+    ],
+    "rules": [
+      {
+        "name": "The Material Gradient Rule",
+        "body": "Put gradients on sleeves, action fills, and broad contact surfaces; keep reading text a solid color.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Script Rule",
+        "body": "Preserve the Noto Sans Thai fallback in display stacks and its reading role; test both languages when changing type size or width.",
+        "section": "typography"
+      },
+      {
+        "name": "The Open Catalog Rule",
+        "body": "Present work listings as open rows separated by fine rules; use enclosed panels for evidence, fields, and resource states where grouping earns its boundary.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** preserve the original skull and dark, gradient-bearing identity.",
+      "**Do** use solid readable text, fine rules, and open work listings.",
+      "**Do** preserve both language stacks, visible focus, and reduced-motion behavior.",
+      "**Do** derive future component variants from the observed source and verify their responsive reading order."
+    ],
+    "donts": [
+      "**Don't** turn reading text into gradient lettering.",
+      "**Don't** apply the skull's shadow as a general panel elevation.",
+      "**Don't** gate content behind decorative animation or add a continuous sleeve loop.",
+      "**Don't** infer new project evidence or product claims from visual examples."
+    ]
+  }
+}
