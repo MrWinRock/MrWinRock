@@ -45,12 +45,11 @@ export default function Home() {
                 </div>
             </div>
             <figure className="identity-sleeve">
-                <div className="sleeve-top"><span>MrWinRock</span><span>{t('home.portfolioLabel')}</span></div>
+                <div className="sleeve-top"><span>MrWinRock</span></div>
                 <div className="sleeve-art"><img src="/logo.jpg" alt={t('home.brandAlt')} width="512" height="512" fetchPriority="high" decoding="async" /></div>
-                <figcaption className="sleeve-caption"><span>{t('home.location')}</span><span>EN / TH</span></figcaption>
+                <figcaption className="sleeve-caption">{t('home.location')}</figcaption>
             </figure>
         </section>
-        <BuildFocus />
         {settingsStatus === 'unavailable' && <PublicDataNotice state={{ status: 'unavailable', reason: 'unavailable' }} retry={retrySettings} />}
         {settingsStatus === 'snapshot' && <div className="public-notice"><p role="status">{t('resource.snapshot')}</p><button type="button" className="s-button mt-3" onClick={retrySettings}>{t('resource.retry')}</button></div>}
         {visible.showProjects && projects.state.status !== 'empty' && <section className="home-section">
@@ -58,6 +57,7 @@ export default function Home() {
             <PublicDataNotice {...projects} />
             {!!featured.length && <div className="showcase-grid">{featured.map((project, index) => <ProjectCard key={project._id ?? project.title} project={localizeProject(project, i18n.language)} number={index + 1} variant="showcase" />)}</div>}
         </section>}
+        <BuildFocus />
         {visible.showSkills && <section className="home-section">
             <div className="section-heading"><h2>{t('home.techTitle')}</h2><Link to="/skills">{t('home.seeMore')} <ArrowIcon /></Link></div>
             <PublicDataNotice {...resource} />

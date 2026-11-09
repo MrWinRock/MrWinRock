@@ -94,14 +94,12 @@ button:disabled { opacity: .55; cursor: not-allowed; }
 .identity-sleeve::after { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(125deg, transparent 28%, #ffffff50 49%, transparent 70%); translate: -110% 0; }
 .sleeve-top, .sleeve-caption { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; font-size: .7rem; font-weight: 600; line-height: 1.7; }
 .sleeve-top > span:first-child { font-family: var(--font-display); font-weight: 650; font-size: 1rem; letter-spacing: -.04em; }
-.sleeve-top > span:last-child { max-width: 110px; text-align: right; }
 .sleeve-art { display: flex; justify-content: center; align-items: center; min-height: 0; padding: 22px 14px; }
 .sleeve-art img { display: block; width: auto; height: 100%; max-width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 50%; box-shadow: 0 24px 42px -22px #21113b70; }
 .sleeve-caption { border-top: 1px solid #18102560; padding-top: 14px; }
-.sleeve-caption > span:last-child { text-align: right; }
 
 /* Capability catalog */
-.build-focus { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 36px; border-block: 1px solid var(--border); padding: 32px 0; }
+.build-focus { margin-top: 84px; display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 36px; border-block: 1px solid var(--border); padding: 32px 0; }
 .build-focus-header h2 { font-size: 1rem; font-weight: 500; }
 .build-focus-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
 .build-focus-copy h3 { font-size: 1rem; font-weight: 500; margin-bottom: 10px; }
@@ -128,7 +126,7 @@ button:disabled { opacity: .55; cursor: not-allowed; }
 .project-showcase .project-summary h3 { font-size: 2rem; }
 .tech-tag { display: inline-flex; align-items: center; padding: 2px 0; color: #c5bfd4; font-size: .75rem; line-height: 1.7; }
 .tech-tag:not(:last-child)::after { content: '/'; color: #74707f; margin-left: 14px; }
-.project-cover { grid-column: 1 / -1; max-height: 420px; width: 100%; object-fit: contain; object-position: left; margin-top: 20px; border-radius: 12px; }
+.project-cover { grid-column: 1 / -1; max-height: 600px; width: 100%; object-fit: contain; object-position: left; margin-top: 20px; border-radius: 12px; }
 .project-actions { display: grid; grid-template-columns: minmax(0, 1fr) 44px; gap: 8px; max-width: 100%; }
 .project-action-live, .project-action-repository { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 9px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-size: .75rem; font-weight: 500; }
 .project-action-live:hover, .project-action-repository:hover { background: #332a45; }
@@ -338,7 +336,7 @@ textarea.contact-field { min-height: 150px; resize: vertical; }
   .identity-sleeve { max-width: 440px; width: 100%; justify-self: center; padding: 24px; aspect-ratio: 1.05; }
   .sleeve-art { padding: 16px 24px; }
   .sleeve-top, .sleeve-caption { font-size: .65rem; }
-  .build-focus { padding-block: 28px; }
+  .build-focus { margin-top: 56px; padding-block: 28px; }
   .build-focus-list { grid-template-columns: 1fr; gap: 0; }
   .build-focus-area + .build-focus-area { border-top: 1px solid var(--border); padding-top: 20px; margin-top: 20px; }
   .build-focus-copy { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 22px; }
