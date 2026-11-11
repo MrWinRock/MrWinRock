@@ -5,6 +5,9 @@ import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import { skills as staticSkills, type Skill } from "../../../data/skills";
 import { api } from "../../../lib/api";
 import { getPublicSnapshot } from '../../../lib/publicSnapshot';
+import { Link } from 'react-router-dom';
+import { useSettings } from '../../../contexts/useSettings';
+import { ArrowIcon } from '../../ArrowIcon';
 
 interface CategoryGroup {
     id: string;
@@ -15,6 +18,8 @@ interface CategoryGroup {
 
 const Skills = () => {
     const { t } = useTranslation();
+    const { settings, isInitialLoading } = useSettings();
+    const canExplore = !isInitialLoading && settings.showProjects;
 
     const categoryTitles: Record<string, string> = {
         programming: t("skills.categories.programming"),
@@ -82,22 +87,16 @@ const Skills = () => {
                             </div>
 
                             <div className="public-skill-grid">
-                                {category.skills.map((skill) => (
-                                    <div
-                                        key={skill._id || skill.name}
-                                        className="skill-tile"
-                                    >
-                                        <span className="skill-icon-well">
-                                            <img
-                                                src={skill.icon}
-                                                alt={skill.name}
-                                                loading="lazy"
-                                                className="w-8 h-8"
-                                            />
-                                        </span>
+                                {category.skills.map(skill => {
+                                    const content = <>
+                                        {skill.icon && <span className="skill-icon-well"><img src={skill.icon} alt="" loading="lazy" width="28" height="28" /></span>}
                                         <span className="text-sm font-semibold">{skill.name}</span>
-                                    </div>
-                                ))}
+                                        {canExplore && <span className="skill-tile-arrow"><ArrowIcon /></span>}
+                                    </>;
+                                    return canExplore
+                                        ? <Link key={skill._id || skill.name} className="skill-tile" to={'/projects?tech=' + encodeURIComponent(skill.name)}>{content}</Link>
+                                        : <div key={skill._id || skill.name} className="skill-tile">{content}</div>;
+                                })}
                             </div>
                         </motion.section>
                     ))}

@@ -26,7 +26,7 @@ export default function Navbar() {
         onKeyDown={event => { if (event.key === 'Escape' && isMenuOpen) { setIsMenuOpen(false); toggle.current?.focus(); } }}>
         <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-4 py-3">
             <Link to="/" className="navbar-brand flex items-center shrink-0"><img src={logo} alt="" width="34" height="34" /><span className="navbar-title">mrwinrock<span aria-hidden="true">.</span></span></Link>
-            <div className="hidden lg:flex items-center gap-1 xl:gap-3">{links(false)}<LanguageSwitcher /></div>
+            <div className="hidden lg:flex items-center gap-1">{links(false)}<LanguageSwitcher /></div>
             <div className="lg:hidden flex items-center gap-2"><LanguageSwitcher /><button ref={toggle} type="button" className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={t(isMenuOpen ? 'nav.closeMenu' : 'nav.openMenu')} aria-expanded={isMenuOpen} aria-controls="mobile-navigation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true"><path d={isMenuOpen ? 'M6 6l12 12M6 18 18 6' : 'M4 8h16M4 16h16'} /></svg></button></div>
         </div>
         {isMenuOpen && <div id="mobile-navigation" className="lg:hidden mobile-navigation"><div className="flex flex-col gap-1 px-4 pb-4">{links(true)}</div></div>}

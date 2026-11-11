@@ -36,7 +36,7 @@ export default function Home() {
                 <div className="hero-actions">
                     {visible.showProjects && <Link className="primary-action" to="/projects">{t('home.viewWork')} <ArrowIcon /></Link>}
                     {visible.showResume && <ResumeDownloadButton />}
-                    {visible.showContact && <Link className="s-button" onClick={()=>trackPortfolioEvent('contact_intent')} to="/contact">{t('nav.contact')}</Link>}
+                    {visible.showContact && <Link className="text-action" onClick={()=>trackPortfolioEvent('contact_intent')} to="/contact">{t('nav.contact')} <ArrowIcon /></Link>}
                 </div>
                 <div className="hero-socials">
                     <a href="https://github.com/MrWinRock" target="_blank" rel="noopener noreferrer">GitHub <ArrowIcon /></a>

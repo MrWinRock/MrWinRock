@@ -8,7 +8,7 @@ export function PublicDataNotice<T>({ state, retry }: { state: PublicResourceSta
   if (state.status === 'ready') return null;
   const failed = state.status === 'unavailable' || state.status === 'stale';
   return (
-    <div className="public-notice">
+    <div className="public-notice" data-status={state.status}>
       <p role={state.status === 'unavailable' ? 'alert' : 'status'}>
         {t(`resource.${state.status === 'stale' && state.source === 'snapshot' ? 'snapshot' : state.status}`)}
       </p>

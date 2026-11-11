@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-26T01:12:04.592Z",
+  "generatedAt": "2026-11-11T11:00:01Z",
   "title": "Design System: MrWinRock",
   "extensions": {
     "colorMeta": {
@@ -250,6 +250,10 @@
       "label": {
         "displayName": "Label",
         "purpose": "Primary and secondary control text."
+      },
+      "support": {
+        "displayName": "Supporting Copy",
+        "purpose": "Shared --support-size for capability descriptions, hero social links, and the tertiary action."
       }
     },
     "shadows": [
@@ -263,7 +267,7 @@
       {
         "name": "ease-sleeve",
         "value": "cubic-bezier(.16, 1, .3, 1)",
-        "purpose": "Identity sheen and action-arrow movement."
+        "purpose": "Identity sheen and compact action-arrow movement."
       },
       {
         "name": "sleeve-arrival",
@@ -277,13 +281,13 @@
       },
       {
         "name": "arrow-shift",
-        "value": ".3s",
-        "purpose": "Translate primary and project-detail arrows by 2px -2px on hover."
+        "value": ".2s",
+        "purpose": "Translate primary, project-detail, skill, capability, direct-contact, and secondary-action arrows by 1px -1px on hover and keyboard focus."
       },
       {
         "name": "control-state",
         "value": ".2s",
-        "purpose": "Control background, border, and text state transitions."
+        "purpose": "Control background, border, text, and supported pressed-state transitions."
       },
       {
         "name": "reduced-motion",
@@ -305,6 +309,10 @@
         "value": "767px"
       },
       {
+        "name": "skill-single-column-max",
+        "value": "479px"
+      },
+      {
         "name": "narrow-max",
         "value": "359px"
       },
@@ -322,18 +330,34 @@
     {
       "name": "Primary Action",
       "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Gradient action. Source: src/index.css controls; src/components/pages/home/Home.tsx; SVG: src/components/ArrowIcon.tsx.",
-      "html": "<a class=\"ds-primary\" href=\"#work\">View work <svg class=\"ds-arrow\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a>",
-      "css": ".ds-primary{font-family:'Noto Sans Thai',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:48px;padding:12px 22px;border-radius:var(--radius,8px);border:1px solid var(--border-strong,#514d60);font-size:.875rem;font-weight:600;line-height:1.5;text-decoration:none;transition:background-color .2s,border-color .2s,color .2s;color:#14101f;background:var(--brand-gradient,linear-gradient(115deg,#a48aff 0%,#d6a5f6 45%,#a0e8ee 100%));border-color:transparent}.ds-primary:hover{background:#ded3ff}.ds-primary:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-arrow{display:inline-block;flex:0 0 auto;vertical-align:middle}@media(prefers-reduced-motion:no-preference){.ds-primary .ds-arrow{transition:translate .3s var(--motion-ease,cubic-bezier(.16,1,.3,1))}.ds-primary:hover .ds-arrow{translate:2px -2px}}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+      "refersTo": "hero-primary",
+      "description": "Home primary work action, with a 52px minimum height. Source: src/index.css hero-actions and controls; src/components/pages/home/Home.tsx; SVG: src/components/ArrowIcon.tsx.",
+      "html": "<a class=\"ds-primary\" href=\"#work\">View work <svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a>",
+      "css": ".ds-primary{font-family:'Noto Sans Thai',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:var(--control-gap,8px);min-height:52px;padding:12px 24px;border-radius:var(--radius,8px);border:1px solid transparent;font-size:.875rem;font-weight:600;line-height:1.5;text-decoration:none;transition:background-color .2s,border-color .2s,color .2s,translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1));color:#14101f;background:var(--brand-gradient,linear-gradient(115deg,#a48aff 0%,#d6a5f6 45%,#a0e8ee 100%))}.ds-primary:is(:hover,:focus-visible){background:#ded3ff}.ds-primary:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-primary:active{translate:0 1px}.ds-arrow{display:inline-block;flex:0 0 auto;width:var(--icon-size,14px);height:var(--icon-size,14px);vertical-align:middle}@media(max-width:1100px){.ds-primary{padding-inline:14px;font-size:.8rem}}@media(max-width:767px){.ds-primary{padding-inline:16px}}@media(prefers-reduced-motion:no-preference){.ds-primary .ds-arrow{transition:translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1))}.ds-primary:is(:hover,:focus-visible) .ds-arrow{translate:1px -1px}}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
     },
     {
       "name": "Secondary Action",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "Outlined secondary action. Source: src/index.css controls; src/components/pages/home/Home.tsx.",
-      "html": "<button class=\"ds-secondary\" type=\"button\">Contact</button>",
-      "css": ".ds-secondary{font-family:'Noto Sans Thai',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:48px;padding:12px 22px;border-radius:var(--radius,8px);border:1px solid var(--border-strong,#514d60);font-size:.875rem;font-weight:600;line-height:1.5;text-decoration:none;transition:background-color .2s,border-color .2s,color .2s;color:var(--ink,#f3f1f8);background:transparent;cursor:pointer}.ds-secondary:hover{border-color:#b8a0ef;background:#221d2e}.ds-secondary:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-secondary:disabled{opacity:.55;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+      "description": "Outlined actions for Home resume download and enabled contextual destinations on About; the resume new-tab action uses the shared compact arrow. Source: src/index.css controls and hero-actions; src/components/ResumeDownloadButton.tsx; src/components/pages/about/About.tsx; src/components/pages/resume/Resume.tsx.",
+      "html": "<button class=\"ds-secondary\" type=\"button\">Download Résumé</button>",
+      "css": ".ds-secondary{font-family:'Noto Sans Thai',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:var(--control-gap,8px);min-height:48px;padding:12px 16px;border-radius:var(--radius,8px);border:1px solid var(--border-strong,#514d60);font-size:.875rem;font-weight:600;line-height:1.5;text-decoration:none;transition:background-color .2s,border-color .2s,color .2s,translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1));color:var(--ink,#f3f1f8);background:transparent;cursor:pointer}.ds-secondary:is(:hover,:focus-visible){border-color:var(--brand-ink,#c6b5ff);background:#221d2e}.ds-secondary:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-secondary:active:not(:disabled){translate:0 1px}.ds-secondary:disabled{opacity:.55;cursor:not-allowed}@media(max-width:1100px){.ds-secondary{padding-inline:14px;font-size:.8rem}}@media(max-width:767px){.ds-secondary{padding-inline:16px}}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "Tertiary Contact Action",
+      "kind": "button",
+      "refersTo": "button-tertiary",
+      "description": "Home text contact action beneath the primary work hierarchy. Source: src/components/pages/home/Home.tsx; src/index.css text-action rules.",
+      "html": "<a class=\"ds-text-action\" href=\"#contact\">Contact <svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a>",
+      "css": ".ds-text-action{font-family:'Noto Sans Thai',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:var(--control-gap,8px);min-height:48px;padding:10px 12px;border-radius:var(--radius,8px);color:var(--muted,#aaa7b7);font-size:var(--support-size,.875rem);font-weight:500;text-decoration:none;transition:background-color .2s,color .2s}.ds-text-action:is(:hover,:focus-visible){color:var(--ink,#f3f1f8);background:var(--surface-elevated,#1c1b23)}.ds-text-action:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-text-action:active{translate:0 1px}.ds-arrow{display:inline-block;flex:0 0 auto;width:var(--icon-size,14px);height:var(--icon-size,14px);vertical-align:middle}@media(prefers-reduced-motion:reduce){.ds-text-action{transition:none}}"
+    },
+    {
+      "name": "Boxed Skill Evidence",
+      "kind": "custom",
+      "refersTo": "skill-evidence",
+      "description": "Home skills use boxed controls in three columns, two on mobile, and one below 360px. Skills tiles use four columns, three below 1024px, two below 768px, and one below 480px. Both link to the corresponding technology filter only when Projects is enabled; otherwise they are informational. Source: src/components/pages/home/Home.tsx; src/components/pages/skills/Skills.tsx; src/index.css developer-stack and skill rules.",
+      "html": "<div class=\"ds-stack\"><a class=\"ds-skill\" href=\"#projects-typescript\">TypeScript <svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a><a class=\"ds-skill\" href=\"#projects-react\">React <svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a><span class=\"ds-skill\">Node.js</span></div><div class=\"ds-skill-grid\"><a class=\"ds-skill-tile\" href=\"#projects-typescript\"><span>TypeScript</span><svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a><a class=\"ds-skill-tile\" href=\"#projects-react\"><span>React</span><svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a></div>",
+      "css": ".ds-stack,.ds-skill-grid{font-family:'Noto Sans Thai',sans-serif;display:grid;gap:12px}.ds-stack{grid-template-columns:repeat(3,minmax(0,1fr))}.ds-skill{display:inline-flex;align-items:center;gap:12px;min-height:64px;padding:16px 18px;border:1px solid var(--border-strong,#514d60);border-radius:var(--radius,8px);background:var(--surface,#151419);font-size:1rem;color:var(--ink,#f3f1f8);text-decoration:none;transition:background-color .2s,border-color .2s,color .2s}.ds-skill-grid{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:12px}.ds-skill-tile{display:flex;align-items:center;gap:10px;min-width:0;min-height:72px;padding:16px;border:1px solid var(--border-strong,#514d60);border-radius:var(--radius,8px);background:var(--surface,#151419);color:var(--ink,#f3f1f8);font-size:.875rem;font-weight:600;text-decoration:none;transition:background-color .2s,border-color .2s,color .2s}.ds-skill-tile span{min-width:0;overflow-wrap:anywhere}a.ds-skill:is(:hover,:focus-visible),a.ds-skill-tile:is(:hover,:focus-visible){color:var(--brand-ink,#c6b5ff);border-color:var(--brand-ink,#c6b5ff);background:var(--surface-elevated,#1c1b23)}a.ds-skill:focus-visible,a.ds-skill-tile:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}a.ds-skill:active,a.ds-skill-tile:active{translate:0 1px}.ds-skill .ds-arrow,.ds-skill-tile .ds-arrow{color:var(--brand-ink,#c6b5ff)}.ds-arrow{display:inline-block;flex:0 0 auto;width:var(--icon-size,14px);height:var(--icon-size,14px);vertical-align:middle}@media(max-width:1023px){.ds-skill-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:767px){.ds-stack,.ds-skill-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ds-skill{font-size:.875rem;gap:8px}.ds-skill-tile{padding:14px;font-size:.8rem}}@media(max-width:479px){.ds-skill-grid{grid-template-columns:1fr}}@media(max-width:359px){.ds-stack{grid-template-columns:1fr}}@media(prefers-reduced-motion:no-preference){a.ds-skill .ds-arrow,a.ds-skill-tile .ds-arrow{transition:translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1))}a.ds-skill:is(:hover,:focus-visible) .ds-arrow,a.ds-skill-tile:is(:hover,:focus-visible) .ds-arrow{translate:1px -1px}}@media(prefers-reduced-motion:reduce){.ds-skill,.ds-skill-tile{transition:none}}"
     },
     {
       "name": "Reading Field",
@@ -349,23 +373,23 @@
       "refersTo": "navigation-link",
       "description": "Active and resting navigation links. Source: src/components/Navbar.tsx; src/index.css navigation rules.",
       "html": "<nav class=\"ds-nav\" aria-label=\"Preview navigation\"><a class=\"ds-nav-link\" href=\"#home\" aria-current=\"page\">Home</a><a class=\"ds-nav-link\" href=\"#projects\">Projects</a><a class=\"ds-nav-link\" href=\"#contact\">Contact</a></nav>",
-      "css": ".ds-nav{font-family:'Noto Sans Thai',sans-serif;display:flex;gap:4px;padding:14px;background:#0c0c10;border-bottom:1px solid var(--border,#302e39)}.ds-nav-link{display:inline-flex;align-items:center;min-height:44px;padding:8px 11px;font-size:.82rem;line-height:1.75;color:var(--muted,#aaa7b7);border-radius:6px;text-decoration:none}.ds-nav-link:hover,.ds-nav-link[aria-current=page]{color:var(--ink,#f3f1f8);background:#211c2c}.ds-nav-link:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}"
+      "css": ".ds-nav{font-family:'Noto Sans Thai',sans-serif;display:flex;align-items:center;gap:4px;min-height:var(--header-height,72px);padding:10px;background:#0c0c10;border-bottom:1px solid var(--border,#302e39)}.ds-nav-link{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:8px 10px;font-size:.8125rem;line-height:1.75;color:var(--muted,#aaa7b7);border-radius:6px;text-decoration:none;transition:color .2s,background-color .2s}.ds-nav-link:hover{color:var(--ink,#f3f1f8);background:var(--surface,#151419)}.ds-nav-link[aria-current=page]{color:var(--brand-ink,#c6b5ff)}.ds-nav-link[aria-current=page]::after{content:'';position:absolute;bottom:2px;left:10px;right:10px;height:2px;border-radius:2px;background:var(--brand-ink,#c6b5ff)}.ds-nav-link:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}@media(max-width:767px){.ds-nav{min-height:var(--header-height,64px)}}@media(prefers-reduced-motion:reduce){.ds-nav-link{transition:none}}"
     },
     {
       "name": "Technology Tags",
       "kind": "chip",
       "refersTo": "technology-tag",
-      "description": "Noninteractive slash-separated technology labels. Source: src/components/pages/projects/ProjectCard.tsx; src/index.css tech-tag rules.",
-      "html": "<ul class=\"ds-tags\" aria-label=\"Technologies\"><li class=\"ds-tag\">TypeScript</li><li class=\"ds-tag\">React</li><li class=\"ds-tag\">Node.js</li></ul>",
-      "css": ".ds-tags{font-family:'Noto Sans Thai',sans-serif;display:flex;flex-wrap:wrap;gap:8px 16px;margin:0;padding:0;list-style:none}.ds-tag{display:inline-flex;align-items:center;padding:2px 0;color:#c5bfd4;font-size:.75rem;line-height:1.7}.ds-tag:not(:last-child)::after{content:'/';color:#74707f;margin-left:14px}"
+      "description": "Shared boxed technology chips for project cards, project details, and Experience. Deduplicated labels link to project technology filters only when Projects is enabled; otherwise they are informational. Source: src/components/TechnologyTags.tsx; src/index.css tech-list and tech-chip rules.",
+      "html": "<ul class=\"ds-tags\" aria-label=\"Technologies\"><li class=\"ds-tag\"><a class=\"ds-chip\" href=\"#projects-typescript\">TypeScript</a></li><li class=\"ds-tag\"><a class=\"ds-chip\" href=\"#projects-react\">React</a></li><li class=\"ds-tag\"><span class=\"ds-chip\">Node.js</span></li></ul>",
+      "css": ".ds-tags{font-family:'Noto Sans Thai',sans-serif;display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}.ds-tag{display:inline-flex;min-width:0}.ds-chip{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:6px 12px;border:1px solid var(--border-strong,#514d60);border-radius:var(--radius,8px);color:var(--brand-ink,#c6b5ff);background:var(--surface-elevated,#1c1b23);font-size:.8125rem;line-height:1.5;overflow-wrap:anywhere;text-decoration:none;transition:color .2s,background-color .2s,border-color .2s,translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1))}a.ds-chip:is(:hover,:focus-visible){color:var(--ink,#f3f1f8);border-color:var(--brand-ink,#c6b5ff);background:#241c32}a.ds-chip:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}a.ds-chip:active{translate:0 1px}@media(prefers-reduced-motion:reduce){.ds-chip{transition:none}}"
     },
     {
       "name": "Open Project Row",
       "kind": "card",
       "refersTo": "project-row",
-      "description": "Signature open catalog listing, with a flexible summary and aligned detail action. Source: src/components/pages/projects/ProjectCard.tsx; src/index.css project-card rules; SVG: src/components/ArrowIcon.tsx.",
-      "html": "<article class=\"ds-project\"><div class=\"ds-summary\"><h3 class=\"ds-project-title\">Project title</h3><p class=\"ds-project-copy\">Published project description.</p></div><a class=\"ds-detail\" href=\"#project\">View details <svg class=\"ds-arrow\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a></article>",
-      "css": ".ds-project{font-family:'Noto Sans Thai',sans-serif;display:grid;grid-template-columns:minmax(0,1fr) 200px;gap:44px;align-items:center;padding:32px 0;background:transparent;border-block:1px solid var(--border,#302e39)}.ds-project:hover,.ds-project:focus-within{background:#1c1726}.ds-summary{min-width:0}.ds-project-title{font-family:var(--font-display,Sora,'Noto Sans Thai',sans-serif);font-size:1.65rem;font-weight:500;line-height:1.25;color:var(--ink,#f3f1f8);margin:0 0 12px}.ds-project-copy{max-width:68ch;color:var(--muted,#aaa7b7);line-height:1.85;font-size:.95rem;margin:0 0 18px}.ds-detail{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:44px;font-size:.85rem;color:var(--brand-ink,#c6b5ff);text-decoration:none}.ds-detail:hover{color:var(--ink,#f3f1f8)}.ds-detail:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-arrow{display:inline-block;flex:0 0 auto;vertical-align:middle}@media(max-width:767px){.ds-project{grid-template-columns:1fr;gap:20px;padding:28px 0}.ds-detail{max-width:250px}}@media(prefers-reduced-motion:no-preference){.ds-detail .ds-arrow{transition:translate .3s var(--motion-ease,cubic-bezier(.16,1,.3,1))}.ds-detail:hover .ds-arrow{translate:2px -2px}}"
+      "description": "Open catalog listing with a linked title, boxed technology filters, and compact exploration actions directly below the summary. Optional Home covers open the detail and sit beside the summary on desktop, above it on mobile; this preview has no cover. Source: src/components/pages/projects/ProjectCard.tsx; src/components/TechnologyTags.tsx; src/index.css project-card rules; SVG: src/components/ArrowIcon.tsx.",
+      "html": "<article class=\"ds-project\"><div class=\"ds-project-body\"><div class=\"ds-project-info\"><div class=\"ds-summary\"><h3 class=\"ds-project-title\"><a class=\"ds-title-link\" href=\"#project\">Project title</a></h3><p class=\"ds-project-copy\">Published project description.</p><ul class=\"ds-project-tags\" aria-label=\"Technologies\"><li><a class=\"ds-project-chip\" href=\"#projects-typescript\">TypeScript</a></li></ul></div><div class=\"ds-project-links\"><a class=\"ds-detail\" href=\"#project\">View details <svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a></div></div></div></article>",
+      "css": ".ds-project{font-family:'Noto Sans Thai',sans-serif;display:grid;padding:32px 0;background:transparent;border-block:1px solid var(--border,#302e39)}.ds-project-body{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:start}.ds-project:hover,.ds-project:focus-within{background:#1c1726}.ds-project-info{display:grid;gap:24px;min-width:0}.ds-summary{min-width:0}.ds-project-title{font-family:var(--font-display,Sora,'Noto Sans Thai',sans-serif);font-size:1.65rem;font-weight:500;line-height:1.25;color:var(--ink,#f3f1f8);margin:0 0 12px}.ds-title-link{color:inherit;text-decoration:none;text-decoration-thickness:1px;text-underline-offset:.2em}.ds-title-link:is(:hover,:focus-visible){color:var(--brand-ink,#c6b5ff);text-decoration-line:underline}.ds-project-copy{max-width:68ch;color:var(--muted,#aaa7b7);line-height:1.85;font-size:.95rem;margin:0 0 18px}.ds-project-tags{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}.ds-project-chip{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:6px 12px;border:1px solid var(--border-strong,#514d60);border-radius:var(--radius,8px);color:var(--brand-ink,#c6b5ff);background:var(--surface-elevated,#1c1b23);font-size:.8125rem;line-height:1.5;text-decoration:none;transition:color .2s,background-color .2s,border-color .2s}.ds-project-chip:is(:hover,:focus-visible){color:var(--ink,#f3f1f8);border-color:var(--brand-ink,#c6b5ff);background:#241c32}.ds-project-links{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.ds-detail{display:inline-flex;align-items:center;justify-content:center;gap:var(--control-gap,8px);width:fit-content;min-height:44px;padding:10px 14px;border:1px solid var(--border-strong,#514d60);border-radius:var(--radius,8px);background:var(--brand-wash,linear-gradient(120deg,#231b39,#18292e));font-size:.85rem;font-weight:600;color:var(--brand-ink,#c6b5ff);text-decoration:none;transition:color .2s,background-color .2s,border-color .2s}.ds-detail:is(:hover,:focus-visible){color:var(--ink,#f3f1f8);border-color:var(--brand-ink,#c6b5ff);background:var(--surface-elevated,#1c1b23)}.ds-detail:active,.ds-project-chip:active{translate:0 1px}.ds-detail:focus-visible,.ds-title-link:focus-visible,.ds-project-chip:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-arrow{display:inline-block;flex:0 0 auto;width:var(--icon-size,14px);height:var(--icon-size,14px);vertical-align:middle}.ds-showcase{padding:36px 0;transition:background-color .22s}.ds-showcase .ds-project-title{font-size:2rem}.ds-showcase.ds-with-cover .ds-project-body{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:24px 56px;align-items:start}.ds-showcase.ds-with-cover .ds-project-info{align-self:center}.ds-showcase.ds-with-cover .ds-cover-link{display:block;grid-column:2;align-self:center;border-radius:12px;overflow:hidden;background:var(--surface,#151419)}.ds-cover-link:is(:hover,:focus-visible){outline:2px solid var(--brand-ink,#c6b5ff);outline-offset:4px}.ds-cover{display:block;width:100%;max-height:380px;object-fit:contain;object-position:left;border-radius:12px}@media(max-width:767px){.ds-project,.ds-showcase{padding:28px 0}.ds-project-body{grid-template-columns:1fr;gap:20px}.ds-project-links{gap:8px}.ds-detail{max-width:250px}.ds-showcase .ds-project-title{font-size:1.7rem}.ds-project-copy{font-size:.9rem}.ds-showcase.ds-with-cover .ds-project-body{grid-template-columns:1fr;gap:24px}.ds-showcase.ds-with-cover .ds-project-info,.ds-showcase.ds-with-cover .ds-cover-link{grid-column:1;grid-row:auto}.ds-showcase.ds-with-cover .ds-cover-link{order:-1;width:100%}.ds-cover{max-height:320px}}@media(prefers-reduced-motion:no-preference){.ds-detail .ds-arrow{transition:translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1))}.ds-detail:is(:hover,:focus-visible) .ds-arrow{translate:1px -1px}}@media(prefers-reduced-motion:reduce){.ds-showcase,.ds-detail,.ds-project-chip{transition:none}}"
     },
     {
       "name": "Evidence Panel",
@@ -373,7 +397,15 @@
       "refersTo": "evidence-panel",
       "description": "Enclosed reading container used where evidence needs grouping. Source: src/index.css surface-panel and evidence-panel rules.",
       "html": "<section class=\"ds-panel\"><h2 class=\"ds-panel-title\">Project evidence</h2><p class=\"ds-panel-copy\">Available technical decisions and contribution details appear here.</p></section>",
-      "css": ".ds-panel{font-family:'Noto Sans Thai',sans-serif;position:relative;padding:32px;border:1px solid var(--border,#302e39);border-radius:16px;background:var(--surface,#151419);min-width:0}.ds-panel-title{font-family:var(--font-display,Sora,'Noto Sans Thai',sans-serif);font-size:1.4rem;font-weight:500;line-height:1.25;letter-spacing:-.035em;color:var(--ink,#f3f1f8);margin:0 0 18px}.ds-panel-copy{color:var(--muted,#aaa7b7);max-width:70ch;line-height:1.9;margin:0}@media(max-width:767px){.ds-panel{padding:24px}}"
+      "css": ".ds-panel{font-family:'Noto Sans Thai',sans-serif;position:relative;padding:32px;border:1px solid var(--border,#302e39);border-radius:16px;background:var(--surface,#151419);min-width:0;transition:border-color .2s}.ds-panel:focus-within{border-color:var(--border-strong,#514d60)}.ds-panel-title{font-family:var(--font-display,Sora,'Noto Sans Thai',sans-serif);font-size:1.4rem;font-weight:500;line-height:1.25;letter-spacing:-.035em;color:var(--ink,#f3f1f8);margin:0 0 18px}.ds-panel-copy{color:var(--muted,#aaa7b7);max-width:70ch;line-height:1.9;margin:0}@media(max-width:767px){.ds-panel{padding:24px}}@media(prefers-reduced-motion:reduce){.ds-panel{transition:none}}"
+    },
+    {
+      "name": "Direct Contact Link",
+      "kind": "card",
+      "refersTo": "direct-contact",
+      "description": "Boxed contact destination with a compact arrow beside its label and a wrapping address. Source: src/components/pages/contact/Contact.tsx; src/index.css direct-link rules.",
+      "html": "<a class=\"ds-direct\" href=\"mailto:hello@example.com\"><span class=\"ds-contact-icon\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\"/><path d=\"m3 7 9 6 9-6\"/></svg></span><span class=\"ds-direct-copy\"><span class=\"ds-direct-label\">Email <svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></span><span class=\"ds-direct-value\">hello@example.com</span></span></a>",
+      "css": ".ds-direct{font-family:'Noto Sans Thai',sans-serif;display:flex;align-items:center;gap:16px;padding:16px;border:1px solid var(--border,#302e39);border-radius:var(--radius,8px);background:var(--surface,#151419);color:var(--ink,#f3f1f8);text-decoration:none;overflow-wrap:anywhere;transition:border-color .2s,background-color .2s}.ds-contact-icon{display:grid;place-items:center;flex-shrink:0;width:40px;height:40px;border-radius:8px;background:#ffffff0d;color:var(--brand-ink,#c6b5ff)}.ds-direct-copy{min-width:0}.ds-direct-label{display:inline-flex;align-items:center;gap:8px;font-size:.875rem;font-weight:500;color:#fff}.ds-direct-label .ds-arrow{color:var(--brand-ink,#c6b5ff)}.ds-direct-value{display:block;font-size:.75rem;color:#99a1af;overflow-wrap:anywhere}.ds-direct:is(:hover,:focus-visible){color:var(--brand-ink,#c6b5ff);border-color:var(--brand-ink,#c6b5ff);background:var(--surface-elevated,#1c1b23)}.ds-direct:hover .ds-contact-icon{color:#fff}.ds-direct:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-arrow{display:inline-block;flex:0 0 auto;width:var(--icon-size,14px);height:var(--icon-size,14px);vertical-align:middle}@media(prefers-reduced-motion:no-preference){.ds-direct .ds-arrow{transition:translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1))}.ds-direct:is(:hover,:focus-visible) .ds-arrow{translate:1px -1px}}@media(prefers-reduced-motion:reduce){.ds-direct{transition:none}}"
     }
   ],
   "narrative": {

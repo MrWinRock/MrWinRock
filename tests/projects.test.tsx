@@ -88,3 +88,20 @@ it('does not publish a case study route for a typed company record', async () =>
   expect(container.textContent).not.toMatch(/Internal contribution|Private company|Private role/);
   expect(container.querySelector('img')).toBeNull();
 });
+it('connects a personal overview to relevant sections, technology filters, and safe screenshots', async () => {
+  vi.mocked(api.projects).mockResolvedValue({ ok: true, data: [{
+    title: 'Personal Tool', slug: 'personal-tool', description: 'A published personal project.', order: 0, tech: ['React'],
+    caseStudy: { problem: 'A published problem.', repositories: [{ label: 'Source', url: 'https://github.com/example/tool' }], screenshots: [
+      { alt: 'Published screenshot', url: 'https://example.com/tool.png' },
+      { alt: 'Unsafe screenshot', url: 'javascript:alert(1)' },
+    ] },
+  }] });
+  renderPublic(<Routes><Route path="/projects/:slug" element={<ProjectDetail />} /></Routes>, { route: '/projects/personal-tool' });
+  expect(await screen.findByRole('heading', { name: 'Personal Tool' })).toBeVisible();
+  expect(screen.getByRole('link', { name: 'React', exact: true })).toHaveAttribute('href', '/projects?tech=React');
+  expect(screen.getByRole('navigation', { name: 'Project overview' })).toContainElement(screen.getByRole('link', { name: 'The problem', exact: true }));
+  expect(screen.getByRole('link', { name: 'The problem', exact: true })).toHaveAttribute('href', '#problem');
+  expect(screen.getByRole('link', { name: 'Published screenshot', exact: true })).toHaveAttribute('href', 'https://example.com/tool.png');
+  expect(screen.getByRole('link', { name: 'Published screenshot', exact: true })).toHaveAttribute('rel', 'noopener noreferrer');
+  expect(screen.queryByRole('link', { name: 'Unsafe screenshot', exact: true })).toBeNull();
+});

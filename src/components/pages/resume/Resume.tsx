@@ -5,6 +5,7 @@ import { useObjectUrl } from '../../../hooks/useObjectUrl';
 import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import { api } from "../../../lib/api";
 import { trackPortfolioEvent } from '../../../lib/portfolioEvents';
+import { ArrowIcon } from '../../ArrowIcon';
 
 const Resume = () => {
     const { t } = useTranslation();
@@ -35,6 +36,7 @@ const Resume = () => {
                         className="p-button inline-flex items-center justify-center"
                     >
                         {t("resume.download")}
+                        <svg className="action-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4" /></svg>
                     </a>
                     <a
                         href={resumeUrl}
@@ -43,6 +45,7 @@ const Resume = () => {
                         className="s-button inline-flex items-center justify-center"
                     >
                         {t("resume.newTab")}
+                        <ArrowIcon />
                     </a>
                 </div>
 

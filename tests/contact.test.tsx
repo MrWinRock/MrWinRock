@@ -35,11 +35,13 @@ it('prevents duplicate sends, resets only on success, and aborts on unmount', as
   fireEvent.click(button); fireEvent.click(button);
   expect(api.contact).toHaveBeenCalledTimes(1);
   expect(button).toBeDisabled();
+  expect(button.closest('form')).toHaveAttribute('aria-busy', 'true');
   const signal = vi.mocked(api.contact).mock.calls[0][1]?.signal;
   expect(signal?.aborted).toBe(false);
   await act(async () => resolve({ ok: true, message: 'Sent' }));
   expect(screen.getByLabelText(/^name$/i)).toHaveValue('');
   expect(screen.getByRole('status')).toHaveTextContent(/sent/i);
+  expect(button.closest('form')).toHaveAttribute('aria-busy', 'false');
   fill(); fireEvent.click(button); unmount();
   expect(vi.mocked(api.contact).mock.calls[1][1]?.signal?.aborted).toBe(true);
 });

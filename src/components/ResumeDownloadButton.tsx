@@ -21,7 +21,7 @@ export function ResumeDownloadButton() {
         catch { if (!controller.signal.aborted) setStatus('error'); }
         finally { if (active.current === controller) active.current = null; }
     }
-    return <div>{url ? <a className="s-button inline-flex" href={url} download="Pharthiwath_Gristsoopharruth_Resume.pdf">{t('resume.download')}</a> : <button type="button" className="s-button" disabled={status === 'loading'} onClick={download}>{t(status === 'loading' ? 'resource.loading' : 'resume.download')}</button>}
+    return <div>{url ? <a className="s-button inline-flex" href={url} download="Pharthiwath_Gristsoopharruth_Resume.pdf">{t('resume.download')}</a> : <button type="button" className="s-button" disabled={status === 'loading'} aria-busy={status === 'loading'} onClick={download}>{t(status === 'loading' ? 'resource.loading' : 'resume.download')}</button>}
         {url && <a ref={link} className="hidden" tabIndex={-1} aria-hidden="true" href={url} download="Pharthiwath_Gristsoopharruth_Resume.pdf" />}
         {status === 'error' && <p role="alert" className="mt-2 text-sm text-rose-200">{t('resume.downloadError')}</p>}</div>;
 }

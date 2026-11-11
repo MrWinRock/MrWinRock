@@ -11,6 +11,9 @@ it('retries failure and owns the successful PDF URL', async () => {
   fireEvent.click(await screen.findByRole('button', { name: /retry/i }));
   const download = await screen.findByRole('link', { name: /download/i });
   expect(download.getAttribute('href')).toMatch(/^blob:/);
+  const open = screen.getByRole('link', { name: /new tab/i });
+  expect(open).toHaveAttribute('href', download.getAttribute('href'));
+  expect(open).toHaveAttribute('target', '_blank');
   const revoke = vi.spyOn(URL, 'revokeObjectURL');
   unmount();
   expect(revoke).toHaveBeenCalledWith(download.getAttribute('href'));

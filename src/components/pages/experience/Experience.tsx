@@ -4,6 +4,7 @@ import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import { api } from "../../../lib/api";
 import { localizeExperience } from '../../../lib/portfolio';
 import { getPublicSnapshot } from '../../../lib/publicSnapshot';
+import { TechnologyTags } from '../../TechnologyTags';
 
 const Experience = () => {
     const { t, i18n } = useTranslation();
@@ -55,9 +56,7 @@ const Experience = () => {
                             <h3>{t('experience.achievements')}</h3>
                             <ul>{exp.achievements.map((achievement, index) => <li key={index}>{achievement}</li>)}</ul>
                         </div>}
-                        {!!exp.tech.length && <div className="flex flex-wrap gap-2">
-                            {exp.tech.map((tag, index) => <span className="tech-tag" key={index}>{tag}</span>)}
-                        </div>}
+                        {!!exp.tech.length && <TechnologyTags technologies={exp.tech} />}
                     </div>
                 </article>
             </li>)}

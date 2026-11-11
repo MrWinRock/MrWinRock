@@ -187,7 +187,9 @@ it('maps companion technology evidence to the parent without attributing its pri
   vi.mocked(api.matchProjects).mockResolvedValue({ ok: true, data: { source: 'jev', matches: [{ project: child, score: 1, confidence: 0.9, evidence: [{ field: 'tech', index: 0 }, { field: 'role' }] }] } });
   renderPublic(<Projects />); submit();
   const results = await screen.findByRole('region', { name: /relevant projects/i });
-  expect(within(results).getByRole('link', { name: /Bun/ })).toHaveAttribute('href', '/projects/parent#technologies');
+  const evidence = within(results).getByText('Why this matches').parentElement!;
+  expect(within(evidence).getByRole('link', { name: /Bun/ })).toHaveAttribute('href', '/projects/parent#technologies');
+  expect(within(results).getAllByRole('link', { name: 'Bun', exact: true }).map(link => link.getAttribute('href'))).toContain('/projects?tech=Bun');
   expect(within(results).queryByText('Built a separate backend')).toBeNull();
 });
 

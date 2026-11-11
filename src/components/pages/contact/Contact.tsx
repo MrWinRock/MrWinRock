@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import SpotlightCard from "@/components/cards/SpotLightCard";
 import { api } from "@/lib/api";
 import { ContactBrief } from './ContactBrief';
+import { ArrowIcon } from '../../ArrowIcon';
 
 const CONTACT_EMAIL = "mrwinrock11@gmail.com";
 const GITHUB_URL = "https://github.com/MrWinRock";
@@ -98,7 +99,7 @@ const Contact = () => {
                     {/* Form */}
                     <motion.div className="md:col-span-3" variants={item}>
                         <SpotlightCard index={0} className="flex flex-col" spotlightColor="rgba(128, 0, 255, 0.22)">
-                            <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-5">
+                            <form noValidate onSubmit={handleSubmit} aria-busy={status === 'sending'} className="flex flex-col gap-5">
                                 <div>
                                     <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">
                                         {t("contact.name")}
@@ -256,8 +257,8 @@ const ContactLink: React.FC<ContactLinkProps> = ({ href, label, value, icon, ext
             {icon}
         </span>
         <span className="min-w-0">
-            <span className="block text-sm font-medium text-white">{label}</span>
-            <span className="block text-xs text-gray-400 truncate">{value}</span>
+            <span className="direct-link-label inline-flex items-center gap-2 text-sm font-medium text-white">{label} <ArrowIcon /></span>
+            <span className="direct-link-value block text-xs text-gray-400">{value}</span>
         </span>
     </motion.a>
 );

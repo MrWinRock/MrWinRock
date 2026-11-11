@@ -53,3 +53,18 @@ Signature interaction and motion: the identity sleeve's gradient sheen travels o
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
 Unresolved: no new factual copy, imagery claims, or product behavior is commissioned. Existing screenshots remain conditional on published evidence.
+
+## Clean product engineer refinement — 2026-11-11
+
+The owner requested a more modern developer presentation while keeping the current color theme, and selected the clean product engineer direction. This refines the existing world rather than replacing its identity.
+
+- Keep the full name, role, and primary work action prominent; reduce the desktop sleeve to a supporting 336px square and use a compact horizontal identity strip on mobile.
+- Use a 72px desktop / 64px mobile header, ordinary navigation links, and a fine lavender active indicator. Preserve every API-controlled destination and mobile menu behavior.
+- Keep work before the capability summary. Link project titles to their overview; compose available Home project screenshots beside the summary on desktop and above it on mobile. Missing screenshots retain the open text listing.
+- Keep View My Work primary, résumé secondary, and Contact as a tertiary text action. Use aligned, open skill links instead of individual bordered boxes.
+- Reuse the existing palette, self-hosted bilingual fonts, arrow vocabulary, focus rules, and reduced-motion behavior. Loading notices retain real status text with a small decorative progress indicator.
+- Verify Home in English and Thai from 320px to 1440px, the shared Projects and Contact paths, and keyboard, loading, recovery, and reduced-motion behavior. Capture fixtures remain review-only and create no published evidence.
+
+## Interaction refinement — 2026-11-11
+
+The owner requested boxed stack items, smaller arrows positioned next to their labels, and more useful interactions across every public page. This explicitly supersedes the open skill-row and unboxed technology-tag treatments above. Technology chips and skill tiles navigate to the existing project technology filter while the Projects destination is enabled; otherwise they remain informational. Project exploration actions sit directly below the summary instead of in a distant column. All real controls share visible hover, keyboard focus, and pressed feedback. Paragraphs and informational panels retain their reading semantics. The dark violet/cyan palette, published content, bilingual journeys, and API visibility boundaries remain authoritative.

@@ -20,7 +20,7 @@ colors:
 typography:
   display:
     fontFamily: "Sora, 'Noto Sans Thai', sans-serif"
-    fontSize: "clamp(2.8rem, 5.4vw, 4.7rem)"
+    fontSize: "clamp(3rem, 5.3vw, 4.75rem)"
     fontWeight: 600
     lineHeight: 1.12
     letterSpacing: "-.04em"
@@ -44,6 +44,9 @@ typography:
     fontSize: ".875rem"
     fontWeight: 600
     lineHeight: 1.5
+  support:
+    fontFamily: "'Noto Sans Thai', sans-serif"
+    fontSize: ".875rem"
 rounded:
   control: "8px"
   panel: "16px"
@@ -51,12 +54,15 @@ rounded:
   compact: "6px"
 spacing:
   compact: "8px"
-  control-gap: "14px"
+  control-gap: "8px"
   base: "16px"
   mobile-gutter: "24px"
   panel: "32px"
   desktop-gutter: "48px"
-  section: "84px"
+  section: "80px"
+  section-mobile: "56px"
+  header-height: "72px"
+  header-height-mobile: "64px"
 components:
   button-primary:
     textColor: "{colors.control-ink}"
@@ -65,11 +71,22 @@ components:
     padding: "12px 22px"
   button-primary-hover:
     backgroundColor: "{colors.primary-hover}"
+  hero-primary:
+    textColor: "{colors.control-ink}"
+    typography: "{typography.label}"
+    rounded: "{rounded.control}"
+    padding: "12px 24px"
+    height: "52px"
   button-secondary:
     textColor: "{colors.ink}"
     typography: "{typography.label}"
     rounded: "{rounded.control}"
     padding: "12px 22px"
+  button-tertiary:
+    textColor: "{colors.muted}"
+    typography: "{typography.support}"
+    rounded: "{rounded.control}"
+    padding: "10px 12px"
   input:
     backgroundColor: "{colors.field-background}"
     textColor: "{colors.ink}"
@@ -78,9 +95,22 @@ components:
   navigation-link:
     textColor: "{colors.muted}"
     rounded: "{rounded.compact}"
-    padding: "8px 11px"
+    padding: "8px 10px"
+  skill-evidence:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.control}"
+    padding: "16px 18px"
   technology-tag:
-    padding: "2px 0"
+    backgroundColor: "{colors.surface-elevated}"
+    textColor: "{colors.brand-ink}"
+    rounded: "{rounded.control}"
+    padding: "6px 12px"
+  direct-contact:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.control}"
+    padding: "16px"
   project-row:
     padding: "32px 0"
   evidence-panel:
@@ -138,11 +168,11 @@ The palette combines cool neutrals with soft violet and cyan accents; vivid grad
 
 ### Hierarchy
 
-- **Display:** the frontmatter display role is the desktop first-name treatment. The surname uses (.59em), weight (450), leading inherited from the name, and tracking (-.03em). At mobile width it becomes (.65em).
+- **Display:** the frontmatter display role is the desktop first-name treatment. The surname uses (.62em), weight (450), leading inherited from the name, and tracking (-.03em). At tablet width the first name uses `clamp(2.5rem, 5.4vw, 4rem)`; on mobile it uses `clamp(2.6rem, 9.4vw, 4.8rem)` and the surname becomes (.65em).
 - **Headline:** fluid section headings use the headline role; route titles use `clamp(2.5rem, 5vw, 4.5rem)`, weight (500).
 - **Title:** project titles use the title role; featured work increases to (2rem). Panel titles are (1.4rem), weight (500).
 - **Body:** the root role is the default. Hero and page descriptions increase leading to (1.9), with measures of (57ch) and (70ch); project summaries use (.95rem), leading (1.85), and (68ch).
-- **Label:** controls use the label role. Navigation uses (.82rem), technology labels (.75rem); labels stay in ordinary case.
+- **Label:** controls use the label role. Navigation and technology labels use (.8125rem); labels stay in ordinary case. The support role maps to the source's `--support-size` for capability descriptions, hero social links, and the tertiary action.
 
 ### Named Rules
 
@@ -150,11 +180,11 @@ The palette combines cool neutrals with soft violet and cyan accents; vivid grad
 
 ## Layout
 
-The outer main and navigation containers stop at (1280px), including desktop side padding of (48px); the resulting inner content width is (1184px). Navigation is fixed and (84px) high. The page begins below it. Main content has (100px) bottom padding. Sections use the source's (84px) separation, with local (8–32px) control and reading gaps.
+The outer main and navigation containers stop at (1280px), including desktop side padding of (48px); the resulting inner content width is (1184px). Navigation is fixed and uses `--header-height`; the page begins below it and scroll padding adds (24px). Main content has (100px) bottom padding. Sections use `--section-space`, with local (8–32px) control and reading gaps. The frontmatter records the desktop and mobile values of both source tokens.
 
-The home composition pairs text and the sleeve in (1.3fr / 1fr) columns with a (64px) gap. Project rows pair flexible summaries with a (200px) action column and a (44px) gap. These compositions are surface patterns, not mandatory layouts for every route.
+The home composition pairs text and a supporting sleeve in (1.6fr / .8fr) columns with an (80px) gap and (72px 0 56px) padding. Selected work precedes the capability summary. Project actions wrap directly below the summary and technology chips, grouped with them at a (24px) gap so a taller screenshot cannot push the actions away. A Home showcase with a published screenshot centers this information group beside the image, in (1fr / 1.05fr) columns with a (56px) column gap; without an image it retains the open text listing. Home skill evidence uses three columns of boxed links with (12px) gaps. These compositions are surface patterns, not mandatory layouts for every route.
 
-At (1100px) the hero tightens. At (1023px) side gutters become (32px), hero columns tighten again, and skills use three columns. At (767px) gutters become (24px), navigation becomes (72px) high, hero and project rows stack, skills use two columns, and section separation becomes (56px). At (359px) gutters become (18px) and skills use one column. The Tailwind desktop navigation appears from (1024px); its larger navigation gap begins at (1280px). The body supports a minimum width of (280px).
+At (1100px) the hero tightens. At (1023px) side gutters become (32px), hero columns tighten again, and the separate Skills route uses three columns. At (767px) gutters become (24px), navigation becomes (64px) high, hero and project rows stack, Home showcase images lead their summaries, skills use two columns, and section separation becomes (56px). The Skills route becomes one column at (479px); Home skill evidence becomes one column at (359px), when gutters also become (18px). The Tailwind desktop navigation appears from (1024px). The body supports a minimum width of (280px).
 
 ## Elevation & Depth
 
@@ -166,25 +196,33 @@ Depth comes from tonal fields, dividers, and state changes. Panels have no gener
 
 ## Shapes
 
-Controls and skill links use the control radius; sleeves, contact rails, and evidence panels use the panel radius. Resource notices, screenshots, and the résumé frame use the resource radius. Compact navigation and experience labels use the compact radius. The original skull and navigation logo keep their circular crop. Project rows themselves have no rounded enclosure.
+Controls, technology chips, Home skill links, Skills tiles, and direct contact links use the control radius; sleeves, contact rails, and evidence panels use the panel radius. Resource notices, screenshots, and the résumé frame use the resource radius. Compact navigation uses the compact radius. The original skull and navigation logo keep their circular crop. Project rows remain open without a rounded enclosure.
 
 ## Components
 
 ### Buttons
 
-Controls are clear and gently rounded. Primary actions use the brand surface gradient, dark lettering, a (48px) minimum height, and the frontmatter padding. Hover becomes a solid pale lavender. Secondary actions are transparent with a strong boundary, shifting to a violet-dark fill and lighter rule on hover. Disabled buttons reduce opacity to (.55).
+Controls are clear and gently rounded. Primary actions use the brand surface gradient, dark lettering, a (48px) minimum height, and the frontmatter padding. Hover and keyboard focus become solid pale lavender. Secondary actions are transparent with a strong boundary, shifting to a violet-dark fill and lavender rule on hover and keyboard focus. Action labels and arrows share the compact control gap. Buttons, text actions, technology links, skill links, and project-detail links move down (1px) while pressed. Disabled buttons reduce opacity to (.55).
+
+On Home, View My Work has a (52px) minimum height and (24px) horizontal padding; the résumé stays secondary with (16px) horizontal padding. Contact is a tertiary text action with the support type role and a (48px) minimum height; hover and keyboard focus brighten its text and add a raised-ink fill. Compact breakpoints reduce the work action's horizontal padding.
 
 The contact rail reverses the action to a dark solid fill with light lettering. Global keyboard focus uses a (2px) cyan outline offset by (5px). Color and border transitions last (.2s).
 
 ### Chips
 
-Technology tags are unboxed text with slash separators, not badges. Skill evidence links are bordered controls with a (56px) minimum height and (10px 18px) padding. Filtering controls elsewhere may use the existing button vocabulary; technology labels are not interactive.
+Technology tags are boxed chips with a strong boundary, raised-ink fill, a (36px) minimum height, and the frontmatter padding. The shared technology-tag component deduplicates labels across project cards, project details, and Experience. When Projects is enabled, each chip links to its technology filter; during visibility loading or when Projects is hidden, the same label remains informational. Link hover and keyboard focus brighten the text, turn the rule lavender, and deepen the violet fill.
+
+Home skill evidence uses boxed catalog-surface links with a strong boundary, a (64px) minimum height, and the frontmatter padding. The Skills route uses the same visual vocabulary in tiles with (16px) padding and a (72px) minimum height. Both link to the corresponding project filter only when Projects is enabled; otherwise they retain reading semantics. Hover and keyboard focus use lavender text and rules with a raised-ink fill. Arrows sit beside the label. Home skill icons are (24px); Skills icons are (28px) inside a (36px) well.
 
 ### Cards / Containers
 
-Project entries use open rows. Featured rows use (38px 28px) padding and alternate a subtle dark tone; hover and focus-within share the project-hover tone. On mobile, featured padding becomes (28px 18px) and the action region has a (250px) maximum width.
+Project entries use open rows with linked titles. Title hover and keyboard focus add lavender text and a fine underline. Detail actions are compact, boxed links beneath the description and technology chips, with (10px 14px) padding and a (44px) minimum height. Their arrows remain beside the label. Live and repository actions wrap alongside them. Home showcase rows use (36px 0) padding and a transparent resting surface; hover and focus-within share the project-hover tone. On mobile, row padding becomes (28px 0) and each detail action and external-action group has a (250px) maximum width. Showcase screenshots are conditional on published evidence, contained without cropping, and limited to (380px) height on desktop and (320px) on mobile. Linked covers open the project detail; hover and keyboard focus outline the image boundary.
 
-Evidence panels use the frontmatter surface, padding, and panel radius with a fine border; mobile padding becomes (24px). Resource notices use the resource radius and explicit status copy.
+Evidence panels use the frontmatter surface, padding, and panel radius with a fine border; mobile padding becomes (24px). Panels containing a focused control strengthen their boundary. Resource notices use the resource radius and explicit status copy.
+
+Direct contact destinations use boxed links with (16px) padding, a (16px) icon-to-copy gap, a fine boundary, and the catalog surface. The arrow stays beside the destination label; supporting addresses can wrap. Hover and keyboard focus use lavender rules and a raised-ink fill. About offers contextual work and Experience actions only when those destinations are enabled. The résumé toolbar pairs its download label with a (16px) download SVG and its new-tab action with the shared arrow.
+
+Loading notices keep that real status text and add a decorative (16px) outlined progress ring. It rotates over (.8s) only when reduced motion is not requested; status remains readable when the ring is static.
 
 ### Inputs / Fields
 
@@ -192,13 +230,15 @@ Fields have a dark inset tone, strong border, and control radius. Minimum height
 
 ### Navigation
 
-The compact skull and wordmark sit beside ordinary-case links. Active and hover links receive a light foreground and a dark violet field. Links and the language switcher have a (44px) minimum target; the menu toggle is (44px) square. Mobile links are (1rem) with (12px 18px) padding, inside an opaque scrollable menu. Destination visibility continues to follow settings.
+The compact skull and wordmark sit beside ordinary-case links. The active link has lavender text and a fine lavender indicator (2px); hover uses a light foreground and the catalog surface. Links and the language switcher have a (44px) minimum target; the menu toggle is (44px) square. Mobile links are (1rem) with (12px 18px) padding, inside an opaque scrollable menu bounded by the viewport minus `--header-height`. Destination visibility continues to follow settings.
+
+Project details offer a wrapping section navigation when at least two published sections are available. Its boxed anchors have a (44px) minimum height, (8px 14px) padding, and (8px) gaps; hover and keyboard focus brighten the text, rule, and surface. Section offsets clear the fixed header by (24px). Published screenshots open their original image in a new tab and show an outline on hover or keyboard focus.
 
 ### Identity Sleeve and Arrow
 
-The sleeve preserves the original skull asset; its desktop aspect ratio is (.94) and mobile ratio (1.05), with a mobile maximum width of (440px). Its sheen travels once on arrival (1.8s), then sweeps on hover with a (1s) transition. The shared easing is `cubic-bezier(.16, 1, .3, 1)`. Primary and project-detail arrows shift (2px -2px) on hover over (.3s). All decorative animation, transitions, and smooth scrolling stop under reduced motion; essential content is never gated by animation.
+The sleeve preserves the original skull asset in a supporting desktop square with a (336px) maximum width. On mobile it becomes a horizontal identity strip: a (72px) skull beside the wordmark and location, with (20px) padding and a (112px) resulting minimum content height. Its sheen travels once on arrival (1.8s), then sweeps on hover with a (1s) transition. The shared easing is `cubic-bezier(.16, 1, .3, 1)`. Primary, project-detail, skill, capability, direct-contact, and secondary-action arrows shift (1px -1px) on hover and keyboard focus over (.2s). All decorative animation, transitions, and smooth scrolling stop under reduced motion; essential content is never gated by animation.
 
-Arrow links use the shared inline SVG with round caps, (1.6) stroke width, and a default (20px) square view. Smaller social, skill, and footer arrows retain the same path; back links use the matching back path.
+Arrow links use the shared inline SVG with round caps, (1.6) stroke width, and a default (14px) square size. Keep the arrow adjacent to its label using the compact control gap. Home social arrows use (13px); back links use the matching back path.
 
 ### Source mappings
 
@@ -209,7 +249,10 @@ Arrow links use the shared inline SVG with round caps, (1.6) stroke width, and a
 | Primary / secondary buttons | `src/index.css` controls; `src/components/pages/home/Home.tsx` actions |
 | Input | `src/index.css` search/contact field rules |
 | Navigation | `src/components/Navbar.tsx`; `src/index.css` navigation rules |
-| Technology tag / project row | `src/components/pages/projects/ProjectCard.tsx`; `src/index.css` catalog rules |
+| Technology tag | `src/components/TechnologyTags.tsx`; `src/index.css` technology-chip rules |
+| Project row / detail navigation | `src/components/pages/projects/ProjectCard.tsx`, `ProjectDetail.tsx`; `src/index.css` catalog and detail rules |
+| Skill evidence / tiles | `src/components/pages/home/Home.tsx`, `src/components/pages/skills/Skills.tsx`; `src/index.css` skill rules |
+| Contextual and direct actions | `src/components/pages/about/About.tsx`, `src/components/pages/contact/Contact.tsx`, `src/components/pages/resume/Resume.tsx` |
 | Evidence panel | `src/index.css` secondary-route panel rules |
 | Identity sleeve | `src/components/pages/home/Home.tsx`; `src/index.css` sleeve and motion rules |
 | Arrow SVG | `src/components/ArrowIcon.tsx` |

@@ -5,9 +5,13 @@ import { motion } from "motion/react";
 import SpotlightCard from "@/components/cards/SpotLightCard";
 import { api } from '../../../lib/api';
 import { getPublicSnapshot } from '../../../lib/publicSnapshot';
+import { Link } from 'react-router-dom';
+import { useSettings } from '../../../contexts/useSettings';
+import { ArrowIcon } from '../../ArrowIcon';
 
 const About = () => {
     const { t, i18n } = useTranslation();
+    const { settings, isInitialLoading } = useSettings();
     const lang = i18n.language?.startsWith('th') ? 'th' : 'en';
     const resource = usePublicResource({
         key: 'about:' + lang,
@@ -59,6 +63,10 @@ const About = () => {
                             {about.background}
                         </p>
                     </SpotlightCard>
+                </div>}
+                {about && !isInitialLoading && (settings.showProjects || settings.showExperience) && <div className="about-actions flex flex-wrap gap-3 mt-8">
+                    {settings.showProjects && <Link className="s-button about-project-link" to="/projects">{t('home.viewWork')} <ArrowIcon /></Link>}
+                    {settings.showExperience && <Link className="s-button" to="/experience">{t('nav.experience')} <ArrowIcon /></Link>}
                 </div>}
             </div>
         </motion.div>
