@@ -5,6 +5,7 @@ import { api } from "../../../lib/api";
 import { localizeExperience } from '../../../lib/portfolio';
 import { getPublicSnapshot } from '../../../lib/publicSnapshot';
 import { TechnologyTags } from '../../TechnologyTags';
+import { PageIntro } from '../PageIntro';
 
 const Experience = () => {
     const { t, i18n } = useTranslation();
@@ -26,8 +27,8 @@ const Experience = () => {
         });
     };
 
-    return <div className="secondary-page">
-        <h1 className="page-title" id="experience-title">{t('experience.title')}</h1>
+    return <div className="secondary-page experience-page">
+        <PageIntro title={t('experience.title')} titleId="experience-title" description={t('experience.intro')} />
         <PublicDataNotice {...resource} />
         {!!experienceList.length && <ol className="experience-list" role="list" aria-labelledby="experience-title">
             {experienceList.map(exp => <li key={exp._id || `${exp.company}-${exp.title}-${exp.startDate}`}>

@@ -9,8 +9,12 @@ import { safeExternalUrl } from '../../../lib/safeExternalUrl';
 import { PageMetadata } from '../../PageMetadata';
 import { ArrowIcon } from '../../ArrowIcon';
 import { TechnologyTags } from '../../TechnologyTags';
+import { PageIntro } from '../PageIntro';
+
 export default function ProjectDetail() {
-    const { slug } = useParams(); const { t, i18n } = useTranslation(); const resource = useProjects();
+    const { slug } = useParams();
+    const { t, i18n } = useTranslation();
+    const resource = useProjects();
     const project = 'data' in resource.state ? groupProjects(resource.state.data).find(item => projectSlug(item) === slug && !isCompanyProject(item)) : undefined;
     const { hash } = useLocation();
     useEffect(() => {
@@ -18,21 +22,57 @@ export default function ProjectDetail() {
         const frame = requestAnimationFrame(() => document.getElementById(hash.slice(1))?.scrollIntoView?.({ block: 'start', behavior: 'instant' }));
         return () => cancelAnimationFrame(frame);
     }, [project, hash]);
-    if (!project) return <div className="page-shell"><PublicDataNotice {...resource} />{(resource.state.status === 'ready' || resource.state.status === 'stale' || resource.state.status === 'empty') && <><h1 className="page-title">{t('projects.notFound')}</h1><Link className="s-button inline-flex" to="/projects">{t('projects.back')}</Link></>}</div>;
-    const content = localizeProject(project, i18n.language); const study = content.caseStudy;
+    if (!project) return <div className="page-shell">
+        {(resource.state.status === 'ready' || resource.state.status === 'stale' || resource.state.status === 'empty') &&
+            <PageIntro title={t('projects.notFound')} actions={<Link className="s-button" to="/projects"><ArrowIcon back /> {t('projects.back')}</Link>} />}
+        <PublicDataNotice {...resource} />
+    </div>;
+
+    const content = localizeProject(project, i18n.language);
+    const study = content.caseStudy;
+    const repositories = (study?.repositories ?? []).filter(item => safeExternalUrl(item.url));
+    const screenshots = (study?.screenshots ?? []).filter(item => safeExternalUrl(item.url));
     const sections = [
-        ['technologies', content.tech.length > 0], ['problem', !!study?.problem], ['role', !!study?.role],
-        ['decisions', !!study?.decisions?.length], ['outcomes', !!study?.outcomes?.length],
-        ['repositories', study?.repositories?.some(item => safeExternalUrl(item.url))],
-    ] as const;
-    const availableSections = sections.filter(([, visible]) => visible);
-    return <article className="page-shell project-detail"><PageMetadata title={content.title} description={content.description} /><Link className="detail-back-link" to="/projects"><ArrowIcon back /> {t('projects.back')}</Link><h1 className="page-title">{content.title}</h1><p id="description" className="text-xl text-gray-300 max-w-3xl leading-relaxed">{content.description}</p><PublicDataNotice {...resource} /><div className="my-8 max-w-md"><ProjectActions url={content.url} repo={content.repo} /></div>
-        {availableSections.length > 1 && <nav className="detail-nav" aria-label={t('projects.caseStudy')}>{availableSections.map(([id]) => <a key={id} href={'#' + id}>{t('projects.' + id)}</a>)}</nav>}
-        <div id="technologies" className="mb-10"><TechnologyTags technologies={content.tech} /></div>
-        <div className="grid md:grid-cols-2 gap-6">{study?.problem && <section id="problem" className="evidence-panel"><h2>{t('projects.problem')}</h2><p>{study.problem}</p></section>}{study?.role && <section id="role" className="evidence-panel"><h2>{t('projects.role')}</h2><p>{study.role}</p></section>}
-        {!!study?.decisions?.length && <section id="decisions" className="evidence-panel"><h2>{t('projects.decisions')}</h2><ul>{study.decisions.map((text, index) => <li key={index}>{text}</li>)}</ul></section>}
-        {!!study?.outcomes?.length && <section id="outcomes" className="evidence-panel"><h2>{t('projects.outcomes')}</h2><ul>{study.outcomes.map((text, index) => <li key={index}>{text}</li>)}</ul></section>}</div>
-        {!!study?.repositories?.length && <section id="repositories" className="mt-10"><h2 className="text-2xl mb-4">{t('projects.repositories')}</h2><div className="flex flex-wrap gap-3">{study.repositories.map(item => safeExternalUrl(item.url) && <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" className="s-button detail-repository-link">{item.label} <ArrowIcon /></a>)}</div></section>}
-        {!!study?.screenshots?.length && <section className="grid gap-6 mt-10">{study.screenshots.map(item => safeExternalUrl(item.url) && <figure key={item.url}><a className="detail-screenshot-link" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={item.alt}><img className="project-screenshot w-full" src={item.url} alt={item.alt} loading="lazy" /></a><figcaption className="mt-2 text-gray-300">{item.alt}</figcaption></figure>)}</section>}
-        </article>;
+        { id: 'technologies', body: content.tech.length > 0 && <TechnologyTags technologies={content.tech} /> },
+        { id: 'problem', body: study?.problem && <p>{study.problem}</p> },
+        { id: 'role', body: study?.role && <p>{study.role}</p> },
+        { id: 'decisions', body: !!study?.decisions?.length && <ul className="detail-points">{study.decisions.map((text, index) => <li key={index}>{text}</li>)}</ul> },
+        { id: 'outcomes', body: !!study?.outcomes?.length && <ul className="detail-points">{study.outcomes.map((text, index) => <li key={index}>{text}</li>)}</ul> },
+        { id: 'screenshots', body: screenshots.length > 0 && <div className="detail-screenshots">
+            {screenshots.map(item => <figure key={item.url}>
+                <a className="detail-screenshot-link" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={item.alt}>
+                    <img className="project-screenshot" src={item.url} alt={item.alt} loading="lazy" />
+                </a>
+                <figcaption>{item.alt}</figcaption>
+            </figure>)}
+        </div> },
+        { id: 'repositories', body: repositories.length > 0 && <div className="detail-repositories">
+            {repositories.map(item => <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" className="s-button detail-repository-link">{item.label} <ArrowIcon /></a>)}
+        </div> },
+    ].filter(section => section.body);
+
+    return <article className="page-shell project-detail">
+        <PageMetadata title={content.title} description={content.description} />
+        <Link className="detail-back-link" to="/projects"><ArrowIcon back /> {t('projects.back')}</Link>
+        <header className="page-intro">
+            <div className="page-intro-copy">
+                <h1 className="page-title">{content.title}</h1>
+                <p id="description" className="page-description">{content.description}</p>
+            </div>
+            <div className="page-intro-actions"><ProjectActions url={content.url} repo={content.repo} /></div>
+        </header>
+        <PublicDataNotice {...resource} />
+        {!!sections.length && <div className="detail-layout">
+            {sections.length > 1 && <nav className="detail-nav" aria-label={t('projects.caseStudy')}>
+                <p>{t('projects.caseStudy')}</p>
+                {sections.map(({ id }) => <a key={id} href={'#' + id}>{t('projects.' + id)}</a>)}
+            </nav>}
+            <div className="detail-contents">
+                {sections.map(({ id, body }) => <section key={id} id={id} className="detail-section">
+                    <h2>{t('projects.' + id)}</h2>
+                    <div className="detail-section-body">{body}</div>
+                </section>)}
+            </div>
+        </div>}
+    </article>;
 }

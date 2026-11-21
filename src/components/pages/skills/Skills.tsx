@@ -1,13 +1,14 @@
-import { motion } from "motion/react";
+import { useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import { usePublicResource } from '../../../hooks/usePublicResource';
 import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import { skills as staticSkills, type Skill } from "../../../data/skills";
 import { api } from "../../../lib/api";
 import { getPublicSnapshot } from '../../../lib/publicSnapshot';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSettings } from '../../../contexts/useSettings';
 import { ArrowIcon } from '../../ArrowIcon';
+import { PageIntro } from '../PageIntro';
 
 interface CategoryGroup {
     id: string;
@@ -18,6 +19,7 @@ interface CategoryGroup {
 
 const Skills = () => {
     const { t } = useTranslation();
+    const { hash } = useLocation();
     const { settings, isInitialLoading } = useSettings();
     const canExplore = !isInitialLoading && settings.showProjects;
 
@@ -47,63 +49,50 @@ const Skills = () => {
         })).filter(group => group.skills.length > 0),
         isEmpty: groups => groups.every(group => group.skills.length === 0),
     });
-    const categoryGroups = 'data' in resource.state ? resource.state.data : [];
+    const categoryGroups = 'data' in resource.state ? resource.state.data.filter(group => group.skills.length > 0).map(group => ({
+        ...group,
+        title: categoryTitles[group.id] || group.title,
+        sectionId: 'skills-' + encodeURIComponent(group.id),
+    })) : [];
+    const activeSection = categoryGroups.find(category => '#' + encodeURIComponent(category.sectionId) === hash)?.sectionId;
 
-    return (
-        <motion.div
-            className="secondary-page"
-            initial={false}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.45 }}
-        >
-            <div>
-                <motion.h1
-                    className="page-title"
-                    initial={false}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.45 }}
-                >
-                    {t("skills.title")}
-                </motion.h1>
+    useEffect(() => {
+        if (!activeSection) return;
+        const frame = requestAnimationFrame(() => document.getElementById(activeSection)?.scrollIntoView({ block: 'start', behavior: 'instant' }));
+        return () => cancelAnimationFrame(frame);
+    }, [activeSection]);
 
-                <PublicDataNotice {...resource} />
-                <div className="space-y-10 mt-8">
-                    {categoryGroups.map((category, categoryIndex) => (
-                        <motion.section
-                            key={category.id}
-                            className="skill-category-section"
-                            initial={false}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{
-                                duration: 0.4,
-                                delay: Math.min(categoryIndex * 0.05, 0.25)
-                            }}
-                        >
-                            <div className="skill-category-header">
-                                <h2 className="skill-category-title">
-                                    {categoryTitles[category.id] || category.id}
-                                </h2>
-                                <span className="collection-count" aria-hidden="true">{category.skills.length}</span>
-                            </div>
-
-                            <div className="public-skill-grid">
-                                {category.skills.map(skill => {
-                                    const content = <>
-                                        {skill.icon && <span className="skill-icon-well"><img src={skill.icon} alt="" loading="lazy" width="28" height="28" /></span>}
-                                        <span className="text-sm font-semibold">{skill.name}</span>
-                                        {canExplore && <span className="skill-tile-arrow"><ArrowIcon /></span>}
-                                    </>;
-                                    return canExplore
-                                        ? <Link key={skill._id || skill.name} className="skill-tile" to={'/projects?tech=' + encodeURIComponent(skill.name)}>{content}</Link>
-                                        : <div key={skill._id || skill.name} className="skill-tile">{content}</div>;
-                                })}
-                            </div>
-                        </motion.section>
-                    ))}
-                </div>
+    return <div className="secondary-page skills-page">
+        <PageIntro title={t('skills.title')} description={t('skills.intro')} />
+        <PublicDataNotice {...resource} />
+        {!!categoryGroups.length && <div className="skills-layout">
+            {categoryGroups.length > 1 && <nav className="skills-nav" aria-label={t('skills.categoryNavigation')}>
+                {categoryGroups.map(category => <a key={category.id} href={'#' + encodeURIComponent(category.sectionId)}
+                    aria-current={category.sectionId === activeSection ? 'location' : undefined}>{category.title}</a>)}
+            </nav>}
+            <div className="skill-categories">
+                {categoryGroups.map(category => <section key={category.id} id={category.sectionId} className="skill-category-section">
+                    <div className="skill-category-header">
+                        <h2 className="skill-category-title">{category.title}</h2>
+                        <span className="collection-count" aria-hidden="true">{category.skills.length}</span>
+                    </div>
+                    <ul className="public-skill-grid" role="list">
+                        {category.skills.map(skill => {
+                            const content = <>
+                                {skill.icon && <span className="skill-icon-well"><img src={skill.icon} alt="" loading="lazy" width="28" height="28" /></span>}
+                                <span>{skill.name}</span>
+                            </>;
+                            return <li key={skill._id || skill.name}>
+                                {canExplore ? <Link className="skill-tile" to={'/projects?tech=' + encodeURIComponent(skill.name)}>
+                                    {content}<span className="skill-tile-arrow"><ArrowIcon /></span>
+                                </Link> : <span className="skill-tile">{content}</span>}
+                            </li>;
+                        })}
+                    </ul>
+                </section>)}
             </div>
-        </motion.div>
-    );
+        </div>}
+    </div>;
 }
 
 export default Skills;

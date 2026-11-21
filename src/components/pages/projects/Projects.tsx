@@ -7,6 +7,7 @@ import { PublicDataNotice } from '../../PublicDataNotice';
 import { ProjectCard } from './ProjectCard';
 import { ProjectMatcher } from './ProjectMatcher';
 import { safeExternalUrl } from '../../../lib/safeExternalUrl';
+import { PageIntro } from '../PageIntro';
 
 export default function Projects() {
     const { t, i18n } = useTranslation();
@@ -26,17 +27,15 @@ export default function Projects() {
     const primaryTitle = t(featured.length ? 'projects.selected' : 'projects.archive');
 
     return <div className="page-shell projects-page">
-        <header className="projects-header">
-            <div><h1 className="page-title">{t('projects.title')}</h1><p className="page-description">{t('projects.intro')}</p></div>
-            {!!records.length && <div className="project-filter">
+        <PageIntro title={t('projects.title')} description={t('projects.intro')} actions={records.length > 0
+            ? <div className="project-filter">
                 <label htmlFor="tech-filter">{t('projects.filter')}</label>
-                <input id="tech-filter" className="search-field" value={query} onChange={event => {
+                <input id="tech-filter" type="search" className="search-field" placeholder={t('projects.filterPlaceholder')} value={query} onChange={event => {
                     const next = new URLSearchParams(params);
                     if (event.target.value) next.set('tech', event.target.value); else next.delete('tech');
                     setParams(next, { replace: true });
                 }} />
-            </div>}
-        </header>
+            </div> : undefined} />
         <div className="projects-overview">
             <div className="project-selection">
                 <PublicDataNotice {...resource} />
@@ -47,14 +46,14 @@ export default function Projects() {
                 {!!records.length && !filtered.length && <p role="status" className="public-notice">{t('projects.noMatches')}</p>}
             </div>
             {resource.state.status !== 'disabled' && <aside className="project-discovery" aria-label={t('projects.match.title')}><ProjectMatcher projects={'data' in resource.state ? resource.state.data : []} /></aside>}
+            {!!archive.length && <section className="project-archive">
+                <div className="collection-heading"><h2>{t('projects.archive')}</h2><span className="collection-count">{archive.length}</span></div>
+                <div className="work-list">{archive.map(project => <ProjectCard key={project._id ?? project.title} project={project} />)}</div>
+            </section>}
         </div>
-        {!!archive.length && <section className="project-archive">
-            <div className="collection-heading"><h2>{t('projects.archive')}</h2><span className="collection-count">{archive.length}</span></div>
-            <div className="work-list">{archive.map(project => <ProjectCard key={project._id ?? project.title} project={project} />)}</div>
-        </section>}
         {!!companyLinks.length && <section className="company-work" aria-label={t('projects.company')}>
             <div className="collection-heading"><h2>{t('projects.company')}</h2><span className="collection-count">{companyLinks.length}</span></div>
-            <div>{companyLinks.map(project => <aside key={project.key} className="company-link"><a href={project.url} target="_blank" rel="noopener noreferrer">{project.title} <ArrowIcon /></a><p>{t('projects.publicLink')}</p></aside>)}</div>
+            <ul className="company-links" role="list">{companyLinks.map(project => <li key={project.key} className="company-link"><a href={project.url} target="_blank" rel="noopener noreferrer">{project.title} <ArrowIcon /></a><p>{t('projects.publicLink')}</p></li>)}</ul>
         </section>}
     </div>;
 }

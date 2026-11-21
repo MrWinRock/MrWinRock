@@ -6,7 +6,6 @@ import type { SettingsDoc } from '../../src/lib/api';
 import i18n from '../../src/i18n';
 import { HIDDEN_SETTINGS, SettingsContext } from '../../src/contexts/settingsConstants';
 
-vi.mock('@/components/cards/SpotLightCard', () => ({ default: () => null }));
 vi.mock('@/lib/api', () => ({ api: {} }));
 
 const { default: App } = await import('../../src/App');

@@ -60,3 +60,21 @@ test('projects makes published work visible before the optional matching form', 
   await expect(page.getByLabel('What do you need?', { exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
+
+test('skills category deep links scroll after the skill list loads', async ({ page }) => {
+  let allowSkills = () => {};
+  const skillsReady = new Promise<void>(resolve => { allowSkills = resolve; });
+  await page.route('**/api/skills', async route => {
+    await skillsReady;
+    await route.fulfill({ json: { ok: true, data: {
+      programming: { order_flag: 0, skills: Array.from({ length: 60 }, (_, order) => ({ name: 'Tool ' + (order + 1), order })) },
+      backend: { order_flag: 1, skills: [{ name: 'Bun', order: 0 }] },
+    } } });
+  });
+  await page.goto('/skills#skills-backend');
+  allowSkills();
+
+  const target = page.locator('#skills-backend');
+  await expect(target.getByRole('heading')).toBeInViewport();
+  await expect(page.locator('.skills-nav a[href="#skills-backend"]')).toHaveAttribute('aria-current', 'location');
+});

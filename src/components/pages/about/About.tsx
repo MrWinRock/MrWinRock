@@ -1,13 +1,12 @@
 import { usePublicResource } from '../../../hooks/usePublicResource';
 import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import { useTranslation } from 'react-i18next';
-import { motion } from "motion/react";
-import SpotlightCard from "@/components/cards/SpotLightCard";
 import { api } from '../../../lib/api';
 import { getPublicSnapshot } from '../../../lib/publicSnapshot';
 import { Link } from 'react-router-dom';
 import { useSettings } from '../../../contexts/useSettings';
 import { ArrowIcon } from '../../ArrowIcon';
+import { PageIntro } from '../PageIntro';
 
 const About = () => {
     const { t, i18n } = useTranslation();
@@ -21,69 +20,34 @@ const About = () => {
     });
     const about = 'data' in resource.state ? resource.state.data : null;
 
-    return (
-        <motion.div
-            className="secondary-page"
-            initial={false}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.45 }}
-        >
-            <div>
-                <motion.h1
-                    className="page-title"
-                    initial={false}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.45 }}
-                >
-                    {t("about.title")}
-                </motion.h1>
-
-                <PublicDataNotice {...resource} />
-                {about && <div className="grid md:grid-cols-2 gap-6 items-stretch mt-8">
-                    <SpotlightCard index={0} className="flex flex-col" spotlightColor="rgba(128, 0, 255, 0.24)">
-                        <div className="flex items-center gap-3.5 mb-5">
-                            <span className="neutral-icon">
-                                <StoryIcon />
-                            </span>
-                            <h2 className="text-2xl font-semibold tracking-tight">{t("about.myStory")}</h2>
-                        </div>
-                        <p className="text-gray-300 leading-relaxed whitespace-pre-line">
-                            {about.story}
-                        </p>
-                    </SpotlightCard>
-
-                    <SpotlightCard index={1} className="flex flex-col" spotlightColor="rgba(0, 255, 255, 0.2)">
-                        <div className="flex items-center gap-3.5 mb-5">
-                            <span className="neutral-icon">
-                                <EducationIcon />
-                            </span>
-                            <h2 className="text-2xl font-semibold tracking-tight">{t("about.education")}</h2>
-                        </div>
-                        <p className="text-gray-300 leading-relaxed whitespace-pre-line">
-                            {about.background}
-                        </p>
-                    </SpotlightCard>
-                </div>}
-                {about && !isInitialLoading && (settings.showProjects || settings.showExperience) && <div className="about-actions flex flex-wrap gap-3 mt-8">
-                    {settings.showProjects && <Link className="s-button about-project-link" to="/projects">{t('home.viewWork')} <ArrowIcon /></Link>}
-                    {settings.showExperience && <Link className="s-button" to="/experience">{t('nav.experience')} <ArrowIcon /></Link>}
+    return <div className="secondary-page about-page">
+        <PageIntro title={t('about.title')} />
+        <PublicDataNotice {...resource} />
+        {about && <div className="about-layout">
+            <div className="about-reading">
+                {about.story && <section>
+                    <h2>{t('about.myStory')}</h2>
+                    <p>{about.story}</p>
+                </section>}
+                {about.background && <section>
+                    <h2>{t('about.education')}</h2>
+                    <p>{about.background}</p>
+                </section>}
+                {!isInitialLoading && (settings.showProjects || settings.showExperience) && <div className="about-actions">
+                    {settings.showProjects && <Link className="primary-action" to="/projects">{t('home.viewWork')} <ArrowIcon /></Link>}
+                    {settings.showExperience && <Link className="s-button" to="/experience">{t('nav.experience')}</Link>}
                 </div>}
             </div>
-        </motion.div>
-    );
+            <aside className="about-profile" aria-labelledby="about-profile-name">
+                <div className="about-profile-art"><img src="/logo.jpg" alt="" width="512" height="512" decoding="async" /></div>
+                <div className="about-profile-copy">
+                    <h2 id="about-profile-name">{t('home.name')} {t('home.surname')}</h2>
+                    <p>{t('home.subtitle')}</p>
+                    <p>{t('home.location')}</p>
+                </div>
+            </aside>
+        </div>}
+    </div>;
 };
-
-const StoryIcon = () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-    </svg>
-);
-const EducationIcon = () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M22 10 12 5 2 10l10 5 10-5z" />
-        <path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5" />
-    </svg>
-);
 
 export default About;

@@ -56,6 +56,8 @@
     },
     "skills": {
         "title": "My Skills",
+        "intro": "Browse the languages, frameworks, and tools I use across my projects.",
+        "categoryNavigation": "Skill categories",
         "categories": {
             "programming": "Programming Languages",
             "web": "Web Development",
@@ -81,6 +83,7 @@
         "details": "Explore project",
         "technologies": "Technologies",
         "filter": "Filter by technology",
+        "filterPlaceholder": "e.g. TypeScript",
         "match": {
             "why": "Why this matches",
             "evidence": { "description": "Project description", "tech": "Technology", "problem": "The problem", "role": "My contribution", "decisions": "Technical decision", "outcomes": "Published outcome" },
@@ -111,11 +114,13 @@
         "role": "My contribution",
         "decisions": "Technical decisions",
         "outcomes": "Verified outcomes",
+        "screenshots": "Screenshots",
         "repositories": "Repositories",
         "noRepository": "GitHub repository not available"
     },
     "experience": {
         "title": "Experience",
+        "intro": "My work and education, with the responsibilities and technologies behind each milestone.",
         "present": "Present",
         "achievements": "Key Achievements",
         "types": {
@@ -131,6 +136,7 @@
     },
     "resume": {
         "title": "Resume",
+        "intro": "My résumé is available as a PDF.",
         "download": "Download Resume",
         "newTab": "Opens in new tab",
         "browserError": "Your browser can't display PDFs inline.",

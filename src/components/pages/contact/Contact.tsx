@@ -1,15 +1,13 @@
 import { trackPortfolioEvent } from '../../../lib/portfolioEvents';
-import { motion, AnimatePresence } from "motion/react";
-import type { Variants } from "motion/react";
 import { useEffect, useRef, useState } from 'react';
 import type { ContactInput } from '../../../lib/apiTypes';
 import { validateContact, type ContactFieldErrors } from './contactValidation';
 import { useRetryCountdown } from '../../../hooks/useRetryCountdown';
 import { useTranslation } from "react-i18next";
-import SpotlightCard from "@/components/cards/SpotLightCard";
 import { api } from "@/lib/api";
 import { ContactBrief } from './ContactBrief';
 import { ArrowIcon } from '../../ArrowIcon';
+import { PageIntro } from '../PageIntro';
 
 const CONTACT_EMAIL = "mrwinrock11@gmail.com";
 const GITHUB_URL = "https://github.com/MrWinRock";
@@ -69,172 +67,63 @@ const Contact = () => {
         }
     };
 
-    const container: Variants = {
-        hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
-    };
-    const item: Variants = {
-        hidden: { opacity: 0, y: 16 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
-    };
-
-    const fieldClass = "contact-field";
-
-    return (
-        <motion.div
-            className="secondary-page"
-            initial={false}
-            animate="visible"
-            variants={container}
-        >
-            <div>
-                <motion.h1 className="page-title" variants={item}>
-                    {t("contact.title")}
-                </motion.h1>
-                <motion.p className="page-description mb-10" variants={item}>
-                    {t("contact.subtitle")}
-                </motion.p>
-
-                <div className="grid md:grid-cols-5 gap-6 items-stretch">
-                    {/* Form */}
-                    <motion.div className="md:col-span-3" variants={item}>
-                        <SpotlightCard index={0} className="flex flex-col" spotlightColor="rgba(128, 0, 255, 0.22)">
-                            <form noValidate onSubmit={handleSubmit} aria-busy={status === 'sending'} className="flex flex-col gap-5">
-                                <div>
-                                    <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">
-                                        {t("contact.name")}
-                                    </label>
-                                    <input
-                                        id="name"
-                                        aria-invalid={!!errors.name}
-                                        aria-describedby={errors.name ? 'name-error' : undefined}
-                                        type="text"
-                                        required
-                                        disabled={status === "sending"}
-                                        value={form.name}
-                                        onChange={(e) => setForm({ ...form, name: e.target.value })}
-                                        className={`${fieldClass} disabled:opacity-60`}
-                                        placeholder={t("contact.namePlaceholder")}
-                                    />
-                                    {errors.name && <p id="name-error" className="mt-2 text-sm text-rose-300">{t(errors.name)}</p>}
-                                </div>
-                                <div>
-                                    <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-300">
-                                        {t("contact.email")}
-                                    </label>
-                                    <input
-                                        id="email"
-                                        aria-invalid={!!errors.email}
-                                        aria-describedby={errors.email ? 'email-error' : undefined}
-                                        type="email"
-                                        required
-                                        disabled={status === "sending"}
-                                        value={form.email}
-                                        onChange={(e) => setForm({ ...form, email: e.target.value })}
-                                        className={`${fieldClass} disabled:opacity-60`}
-                                        placeholder={t("contact.emailPlaceholder")}
-                                    />
-                                    {errors.email && <p id="email-error" className="mt-2 text-sm text-rose-300">{t(errors.email)}</p>}
-                                </div>
-                                <div>
-                                    <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-300">
-                                        {t("contact.message")}
-                                    </label>
-                                    <textarea
-                                        id="message"
-                                        aria-invalid={!!errors.message}
-                                        aria-describedby={errors.message ? 'message-error' : undefined}
-                                        rows={5}
-                                        required
-                                        minLength={10}
-                                        maxLength={5000}
-                                        disabled={status === "sending"}
-                                        value={form.message}
-                                        onChange={(e) => { setForm({ ...form, message: e.target.value }); setErrors(previous => ({ ...previous, message: undefined })); }}
-                                        className={`${fieldClass} resize-y disabled:opacity-60`}
-                                        placeholder={t("contact.messagePlaceholder")}
-                                    />
-                                    {errors.message && <p id="message-error" className="mt-2 text-sm text-rose-300">{t(errors.message)}</p>}
-                                </div>
-                                <ContactBrief message={form.message} sending={status === 'sending'} onInvalid={() => setErrors(previous => ({ ...previous, message: 'contact.validation.message' }))} />
-                                <motion.button
-                                    type="submit"
-                                    disabled={status === "sending" || seconds > 0}
-                                    className="primary-action w-full disabled:opacity-60 disabled:cursor-not-allowed"
-                                    whileTap={status === "sending" ? undefined : { scale: 0.98 }}
-                                    transition={{ duration: 0.2 }}
-                                >
-                                    {status === "sending" ? t("contact.sending") : t("contact.send")}
-                                </motion.button>
-
-                                {status === "sending" && <p role="status">{t("contact.sending")}</p>}
-                                {status === "rate-limited" && <><p role="alert">{t("contact.rateLimited")}</p><p aria-live="off">{t("resource.rateLimited", { count: seconds })}</p></>}
-                                <AnimatePresence mode="wait">
-                                    {status === "success" && (
-                                        <motion.p
-                                            key="success"
-                                            initial={false}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0 }}
-                                            role="status"
-                                            className="text-sm text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-3"
-                                        >
-                                            {t("contact.success")}
-                                        </motion.p>
-                                    )}
-                                    {(status === "error" || status === "unavailable") && (
-                                        <motion.p
-                                            key="error"
-                                            initial={false}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0 }}
-                                            role="alert"
-                                            className="text-sm text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3"
-                                        >
-                                            {t(status === "unavailable" ? "contact.unavailable" : "contact.error")}
-                                        </motion.p>
-                                    )}
-                                </AnimatePresence>
-                            </form>
-                        </SpotlightCard>
-                    </motion.div>
-
-                    {/* Direct contact methods */}
-                    <motion.div className="md:col-span-2" variants={item}>
-                        <SpotlightCard index={1} spotlightColor="rgba(0, 255, 255, 0.2)" className="flex flex-col">
-                            <h2 className="text-lg font-semibold text-white mb-1">{t("contact.directTitle")}</h2>
-                            <p className="text-sm text-gray-400 mb-6">{t("contact.directSubtitle")}</p>
-
-                            <div className="flex flex-col gap-3">
-                                <ContactLink
-                                    href={`mailto:${CONTACT_EMAIL}`}
-                                    label={t("contact.emailMe")}
-                                    value={CONTACT_EMAIL}
-                                    icon={<MailIcon />}
-                                />
-                                <ContactLink
-                                    href={GITHUB_URL}
-                                    label="GitHub"
-                                    value="@MrWinRock"
-                                    icon={<GitHubIcon />}
-                                    external
-                                />
-                                <ContactLink
-                                    href={LINKEDIN_URL}
-                                    label="LinkedIn"
-                                    value="Pharthiwath G."
-                                    icon={<LinkedInIcon />}
-                                    external
-                                />
-                            </div>
-
-                            <p className="text-xs text-gray-300 mt-auto pt-6">{t("contact.responseNote")}</p>
-                        </SpotlightCard>
-                    </motion.div>
+    return <div className="secondary-page contact-page">
+        <PageIntro title={t('contact.title')} description={t('contact.subtitle')} />
+        <div className="contact-layout">
+            <form noValidate onSubmit={handleSubmit} aria-busy={status === 'sending'} className="contact-form">
+                <div className="contact-identity-fields">
+                    <div className="contact-form-field">
+                        <label htmlFor="name">{t('contact.name')}</label>
+                        <input id="name" name="name" type="text" autoComplete="name" required disabled={status === 'sending'}
+                            aria-invalid={!!errors.name} aria-describedby={errors.name ? 'name-error' : undefined}
+                            className="contact-field" placeholder={t('contact.namePlaceholder')} value={form.name}
+                            onChange={event => setForm({ ...form, name: event.target.value })} />
+                        {errors.name && <p id="name-error" className="contact-field-error">{t(errors.name)}</p>}
+                    </div>
+                    <div className="contact-form-field">
+                        <label htmlFor="email">{t('contact.email')}</label>
+                        <input id="email" name="email" type="email" autoComplete="email" required disabled={status === 'sending'}
+                            aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined}
+                            className="contact-field" placeholder={t('contact.emailPlaceholder')} value={form.email}
+                            onChange={event => setForm({ ...form, email: event.target.value })} />
+                        {errors.email && <p id="email-error" className="contact-field-error">{t(errors.email)}</p>}
+                    </div>
                 </div>
-            </div>
-        </motion.div>
-    );
+                <div className="contact-form-field">
+                    <label htmlFor="message">{t('contact.message')}</label>
+                    <textarea id="message" name="message" rows={5} required minLength={10} maxLength={5000} disabled={status === 'sending'}
+                        aria-invalid={!!errors.message} aria-describedby={errors.message ? 'message-error' : undefined}
+                        className="contact-field" placeholder={t('contact.messagePlaceholder')} value={form.message}
+                        onChange={event => {
+                            setForm({ ...form, message: event.target.value });
+                            setErrors(previous => ({ ...previous, message: undefined }));
+                        }} />
+                    {errors.message && <p id="message-error" className="contact-field-error">{t(errors.message)}</p>}
+                </div>
+                <ContactBrief message={form.message} sending={status === 'sending'} onInvalid={() => setErrors(previous => ({ ...previous, message: 'contact.validation.message' }))} />
+                <button type="submit" disabled={status === 'sending' || seconds > 0} className="primary-action contact-submit">
+                    {status === 'sending' ? t('contact.sending') : t('contact.send')}
+                </button>
+                {status === 'sending' && <p role="status" className="contact-feedback">{t('contact.sending')}</p>}
+                {status === 'rate-limited' && <div className="contact-feedback">
+                    <p role="alert">{t('contact.rateLimited')}</p><p aria-live="off">{t('resource.rateLimited', { count: seconds })}</p>
+                </div>}
+                {status === 'success' && <p role="status" className="contact-feedback contact-feedback-success">{t('contact.success')}</p>}
+                {(status === 'error' || status === 'unavailable') && <p role="alert" className="contact-feedback contact-feedback-error">
+                    {t(status === 'unavailable' ? 'contact.unavailable' : 'contact.error')}
+                </p>}
+            </form>
+            <aside className="contact-direct" aria-labelledby="contact-direct-title">
+                <h2 id="contact-direct-title">{t('contact.directTitle')}</h2>
+                <div className="contact-direct-list">
+                    <ContactLink href={`mailto:${CONTACT_EMAIL}`} label={t('contact.emailMe')} value={CONTACT_EMAIL} icon={<MailIcon />} />
+                    <ContactLink href={GITHUB_URL} label="GitHub" value="@MrWinRock" icon={<GitHubIcon />} external />
+                    <ContactLink href={LINKEDIN_URL} label="LinkedIn" value="Pharthiwath G." icon={<LinkedInIcon />} external />
+                </div>
+                <p className="contact-response">{t('contact.responseNote')}</p>
+            </aside>
+        </div>
+    </div>;
 };
 
 interface ContactLinkProps {
@@ -246,21 +135,20 @@ interface ContactLinkProps {
 }
 
 const ContactLink: React.FC<ContactLinkProps> = ({ href, label, value, icon, external }) => (
-    <motion.a
+    <a
         href={href}
         onClick={()=>trackPortfolioEvent('contact_intent')}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
-        className="direct-link group"
+        className="direct-link"
     >
-        <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/[0.05] text-gray-300 group-hover:text-white transition-colors shrink-0">
-            {icon}
+        <span className="direct-link-icon">{icon}</span>
+        <span className="direct-link-copy">
+            <span>{label}</span>
+            <span className="direct-link-value">{value}</span>
         </span>
-        <span className="min-w-0">
-            <span className="direct-link-label inline-flex items-center gap-2 text-sm font-medium text-white">{label} <ArrowIcon /></span>
-            <span className="direct-link-value block text-xs text-gray-400">{value}</span>
-        </span>
-    </motion.a>
+        <ArrowIcon />
+    </a>
 );
 
 const MailIcon = () => (
