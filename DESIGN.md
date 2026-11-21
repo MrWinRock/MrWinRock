@@ -1,40 +1,39 @@
 ---
 name: MrWinRock
-description: A dark personal catalog with a vivid skull identity sleeve.
+description: An asymmetric dark obsidian bento monograph with a floating pill navigation dock and cyan-to-magenta spectrum accents.
 colors:
-  background: "#0c0c10"
-  ink: "#f3f1f8"
-  muted: "#aaa7b7"
-  surface: "#151419"
-  surface-elevated: "#1c1b23"
-  border: "#302e39"
-  border-strong: "#514d60"
-  brand-ink: "#c6b5ff"
-  brand-cyan: "#a0e8ee"
-  control-ink: "#14101f"
-  primary-hover: "#ded3ff"
-  field-background: "#0e0d12"
-  placeholder: "#9d97ac"
-  error: "#f4a4bb"
-  project-hover: "#1c1726"
+  background: "#121212"
+  ink: "#F4F4F4"
+  muted: "#B9B9B9"
+  surface: "#1B1B1B"
+  surface-elevated: "#252525"
+  field: "#0E0E0E"
+  border: "#373737"
+  border-strong: "#777777"
+  brand-ink: "#A6EEEB"
+  brand-cyan: "#33FFFF"
+  brand-magenta: "#CB4EFF"
+  primary-hover: "#D9FAF7"
+  status-error: "#F4A4BB"
+  status-success: "#A1E2BC"
 typography:
   display:
     fontFamily: "Sora, 'Noto Sans Thai', sans-serif"
-    fontSize: "clamp(3rem, 5.3vw, 4.75rem)"
-    fontWeight: 600
-    lineHeight: 1.12
+    fontSize: "clamp(2.3rem, 4.3vw, 3.9rem)"
+    fontWeight: 650
+    lineHeight: 1.07
     letterSpacing: "-.04em"
   headline:
     fontFamily: "Sora, 'Noto Sans Thai', sans-serif"
-    fontSize: "clamp(1.6rem, 3.2vw, 2.5rem)"
-    fontWeight: 500
-    lineHeight: 1.25
+    fontSize: "clamp(1.65rem, 3vw, 2.3rem)"
+    fontWeight: 600
+    lineHeight: 1.2
     letterSpacing: "-.035em"
   title:
     fontFamily: "Sora, 'Noto Sans Thai', sans-serif"
-    fontSize: "1.65rem"
-    fontWeight: 500
-    lineHeight: 1.25
+    fontSize: "1.48rem"
+    fontWeight: 590
+    lineHeight: 1.2
   body:
     fontFamily: "'Noto Sans Thai', sans-serif"
     fontSize: "1rem"
@@ -43,120 +42,121 @@ typography:
     fontFamily: "'Noto Sans Thai', sans-serif"
     fontSize: ".875rem"
     fontWeight: 600
-    lineHeight: 1.5
+    lineHeight: 1.4
   support:
     fontFamily: "'Noto Sans Thai', sans-serif"
     fontSize: ".875rem"
+    lineHeight: 1.75
 rounded:
-  control: "8px"
-  panel: "16px"
-  resource: "12px"
-  compact: "6px"
+  chip: "8px"
+  control: "10px"
+  card: "16px"
+  panel: "22px"
+  bento: "24px"
+  pill: "999px"
 spacing:
-  compact: "8px"
   control-gap: "8px"
+  compact: "12px"
   base: "16px"
-  mobile-gutter: "24px"
+  bento-gap: "18px"
   panel: "32px"
   desktop-gutter: "48px"
+  mobile-gutter: "24px"
   section: "80px"
-  section-mobile: "56px"
-  header-height: "72px"
-  header-height-mobile: "64px"
+  section-mobile: "52px"
+  header-height: "84px"
+  header-height-mobile: "76px"
 components:
   button-primary:
-    textColor: "{colors.control-ink}"
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.background}"
     typography: "{typography.label}"
     rounded: "{rounded.control}"
-    padding: "12px 22px"
+    padding: "10px 20px"
   button-primary-hover:
     backgroundColor: "{colors.primary-hover}"
-  hero-primary:
-    textColor: "{colors.control-ink}"
-    typography: "{typography.label}"
-    rounded: "{rounded.control}"
-    padding: "12px 24px"
-    height: "52px"
   button-secondary:
+    backgroundColor: "{colors.surface-elevated}"
     textColor: "{colors.ink}"
     typography: "{typography.label}"
     rounded: "{rounded.control}"
-    padding: "12px 22px"
-  button-tertiary:
-    textColor: "{colors.muted}"
-    typography: "{typography.support}"
-    rounded: "{rounded.control}"
-    padding: "10px 12px"
+    padding: "10px 20px"
   input:
-    backgroundColor: "{colors.field-background}"
+    backgroundColor: "{colors.field}"
     textColor: "{colors.ink}"
     rounded: "{rounded.control}"
-    padding: "13px 16px"
-  navigation-link:
+    padding: "12px 16px"
+  navigation-dock:
+    backgroundColor: "{colors.surface}"
     textColor: "{colors.muted}"
-    rounded: "{rounded.compact}"
-    padding: "8px 10px"
-  skill-evidence:
+    rounded: "{rounded.pill}"
+    padding: "6px 8px 6px 10px"
+  project-card:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.control}"
-    padding: "16px 18px"
+    rounded: "{rounded.panel}"
+    padding: "30px"
   technology-tag:
-    backgroundColor: "{colors.surface-elevated}"
-    textColor: "{colors.brand-ink}"
-    rounded: "{rounded.control}"
-    padding: "6px 12px"
+    backgroundColor: "{colors.field}"
+    textColor: "{colors.muted}"
+    rounded: "{rounded.chip}"
+    padding: "5px 11px"
+  skill-tile:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "12px"
+    padding: "10px 14px"
   direct-contact:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.control}"
-    padding: "16px"
-  project-row:
-    padding: "32px 0"
-  evidence-panel:
-    backgroundColor: "{colors.surface}"
-    rounded: "{rounded.panel}"
-    padding: "32px"
+    rounded: "14px"
+    padding: "16px 18px"
 ---
 
 # Design System: MrWinRock
 
 ## Overview
 
-**Creative North Star: "The Independent Catalog"**
+**Creative North Star: "Asymmetric Bento Monograph & Floating Dock"**
 
-The system treats personal work as a catalog: clear names, open listings, fine rules, and enough space to inspect the evidence. Ink-dark fields and cool lettering provide a quiet reading surface; the original skull anchors recognition inside an expressive gradient sleeve.
+MrWinRock pairs a detached floating obsidian pill navigation dock with an asymmetric bento-grid portfolio layout. Rather than stacking identical full-width sections beneath a rigid top bar, Home opens with an 8/4 hero split (statement plate beside a skull identity stage with an integrated 2x2 quick-links footer), transitions into an asymmetric featured work grid (`01` full-width lead plate over `02` and `03` side-by-side), and pairs `What I build` beside `Technologies I Work With` inside one balanced hairline-divided band.
 
-This name, the descriptive color names, and the named rules below are designer decisions made under the owner's delegated visual brief. The durable owner commitments are the MrWinRock identity, the existing skull, dark surfaces, gradients, and useful English and Thai journeys. Sora supplies the display voice while Noto Sans Thai carries reading and Thai coverage.
+Interior routes drop the boxed banner in favor of open monumental editorial headers directly on the `#121212` obsidian canvas, carrying the same bento language across the portfolio—full-width asymmetric bento plus horizontal Project Matcher band on Projects, top pill category bar plus 2-column hairline-divided bento matrices on Skills, left sticky dossier on About, viewport-centered alternating timeline on Experience, and asymmetric inquiry form plus direct-channel cards on Contact.
 
 **Key Characteristics:**
 
-- Ink-dark reading surfaces and cool, solid-color text.
-- Original skull artwork on a violet, lilac, and cyan sleeve.
-- Open project rows, fine dividers, and restrained tonal states.
-- Bilingual typography, visible focus, and static reduced-motion behavior.
+- Floating centered pill navigation dock on desktop (`999px` radius) and floating rounded dock bar on mobile.
+- Asymmetric Home bento: 8/4 hero split, lead-plus-pair featured projects, and side-by-side capability ledger and stack matrix.
+- Open unboxed editorial interior headers with a `64px` cyan-to-magenta hairline notch directly on `#121212`.
+- Exact preserved charcoal, chalk-ink, mint-cyan, and electric cyan-to-magenta palette with zero nested cards and full reduced-motion support.
 
 ## Colors
 
-The palette combines cool neutrals with soft violet and cyan accents; vivid gradients belong to material surfaces.
+The palette anchors neutral charcoal bento surfaces with crisp white ink, soft mint-cyan interactive accents, and a rationed electric cyan-to-magenta spectrum.
 
 ### Primary
 
-- **Sleeve Lavender** (`brand-ink`): role text, evidence links, field focus, and selection.
-- **Ice Cyan** (`brand-cyan`): global keyboard focus and selected accent details.
-- The primary surface gradient uses `linear-gradient(115deg, #a48aff 0%, #d6a5f6 45%, #a0e8ee 100%)`. The identity sleeve has its own material gradient: `linear-gradient(145deg, #aa80f7, #c5aff4 48%, #73d4e2)`.
+- **Mint Cyan** (`brand-ink`): role titles, project indices, category counts, interactive arrows, hover text, and company metadata.
+- **Electric Cyan** (`brand-cyan`): keyboard focus outlines, caret color, current timeline nodes, and the leading edge of the spectrum gradient.
+- **Electric Magenta** (`brand-magenta`): trailing edge of the spectrum gradient (`linear-gradient(90deg, #33FFFF, #CB4EFF)`) and the cool-warm stage wash tint.
+- **Ice Mint** (`primary-hover`): hover and focus fill for primary chalk-white action buttons.
 
 ### Neutral
 
-- **Night Ink** (`background`): the continuous page and navigation field.
-- **Cool Lettering** (`ink`) and **Quiet Lilac Gray** (`muted`): main and supporting reading levels.
-- **Catalog Surface** (`surface`) and **Raised Ink** (`surface-elevated`): panel tones; the latter is declared in the source palette but is not a general elevation mandate.
-- **Fine Rule** (`border`) and **Control Rule** (`border-strong`): structural dividers and control boundaries.
-- **Control Ink**, **Primary Hover**, **Field Background**, **Placeholder**, and **Project Hover** describe the corresponding control and row states. **Error** marks invalid contact fields and assistant failures.
+- **Obsidian Ground** (`background`): continuous page canvas beneath the floating dock and open interior headers.
+- **Chalk Ink** (`ink`): display headings, titles, and primary action button fills.
+- **Silver Gray** (`muted`): body copy, descriptions, placeholders, and resting navigation labels.
+- **Charcoal Plate** (`surface`): floating dock, hero plates, project cards, bento ledgers, standalone skill/contact tiles, and footer band.
+- **Graphite Lift** (`surface-elevated`): hover states, secondary buttons, active pill links, and icon wells.
+- **Recessed Ink** (`field`): form inputs, technology chips, project screenshot frames, and index badges.
+- **Hairline Rule** (`border`) and **Strong Rule** (`border-strong`): bento dividers, card boundaries, and interactive borders.
+- **Rose Error** (`status-error`) and **Mint Success** (`status-success`): form validation, unavailable alerts, and accepted contact feedback.
 
 ### Named Rules
 
-**The Material Gradient Rule.** Put gradients on sleeves, action fills, and broad contact surfaces; keep reading text a solid color.
+**The Spectrum Ration Rule.** Reserve the cyan-to-magenta gradient strictly for thin accent rims (2px), full-perimeter card hover/focus borders (1.5px mask ring), the active dock indicator, timeline spines, and the circular skull ring; keep all reading and display text a solid color.
+
+**The Single-Boundary Rule.** Never nest bordered cards inside bordered cards; use hairline-divided internal matrices (`1px` gap grids) inside unified bento frames, recessed `#0E0E0E` wells for inputs and screenshots, and standalone tiles directly on `#121212`.
 
 ## Typography
 
@@ -164,114 +164,76 @@ The palette combines cool neutrals with soft violet and cyan accents; vivid grad
 
 **Body Font:** self-hosted Noto Sans Thai, followed by sans-serif.
 
-**Character:** geometric display lettering creates identity while generous reading leading supports both languages. The root is (16px); the system uses observed roles rather than a fixed mathematical type ratio.
+**Character:** tight geometric Sora display headlines contrast with open, legible Noto Sans Thai body copy across both languages.
 
 ### Hierarchy
 
-- **Display:** the frontmatter display role is the desktop first-name treatment. The surname uses (.62em), weight (450), leading inherited from the name, and tracking (-.03em). At tablet width the first name uses `clamp(2.5rem, 5.4vw, 4rem)`; on mobile it uses `clamp(2.6rem, 9.4vw, 4.8rem)` and the surname becomes (.65em).
-- **Headline:** fluid section headings use the headline role; route titles use `clamp(2.5rem, 5vw, 4.5rem)`, weight (500).
-- **Title:** project titles use the title role; featured work increases to (2rem). Panel titles are (1.4rem), weight (500).
-- **Body:** the root role is the default. Hero and page descriptions increase leading to (1.9), with measures of (57ch) and (70ch); project summaries use (.95rem), leading (1.85), and (68ch).
-- **Label:** controls use the label role. Navigation and technology labels use (.8125rem); labels stay in ordinary case. The support role maps to the source's `--support-size` for capability descriptions, hero social links, and the tertiary action.
+- **Display:** Hero full-name treatment (`clamp(2.3rem, 4.3vw, 3.9rem)`), weight (650) given name and (475) surname, line height (1.07), tracking (`-.04em` floor). Thai switches to line height (1.24) and tracking (`-.018em`).
+- **Headline:** Open interior route titles use `clamp(2.35rem, 4.8vw, 4.1rem)`, weight (630), tracking (`-.038em`); Home section headings use `clamp(1.65rem, 3vw, 2.3rem)`, weight (600), tracking (`-.035em`). Thai `h2` headings relax to line height (1.28) and tracking (`-.012em`).
+- **Title:** Lead featured project titles scale to `clamp(1.7rem, 2.6vw, 2.15rem)`, paired showcase cards use (1.48rem), and archive cards use (1.28rem).
+- **Body:** Root (16px) with (1.75–1.9) line height and (56–68ch) measures across biography, summaries, and case studies.
+- **Label:** Controls, dock links, and form labels use (.825–.875rem) in ordinary sentence case with tabular numerals (`font-variant-numeric: tabular-nums`) on project indices, counts, and timeline dates.
 
 ### Named Rules
 
-**The Two-Script Rule.** Preserve the Noto Sans Thai fallback in display stacks and its reading role; test both languages when changing type size or width.
+**The Two-Script Tracking Rule.** Keep Latin display tracking at or above (`-.04em`) and relax tracking (`-.018em` / `-.012em`) and line height (`1.24` / `1.28`) for `:lang(th)` headings so Thai upper vowels and tone marks stay clear.
 
 ## Layout
 
-The outer main and navigation containers stop at (1280px), including desktop side padding of (48px); the resulting inner content width is (1184px). Navigation is fixed and uses `--header-height`; the page begins below it and scroll padding adds (24px). Main content has (100px) bottom padding. Sections use `--section-space`, with local (8–32px) control and reading gaps. The frontmatter records the desktop and mobile values of both source tokens.
+Outer main containers cap at (1248px) with fluid side gutters (`clamp(20px, 4vw, 48px)`). The desktop navigation floats `14px` from the top edge centered as a compact pill dock (`fit-content`, `min-height: 56px`); main content offsets by `--header-height` (`84px` desktop, `76px` mobile) and finishes with (108px) desktop and (68px) mobile bottom padding. Major Home bands separate by (80px) desktop and (52px) mobile.
 
-The home composition pairs text and a supporting sleeve in (1.6fr / .8fr) columns with an (80px) gap and (72px 0 56px) padding. Selected work precedes the capability summary. Project actions wrap directly below the summary and technology chips, grouped with them at a (24px) gap so a taller screenshot cannot push the actions away. A Home showcase with a published screenshot centers this information group beside the image, in (1fr / 1.05fr) columns with a (56px) column gap; without an image it retains the open text listing. Home skill evidence uses three columns of boxed links with (12px) gaps. These compositions are surface patterns, not mandatory layouts for every route.
+Home uses a multi-column bento architecture: a 12-column opening row (`span 8` statement plate + `span 4` skull identity stage with integrated 2x2 social dock), a 2-column Selected Work bento (`01` spanning full width above `02` and `03` side-by-side, with `:nth-child(2):last-child` spanning full width to prevent orphans), a side-by-side lower bento pairing `What I build` (`1.2fr`) beside `Technologies I Work With` (`1fr`, collapsing cleanly to 1 column when skills are disabled), and a full-width closing Contact banner.
 
-At (1100px) the hero tightens. At (1023px) side gutters become (32px), hero columns tighten again, and the separate Skills route uses three columns. At (767px) gutters become (24px), navigation becomes (64px) high, hero and project rows stack, Home showcase images lead their summaries, skills use two columns, and section separation becomes (56px). The Skills route becomes one column at (479px); Home skill evidence becomes one column at (359px), when gutters also become (18px). The Tailwind desktop navigation appears from (1024px). The body supports a minimum width of (280px).
+Interior routes open with an unboxed editorial `PageIntro` directly on `#121212` (top-aligned whenever header actions are present). Projects flows full-width in the same bento cadence as Home: asymmetric lead-plus-pair Selected Projects above a full-width horizontal two-column Project Matcher bento plate (`.78fr / 1.22fr`), followed by a three-column archive grid and three-column link-only Company Work strip. Skills pairs a sticky floating pill category tab bar (with a spring-gliding active pill indicator and scroll-spy synchronization; horizontally scrollable single-row pill rail on mobile) above a single-column stack of unified category plates, each carrying a uniform hairline-divided three-column skill matrix on desktop (two columns on tablet/mobile, one column at `<=359px`) where every skill tile keeps identical column width and (60px) base row height. About pairs a left sticky skull identity dossier (`.42fr`) beside a right unified hairline-divided reading ledger (`1fr`). Experience alternates milestone cards symmetrically around the (50%) horizontal axis (`>=1024px`, 96px gap, equal 512px cards at 1440px). Project Detail keeps a sticky left overview rail beside framed spec blocks.
+
+At (1023px) the floating dock spans mobile width (`16px` radius), the Home bento collapses to single-column plates with a horizontal skull strip, Projects stacks the matcher to one column and archive to two columns, Skills stacks category plates to one column with two-column internal matrices, About keeps the profile above reading sections, and Experience switches to a single-column left-aligned timeline. At (767px) gutters become (24px), mobile hero buttons stay side-by-side at (390px), and Projects archive stacks to one column; at (359px) gutters become (16px) and internal skill matrices become one column down to (280px).
 
 ## Elevation & Depth
 
-Depth comes from tonal fields, dividers, and state changes. Panels have no general drop shadow. The skull artwork alone has the observed soft shadow (`0 24px 42px -22px #21113b70`), grounding it inside the sleeve. Navigation is opaque, with no backdrop blur.
-
-### Named Rules
-
-**The Open Catalog Rule.** Present work listings as open rows separated by fine rules; use enclosed panels for evidence, fields, and resource states where grouping earns its boundary.
+Depth combines tonal plate stepping (`#121212` canvas -> `#1B1B1B` plates -> `#252525` hover lifts, with `#0E0E0E` recessed wells) and two soft offset ambient drop shadows: `--dock-shadow` (`0 18px 42px -16px rgba(0, 0, 0, .82)`) grounding the floating pill dock and mobile drawer, and `--plate-shadow` (`0 20px 44px -26px rgba(0, 0, 0, .72)`) beneath primary bento plates. Zero-offset neon glow halos are avoided.
 
 ## Shapes
 
-Controls, technology chips, Home skill links, Skills tiles, and direct contact links use the control radius; sleeves, contact rails, and evidence panels use the panel radius. Resource notices, screenshots, and the résumé frame use the resource radius. Compact navigation uses the compact radius. The original skull and navigation logo keep their circular crop. Project rows remain open without a rounded enclosure.
+The floating desktop navigation dock, route pills, section jump buttons, back links, and count tags use full pill radii (`999px`). Major bento plates use (24px) on Hero/Contact Banner and (22px) on project/ledger panels; compact cards and mobile dock use (16px); controls and inputs use (10px); technology chips and index badges use (8px) and (6px). The MrWinRock skull remains circular inside a (2px) cyan-to-magenta gradient ring.
 
 ## Components
 
 ### Buttons
 
-Controls are clear and gently rounded. Primary actions use the brand surface gradient, dark lettering, a (48px) minimum height, and the frontmatter padding. Hover and keyboard focus become solid pale lavender. Secondary actions are transparent with a strong boundary, shifting to a violet-dark fill and lavender rule on hover and keyboard focus. Action labels and arrows share the compact control gap. Buttons, text actions, technology links, skill links, and project-detail links move down (1px) while pressed. Disabled buttons reduce opacity to (.55).
-
-On Home, View My Work has a (52px) minimum height and (24px) horizontal padding; the résumé stays secondary with (16px) horizontal padding. Contact is a tertiary text action with the support type role and a (48px) minimum height; hover and keyboard focus brighten its text and add a raised-ink fill. Compact breakpoints reduce the work action's horizontal padding.
-
-The contact rail reverses the action to a dark solid fill with light lettering. Global keyboard focus uses a (2px) cyan outline offset by (5px). Color and border transitions last (.2s).
+Primary actions use chalk-white fill with obsidian ink, (46–50px) minimum height, (10px) radius, shifting to ice-mint on hover/focus. Secondary actions use graphite-lift fill with a strong border, shifting to mint-cyan border and ink on hover. Interactive controls depress (2px) on active press; disabled or non-interactive span/div states never light up on hover or depress on click.
 
 ### Chips
 
-Technology tags are boxed chips with a strong boundary, raised-ink fill, a (36px) minimum height, and the frontmatter padding. The shared technology-tag component deduplicates labels across project cards, project details, and Experience. When Projects is enabled, each chip links to its technology filter; during visibility loading or when Projects is hidden, the same label remains informational. Link hover and keyboard focus brighten the text, turn the rule lavender, and deepen the violet fill.
-
-Home skill evidence uses boxed catalog-surface links with a strong boundary, a (64px) minimum height, and the frontmatter padding. The Skills route uses the same visual vocabulary in tiles with (16px) padding and a (72px) minimum height. Both link to the corresponding project filter only when Projects is enabled; otherwise they retain reading semantics. Hover and keyboard focus use lavender text and rules with a raised-ink fill. Arrows sit beside the label. Home skill icons are (24px); Skills icons are (28px) inside a (36px) well.
+Technology tags are recessed (`#0E0E0E`) chips with a hairline border, (34px) minimum height, and (8px) radius. Interactive links illuminate to mint-cyan on graphite lift when Projects is enabled; non-linked chips remain informational.
 
 ### Cards / Containers
 
-Project entries use open rows with linked titles. Title hover and keyboard focus add lavender text and a fine underline. Detail actions are compact, boxed links beneath the description and technology chips, with (10px 14px) padding and a (44px) minimum height. Their arrows remain beside the label. Live and repository actions wrap alongside them. Home showcase rows use (36px 0) padding and a transparent resting surface; hover and focus-within share the project-hover tone. On mobile, row padding becomes (28px 0) and each detail action and external-action group has a (250px) maximum width. Showcase screenshots are conditional on published evidence, contained without cropping, and limited to (380px) height on desktop and (320px) on mobile. Linked covers open the project detail; hover and keyboard focus outline the image boundary.
-
-Evidence panels use the frontmatter surface, padding, and panel radius with a fine border; mobile padding becomes (24px). Panels containing a focused control strengthen their boundary. Resource notices use the resource radius and explicit status copy.
-
-Direct contact destinations use boxed links with (16px) padding, a (16px) icon-to-copy gap, a fine boundary, and the catalog surface. The arrow stays beside the destination label; supporting addresses can wrap. Hover and keyboard focus use lavender rules and a raised-ink fill. About offers contextual work and Experience actions only when those destinations are enabled. The résumé toolbar pairs its download label with a (16px) download SVG and its new-tab action with the shared arrow.
-
-Loading notices keep that real status text and add a decorative (16px) outlined progress ring. It rotates over (.8s) only when reduced motion is not requested; status remains readable when the ring is static.
+Lead and paired featured project plates feature inline tabular index badges (`01`, `02`, `03`), a full-perimeter (1.5px) diagonal cyan-to-magenta border ring revealed smoothly around all four edges on hover and focus-within (with no top-only hover stripe), hairline-separated bottom action bars, and recessed `#0E0E0E` screenshot frames. The same full-perimeter spectrum border reveal unifies Skills category plates, Company Work cards, direct contact destinations, and the focused Project Matcher panel. Home's `What I build` ledger, `Technologies I Work With` matrix, and Skills category plates all use unified outer frames with `1px` hairline internal dividers and odd-tail orphan guards (zero nested cards).
 
 ### Inputs / Fields
 
-Fields have a dark inset tone, strong border, and control radius. Minimum height is (50px); textarea height begins at (150px) and resizes vertically. Placeholder text remains visibly distinct. Field focus uses a (2px) lavender outline offset by (2px); invalid contact fields use the error border.
+Text inputs and textareas sit recessed in `#0E0E0E` with hairline borders, (48px) minimum height, high-contrast muted placeholders, cyan carets, and a (2px) cyan focus ring offset by (2px). Invalid fields switch borders to rose error.
 
 ### Navigation
 
-The compact skull and wordmark sit beside ordinary-case links. The active link has lavender text and a fine lavender indicator (2px); hover uses a light foreground and the catalog surface. Links and the language switcher have a (44px) minimum target; the menu toggle is (44px) square. Mobile links are (1rem) with (12px 18px) padding, inside an opaque scrollable menu bounded by the viewport minus `--header-height`. Destination visibility continues to follow settings.
+Desktop navigation floats centered (`14px` from top) in a single charcoal pill dock holding the circular skull mark, vertical hairline divider, pill route links (graphite active fill + 2px cyan-to-magenta bottom accent), and circular language switcher. Mobile uses a floating rounded bar with a `grid-template-rows` animated drawer, `inert` focus protection, and Escape-to-close behavior.
 
-Project details offer a wrapping section navigation when at least two published sections are available. Its boxed anchors have a (44px) minimum height, (8px 14px) padding, and (8px) gaps; hover and keyboard focus brighten the text, rule, and surface. Section offsets clear the fixed header by (24px). Published screenshots open their original image in a new tab and show an outline on hover or keyboard focus.
+### Identity Stage & Motion
 
-### Identity Sleeve and Arrow
-
-The sleeve preserves the original skull asset in a supporting desktop square with a (336px) maximum width. On mobile it becomes a horizontal identity strip: a (72px) skull beside the wordmark and location, with (20px) padding and a (112px) resulting minimum content height. Its sheen travels once on arrival (1.8s), then sweeps on hover with a (1s) transition. The shared easing is `cubic-bezier(.16, 1, .3, 1)`. Primary, project-detail, skill, capability, direct-contact, and secondary-action arrows shift (1px -1px) on hover and keyboard focus over (.2s). All decorative animation, transitions, and smooth scrolling stop under reduced motion; essential content is never gated by animation.
-
-Arrow links use the shared inline SVG with round caps, (1.6) stroke width, and a default (14px) square size. Keep the arrow adjacent to its label using the compact control gap. Home social arrows use (13px); back links use the matching back path.
-
-### Source mappings
-
-| Module or snippet | Source of truth |
-| --- | --- |
-| Palette, type, radii, spacing, focus, breakpoints | `src/index.css`, `:root`, global rules, responsive media blocks |
-| Font delivery | `src/index.css` font faces; `index.html` font preloads |
-| Primary / secondary buttons | `src/index.css` controls; `src/components/pages/home/Home.tsx` actions |
-| Input | `src/index.css` search/contact field rules |
-| Navigation | `src/components/Navbar.tsx`; `src/index.css` navigation rules |
-| Technology tag | `src/components/TechnologyTags.tsx`; `src/index.css` technology-chip rules |
-| Project row / detail navigation | `src/components/pages/projects/ProjectCard.tsx`, `ProjectDetail.tsx`; `src/index.css` catalog and detail rules |
-| Skill evidence / tiles | `src/components/pages/home/Home.tsx`, `src/components/pages/skills/Skills.tsx`; `src/index.css` skill rules |
-| Contextual and direct actions | `src/components/pages/about/About.tsx`, `src/components/pages/contact/Contact.tsx`, `src/components/pages/resume/Resume.tsx` |
-| Evidence panel | `src/index.css` secondary-route panel rules |
-| Identity sleeve | `src/components/pages/home/Home.tsx`; `src/index.css` sleeve and motion rules |
-| Arrow SVG | `src/components/ArrowIcon.tsx` |
-| Utility defaults | `tailwind.config.ts` has no extended theme; Tailwind supplies responsive display utilities |
-
-The sidecar previews translate these modules into standalone HTML/CSS. Preview examples are interface labels, not new project claims. Tonal ramps are generated panel metadata, not additional shipped palette tokens.
+The Hero identity stage pairs the circular MrWinRock skull with an integrated 2x2 hairline quick-links footer and a diagonal light sheen sweeping once on arrival (`1.45s cubic-bezier(.16, 1, .3, 1)`) and replaying on hover. Route changes animate subtly from visible opacity (`.76 -> 1`) over (420ms). All animations, transitions, press translations, and smooth scrolling stop under `prefers-reduced-motion: reduce`.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** preserve the original skull and dark, gradient-bearing identity.
-- **Do** use solid readable text, fine rules, and open work listings.
-- **Do** preserve both language stacks, visible focus, and reduced-motion behavior.
-- **Do** derive future component variants from the observed source and verify their responsive reading order.
+- **Do** preserve the exact charcoal, chalk-ink, mint-cyan, and electric cyan-to-magenta palette across all routes.
+- **Do** keep the floating centered pill dock on desktop, asymmetric bento grid on Home, and open unboxed editorial headers on interior routes.
+- **Do** scope hover highlights and active press translation strictly to real interactive controls (`<a>` and enabled `<button>`).
+- **Do** keep English and Thai layouts free of horizontal overflow and WCAG AA violations from (320px) to (1440px).
 
 ### Don't:
 
-- **Don't** turn reading text into gradient lettering.
-- **Don't** apply the skull's shadow as a general panel elevation.
-- **Don't** gate content behind decorative animation or add a continuous sleeve loop.
-- **Don't** infer new project evidence or product claims from visual examples.
+- **Don't** place kickers or eyebrows above headings.
+- **Don't** nest bordered cards inside bordered cards; use hairline-divided matrices or standalone tiles on `#121212`.
+- **Don't** apply gradient fills to body or heading text, or use zero-offset neon glow halos.
+- **Don't** invent project evidence, company case-study details, or claims outside published API data.

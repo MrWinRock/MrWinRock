@@ -55,7 +55,15 @@ export function ContactBrief({ message, sending, onInvalid }: { message: string;
             {result.source === 'unavailable' ? <p>{t('contact.brief.unavailable')}</p> : <>
                 {result.category && <p className="brief-category">{t('contact.brief.category')}: <strong>{t(`contact.brief.categories.${result.category}`)}</strong></p>}
                 <ul className="brief-checks">{(['audience', 'scope', 'deadline'] as const).map(field => <li key={field} data-check={result.checks[field]}>
-                    <span className="brief-check-symbol" aria-hidden="true">{result.checks[field] === 'present' ? '✓' : result.checks[field] === 'missing' ? '+' : '?'}</span>
+                    <span className="brief-check-symbol" aria-hidden="true">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            {result.checks[field] === 'present'
+                                ? <path d="M5 13l4 4L19 7" />
+                                : result.checks[field] === 'missing'
+                                    ? <path d="M12 5v14M5 12h14" />
+                                    : <><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4" /><path d="M12 17h.01" /></>}
+                        </svg>
+                    </span>
                     <span><strong>{t(`contact.brief.fields.${field}`)}</strong><span>{t(`contact.brief.states.${result.checks[field]}`)}</span>{result.checks[field] !== 'present' && <span>{t(`contact.brief.hints.${field}`)}</span>}</span>
                 </li>)}</ul>
             </>}

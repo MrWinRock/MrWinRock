@@ -24,6 +24,14 @@ const About = () => {
         <PageIntro title={t('about.title')} />
         <PublicDataNotice {...resource} />
         {about && <div className="about-layout">
+            <aside className="about-profile" aria-labelledby="about-profile-name">
+                <div className="about-profile-art"><img src="/logo.jpg" alt="" width="512" height="512" decoding="async" /></div>
+                <div className="about-profile-copy">
+                    <h2 id="about-profile-name">{t('home.name')} {t('home.surname')}</h2>
+                    <p>{t('home.subtitle')}</p>
+                    <p>{t('home.location')}</p>
+                </div>
+            </aside>
             <div className="about-reading">
                 {about.story && <section>
                     <h2>{t('about.myStory')}</h2>
@@ -38,14 +46,6 @@ const About = () => {
                     {settings.showExperience && <Link className="s-button" to="/experience">{t('nav.experience')}</Link>}
                 </div>}
             </div>
-            <aside className="about-profile" aria-labelledby="about-profile-name">
-                <div className="about-profile-art"><img src="/logo.jpg" alt="" width="512" height="512" decoding="async" /></div>
-                <div className="about-profile-copy">
-                    <h2 id="about-profile-name">{t('home.name')} {t('home.surname')}</h2>
-                    <p>{t('home.subtitle')}</p>
-                    <p>{t('home.location')}</p>
-                </div>
-            </aside>
         </div>}
     </div>;
 };

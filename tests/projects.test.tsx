@@ -105,3 +105,15 @@ it('connects a personal overview to relevant sections, technology filters, and s
   expect(screen.getByRole('link', { name: 'Published screenshot', exact: true })).toHaveAttribute('rel', 'noopener noreferrer');
   expect(screen.queryByRole('link', { name: 'Unsafe screenshot', exact: true })).toBeNull();
 });
+it('adds the InfoXP case study without replacing authored details or removing the full stack', async () => {
+  vi.mocked(api.projects).mockResolvedValue({ ok: true, data: [{
+    title: 'InfoXP', slug: 'infoxp', description: 'Game knowledge', order: 0,
+    tech: ['React', 'TypeScript', 'Vite', 'Bun', 'MongoDB'], caseStudy: { role: 'Published case study contribution.' },
+  }] });
+  renderPublic(<Routes><Route path="/projects/:slug" element={<ProjectDetail />} /></Routes>, { route: '/projects/infoxp' });
+  expect(await screen.findByRole('heading', { name: 'InfoXP', exact: true })).toBeVisible();
+  expect(screen.getByText('Published case study contribution.')).toBeVisible();
+  expect(screen.getByText(/streamed replies/i)).toBeVisible();
+  expect(screen.getByRole('img', { name: /InfoXP game catalog/i })).toBeVisible();
+  expect(screen.getByRole('link', { name: 'MongoDB', exact: true })).toHaveAttribute('href', '/projects?tech=MongoDB');
+});

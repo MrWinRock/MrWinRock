@@ -5,6 +5,14 @@ import { safeExternalUrl } from './safeExternalUrl';
 export const projectSlug = (project: Project) => project.slug ?? project._id ?? project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 export const isCompanyProject = (project: Project) => project.workType === 'company';
 export const isFeaturedProject = (project: Project) => !isCompanyProject(project) && (project.featured ?? ['InfoXP', 'Stringy', 'ChadChat'].includes(project.title));
+export const isInfoXP = (project: Project) => !isCompanyProject(project) && (projectSlug(project) === 'infoxp' || project.title === 'InfoXP');
+
+export function featuredProjects(projects: Project[]): Project[] {
+    return projects.filter(isFeaturedProject)
+        .sort((first, second) => Number(isInfoXP(second)) - Number(isInfoXP(first)))
+        .slice(0, 3);
+}
+
 export function localizeProject(project: Project, language: string): Project {
     const translated = language.startsWith('th') ? project.translations?.th : undefined;
     return translated ? { ...project, ...translated, slug: projectSlug(project), caseStudy: project.caseStudy || translated.caseStudy ? { problem: '', role: '', decisions: [], outcomes: [], repositories: [], screenshots: [], ...project.caseStudy, ...translated.caseStudy } : undefined } : project;

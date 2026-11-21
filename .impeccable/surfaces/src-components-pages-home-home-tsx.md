@@ -2,69 +2,30 @@
 version: 1
 slug: "src-components-pages-home-home-tsx"
 primary_target: "src/components/pages/home/Home.tsx"
-related_targets: ["src/index.css","src/components/Navbar.tsx","src/components/Footer.tsx","src/components/pages/projects/ProjectCard.tsx"]
+related_targets: ["src/index.css","src/components/Navbar.tsx","src/components/Footer.tsx","src/components/pages/home/BuildFocus.tsx","src/components/pages/projects/ProjectCard.tsx","src/components/pages/projects/Projects.tsx","src/components/pages/projects/ProjectDetail.tsx","src/components/pages/about/About.tsx","src/components/pages/skills/Skills.tsx","src/components/pages/experience/Experience.tsx","src/components/pages/contact/Contact.tsx","src/components/pages/resume/Resume.tsx"]
 ---
 
-# Portfolio redesign
+# Portfolio redesign — Asymmetric Bento & Floating Dock (2026-11-21)
 
-Scope: Home, shared navigation/footer, and the visual system across all public routes. Visitor mode: Experience. Recruiters and clients remain equal audiences. Existing content, API visibility, bilingual behavior, and contact/resume workflows are retained.
+Scope: Overall layout architecture overhaul across all public portfolio routes (Home, Projects, Project Detail, About, Experience, Skills, Contact, Resume) plus shared Navigation and Footer. Visitor mode: Experience. Recruiters and potential clients remain equal audiences.
 
-The owner delegated visual decisions, requiring dark surfaces and gradients. Proceed code-first using the existing React/Vite stack, in this checkout. No extra interview or concept approval is required by the delegated brief.
-
-## Grounded directions
-
-1. Engineering field journal: annotated work and decisions in a structured reading flow.
-2. Software exhibition: a gallery wall of real projects, with quiet navigation.
-3. Night-race paddock: practical wayfinding, broad dark fields, precise information.
-4. Film title sequence: oversized credits with a deliberate project-to-project rhythm.
-5. Independent record-label sleeve and catalog: a bold identity sleeve paired with readable work listings; the existing skull is recognizable cover art.
-6. Technical specimen book: clear specimen headings and detailed evidence beneath.
-7. Workshop inventory: material labels, open shelving, and grouped capabilities.
-
-The category rut is a terminal hero beside three boxed capability cards. Its predictable opposite is a pale serif editorial page. Neither is the new world.
-
-## Challenger judgment
-
-Each challenger was fused with real portfolio content before comparison on audience identification and product clarity.
-
-- Brick instructions: declined on both; a required step sequence misrepresents independent project browsing. Keep the discipline of clear part-to-whole relationships between skills and projects.
-- Pickling calendar: declined on both; time-maturation controls invent a workflow. Keep generous separation between distinct groups of evidence.
-- Split-flap board: competitive on clarity, weaker on personal identification. Keep stable column alignment and legible row updates, without letter-flip gates.
-- ASCII scene: competitive on developer identification, weaker on project clarity. Keep a memorable skull-led first viewport without turning readable content into glyph art.
-- Four-shade handheld: declined on both; constrained resolution and game controls weaken bilingual reading. Keep consistent geometry and strong silhouettes.
-- Lowbrow gallery panel: competitive on personality, weaker on product clarity. Keep full commitment to the supplied skull artwork and an expressive gradient field, without overcrowding the evidence.
-
-The assigned fifth grounded direction carries both audience identification and product clarity. Creative discretion is exercised on the user's behalf; no decision-page choice is implied.
+Owner confirmation:
+- Asymmetric Bento Grid + Floating Nav Dock overall layout (floating centered nav pill on desktop; bento Home with 2-up featured project grid and What I Build paired side-by-side with Technologies; open editorial interior headers).
+- Keep the current live color palette unchanged (`#121212` ground, `#1B1B1B`/`#252525` surfaces, `#0E0E0E` recessed fields, `#F4F4F4` ink, `#B9B9B9` muted, `#373737`/`#777777` borders, `#A6EEEB` mint-cyan brand ink, `#33FFFF` cyan to `#CB4EFF` magenta spectrum accent, `#D9FAF7` primary hover, `#F4A4BB` error, `#A1E2BC` success).
+- Preserve all bilingual EN/TH copy, API visibility guards, company link-only privacy rules, AI disclosure/fallback behavior, keyboard accessibility, and E2E layout contracts.
 
 ## Direction contract
 
-THESIS: Treat the portfolio as a personal catalog of work, with a recognizable identity sleeve and open, readable listings rather than terminal chrome or equal cards.
+THESIS: Replace the traditional top-bar + single-column vertical stack with a floating obsidian pill dock and an asymmetric bento-grid monograph—pairing a wide lead showcase with side-by-side secondary projects, placing capabilities and technologies side-by-side in one hairline-divided horizontal band, and opening interior routes with unboxed monumental typography directly on the dark canvas.
 
-OWN-WORLD: Ink-black surfaces; cool white lettering; vivid violet-to-periwinkle-to-cyan gradient fields; Sora display and Noto Sans Thai reading text; broad spacing, fine rules, rounded controls, minimal framing. Gradient stays on material, not body text.
+OWN-WORLD: Continuous `#121212` obsidian canvas with a floating centered `#1B1B1B` pill navigation dock, crisp `20–24px` bento plates (`1px solid #373737`), `#252525` interactive surface lifts, and `#0E0E0E` recessed media and input wells. Solid `#F4F4F4` Sora display lettering (`-0.04em` tracking floor; relaxed Thai `:lang(th)` headings) and Noto Sans Thai body text; `#A6EEEB` mint-cyan for roles, indices, counts, and arrows; `#33FFFF` to `#CB4EFF` spectrum gradient rationed strictly to 2px structural rims, active dock indicator, timeline spine, and the circular skull emblem ring.
 
-STORY: Meet Pharthiwath, recognize the skull identity, inspect personal work, then choose a résumé or conversation. Skills point toward evidence. Optional AI and unavailable content stay explicit.
+STORY: Visitors land on a detached floating dock above an asymmetric bento hero pairing Pharthiwath's statement plate with the MrWinRock skull identity and social dock, scan an asymmetric lead-plus-pair Selected Work grid, inspect capabilities and core technologies side-by-side without endless vertical scrolling, and reach résumé review or direct inquiry in one step.
 
-FIRST VIEWPORT: Compact navigation above a two-column composition. Left: immediate full-name H1, prominent full-stack role, biography and real actions. Right: a large gradient sleeve with the original skull and brand caption. The next visible passage starts the capability catalog. On mobile, copy/actions lead and the sleeve follows.
+FIRST VIEWPORT: Floating centered pill navigation dock (`14px` top offset) hovering over an asymmetric 12-column hero bento. Left (8 cols): framed `#1B1B1B` statement plate opening directly on the full-name H1 (no eyebrow above it), inline role/location strip, biography, and primary/secondary action buttons. Right (4 cols): framed skull identity stage with circular emblem in its spectrum ring, brand caption, and integrated quick-link social footer (`GitHub`, `LinkedIn`, `About Me`, `Contact`). Below, Selected Work enters with a full-width `01` lead plate above `02` & `03` side-by-side. On mobile (`<=767px`), the floating bar spans the gutter and the bento collapses cleanly to single-column plates.
 
-FORM: Independent record-label sleeve and catalog, grounded candidate 5; direction seed 5926f20b. Raised by split-flap alignment, ASCII memorability, brick part-to-whole discipline, and lowbrow commitment to the actual artwork.
+FORM: Asymmetric Bento Monograph & Floating Navigation Dock, keeping the owner-pinned dark charcoal and cyan-magenta palette. seed: none (unavailable)
 
-Signature interaction and motion: the identity sleeve's gradient sheen travels once on arrival and sweeps again on hover; focus receives the same clear link treatment as pointer input. No continuous animation or hidden-content entrance. Reduced motion renders the sleeve static.
+Signature interaction and motion: One subtle diagonal light sheen across the Hero skull identity stage on arrival and hover, paired with a unified tactile interaction grammar across interactive links, bento bays, and project plates (`220ms cubic-bezier(.16, 1, .3, 1)`). Zero motion under `prefers-reduced-motion: reduce`.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
-
-Unresolved: no new factual copy, imagery claims, or product behavior is commissioned. Existing screenshots remain conditional on published evidence.
-
-## Clean product engineer refinement — 2026-11-11
-
-The owner requested a more modern developer presentation while keeping the current color theme, and selected the clean product engineer direction. This refines the existing world rather than replacing its identity.
-
-- Keep the full name, role, and primary work action prominent; reduce the desktop sleeve to a supporting 336px square and use a compact horizontal identity strip on mobile.
-- Use a 72px desktop / 64px mobile header, ordinary navigation links, and a fine lavender active indicator. Preserve every API-controlled destination and mobile menu behavior.
-- Keep work before the capability summary. Link project titles to their overview; compose available Home project screenshots beside the summary on desktop and above it on mobile. Missing screenshots retain the open text listing.
-- Keep View My Work primary, résumé secondary, and Contact as a tertiary text action. Use aligned, open skill links instead of individual bordered boxes.
-- Reuse the existing palette, self-hosted bilingual fonts, arrow vocabulary, focus rules, and reduced-motion behavior. Loading notices retain real status text with a small decorative progress indicator.
-- Verify Home in English and Thai from 320px to 1440px, the shared Projects and Contact paths, and keyboard, loading, recovery, and reduced-motion behavior. Capture fixtures remain review-only and create no published evidence.
-
-## Interaction refinement — 2026-11-11
-
-The owner requested boxed stack items, smaller arrows positioned next to their labels, and more useful interactions across every public page. This explicitly supersedes the open skill-row and unboxed technology-tag treatments above. Technology chips and skill tiles navigate to the existing project technology filter while the Projects destination is enabled; otherwise they remain informational. Project exploration actions sit directly below the summary instead of in a distant column. All real controls share visible hover, keyboard focus, and pressed feedback. Paragraphs and informational panels retain their reading semantics. The dark violet/cyan palette, published content, bilingual journeys, and API visibility boundaries remain authoritative.

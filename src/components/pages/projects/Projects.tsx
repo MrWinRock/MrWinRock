@@ -1,8 +1,9 @@
+import { useEffect, useRef } from 'react';
 import { ArrowIcon } from '../../ArrowIcon';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import { useProjects } from '../../../hooks/useProjects';
-import { groupProjects, localizeProject, isCompanyProject, isFeaturedProject } from '../../../lib/portfolio';
+import { featuredProjects, groupProjects, isCompanyProject, isFeaturedProject, localizeProject, projectSlug } from '../../../lib/portfolio';
 import { PublicDataNotice } from '../../PublicDataNotice';
 import { ProjectCard } from './ProjectCard';
 import { ProjectMatcher } from './ProjectMatcher';
@@ -21,10 +22,26 @@ export default function Projects() {
     }) : [];
     const records = 'data' in resource.state ? groupProjects(resource.state.data).filter(project => !isCompanyProject(project)).map(project => localizeProject({ ...project, featured: isFeaturedProject(project) }, i18n.language)) : [];
     const filtered = records.filter(project => !query || project.tech.some(tech => tech.toLowerCase().includes(query.toLowerCase())));
-    const featured = filtered.filter(project => project.featured).slice(0, 3);
+    const featured = featuredProjects(filtered);
     const primary = featured.length ? featured : filtered;
     const archive = featured.length ? filtered.filter(project => !featured.includes(project)) : [];
     const primaryTitle = t(featured.length ? 'projects.selected' : 'projects.archive');
+    const results = useRef<HTMLDivElement>(null);
+    const resultKey = filtered.map(projectSlug).join('\n');
+    const previousResults = useRef({ query, resultKey });
+
+    useEffect(() => {
+        const previous = previousResults.current;
+        previousResults.current = { query, resultKey };
+        if (previous.query === query || previous.resultKey === resultKey || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+
+        const groups = results.current?.querySelectorAll('.project-selection .work-list, .project-archive .work-list');
+        const animations = Array.from(groups ?? [], group => group.animate?.(
+            [{ opacity: 0.8, translate: '0 5px' }, { opacity: 1, translate: '0 0' }],
+            { duration: 220, easing: 'ease-out' },
+        ));
+        return () => animations.forEach(animation => animation?.cancel());
+    }, [query, resultKey]);
 
     return <div className="page-shell projects-page">
         <PageIntro title={t('projects.title')} description={t('projects.intro')} actions={records.length > 0
@@ -36,7 +53,7 @@ export default function Projects() {
                     setParams(next, { replace: true });
                 }} />
             </div> : undefined} />
-        <div className="projects-overview">
+        <div className="projects-overview" ref={results}>
             <div className="project-selection">
                 <PublicDataNotice {...resource} />
                 {!!primary.length && <section aria-label={primaryTitle}>

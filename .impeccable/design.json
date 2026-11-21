@@ -1,450 +1,216 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-11T11:00:01Z",
+  "generatedAt": "2026-11-21T21:37:00+07:00",
   "title": "Design System: MrWinRock",
   "extensions": {
     "colorMeta": {
       "background": {
         "role": "neutral",
-        "displayName": "Night Ink",
-        "canonical": "#0c0c10",
-        "tonalRamp": [
-          "oklch(15.00% 0.00845 285.38)",
-          "oklch(26.43% 0.00845 285.38)",
-          "oklch(37.86% 0.00845 285.38)",
-          "oklch(49.29% 0.00845 285.38)",
-          "oklch(60.71% 0.00845 285.38)",
-          "oklch(72.14% 0.00845 285.38)",
-          "oklch(83.57% 0.00845 285.38)",
-          "oklch(95.00% 0.00845 285.38)"
-        ]
+        "displayName": "Obsidian Ground",
+        "canonical": "#121212",
+        "tonalRamp": ["#0a0a0a", "#121212", "#1b1b1b", "#252525", "#373737", "#5c5c5c", "#9a9a9a", "#f4f4f4"]
       },
       "ink": {
         "role": "neutral",
-        "displayName": "Cool Lettering",
-        "canonical": "#f3f1f8",
-        "tonalRamp": [
-          "oklch(15.00% 0.00952 299.24)",
-          "oklch(26.43% 0.00952 299.24)",
-          "oklch(37.86% 0.00952 299.24)",
-          "oklch(49.29% 0.00952 299.24)",
-          "oklch(60.71% 0.00952 299.24)",
-          "oklch(72.14% 0.00952 299.24)",
-          "oklch(83.57% 0.00952 299.24)",
-          "oklch(95.00% 0.00952 299.24)"
-        ]
+        "displayName": "Chalk Ink",
+        "canonical": "#F4F4F4",
+        "tonalRamp": ["#121212", "#262626", "#454545", "#6e6e6e", "#9a9a9a", "#c4c4c4", "#e2e2e2", "#f4f4f4"]
       },
       "muted": {
         "role": "neutral",
-        "displayName": "Quiet Lilac Gray",
-        "canonical": "#aaa7b7",
-        "tonalRamp": [
-          "oklch(15.00% 0.02302 294.43)",
-          "oklch(26.43% 0.02302 294.43)",
-          "oklch(37.86% 0.02302 294.43)",
-          "oklch(49.29% 0.02302 294.43)",
-          "oklch(60.71% 0.02302 294.43)",
-          "oklch(72.14% 0.02302 294.43)",
-          "oklch(83.57% 0.02302 294.43)",
-          "oklch(95.00% 0.02302 294.43)"
-        ]
+        "displayName": "Silver Gray",
+        "canonical": "#B9B9B9",
+        "tonalRamp": ["#181818", "#2d2d2d", "#4a4a4a", "#6d6d6d", "#929292", "#b9b9b9", "#d8d8d8", "#f2f2f2"]
       },
       "surface": {
         "role": "neutral",
-        "displayName": "Catalog Surface",
-        "canonical": "#151419",
-        "tonalRamp": [
-          "oklch(15.00% 0.01006 294.62)",
-          "oklch(26.43% 0.01006 294.62)",
-          "oklch(37.86% 0.01006 294.62)",
-          "oklch(49.29% 0.01006 294.62)",
-          "oklch(60.71% 0.01006 294.62)",
-          "oklch(72.14% 0.01006 294.62)",
-          "oklch(83.57% 0.01006 294.62)",
-          "oklch(95.00% 0.01006 294.62)"
-        ]
+        "displayName": "Charcoal Plate",
+        "canonical": "#1B1B1B",
+        "tonalRamp": ["#0e0e0e", "#1b1b1b", "#252525", "#373737", "#525252", "#777777", "#b0b0b0", "#ebebeb"]
       },
       "surface-elevated": {
         "role": "neutral",
-        "displayName": "Raised Ink",
-        "canonical": "#1c1b23",
-        "tonalRamp": [
-          "oklch(15.00% 0.01542 290.85)",
-          "oklch(26.43% 0.01542 290.85)",
-          "oklch(37.86% 0.01542 290.85)",
-          "oklch(49.29% 0.01542 290.85)",
-          "oklch(60.71% 0.01542 290.85)",
-          "oklch(72.14% 0.01542 290.85)",
-          "oklch(83.57% 0.01542 290.85)",
-          "oklch(95.00% 0.01542 290.85)"
-        ]
+        "displayName": "Graphite Lift",
+        "canonical": "#252525",
+        "tonalRamp": ["#101010", "#1b1b1b", "#252525", "#373737", "#555555", "#7d7d7d", "#b5b5b5", "#ededed"]
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Recessed Ink",
+        "canonical": "#0E0E0E",
+        "tonalRamp": ["#080808", "#0e0e0e", "#181818", "#262626", "#3b3b3b", "#616161", "#9b9b9b", "#e8e8e8"]
       },
       "border": {
         "role": "neutral",
-        "displayName": "Fine Rule",
-        "canonical": "#302e39",
-        "tonalRamp": [
-          "oklch(15.00% 0.01972 293.54)",
-          "oklch(26.43% 0.01972 293.54)",
-          "oklch(37.86% 0.01972 293.54)",
-          "oklch(49.29% 0.01972 293.54)",
-          "oklch(60.71% 0.01972 293.54)",
-          "oklch(72.14% 0.01972 293.54)",
-          "oklch(83.57% 0.01972 293.54)",
-          "oklch(95.00% 0.01972 293.54)"
-        ]
+        "displayName": "Hairline Rule",
+        "canonical": "#373737",
+        "tonalRamp": ["#141414", "#242424", "#373737", "#515151", "#777777", "#9f9f9f", "#cccccc", "#efefef"]
       },
       "border-strong": {
         "role": "neutral",
-        "displayName": "Control Rule",
-        "canonical": "#514d60",
-        "tonalRamp": [
-          "oklch(15.00% 0.03138 294.70)",
-          "oklch(26.43% 0.03138 294.70)",
-          "oklch(37.86% 0.03138 294.70)",
-          "oklch(49.29% 0.03138 294.70)",
-          "oklch(60.71% 0.03138 294.70)",
-          "oklch(72.14% 0.03138 294.70)",
-          "oklch(83.57% 0.03138 294.70)",
-          "oklch(95.00% 0.03138 294.70)"
-        ]
+        "displayName": "Strong Rule",
+        "canonical": "#777777",
+        "tonalRamp": ["#191919", "#2e2e2e", "#4b4b4b", "#777777", "#969696", "#b6b6b6", "#d6d6d6", "#f0f0f0"]
       },
       "brand-ink": {
         "role": "primary",
-        "displayName": "Sleeve Lavender",
-        "canonical": "#c6b5ff",
-        "tonalRamp": [
-          "oklch(15.00% 0.10417 294.51)",
-          "oklch(26.43% 0.10417 294.51)",
-          "oklch(37.86% 0.10417 294.51)",
-          "oklch(49.29% 0.10417 294.51)",
-          "oklch(60.71% 0.10417 294.51)",
-          "oklch(72.14% 0.10417 294.51)",
-          "oklch(83.57% 0.10417 294.51)",
-          "oklch(95.00% 0.10417 294.51)"
-        ]
+        "displayName": "Mint Cyan",
+        "canonical": "#A6EEEB",
+        "tonalRamp": ["#0d2928", "#164442", "#226562", "#358d88", "#57b8b3", "#81d8d4", "#a6eeeb", "#e3fbfa"]
       },
       "brand-cyan": {
         "role": "primary",
-        "displayName": "Ice Cyan",
-        "canonical": "#a0e8ee",
-        "tonalRamp": [
-          "oklch(15.00% 0.07180 202.53)",
-          "oklch(26.43% 0.07180 202.53)",
-          "oklch(37.86% 0.07180 202.53)",
-          "oklch(49.29% 0.07180 202.53)",
-          "oklch(60.71% 0.07180 202.53)",
-          "oklch(72.14% 0.07180 202.53)",
-          "oklch(83.57% 0.07180 202.53)",
-          "oklch(95.00% 0.07180 202.53)"
-        ]
+        "displayName": "Electric Cyan",
+        "canonical": "#33FFFF",
+        "tonalRamp": ["#082b2b", "#0d4a4a", "#126f6f", "#189b9b", "#1fc9c9", "#33ffff", "#8effff", "#dcffff"]
       },
-      "control-ink": {
-        "role": "neutral",
-        "displayName": "Control Ink",
-        "canonical": "#14101f",
-        "tonalRamp": [
-          "oklch(15.00% 0.03049 295.55)",
-          "oklch(26.43% 0.03049 295.55)",
-          "oklch(37.86% 0.03049 295.55)",
-          "oklch(49.29% 0.03049 295.55)",
-          "oklch(60.71% 0.03049 295.55)",
-          "oklch(72.14% 0.03049 295.55)",
-          "oklch(83.57% 0.03049 295.55)",
-          "oklch(95.00% 0.03049 295.55)"
-        ]
+      "brand-magenta": {
+        "role": "secondary",
+        "displayName": "Electric Magenta",
+        "canonical": "#CB4EFF",
+        "tonalRamp": ["#280f36", "#46185f", "#6a2291", "#922ec7", "#b23ef0", "#cb4eff", "#e19bff", "#f5deff"]
       },
       "primary-hover": {
-        "role": "neutral",
-        "displayName": "Primary Hover",
-        "canonical": "#ded3ff",
-        "tonalRamp": [
-          "oklch(15.00% 0.06090 296.60)",
-          "oklch(26.43% 0.06090 296.60)",
-          "oklch(37.86% 0.06090 296.60)",
-          "oklch(49.29% 0.06090 296.60)",
-          "oklch(60.71% 0.06090 296.60)",
-          "oklch(72.14% 0.06090 296.60)",
-          "oklch(83.57% 0.06090 296.60)",
-          "oklch(95.00% 0.06090 296.60)"
-        ]
+        "role": "primary",
+        "displayName": "Ice Mint",
+        "canonical": "#D9FAF7",
+        "tonalRamp": ["#142c2a", "#224a47", "#366f6b", "#519994", "#77c2bc", "#a6e0db", "#d9faf7", "#f2fefd"]
       },
-      "field-background": {
+      "status-error": {
         "role": "neutral",
-        "displayName": "Field Background",
-        "canonical": "#0e0d12",
-        "tonalRamp": [
-          "oklch(15.00% 0.01053 294.37)",
-          "oklch(26.43% 0.01053 294.37)",
-          "oklch(37.86% 0.01053 294.37)",
-          "oklch(49.29% 0.01053 294.37)",
-          "oklch(60.71% 0.01053 294.37)",
-          "oklch(72.14% 0.01053 294.37)",
-          "oklch(83.57% 0.01053 294.37)",
-          "oklch(95.00% 0.01053 294.37)"
-        ]
+        "displayName": "Rose Error",
+        "canonical": "#F4A4BB",
+        "tonalRamp": ["#32131d", "#562032", "#7e314b", "#a94868", "#cf6789", "#e786a5", "#f4a4bb", "#fce1e9"]
       },
-      "placeholder": {
+      "status-success": {
         "role": "neutral",
-        "displayName": "Placeholder",
-        "canonical": "#9d97ac",
-        "tonalRamp": [
-          "oklch(15.00% 0.03113 298.63)",
-          "oklch(26.43% 0.03113 298.63)",
-          "oklch(37.86% 0.03113 298.63)",
-          "oklch(49.29% 0.03113 298.63)",
-          "oklch(60.71% 0.03113 298.63)",
-          "oklch(72.14% 0.03113 298.63)",
-          "oklch(83.57% 0.03113 298.63)",
-          "oklch(95.00% 0.03113 298.63)"
-        ]
-      },
-      "error": {
-        "role": "neutral",
-        "displayName": "Error",
-        "canonical": "#f4a4bb",
-        "tonalRamp": [
-          "oklch(15.00% 0.09842 0.81)",
-          "oklch(26.43% 0.09842 0.81)",
-          "oklch(37.86% 0.09842 0.81)",
-          "oklch(49.29% 0.09842 0.81)",
-          "oklch(60.71% 0.09842 0.81)",
-          "oklch(72.14% 0.09842 0.81)",
-          "oklch(83.57% 0.09842 0.81)",
-          "oklch(95.00% 0.09842 0.81)"
-        ]
-      },
-      "project-hover": {
-        "role": "neutral",
-        "displayName": "Project Hover",
-        "canonical": "#1c1726",
-        "tonalRamp": [
-          "oklch(15.00% 0.02968 299.24)",
-          "oklch(26.43% 0.02968 299.24)",
-          "oklch(37.86% 0.02968 299.24)",
-          "oklch(49.29% 0.02968 299.24)",
-          "oklch(60.71% 0.02968 299.24)",
-          "oklch(72.14% 0.02968 299.24)",
-          "oklch(83.57% 0.02968 299.24)",
-          "oklch(95.00% 0.02968 299.24)"
-        ]
+        "displayName": "Mint Success",
+        "canonical": "#A1E2BC",
+        "tonalRamp": ["#102b1b", "#1b4a2f", "#296e46", "#3d9662", "#5cbd84", "#7ed2a1", "#a1e2bc", "#dff6e8"]
       }
     },
     "typographyMeta": {
-      "display": {
-        "displayName": "Display",
-        "purpose": "First-name hero treatment; responsive overrides are documented in DESIGN.md."
-      },
-      "headline": {
-        "displayName": "Headline",
-        "purpose": "Fluid section headings."
-      },
-      "title": {
-        "displayName": "Title",
-        "purpose": "Standard project titles."
-      },
-      "body": {
-        "displayName": "Body",
-        "purpose": "English and Thai reading default."
-      },
-      "label": {
-        "displayName": "Label",
-        "purpose": "Primary and secondary control text."
-      },
-      "support": {
-        "displayName": "Supporting Copy",
-        "purpose": "Shared --support-size for capability descriptions, hero social links, and the tertiary action."
-      }
+      "display": { "displayName": "Display", "purpose": "Hero full-name heading inside the 8-column bento statement plate." },
+      "headline": { "displayName": "Headline", "purpose": "Open interior route titles and Home section headings." },
+      "title": { "displayName": "Title", "purpose": "Lead and paired showcase project titles." },
+      "body": { "displayName": "Body", "purpose": "Bilingual EN/TH reading paragraphs." },
+      "label": { "displayName": "Label", "purpose": "Buttons, floating dock links, and form labels." },
+      "support": { "displayName": "Support", "purpose": "Metadata, descriptions, and quick links." }
     },
     "shadows": [
-      {
-        "name": "skull-artwork",
-        "value": "0 24px 42px -22px #21113b70",
-        "purpose": "Original skull inside the identity sleeve only."
-      }
+      { "name": "dock-shadow", "value": "0 18px 42px -16px rgba(0, 0, 0, .82)", "purpose": "Depth beneath the floating centered pill navigation dock and mobile drawer." },
+      { "name": "plate-shadow", "value": "0 20px 44px -26px rgba(0, 0, 0, .72)", "purpose": "Grounded ambient depth beneath primary bento plates." },
+      { "name": "signature-shadow", "value": "0 22px 42px -18px rgba(0, 0, 0, .82)", "purpose": "Depth beneath the circular MrWinRock skull emblem." }
     ],
     "motion": [
-      {
-        "name": "ease-sleeve",
-        "value": "cubic-bezier(.16, 1, .3, 1)",
-        "purpose": "Identity sheen and compact action-arrow movement."
-      },
-      {
-        "name": "sleeve-arrival",
-        "value": "1.8s",
-        "purpose": "One sleeve-sheen animation on arrival."
-      },
-      {
-        "name": "sleeve-hover",
-        "value": "1s",
-        "purpose": "Sleeve sheen transition on hover."
-      },
-      {
-        "name": "arrow-shift",
-        "value": ".2s",
-        "purpose": "Translate primary, project-detail, skill, capability, direct-contact, and secondary-action arrows by 1px -1px on hover and keyboard focus."
-      },
-      {
-        "name": "control-state",
-        "value": ".2s",
-        "purpose": "Control background, border, text, and supported pressed-state transitions."
-      },
-      {
-        "name": "reduced-motion",
-        "value": "none",
-        "purpose": "Under prefers-reduced-motion: reduce, disable animation and transitions and use automatic scrolling."
-      }
+      { "name": "ease-out-expo", "value": "cubic-bezier(.16, 1, .3, 1)", "purpose": "Shared exponential ease-out curve across controls, menu, sheen, and routes." },
+      { "name": "control-duration", "value": "220ms", "purpose": "Interactive hover, border illumination, arrow nudge, and active press." },
+      { "name": "menu-duration", "value": "340ms", "purpose": "Mobile drawer grid-row reveal and backdrop opacity." },
+      { "name": "page-duration", "value": "420ms", "purpose": "Subtle route arrival from already-visible opacity." }
     ],
     "breakpoints": [
-      {
-        "name": "compact-hero-max",
-        "value": "1100px"
-      },
-      {
-        "name": "tablet-max",
-        "value": "1023px"
-      },
-      {
-        "name": "mobile-max",
-        "value": "767px"
-      },
-      {
-        "name": "skill-single-column-max",
-        "value": "479px"
-      },
-      {
-        "name": "narrow-max",
-        "value": "359px"
-      },
-      {
-        "name": "desktop-navigation-min",
-        "value": "1024px"
-      },
-      {
-        "name": "wide-navigation-gap-min",
-        "value": "1280px"
-      }
+      { "name": "xs", "value": "359px" },
+      { "name": "sm", "value": "479px" },
+      { "name": "md", "value": "767px" },
+      { "name": "lg", "value": "1023px" },
+      { "name": "xl", "value": "1200px" }
     ]
   },
   "components": [
     {
-      "name": "Primary Action",
-      "kind": "button",
-      "refersTo": "hero-primary",
-      "description": "Home primary work action, with a 52px minimum height. Source: src/index.css hero-actions and controls; src/components/pages/home/Home.tsx; SVG: src/components/ArrowIcon.tsx.",
-      "html": "<a class=\"ds-primary\" href=\"#work\">View work <svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a>",
-      "css": ".ds-primary{font-family:'Noto Sans Thai',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:var(--control-gap,8px);min-height:52px;padding:12px 24px;border-radius:var(--radius,8px);border:1px solid transparent;font-size:.875rem;font-weight:600;line-height:1.5;text-decoration:none;transition:background-color .2s,border-color .2s,color .2s,translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1));color:#14101f;background:var(--brand-gradient,linear-gradient(115deg,#a48aff 0%,#d6a5f6 45%,#a0e8ee 100%))}.ds-primary:is(:hover,:focus-visible){background:#ded3ff}.ds-primary:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-primary:active{translate:0 1px}.ds-arrow{display:inline-block;flex:0 0 auto;width:var(--icon-size,14px);height:var(--icon-size,14px);vertical-align:middle}@media(max-width:1100px){.ds-primary{padding-inline:14px;font-size:.8rem}}@media(max-width:767px){.ds-primary{padding-inline:16px}}@media(prefers-reduced-motion:no-preference){.ds-primary .ds-arrow{transition:translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1))}.ds-primary:is(:hover,:focus-visible) .ds-arrow{translate:1px -1px}}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+      "name": "Floating Pill Navigation Dock",
+      "kind": "nav",
+      "refersTo": "navigation-dock",
+      "description": "Centered floating obsidian pill dock with brand mark, hairline divider, active spectrum bar, and language button.",
+      "html": "<nav class=\"ds-dock\"><span class=\"ds-brand\">mrwinrock<span>.</span></span><span class=\"ds-sep\"></span><a class=\"ds-pill\" aria-current=\"page\" href=\"#\">Home</a><a class=\"ds-pill\" href=\"#\">Projects</a><a class=\"ds-pill\" href=\"#\">Skills</a><button class=\"ds-lang\" type=\"button\">TH</button></nav>",
+      "css": ".ds-dock { display: inline-flex; align-items: center; gap: 6px; padding: 6px 8px 6px 14px; background: #1B1B1B; border: 1px solid #373737; border-radius: 999px; box-shadow: 0 18px 42px -16px rgba(0,0,0,.82); } .ds-brand { font: 620 .98rem/1 Sora, sans-serif; color: #F4F4F4; letter-spacing: -.035em; } .ds-brand span { color: #33FFFF; } .ds-sep { width: 1px; height: 22px; background: #373737; margin-inline: 4px; } .ds-pill { position: relative; display: inline-flex; align-items: center; min-height: 38px; padding: 6px 13px; border-radius: 999px; color: #B9B9B9; text-decoration: none; font: 500 .85rem/1.4 'Noto Sans Thai', sans-serif; transition: color 220ms, background-color 220ms; } .ds-pill:hover, .ds-pill[aria-current=page] { color: #F4F4F4; background: #252525; } .ds-pill[aria-current=page]::after { content: ''; position: absolute; inset-inline: 14px; bottom: 4px; height: 2px; border-radius: 99px; background: linear-gradient(90deg, #33FFFF, #CB4EFF); } .ds-lang { width: 38px; height: 38px; border-radius: 999px; border: 1px solid #373737; background: #0E0E0E; color: #F4F4F4; font: 600 .75rem/1 'Noto Sans Thai', sans-serif; cursor: pointer; } .ds-lang:hover { border-color: #A6EEEB; color: #A6EEEB; }"
     },
     {
-      "name": "Secondary Action",
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "High-contrast chalk-white primary CTA with diagonal arrow nudge.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">View My Work <svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 10px 20px; border: 1px solid transparent; border-radius: 10px; background: #F4F4F4; color: #121212; font: 600 .875rem/1.4 'Noto Sans Thai', sans-serif; cursor: pointer; transition: background-color 220ms, translate 220ms cubic-bezier(.16, 1, .3, 1); } .ds-btn-primary:is(:hover, :focus-visible) { background: #D9FAF7; outline: 2px solid #33FFFF; outline-offset: 4px; } .ds-btn-primary:active { translate: 0 2px; }"
+    },
+    {
+      "name": "Secondary Button",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "Outlined actions for Home resume download and enabled contextual destinations on About; the resume new-tab action uses the shared compact arrow. Source: src/index.css controls and hero-actions; src/components/ResumeDownloadButton.tsx; src/components/pages/about/About.tsx; src/components/pages/resume/Resume.tsx.",
-      "html": "<button class=\"ds-secondary\" type=\"button\">Download Résumé</button>",
-      "css": ".ds-secondary{font-family:'Noto Sans Thai',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:var(--control-gap,8px);min-height:48px;padding:12px 16px;border-radius:var(--radius,8px);border:1px solid var(--border-strong,#514d60);font-size:.875rem;font-weight:600;line-height:1.5;text-decoration:none;transition:background-color .2s,border-color .2s,color .2s,translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1));color:var(--ink,#f3f1f8);background:transparent;cursor:pointer}.ds-secondary:is(:hover,:focus-visible){border-color:var(--brand-ink,#c6b5ff);background:#221d2e}.ds-secondary:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-secondary:active:not(:disabled){translate:0 1px}.ds-secondary:disabled{opacity:.55;cursor:not-allowed}@media(max-width:1100px){.ds-secondary{padding-inline:14px;font-size:.8rem}}@media(max-width:767px){.ds-secondary{padding-inline:16px}}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+      "description": "Graphite-lift secondary control shifting to mint-cyan border on hover.",
+      "html": "<button class=\"ds-btn-secondary\" type=\"button\">Download Resume</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 10px 20px; border: 1px solid #777777; border-radius: 10px; background: #252525; color: #F4F4F4; font: 600 .875rem/1.4 'Noto Sans Thai', sans-serif; cursor: pointer; transition: background-color 220ms, border-color 220ms, color 220ms, translate 220ms cubic-bezier(.16, 1, .3, 1); } .ds-btn-secondary:is(:hover, :focus-visible) { background: #1B1B1B; border-color: #A6EEEB; color: #A6EEEB; } .ds-btn-secondary:active { translate: 0 2px; }"
     },
     {
-      "name": "Tertiary Contact Action",
-      "kind": "button",
-      "refersTo": "button-tertiary",
-      "description": "Home text contact action beneath the primary work hierarchy. Source: src/components/pages/home/Home.tsx; src/index.css text-action rules.",
-      "html": "<a class=\"ds-text-action\" href=\"#contact\">Contact <svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a>",
-      "css": ".ds-text-action{font-family:'Noto Sans Thai',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:var(--control-gap,8px);min-height:48px;padding:10px 12px;border-radius:var(--radius,8px);color:var(--muted,#aaa7b7);font-size:var(--support-size,.875rem);font-weight:500;text-decoration:none;transition:background-color .2s,color .2s}.ds-text-action:is(:hover,:focus-visible){color:var(--ink,#f3f1f8);background:var(--surface-elevated,#1c1b23)}.ds-text-action:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-text-action:active{translate:0 1px}.ds-arrow{display:inline-block;flex:0 0 auto;width:var(--icon-size,14px);height:var(--icon-size,14px);vertical-align:middle}@media(prefers-reduced-motion:reduce){.ds-text-action{transition:none}}"
-    },
-    {
-      "name": "Boxed Skill Evidence",
-      "kind": "custom",
-      "refersTo": "skill-evidence",
-      "description": "Home skills use boxed controls in three columns, two on mobile, and one below 360px. Skills tiles use four columns, three below 1024px, two below 768px, and one below 480px. Both link to the corresponding technology filter only when Projects is enabled; otherwise they are informational. Source: src/components/pages/home/Home.tsx; src/components/pages/skills/Skills.tsx; src/index.css developer-stack and skill rules.",
-      "html": "<div class=\"ds-stack\"><a class=\"ds-skill\" href=\"#projects-typescript\">TypeScript <svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a><a class=\"ds-skill\" href=\"#projects-react\">React <svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a><span class=\"ds-skill\">Node.js</span></div><div class=\"ds-skill-grid\"><a class=\"ds-skill-tile\" href=\"#projects-typescript\"><span>TypeScript</span><svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a><a class=\"ds-skill-tile\" href=\"#projects-react\"><span>React</span><svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a></div>",
-      "css": ".ds-stack,.ds-skill-grid{font-family:'Noto Sans Thai',sans-serif;display:grid;gap:12px}.ds-stack{grid-template-columns:repeat(3,minmax(0,1fr))}.ds-skill{display:inline-flex;align-items:center;gap:12px;min-height:64px;padding:16px 18px;border:1px solid var(--border-strong,#514d60);border-radius:var(--radius,8px);background:var(--surface,#151419);font-size:1rem;color:var(--ink,#f3f1f8);text-decoration:none;transition:background-color .2s,border-color .2s,color .2s}.ds-skill-grid{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:12px}.ds-skill-tile{display:flex;align-items:center;gap:10px;min-width:0;min-height:72px;padding:16px;border:1px solid var(--border-strong,#514d60);border-radius:var(--radius,8px);background:var(--surface,#151419);color:var(--ink,#f3f1f8);font-size:.875rem;font-weight:600;text-decoration:none;transition:background-color .2s,border-color .2s,color .2s}.ds-skill-tile span{min-width:0;overflow-wrap:anywhere}a.ds-skill:is(:hover,:focus-visible),a.ds-skill-tile:is(:hover,:focus-visible){color:var(--brand-ink,#c6b5ff);border-color:var(--brand-ink,#c6b5ff);background:var(--surface-elevated,#1c1b23)}a.ds-skill:focus-visible,a.ds-skill-tile:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}a.ds-skill:active,a.ds-skill-tile:active{translate:0 1px}.ds-skill .ds-arrow,.ds-skill-tile .ds-arrow{color:var(--brand-ink,#c6b5ff)}.ds-arrow{display:inline-block;flex:0 0 auto;width:var(--icon-size,14px);height:var(--icon-size,14px);vertical-align:middle}@media(max-width:1023px){.ds-skill-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:767px){.ds-stack,.ds-skill-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ds-skill{font-size:.875rem;gap:8px}.ds-skill-tile{padding:14px;font-size:.8rem}}@media(max-width:479px){.ds-skill-grid{grid-template-columns:1fr}}@media(max-width:359px){.ds-stack{grid-template-columns:1fr}}@media(prefers-reduced-motion:no-preference){a.ds-skill .ds-arrow,a.ds-skill-tile .ds-arrow{transition:translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1))}a.ds-skill:is(:hover,:focus-visible) .ds-arrow,a.ds-skill-tile:is(:hover,:focus-visible) .ds-arrow{translate:1px -1px}}@media(prefers-reduced-motion:reduce){.ds-skill,.ds-skill-tile{transition:none}}"
-    },
-    {
-      "name": "Reading Field",
+      "name": "Recessed Input Field",
       "kind": "input",
       "refersTo": "input",
-      "description": "Contact/search input. Source: src/index.css search-field and contact-field rules.",
-      "html": "<input class=\"ds-field\" aria-label=\"Message\" placeholder=\"Your message\" />",
-      "css": ".ds-field{font-family:'Noto Sans Thai',sans-serif;display:block;width:100%;min-height:50px;padding:13px 16px;background:#0e0d12;color:var(--ink,#f3f1f8);border:1px solid var(--border-strong,#514d60);border-radius:8px;line-height:1.7;caret-color:var(--brand-ink,#c6b5ff)}.ds-field::placeholder{color:#9d97ac;opacity:1}.ds-field:focus,.ds-field:focus-visible{outline:2px solid var(--brand-ink,#c6b5ff);outline-offset:2px}.ds-field[aria-invalid=true]{border-color:#f4a4bb}"
+      "description": "Inset dark input field with high-contrast placeholder and cyan focus outline.",
+      "html": "<input class=\"ds-input\" type=\"search\" placeholder=\"e.g. TypeScript\" aria-label=\"Filter by technology\" />",
+      "css": ".ds-input { width: 100%; max-width: 320px; min-height: 48px; padding: 12px 16px; border: 1px solid #373737; border-radius: 10px; background: #0E0E0E; color: #F4F4F4; caret-color: #33FFFF; font: 400 1rem/1.6 'Noto Sans Thai', sans-serif; } .ds-input::placeholder { color: #B9B9B9; opacity: 1; } .ds-input:hover { border-color: #777777; } .ds-input:focus { border-color: #33FFFF; outline: 2px solid #33FFFF; outline-offset: 2px; }"
     },
     {
-      "name": "Catalog Navigation",
-      "kind": "nav",
-      "refersTo": "navigation-link",
-      "description": "Active and resting navigation links. Source: src/components/Navbar.tsx; src/index.css navigation rules.",
-      "html": "<nav class=\"ds-nav\" aria-label=\"Preview navigation\"><a class=\"ds-nav-link\" href=\"#home\" aria-current=\"page\">Home</a><a class=\"ds-nav-link\" href=\"#projects\">Projects</a><a class=\"ds-nav-link\" href=\"#contact\">Contact</a></nav>",
-      "css": ".ds-nav{font-family:'Noto Sans Thai',sans-serif;display:flex;align-items:center;gap:4px;min-height:var(--header-height,72px);padding:10px;background:#0c0c10;border-bottom:1px solid var(--border,#302e39)}.ds-nav-link{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:8px 10px;font-size:.8125rem;line-height:1.75;color:var(--muted,#aaa7b7);border-radius:6px;text-decoration:none;transition:color .2s,background-color .2s}.ds-nav-link:hover{color:var(--ink,#f3f1f8);background:var(--surface,#151419)}.ds-nav-link[aria-current=page]{color:var(--brand-ink,#c6b5ff)}.ds-nav-link[aria-current=page]::after{content:'';position:absolute;bottom:2px;left:10px;right:10px;height:2px;border-radius:2px;background:var(--brand-ink,#c6b5ff)}.ds-nav-link:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}@media(max-width:767px){.ds-nav{min-height:var(--header-height,64px)}}@media(prefers-reduced-motion:reduce){.ds-nav-link{transition:none}}"
-    },
-    {
-      "name": "Technology Tags",
+      "name": "Technology Chip",
       "kind": "chip",
       "refersTo": "technology-tag",
-      "description": "Shared boxed technology chips for project cards, project details, and Experience. Deduplicated labels link to project technology filters only when Projects is enabled; otherwise they are informational. Source: src/components/TechnologyTags.tsx; src/index.css tech-list and tech-chip rules.",
-      "html": "<ul class=\"ds-tags\" aria-label=\"Technologies\"><li class=\"ds-tag\"><a class=\"ds-chip\" href=\"#projects-typescript\">TypeScript</a></li><li class=\"ds-tag\"><a class=\"ds-chip\" href=\"#projects-react\">React</a></li><li class=\"ds-tag\"><span class=\"ds-chip\">Node.js</span></li></ul>",
-      "css": ".ds-tags{font-family:'Noto Sans Thai',sans-serif;display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}.ds-tag{display:inline-flex;min-width:0}.ds-chip{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:6px 12px;border:1px solid var(--border-strong,#514d60);border-radius:var(--radius,8px);color:var(--brand-ink,#c6b5ff);background:var(--surface-elevated,#1c1b23);font-size:.8125rem;line-height:1.5;overflow-wrap:anywhere;text-decoration:none;transition:color .2s,background-color .2s,border-color .2s,translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1))}a.ds-chip:is(:hover,:focus-visible){color:var(--ink,#f3f1f8);border-color:var(--brand-ink,#c6b5ff);background:#241c32}a.ds-chip:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}a.ds-chip:active{translate:0 1px}@media(prefers-reduced-motion:reduce){.ds-chip{transition:none}}"
+      "description": "Recessed stack chip linking to the project technology filter.",
+      "html": "<a class=\"ds-chip\" href=\"#\">TypeScript</a>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; min-height: 34px; padding: 5px 11px; border: 1px solid #373737; border-radius: 8px; background: #0E0E0E; color: #B9B9B9; text-decoration: none; font: 500 .8125rem/1.4 'Noto Sans Thai', sans-serif; transition: color 220ms, border-color 220ms, background-color 220ms; } .ds-chip:is(:hover, :focus-visible) { color: #A6EEEB; border-color: #A6EEEB; background: #252525; }"
     },
     {
-      "name": "Open Project Row",
+      "name": "Indexed Bento Project Plate",
       "kind": "card",
-      "refersTo": "project-row",
-      "description": "Open catalog listing with a linked title, boxed technology filters, and compact exploration actions directly below the summary. Optional Home covers open the detail and sit beside the summary on desktop, above it on mobile; this preview has no cover. Source: src/components/pages/projects/ProjectCard.tsx; src/components/TechnologyTags.tsx; src/index.css project-card rules; SVG: src/components/ArrowIcon.tsx.",
-      "html": "<article class=\"ds-project\"><div class=\"ds-project-body\"><div class=\"ds-project-info\"><div class=\"ds-summary\"><h3 class=\"ds-project-title\"><a class=\"ds-title-link\" href=\"#project\">Project title</a></h3><p class=\"ds-project-copy\">Published project description.</p><ul class=\"ds-project-tags\" aria-label=\"Technologies\"><li><a class=\"ds-project-chip\" href=\"#projects-typescript\">TypeScript</a></li></ul></div><div class=\"ds-project-links\"><a class=\"ds-detail\" href=\"#project\">View details <svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a></div></div></div></article>",
-      "css": ".ds-project{font-family:'Noto Sans Thai',sans-serif;display:grid;padding:32px 0;background:transparent;border-block:1px solid var(--border,#302e39)}.ds-project-body{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:start}.ds-project:hover,.ds-project:focus-within{background:#1c1726}.ds-project-info{display:grid;gap:24px;min-width:0}.ds-summary{min-width:0}.ds-project-title{font-family:var(--font-display,Sora,'Noto Sans Thai',sans-serif);font-size:1.65rem;font-weight:500;line-height:1.25;color:var(--ink,#f3f1f8);margin:0 0 12px}.ds-title-link{color:inherit;text-decoration:none;text-decoration-thickness:1px;text-underline-offset:.2em}.ds-title-link:is(:hover,:focus-visible){color:var(--brand-ink,#c6b5ff);text-decoration-line:underline}.ds-project-copy{max-width:68ch;color:var(--muted,#aaa7b7);line-height:1.85;font-size:.95rem;margin:0 0 18px}.ds-project-tags{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}.ds-project-chip{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:6px 12px;border:1px solid var(--border-strong,#514d60);border-radius:var(--radius,8px);color:var(--brand-ink,#c6b5ff);background:var(--surface-elevated,#1c1b23);font-size:.8125rem;line-height:1.5;text-decoration:none;transition:color .2s,background-color .2s,border-color .2s}.ds-project-chip:is(:hover,:focus-visible){color:var(--ink,#f3f1f8);border-color:var(--brand-ink,#c6b5ff);background:#241c32}.ds-project-links{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.ds-detail{display:inline-flex;align-items:center;justify-content:center;gap:var(--control-gap,8px);width:fit-content;min-height:44px;padding:10px 14px;border:1px solid var(--border-strong,#514d60);border-radius:var(--radius,8px);background:var(--brand-wash,linear-gradient(120deg,#231b39,#18292e));font-size:.85rem;font-weight:600;color:var(--brand-ink,#c6b5ff);text-decoration:none;transition:color .2s,background-color .2s,border-color .2s}.ds-detail:is(:hover,:focus-visible){color:var(--ink,#f3f1f8);border-color:var(--brand-ink,#c6b5ff);background:var(--surface-elevated,#1c1b23)}.ds-detail:active,.ds-project-chip:active{translate:0 1px}.ds-detail:focus-visible,.ds-title-link:focus-visible,.ds-project-chip:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-arrow{display:inline-block;flex:0 0 auto;width:var(--icon-size,14px);height:var(--icon-size,14px);vertical-align:middle}.ds-showcase{padding:36px 0;transition:background-color .22s}.ds-showcase .ds-project-title{font-size:2rem}.ds-showcase.ds-with-cover .ds-project-body{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:24px 56px;align-items:start}.ds-showcase.ds-with-cover .ds-project-info{align-self:center}.ds-showcase.ds-with-cover .ds-cover-link{display:block;grid-column:2;align-self:center;border-radius:12px;overflow:hidden;background:var(--surface,#151419)}.ds-cover-link:is(:hover,:focus-visible){outline:2px solid var(--brand-ink,#c6b5ff);outline-offset:4px}.ds-cover{display:block;width:100%;max-height:380px;object-fit:contain;object-position:left;border-radius:12px}@media(max-width:767px){.ds-project,.ds-showcase{padding:28px 0}.ds-project-body{grid-template-columns:1fr;gap:20px}.ds-project-links{gap:8px}.ds-detail{max-width:250px}.ds-showcase .ds-project-title{font-size:1.7rem}.ds-project-copy{font-size:.9rem}.ds-showcase.ds-with-cover .ds-project-body{grid-template-columns:1fr;gap:24px}.ds-showcase.ds-with-cover .ds-project-info,.ds-showcase.ds-with-cover .ds-cover-link{grid-column:1;grid-row:auto}.ds-showcase.ds-with-cover .ds-cover-link{order:-1;width:100%}.ds-cover{max-height:320px}}@media(prefers-reduced-motion:no-preference){.ds-detail .ds-arrow{transition:translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1))}.ds-detail:is(:hover,:focus-visible) .ds-arrow{translate:1px -1px}}@media(prefers-reduced-motion:reduce){.ds-showcase,.ds-detail,.ds-project-chip{transition:none}}"
+      "refersTo": "project-card",
+      "description": "Framed charcoal project bento plate with tabular index badge and full-perimeter 1.5px cyan-to-magenta hover border ring.",
+      "html": "<article class=\"ds-project\"><div class=\"ds-project-head\"><span class=\"ds-index\">01</span><h3>MrWinRock</h3></div><p>A bilingual developer portfolio for exploring web, mobile, and API projects.</p></article>",
+      "css": ".ds-project { position: relative; padding: 28px; background: #1B1B1B; border: 1px solid #373737; border-radius: 22px; color: #F4F4F4; transition: border-color 220ms, background-color 220ms; } .ds-project::after { content: ''; position: absolute; inset: -1px; padding: 1.5px; border-radius: inherit; background: linear-gradient(135deg, #33FFFF, #CB4EFF); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: exclude; opacity: 0; pointer-events: none; transition: opacity 220ms cubic-bezier(.16, 1, .3, 1); } .ds-project:hover { border-color: transparent; background: #202020; } .ds-project:hover::after { opacity: .88; } .ds-project-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; } .ds-index { padding: 2px 8px; border-radius: 6px; border: 1px solid #373737; background: #0E0E0E; color: #A6EEEB; font: 600 .82rem/1.4 Sora, sans-serif; font-variant-numeric: tabular-nums; } .ds-project h3 { margin: 0; font: 600 1.48rem/1.2 Sora, sans-serif; } .ds-project p { margin: 0; color: #B9B9B9; font: 400 .93rem/1.78 'Noto Sans Thai', sans-serif; }"
     },
     {
-      "name": "Evidence Panel",
+      "name": "Standalone Skill Tile",
       "kind": "card",
-      "refersTo": "evidence-panel",
-      "description": "Enclosed reading container used where evidence needs grouping. Source: src/index.css surface-panel and evidence-panel rules.",
-      "html": "<section class=\"ds-panel\"><h2 class=\"ds-panel-title\">Project evidence</h2><p class=\"ds-panel-copy\">Available technical decisions and contribution details appear here.</p></section>",
-      "css": ".ds-panel{font-family:'Noto Sans Thai',sans-serif;position:relative;padding:32px;border:1px solid var(--border,#302e39);border-radius:16px;background:var(--surface,#151419);min-width:0;transition:border-color .2s}.ds-panel:focus-within{border-color:var(--border-strong,#514d60)}.ds-panel-title{font-family:var(--font-display,Sora,'Noto Sans Thai',sans-serif);font-size:1.4rem;font-weight:500;line-height:1.25;letter-spacing:-.035em;color:var(--ink,#f3f1f8);margin:0 0 18px}.ds-panel-copy{color:var(--muted,#aaa7b7);max-width:70ch;line-height:1.9;margin:0}@media(max-width:767px){.ds-panel{padding:24px}}@media(prefers-reduced-motion:reduce){.ds-panel{transition:none}}"
-    },
-    {
-      "name": "Direct Contact Link",
-      "kind": "card",
-      "refersTo": "direct-contact",
-      "description": "Boxed contact destination with a compact arrow beside its label and a wrapping address. Source: src/components/pages/contact/Contact.tsx; src/index.css direct-link rules.",
-      "html": "<a class=\"ds-direct\" href=\"mailto:hello@example.com\"><span class=\"ds-contact-icon\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\"/><path d=\"m3 7 9 6 9-6\"/></svg></span><span class=\"ds-direct-copy\"><span class=\"ds-direct-label\">Email <svg class=\"ds-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></span><span class=\"ds-direct-value\">hello@example.com</span></span></a>",
-      "css": ".ds-direct{font-family:'Noto Sans Thai',sans-serif;display:flex;align-items:center;gap:16px;padding:16px;border:1px solid var(--border,#302e39);border-radius:var(--radius,8px);background:var(--surface,#151419);color:var(--ink,#f3f1f8);text-decoration:none;overflow-wrap:anywhere;transition:border-color .2s,background-color .2s}.ds-contact-icon{display:grid;place-items:center;flex-shrink:0;width:40px;height:40px;border-radius:8px;background:#ffffff0d;color:var(--brand-ink,#c6b5ff)}.ds-direct-copy{min-width:0}.ds-direct-label{display:inline-flex;align-items:center;gap:8px;font-size:.875rem;font-weight:500;color:#fff}.ds-direct-label .ds-arrow{color:var(--brand-ink,#c6b5ff)}.ds-direct-value{display:block;font-size:.75rem;color:#99a1af;overflow-wrap:anywhere}.ds-direct:is(:hover,:focus-visible){color:var(--brand-ink,#c6b5ff);border-color:var(--brand-ink,#c6b5ff);background:var(--surface-elevated,#1c1b23)}.ds-direct:hover .ds-contact-icon{color:#fff}.ds-direct:focus-visible{outline:2px solid var(--brand-cyan,#a0e8ee);outline-offset:5px}.ds-arrow{display:inline-block;flex:0 0 auto;width:var(--icon-size,14px);height:var(--icon-size,14px);vertical-align:middle}@media(prefers-reduced-motion:no-preference){.ds-direct .ds-arrow{transition:translate .2s var(--motion-ease,cubic-bezier(.16,1,.3,1))}.ds-direct:is(:hover,:focus-visible) .ds-arrow{translate:1px -1px}}@media(prefers-reduced-motion:reduce){.ds-direct{transition:none}}"
+      "refersTo": "skill-tile",
+      "description": "Standalone tactile skill link sitting directly on the obsidian ground.",
+      "html": "<a class=\"ds-skill\" href=\"#\"><span>TypeScript</span><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a>",
+      "css": ".ds-skill { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 56px; padding: 10px 14px; background: #1B1B1B; border: 1px solid #373737; border-radius: 12px; color: #F4F4F4; text-decoration: none; font: 550 .9rem/1.4 'Noto Sans Thai', sans-serif; transition: border-color 220ms, background-color 220ms, color 220ms; } .ds-skill svg { color: #A6EEEB; } .ds-skill:is(:hover, :focus-visible) { color: #A6EEEB; border-color: #A6EEEB; background: #252525; }"
     }
   ],
   "narrative": {
-    "northStar": "The Independent Catalog",
-    "overview": "The system treats personal work as a catalog: clear names, open listings, fine rules, and enough space to inspect the evidence. Ink-dark fields and cool lettering provide a quiet reading surface; the original skull anchors recognition inside an expressive gradient sleeve.\n\nThis name, the descriptive color names, and the named rules below are designer decisions made under the owner's delegated visual brief. The durable owner commitments are the MrWinRock identity, the existing skull, dark surfaces, gradients, and useful English and Thai journeys. Sora supplies the display voice while Noto Sans Thai carries reading and Thai coverage.",
+    "northStar": "Asymmetric Bento Monograph & Floating Dock",
+    "overview": "MrWinRock pairs a detached floating obsidian pill navigation dock with an asymmetric bento-grid portfolio layout. Rather than stacking identical full-width sections beneath a rigid top bar, Home opens with an 8/4 hero split (statement plate beside a skull identity stage with an integrated 2x2 quick-links footer), transitions into an asymmetric featured work grid (01 full-width lead plate over 02 and 03 side-by-side), and pairs What I build beside Technologies I Work With inside one balanced hairline-divided band.\n\nInterior routes drop the boxed banner in favor of open monumental editorial headers directly on the #121212 obsidian canvas, giving each route a distinct spatial rhythm—left sticky dossier on About, asymmetric bento plus sticky matcher on Projects, viewport-centered alternating timeline on Experience, sticky directory plus standalone tile grids on Skills, and asymmetric inquiry form plus direct-channel cards on Contact.",
     "keyCharacteristics": [
-      "Ink-dark reading surfaces and cool, solid-color text.",
-      "Original skull artwork on a violet, lilac, and cyan sleeve.",
-      "Open project rows, fine dividers, and restrained tonal states.",
-      "Bilingual typography, visible focus, and static reduced-motion behavior."
+      "Floating centered pill navigation dock on desktop (999px radius) and floating rounded dock bar on mobile.",
+      "Asymmetric Home bento: 8/4 hero split, lead-plus-pair featured projects, and side-by-side capability ledger and stack matrix.",
+      "Open unboxed editorial interior headers with a 64px cyan-to-magenta hairline notch directly on #121212.",
+      "Exact preserved charcoal, chalk-ink, mint-cyan, and electric cyan-to-magenta palette with zero nested cards and full reduced-motion support."
     ],
     "rules": [
       {
-        "name": "The Material Gradient Rule",
-        "body": "Put gradients on sleeves, action fills, and broad contact surfaces; keep reading text a solid color.",
+        "name": "The Spectrum Ration Rule",
+        "body": "Reserve the cyan-to-magenta gradient strictly for thin accent rims (2px), the active dock indicator, timeline spines, and the circular skull ring; keep all reading and display text a solid color.",
         "section": "colors"
       },
       {
-        "name": "The Two-Script Rule",
-        "body": "Preserve the Noto Sans Thai fallback in display stacks and its reading role; test both languages when changing type size or width.",
-        "section": "typography"
+        "name": "The Single-Boundary Rule",
+        "body": "Never nest bordered cards inside bordered cards; use hairline-divided internal matrices (1px gap grids) inside unified bento frames, recessed #0E0E0E wells for inputs and screenshots, and standalone tiles directly on #121212.",
+        "section": "colors"
       },
       {
-        "name": "The Open Catalog Rule",
-        "body": "Present work listings as open rows separated by fine rules; use enclosed panels for evidence, fields, and resource states where grouping earns its boundary.",
-        "section": "elevation"
+        "name": "The Two-Script Tracking Rule",
+        "body": "Keep Latin display tracking at or above (-.04em) and relax tracking (-.018em / -.012em) and line height (1.24 / 1.28) for :lang(th) headings so Thai upper vowels and tone marks stay clear.",
+        "section": "typography"
       }
     ],
     "dos": [
-      "**Do** preserve the original skull and dark, gradient-bearing identity.",
-      "**Do** use solid readable text, fine rules, and open work listings.",
-      "**Do** preserve both language stacks, visible focus, and reduced-motion behavior.",
-      "**Do** derive future component variants from the observed source and verify their responsive reading order."
+      "Do preserve the exact charcoal, chalk-ink, mint-cyan, and electric cyan-to-magenta palette across all routes.",
+      "Do keep the floating centered pill dock on desktop, asymmetric bento grid on Home, and open unboxed editorial headers on interior routes.",
+      "Do scope hover highlights and active press translation strictly to real interactive controls (<a> and enabled <button>).",
+      "Do keep English and Thai layouts free of horizontal overflow and WCAG AA violations from (320px) to (1440px)."
     ],
     "donts": [
-      "**Don't** turn reading text into gradient lettering.",
-      "**Don't** apply the skull's shadow as a general panel elevation.",
-      "**Don't** gate content behind decorative animation or add a continuous sleeve loop.",
-      "**Don't** infer new project evidence or product claims from visual examples."
+      "Don't place kickers or eyebrows above headings.",
+      "Don't nest bordered cards inside bordered cards; use hairline-divided matrices or standalone tiles on #121212.",
+      "Don't apply gradient fills to body or heading text, or use zero-offset neon glow halos.",
+      "Don't invent project evidence, company case-study details, or claims outside published API data."
     ]
   }
 }

@@ -54,9 +54,10 @@ export default function Navbar() {
         }}>
         <div className="navbar-bar">
             <Link to="/" className="navbar-brand" onClick={() => closeMenu()}>
-                <img src={logo} alt="" width="30" height="30" />
+                <img src={logo} alt="" width="32" height="32" />
                 <span className="navbar-title">mrwinrock<span aria-hidden="true">.</span></span>
             </Link>
+            <span className="navbar-sep hidden lg:block" aria-hidden="true" />
             <div className="desktop-navigation hidden lg:flex">{links(false)}<LanguageSwitcher /></div>
             <div className="mobile-controls flex lg:hidden">
                 <LanguageSwitcher />

@@ -72,28 +72,32 @@ export function ProjectMatcher({ projects }: { projects: ApiProject[] }) {
 
     return <section className="project-matcher" aria-labelledby={`${id}-title`}>
         <div className="matcher-panel">
-            <h2 id={`${id}-title`}>{t('projects.match.title')}</h2>
-            <p className="matcher-intro">{t('projects.match.intro')}</p>
-            <form noValidate onSubmit={submit}>
-                <label htmlFor={`${id}-query`}>{t('projects.match.query')}</label>
-                <textarea ref={input} id={`${id}-query`} className="contact-field" rows={3} required
-                    value={query} onChange={event => edit(event.target.value)}
-                    placeholder={t('projects.match.placeholder')}
-                    aria-invalid={status === 'validation'}
-                    aria-describedby={`${id}-privacy${status === 'validation' ? ` ${id}-error` : ''}`} />
-                <div className="matcher-actions">
-                    <p id={`${id}-privacy`} className="matcher-privacy">{t('projects.match.privacy')}</p>
-                    <button type="submit" className="p-button" disabled={status === 'loading' || seconds > 0}>
-                        {t(status === 'loading' ? 'projects.match.loading' : 'projects.match.submit')}
-                        <ArrowIcon />
-                    </button>
+            <div className="matcher-copy">
+                <h2 id={`${id}-title`}>{t('projects.match.title')}</h2>
+                <p className="matcher-intro">{t('projects.match.intro')}</p>
+            </div>
+            <div className="matcher-form-wrap">
+                <form noValidate onSubmit={submit}>
+                    <label htmlFor={`${id}-query`}>{t('projects.match.query')}</label>
+                    <textarea ref={input} id={`${id}-query`} className="contact-field" rows={3} required
+                        value={query} onChange={event => edit(event.target.value)}
+                        placeholder={t('projects.match.placeholder')}
+                        aria-invalid={status === 'validation'}
+                        aria-describedby={`${id}-privacy${status === 'validation' ? ` ${id}-error` : ''}`} />
+                    <div className="matcher-actions">
+                        <p id={`${id}-privacy`} className="matcher-privacy">{t('projects.match.privacy')}</p>
+                        <button type="submit" className="p-button" disabled={status === 'loading' || seconds > 0}>
+                            {t(status === 'loading' ? 'projects.match.loading' : 'projects.match.submit')}
+                            <ArrowIcon />
+                        </button>
+                    </div>
+                </form>
+                {error && <p id={`${id}-error`} className="matcher-error" role="alert">{error}</p>}
+                <div role={status === 'loading' || status === 'complete' ? 'status' : undefined} aria-live="polite" aria-atomic="true" className="matcher-status">
+                    {status === 'loading' && t('projects.match.loading')}
+                    {status === 'complete' && result && (matchedProjects.length
+                        ? t('projects.match.found', { count: matchedProjects.length }) : t('projects.match.empty'))}
                 </div>
-            </form>
-            {error && <p id={`${id}-error`} className="matcher-error" role="alert">{error}</p>}
-            <div role={status === 'loading' || status === 'complete' ? 'status' : undefined} aria-live="polite" aria-atomic="true" className="matcher-status">
-                {status === 'loading' && t('projects.match.loading')}
-                {status === 'complete' && result && (matchedProjects.length
-                    ? t('projects.match.found', { count: matchedProjects.length }) : t('projects.match.empty'))}
             </div>
         </div>
         {result && <>

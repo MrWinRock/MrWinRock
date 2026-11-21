@@ -79,6 +79,14 @@
         "selected": "Selected projects",
         "all": "All projects",
         "intro": "Web, mobile, and backend work. Explore the implementation and the repositories behind each project.",
+        "infoxp": {
+            "cardContribution": "I built the web and mobile clients and the API they use for chat.",
+            "problem": "InfoXP gives players a place to browse games and ask questions about them. The chat needed to show replies as they arrived and let players reopen earlier conversations.",
+            "role": "I built the React web app, the React Native mobile app, and the TypeScript API on Bun.",
+            "decision": "I put chat sessions and message history behind a shared API. Both clients use a session ID to receive streamed replies and reopen a conversation saved in MongoDB.",
+            "screenshotAlt": "InfoXP game catalog showing eight game cards",
+            "screenshotCaption": "The InfoXP web app running locally with sample catalog data."
+        },
         "archive": "More projects",
         "details": "Explore project",
         "technologies": "Technologies",

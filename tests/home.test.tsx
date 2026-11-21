@@ -1,5 +1,5 @@
 import axe from 'axe-core';
-import { screen } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, expect, it, vi } from 'vitest';
 import Home from '../src/components/pages/home/Home';
@@ -42,4 +42,19 @@ it('excludes typed company records from selected work even when flagged featured
   expect(await screen.findByRole('heading', { name: 'Personal Work' })).toBeInTheDocument();
   expect(screen.queryByText('Company Portal')).toBeNull();
   expect(screen.queryByText('Private claim')).toBeNull();
+});
+it('leads selected work with InfoXP and keeps its card focused on four technologies', async () => {
+  vi.mocked(api.skills).mockResolvedValue({ ok: true, data: {} });
+  vi.mocked(api.projects).mockResolvedValue({ ok: true, data: [
+    { title: 'Earlier Feature', description: 'An earlier featured project', order: 0, featured: true, tech: ['React'] },
+    { title: 'InfoXP', slug: 'infoxp', description: 'Game knowledge', order: 5, tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'] },
+    { title: 'InfoXP Mobile', description: 'Mobile client', order: 6, tech: ['React Native', 'Expo'] },
+    { title: 'InfoXP Backend', description: 'Chat API', order: 7, tech: ['Bun', 'MongoDB'] },
+  ] });
+  renderPublic(<Home />);
+  const heading = await screen.findByRole('heading', { name: 'InfoXP', exact: true });
+  const leadProject = screen.getAllByRole('article')[0];
+  expect(leadProject).toContainElement(heading);
+  expect(within(leadProject).getByRole('img', { name: /InfoXP game catalog/i })).toBeInTheDocument();
+  expect(within(leadProject).getAllByRole('listitem').map(item => item.textContent)).toEqual(['React', 'TypeScript', 'React Native', 'Bun']);
 });

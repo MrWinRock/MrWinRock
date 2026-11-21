@@ -2,7 +2,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useProjects } from '../../../hooks/useProjects';
-import { groupProjects, localizeProject, projectSlug, isCompanyProject } from '../../../lib/portfolio';
+import { groupProjects, isCompanyProject, isInfoXP, localizeProject, projectSlug } from '../../../lib/portfolio';
 import { PublicDataNotice } from '../../PublicDataNotice';
 import { ProjectActions } from './ProjectActions';
 import { safeExternalUrl } from '../../../lib/safeExternalUrl';
@@ -10,6 +10,7 @@ import { PageMetadata } from '../../PageMetadata';
 import { ArrowIcon } from '../../ArrowIcon';
 import { TechnologyTags } from '../../TechnologyTags';
 import { PageIntro } from '../PageIntro';
+import { projectScreenshots } from './projectScreenshots';
 
 export default function ProjectDetail() {
     const { slug } = useParams();
@@ -30,22 +31,28 @@ export default function ProjectDetail() {
 
     const content = localizeProject(project, i18n.language);
     const study = content.caseStudy;
+    const infoXP = isInfoXP(project);
+    const problem = study?.problem || (infoXP ? t('projects.infoxp.problem') : '');
+    const role = study?.role || (infoXP ? t('projects.infoxp.role') : '');
+    const decisions = study?.decisions?.length ? study.decisions : infoXP ? [t('projects.infoxp.decision')] : [];
     const repositories = (study?.repositories ?? []).filter(item => safeExternalUrl(item.url));
-    const screenshots = (study?.screenshots ?? []).filter(item => safeExternalUrl(item.url));
+    const screenshots = projectScreenshots(content, t);
+    const media = { id: 'screenshots', body: screenshots.length > 0 && <div className="detail-screenshots">
+        {screenshots.map(item => <figure key={item.url}>
+            <a className="detail-screenshot-link" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={item.alt}>
+                <img className="project-screenshot" src={item.url} alt={item.alt} width={item.width} height={item.height} loading="lazy" />
+            </a>
+            <figcaption>{item.caption}</figcaption>
+        </figure>)}
+    </div> };
+    const technologies = { id: 'technologies', body: content.tech.length > 0 && <TechnologyTags technologies={content.tech} /> };
     const sections = [
-        { id: 'technologies', body: content.tech.length > 0 && <TechnologyTags technologies={content.tech} /> },
-        { id: 'problem', body: study?.problem && <p>{study.problem}</p> },
-        { id: 'role', body: study?.role && <p>{study.role}</p> },
-        { id: 'decisions', body: !!study?.decisions?.length && <ul className="detail-points">{study.decisions.map((text, index) => <li key={index}>{text}</li>)}</ul> },
+        infoXP ? media : technologies,
+        { id: 'problem', body: problem && <p>{problem}</p> },
+        { id: 'role', body: role && <p>{role}</p> },
+        { id: 'decisions', body: decisions.length > 0 && <ul className="detail-points">{decisions.map((text, index) => <li key={index}>{text}</li>)}</ul> },
         { id: 'outcomes', body: !!study?.outcomes?.length && <ul className="detail-points">{study.outcomes.map((text, index) => <li key={index}>{text}</li>)}</ul> },
-        { id: 'screenshots', body: screenshots.length > 0 && <div className="detail-screenshots">
-            {screenshots.map(item => <figure key={item.url}>
-                <a className="detail-screenshot-link" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={item.alt}>
-                    <img className="project-screenshot" src={item.url} alt={item.alt} loading="lazy" />
-                </a>
-                <figcaption>{item.alt}</figcaption>
-            </figure>)}
-        </div> },
+        infoXP ? technologies : media,
         { id: 'repositories', body: repositories.length > 0 && <div className="detail-repositories">
             {repositories.map(item => <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" className="s-button detail-repository-link">{item.label} <ArrowIcon /></a>)}
         </div> },

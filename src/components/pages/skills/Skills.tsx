@@ -1,11 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from "react-i18next";
+import { motion } from 'motion/react';
 import { usePublicResource } from '../../../hooks/usePublicResource';
 import { PublicDataNotice } from '../../../components/PublicDataNotice';
 import { skills as staticSkills, type Skill } from "../../../data/skills";
 import { api } from "../../../lib/api";
 import { getPublicSnapshot } from '../../../lib/publicSnapshot';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigationType } from 'react-router-dom';
 import { useSettings } from '../../../contexts/useSettings';
 import { ArrowIcon } from '../../ArrowIcon';
 import { PageIntro } from '../PageIntro';
@@ -19,9 +20,11 @@ interface CategoryGroup {
 
 const Skills = () => {
     const { t } = useTranslation();
-    const { hash } = useLocation();
+    const { hash, key, search } = useLocation();
+    const navigationType = useNavigationType();
     const { settings, isInitialLoading } = useSettings();
     const canExplore = !isInitialLoading && settings.showProjects;
+    const [scrolledSection, setScrolledSection] = useState<string | null>(null);
 
     const categoryTitles: Record<string, string> = {
         programming: t("skills.categories.programming"),
@@ -54,24 +57,82 @@ const Skills = () => {
         title: categoryTitles[group.id] || group.title,
         sectionId: 'skills-' + encodeURIComponent(group.id),
     })) : [];
-    const activeSection = categoryGroups.find(category => '#' + encodeURIComponent(category.sectionId) === hash)?.sectionId;
+    const hashSection = categoryGroups.find(category => '#' + encodeURIComponent(category.sectionId) === hash)?.sectionId;
+    const activeSection = scrolledSection ?? hashSection ?? categoryGroups[0]?.sectionId;
+    const sectionKey = categoryGroups.map(category => category.sectionId).join(',');
 
     useEffect(() => {
-        if (!activeSection) return;
-        const frame = requestAnimationFrame(() => document.getElementById(activeSection)?.scrollIntoView({ block: 'start', behavior: 'instant' }));
+        if (!hashSection) return;
+        const frame = requestAnimationFrame(() => {
+            document.getElementById(hashSection)?.scrollIntoView({
+                block: 'start',
+                behavior: navigationType === 'POP' ? 'instant' : 'auto',
+            });
+        });
         return () => cancelAnimationFrame(frame);
-    }, [activeSection]);
+    }, [hashSection, key, navigationType]);
+
+    useEffect(() => {
+        if (!sectionKey) return;
+        const sections = sectionKey.split(',').map(id => document.getElementById(id)).filter(section => section !== null);
+        const firstSection = sections[0];
+        const scrollRoot = document.scrollingElement;
+        if (!firstSection || !scrollRoot) return;
+        sections.reverse();
+
+        let readingLine = 0;
+        let frame: number | undefined;
+
+        const scheduleActiveSection = () => {
+            if (frame !== undefined) return;
+            frame = requestAnimationFrame(() => {
+                frame = undefined;
+                const { scrollTop, scrollHeight, clientHeight } = scrollRoot;
+                // A short final section can reach the bottom before it reaches the reading line.
+                const maxScroll = scrollHeight - clientHeight;
+                const atBottom = maxScroll > 0 && maxScroll - scrollTop <= 1;
+                const current = atBottom ? sections[0] : sections.find(section => section.getBoundingClientRect().top <= readingLine);
+                setScrolledSection((current ?? firstSection).id);
+            });
+        };
+
+        const updateReadingLine = () => {
+            const pagePadding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+            const sectionMargin = parseFloat(getComputedStyle(firstSection).scrollMarginTop);
+            readingLine = pagePadding + sectionMargin + 2;
+            scheduleActiveSection();
+        };
+
+        updateReadingLine();
+        document.addEventListener('scroll', scheduleActiveSection, { passive: true });
+        window.addEventListener('resize', updateReadingLine);
+        return () => {
+            document.removeEventListener('scroll', scheduleActiveSection);
+            window.removeEventListener('resize', updateReadingLine);
+            if (frame !== undefined) cancelAnimationFrame(frame);
+        };
+    }, [sectionKey]);
 
     return <div className="secondary-page skills-page">
         <PageIntro title={t('skills.title')} description={t('skills.intro')} />
         <PublicDataNotice {...resource} />
         {!!categoryGroups.length && <div className="skills-layout">
             {categoryGroups.length > 1 && <nav className="skills-nav" aria-label={t('skills.categoryNavigation')}>
-                {categoryGroups.map(category => <a key={category.id} href={'#' + encodeURIComponent(category.sectionId)}
-                    aria-current={category.sectionId === activeSection ? 'location' : undefined}>{category.title}</a>)}
+                {categoryGroups.map(category => {
+                    const isActive = category.sectionId === activeSection;
+                    return <Link key={category.id} to={{ search, hash: '#' + encodeURIComponent(category.sectionId) }}
+                        aria-current={isActive ? 'location' : undefined}>
+                        {isActive && <motion.span layoutId="skills-active-pill" className="skills-nav-pill" aria-hidden="true"
+                            transition={{ type: 'spring', stiffness: 420, damping: 34, mass: 0.8 }} />}
+                        <span className="skills-nav-label">{category.title}</span>
+                    </Link>;
+                })}
             </nav>}
             <div className="skill-categories">
-                {categoryGroups.map(category => <section key={category.id} id={category.sectionId} className="skill-category-section">
+                {categoryGroups.map(category => <section key={category.id} id={category.sectionId}
+                    className="skill-category-section"
+                    data-active={category.sectionId === activeSection || undefined}
+                    data-targeted={category.sectionId === hashSection || undefined}>
                     <div className="skill-category-header">
                         <h2 className="skill-category-title">{category.title}</h2>
                         <span className="collection-count" aria-hidden="true">{category.skills.length}</span>
