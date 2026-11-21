@@ -29,25 +29,29 @@ export default function Home() {
     const skills = 'data' in resource.state ? priorities.flatMap(name => resource.state.status === 'ready' || resource.state.status === 'stale' ? resource.state.data.filter(skill => skill.name.toLowerCase() === name.toLowerCase()).slice(0, 1) : []) : [];
     return <div className="home-page">
         <section className="hero" aria-labelledby="home-title">
-            <div className="hero-content">
+            <div className="hero-meta">
                 <p className="hero-role">{t('home.subtitle')}</p>
-                <h1 id="home-title" className="hero-name"><span>{t('home.name')}</span>{' '}<span className="hero-surname">{t('home.surname')}</span></h1>
-                <p className="hero-description">{t('home.description')}</p>
-                <div className="hero-actions">
-                    {visible.showProjects && <Link className="primary-action" to="/projects">{t('home.viewWork')} <ArrowIcon /></Link>}
-                    {visible.showResume && <ResumeDownloadButton />}
-                    {visible.showContact && <Link className="text-action" onClick={()=>trackPortfolioEvent('contact_intent')} to="/contact">{t('nav.contact')}</Link>}
+                <p>{t('home.location')}</p>
+            </div>
+            <h1 id="home-title" className="hero-name"><span>{t('home.name')}</span>{' '}<span>{t('home.surname')}</span></h1>
+            <div className="hero-body">
+                <div className="hero-content">
+                    <p className="hero-description">{t('home.description')}</p>
+                    <div className="hero-actions">
+                        {visible.showProjects && <Link className="primary-action" to="/projects">{t('home.viewWork')} <ArrowIcon /></Link>}
+                        {visible.showResume && <ResumeDownloadButton />}
+                    </div>
+                    <div className="hero-socials">
+                        <a href="https://github.com/MrWinRock" target="_blank" rel="noopener noreferrer">GitHub <ArrowIcon /></a>
+                        <a href="https://www.linkedin.com/in/pharthiwath-gristsoopharruth-232301240/" target="_blank" rel="noopener noreferrer">LinkedIn <ArrowIcon /></a>
+                        {visible.showAbout && <Link to="/about">{t('home.aboutMe')}</Link>}
+                        {visible.showContact && <Link onClick={() => trackPortfolioEvent('contact_intent')} to="/contact">{t('nav.contact')}</Link>}
+                    </div>
                 </div>
-                <div className="hero-socials">
-                    <a href="https://github.com/MrWinRock" target="_blank" rel="noopener noreferrer">GitHub <ArrowIcon /></a>
-                    <a href="https://www.linkedin.com/in/pharthiwath-gristsoopharruth-232301240/" target="_blank" rel="noopener noreferrer">LinkedIn <ArrowIcon /></a>
-                    {visible.showAbout && <Link to="/about">{t('home.aboutMe')}</Link>}
+                <div className="hero-signature">
+                    <img src="/logo.jpg" alt={t('home.brandAlt')} width="512" height="512" fetchPriority="high" decoding="async" />
                 </div>
             </div>
-            <figure className="identity-figure">
-                <div className="identity-art"><img src="/logo.jpg" alt={t('home.brandAlt')} width="512" height="512" fetchPriority="high" decoding="async" /></div>
-                <figcaption className="identity-caption"><span>MrWinRock</span><span>{t('home.location')}</span></figcaption>
-            </figure>
         </section>
         {settingsStatus === 'unavailable' && <PublicDataNotice state={{ status: 'unavailable', reason: 'unavailable' }} retry={retrySettings} />}
         {settingsStatus === 'snapshot' && <div className="public-notice"><p role="status">{t('resource.snapshot')}</p><button type="button" className="s-button mt-3" onClick={retrySettings}>{t('resource.retry')}</button></div>}

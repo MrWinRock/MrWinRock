@@ -83,6 +83,37 @@ test('reduced motion disables control transitions', async ({ page }) => {
   expect(duration.split(',').every(value => parseFloat(value) <= 0.001)).toBe(true);
 });
 
+test('page navigation animates the incoming page and respects reduced motion', async ({ page }, info) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  if (info.project.name === 'mobile') await page.getByRole('button', { name: /open menu/i }).click();
+  await page.getByRole('navigation').getByRole('link', { name: 'Projects', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'My Projects', exact: true })).toBeVisible();
+  const route = page.locator('.route-enter');
+  expect(await route.evaluate(node => getComputedStyle(node).animationName)).not.toBe('none');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect.poll(() => route.evaluate(node => getComputedStyle(node).animationName)).toBe('none');
+});
+
+test('the mobile menu can animate closed while its links are unavailable to keyboard users', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  const button = page.getByRole('button', { name: /open menu/i });
+  const panel = page.locator('#mobile-navigation');
+  await expect(panel).toHaveAttribute('inert', '');
+  await button.click();
+  await expect(panel.getByRole('link', { name: 'Projects', exact: true })).toBeVisible();
+  await expect(panel).not.toHaveAttribute('inert', '');
+  expect(await panel.evaluate(node => getComputedStyle(node).transitionProperty)).toContain('grid-template-rows');
+  await page.keyboard.press('Escape');
+  await expect(panel).toHaveAttribute('inert', '');
+  await expect(button).toBeFocused();
+  await button.click();
+  await page.getByRole('link', { name: 'View My Work', exact: true }).focus();
+  await expect(panel).toHaveAttribute('inert', '');
+});
+
 test('settings failure recovers immediately without treating it as disabled', async ({ page }) => {
   let available = false;
   await page.route('**/api/settings', route => route.fulfill(available ? {json:{ok:true,data:settings}} : {status:503,json:{ok:false}}));

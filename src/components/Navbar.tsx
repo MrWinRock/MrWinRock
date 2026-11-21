@@ -1,5 +1,5 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import logo from '../assets/logo.webp';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -11,7 +11,6 @@ export default function Navbar() {
     const toggle = useRef<HTMLButtonElement>(null);
     const { pathname } = useLocation();
     const isMenuOpen = menuPath === pathname;
-    const setIsMenuOpen = (open: boolean) => setMenuPath(open ? pathname : null);
     const { t } = useTranslation();
     const { settings, isInitialLoading } = useSettings();
     const visible = isInitialLoading ? HIDDEN_SETTINGS : settings;
@@ -20,15 +19,61 @@ export default function Navbar() {
         ['/experience', 'experience', visible.showExperience], ['/skills', 'skills', visible.showSkills],
         ['/contact', 'contact', visible.showContact], ['/resume', 'resume', visible.showResume],
     ] as const;
+    function closeMenu(restoreFocus = false) {
+        setMenuPath(null);
+        if (restoreFocus) toggle.current?.focus();
+    }
+
+    useEffect(() => {
+        if (!isMenuOpen) return;
+        const desktop = window.matchMedia?.('(min-width: 64rem)');
+        const onViewportChange = (event: MediaQueryListEvent) => {
+            if (event.matches) setMenuPath(null);
+        };
+        const onBackOrForward = () => setMenuPath(null);
+        desktop?.addEventListener?.('change', onViewportChange);
+        window.addEventListener('popstate', onBackOrForward);
+        return () => {
+            desktop?.removeEventListener?.('change', onViewportChange);
+            window.removeEventListener('popstate', onBackOrForward);
+        };
+    }, [isMenuOpen]);
+
     const links = (mobile: boolean) => destinations.filter(([, , show]) => show).map(([to, key]) =>
-        <NavLink key={to} to={to} end={to === '/'} className={`nav-link ${key === 'resume' ? 'nav-resume' : ''}`} onClick={() => mobile && setIsMenuOpen(false)}>{t(`nav.${key}`)}</NavLink>);
+        <NavLink key={to} to={to} end={to === '/'} className={`nav-link ${key === 'resume' ? 'nav-resume' : ''}`}
+            onClick={mobile ? () => closeMenu() : undefined}>{t(`nav.${key}`)}</NavLink>);
     return <nav className="navbar fixed top-0 left-0 w-full z-50" aria-label={t('nav.primary')}
-        onKeyDown={event => { if (event.key === 'Escape' && isMenuOpen) { setIsMenuOpen(false); toggle.current?.focus(); } }}>
-        <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-4 py-3">
-            <Link to="/" className="navbar-brand flex items-center shrink-0"><img src={logo} alt="" width="34" height="34" /><span className="navbar-title">mrwinrock<span aria-hidden="true">.</span></span></Link>
-            <div className="hidden lg:flex items-center gap-1">{links(false)}<LanguageSwitcher /></div>
-            <div className="lg:hidden flex items-center gap-2"><LanguageSwitcher /><button ref={toggle} type="button" className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={t(isMenuOpen ? 'nav.closeMenu' : 'nav.openMenu')} aria-expanded={isMenuOpen} aria-controls="mobile-navigation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true"><path d={isMenuOpen ? 'M6 6l12 12M6 18 18 6' : 'M4 8h16M4 16h16'} /></svg></button></div>
+        onBlur={event => {
+            if (isMenuOpen && event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) closeMenu();
+        }}
+        onKeyDown={event => {
+            if (event.key === 'Escape' && isMenuOpen) {
+                event.preventDefault();
+                closeMenu(true);
+            }
+        }}>
+        <div className="navbar-bar">
+            <Link to="/" className="navbar-brand" onClick={() => closeMenu()}>
+                <img src={logo} alt="" width="30" height="30" />
+                <span className="navbar-title">mrwinrock<span aria-hidden="true">.</span></span>
+            </Link>
+            <div className="desktop-navigation hidden lg:flex">{links(false)}<LanguageSwitcher /></div>
+            <div className="mobile-controls flex lg:hidden">
+                <LanguageSwitcher />
+                <button ref={toggle} type="button" className="menu-toggle" onClick={() => setMenuPath(isMenuOpen ? null : pathname)}
+                    aria-label={t(isMenuOpen ? 'nav.closeMenu' : 'nav.openMenu')} aria-expanded={isMenuOpen} aria-controls="mobile-navigation">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
+                        <path className="menu-line-top" d="M4 8h16" />
+                        <path className="menu-line-bottom" d="M4 16h16" />
+                    </svg>
+                </button>
+            </div>
         </div>
-        {isMenuOpen && <div id="mobile-navigation" className="lg:hidden mobile-navigation"><div className="flex flex-col gap-1 px-4 pb-4">{links(true)}</div></div>}
+        <div aria-hidden="true" className="lg:hidden mobile-menu-backdrop" data-open={isMenuOpen} onClick={() => closeMenu(true)} />
+        <div id="mobile-navigation" className="mobile-navigation" data-open={isMenuOpen} inert={!isMenuOpen} aria-hidden={!isMenuOpen}>
+            <div className="mobile-navigation-scroll">
+                <div className="mobile-navigation-links">{links(true)}</div>
+            </div>
+        </div>
     </nav>;
 }

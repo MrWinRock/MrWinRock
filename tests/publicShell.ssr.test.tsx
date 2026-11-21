@@ -62,6 +62,8 @@ describe('public shell SSR', () => {
         expect(html).toContain('aria-expanded="false"');
         expect(html).toContain('aria-controls="mobile-navigation"');
         expect(html).toMatch(/<a[^>]*aria-current="page"[^>]*href="\/"/);
-        expect(html).not.toContain('id="mobile-navigation"');
+        const panel = html.match(/<div id="mobile-navigation"[^>]*>/)?.[0];
+        expect(panel).toContain('inert=""');
+        expect(panel).toContain('aria-hidden="true"');
     });
 });

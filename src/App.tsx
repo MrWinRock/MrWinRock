@@ -43,7 +43,7 @@ function App() {
       <ScrollToTop />
       <PageMetadata />
       <Navbar />
-      <main id="main-content" tabIndex={-1} className='min-h-screen max-w-[1200px] mx-auto mt-12 px-4 py-8'>
+      <main id="main-content" tabIndex={-1}>
         <Suspense fallback={<PublicDataNotice state={{ status: 'loading' }} />}><div key={pathname} className="route-enter"><Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<SectionGuard setting="showAbout"><About /></SectionGuard>} />

@@ -54,13 +54,8 @@ export default function ProjectDetail() {
     return <article className="page-shell project-detail">
         <PageMetadata title={content.title} description={content.description} />
         <Link className="detail-back-link" to="/projects"><ArrowIcon back /> {t('projects.back')}</Link>
-        <header className="page-intro">
-            <div className="page-intro-copy">
-                <h1 className="page-title">{content.title}</h1>
-                <p id="description" className="page-description">{content.description}</p>
-            </div>
-            <div className="page-intro-actions"><ProjectActions url={content.url} repo={content.repo} /></div>
-        </header>
+        <PageIntro title={content.title} description={content.description} descriptionId="description"
+            actions={<ProjectActions url={content.url} repo={content.repo} />} />
         <PublicDataNotice {...resource} />
         {!!sections.length && <div className="detail-layout">
             {sections.length > 1 && <nav className="detail-nav" aria-label={t('projects.caseStudy')}>
