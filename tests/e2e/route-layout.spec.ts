@@ -82,7 +82,8 @@ test('the InfoXP lead and identity card are ordered for the viewport', async ({ 
 
   await work.getByRole('link').click();
   await expect(page).toHaveURL(/\/projects\/infoxp$/);
-  const catalog = page.getByRole('img', { name: /InfoXP game catalog/i });
+  await expect(page.getByRole('heading', { name: 'InfoXP', level: 1, exact: true })).toBeVisible();
+  const catalog = page.locator('.project-detail').getByRole('img', { name: /InfoXP game catalog/i });
   await catalog.scrollIntoViewIfNeeded();
   await expect.poll(() => catalog.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
 });
